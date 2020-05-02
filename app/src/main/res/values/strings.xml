@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">CollegeLancer</string>
+
+    <!-- Strings for Sign In XML -->
+
+    <string name="welcomeFreelancer">Hello, Freelancer.</string>
+    <string name="welcomeSignInButton">Sign In</string>
+    <string name="welcomeSignInGoogleButton">Sign in with Google</string>
+    <string name="welcomeSignInFBButton">Sign in with Facebook</string>
+    <string name="welcomeSignUpButton">Don\'t have an account? Sign Up Here</string>
+
+    <!-- Strings for Sign Up XML -->
+
+    <string name="signupTextView">Sign Up.</string>
+    <string name="signupButton">Join CollegeLancer</string>
+    <string name="signupFBButton">Continue with Facebook</string>
+    <string name="signupGoogleButton">Continue with Google</string>
+
+</resources>

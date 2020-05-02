@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "858076402502",
+    "firebase_url": "https://collegelancer-9d31e.firebaseio.com",
+    "project_id": "collegelancer-9d31e",
+    "storage_bucket": "collegelancer-9d31e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858076402502:android:19d4fe0e0b06b2c9c64b47",
+        "android_client_info": {
+          "package_name": "com.college.freelancestartup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858076402502-hanj6ccrpg79uqb20tjqoc6uqngn68of.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.college.freelancestartup",
+            "certificate_hash": "f7856ad393beeee8ba0065bddea3caccd89eb824"
+          }
+        },
+        {
+          "client_id": "858076402502-v34f3b7ik5srmgic58hmcmfdgogaktib.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAemCnt5ekhNHfiAxnCUxJWqi5H5U7RkE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858076402502-v34f3b7ik5srmgic58hmcmfdgogaktib.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/signupTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/signupTextView"
+        android:textSize="30sp"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif-black"
+        android:layout_above="@id/signupEmailEditText"
+        android:layout_marginBottom="30dp"/>
+
+    <EditText
+        android:id="@+id/signupEmailEditText"
+        android:layout_width="match_parent"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:hint="Enter your E-mail ID"/>
+
+    <EditText
+        android:id="@+id/signupPhoneNoEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_below="@id/signupEmailEditText"
+        android:layout_marginTop="5dp"
+        android:inputType="phone"
+        android:maxLength="10"
+        android:hint="Enter your 10-digit Phone Number"/>
+
+    <EditText
+        android:id="@+id/signupPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_below="@id/signupPhoneNoEditText"
+        android:layout_marginTop="5dp"
+        android:hint="Enter a Strong Password"/>
+
+    <EditText
+        android:id="@+id/signupConfPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_below="@id/signupPasswordEditText"
+        android:layout_marginTop="5dp"
+        android:hint="Confirm your Password"/>
+
+    <Button
+        android:id="@+id/signupButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/signupButton"
+        android:textAllCaps="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/signupConfPasswordEditText"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/signupGoogleButton"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:padding="5dp"
+        android:text="@string/signupGoogleButton"
+        android:textAllCaps="true"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/signupFBButton"
+        android:layout_marginBottom="5dp"/>
+
+
+    <Button
+        android:id="@+id/signupFBButton"
+        android:layout_width="match_parent"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="5dp"
+        android:text="@string/signupFBButton"
+        android:textAllCaps="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"/>
+
+</RelativeLayout>
