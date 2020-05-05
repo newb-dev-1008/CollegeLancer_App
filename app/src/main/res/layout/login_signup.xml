@@ -1,90 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/welcomeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/welcomeFreelancer"
-        android:textSize="30sp"
-        android:textColor="#000000"
-        android:fontFamily="sans-serif-black"
-        android:layout_marginTop="300dp" />
-
-    <EditText
-        android:id="@+id/welcomeEmailEditText"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/LoginLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:hint="Your 10 digit Phone Number/ E-mail ID"
-        android:textSize="10sp"
-        android:fontFamily="sans-serif-black"
-        android:layout_below="@id/welcomeTextView"
-        android:layout_marginTop="30dp"/>
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/welcomePasswordEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:hint="Password"
-        android:textSize="10sp"
-        android:fontFamily="sans-serif-black"
-        android:layout_below="@id/welcomeEmailEditText"
-        android:layout_marginTop="5dp"/>
+        <TextView
+            android:id="@+id/welcomeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="41dp"
+            android:layout_above="@id/welcomeEmailEditText"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/welcomeFreelancer"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
 
-    <Button
-        android:id="@+id/welcomeSignInButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="@string/welcomeSignInButton"
-        android:textAllCaps="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/welcomePasswordEditText"
-        android:layout_marginTop="20dp"/>
+        <EditText
+            android:id="@+id/welcomePasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="25dp"
+            android:fontFamily="sans-serif-black"
+            android:hint="Password"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcomeEmailEditText"
+            app:layout_constraintBottom_toTopOf="@id/welcomeSignInButton"/>
 
-    <Button
-        android:id="@+id/welcomeSignInGoogleButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
-        android:padding="5dp"
-        android:text="@string/welcomeSignInGoogleButton"
-        android:textAllCaps="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/welcomeSignInButton"
-        android:layout_marginTop="20dp"/>
+        <EditText
+            android:id="@+id/welcomeEmailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:fontFamily="sans-serif-black"
+            android:hint="Your 10 digit Phone Number/ E-mail ID"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcomeTextView"
+            app:layout_constraintBottom_toTopOf="@id/welcomePasswordEditText"/>
+
+        <Button
+            android:id="@+id/welcomeSignInButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="5dp"
+            android:text="@string/welcomeSignInButton"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcomePasswordEditText"
+            app:layout_constraintBottom_toTopOf="@id/welcomeSignInGoogleButton"/>
 
 
-    <Button
-        android:id="@+id/welcomeSignInFBButton"
-        android:layout_width="match_parent"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="@string/welcomeSignInFBButton"
-        android:textAllCaps="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/welcomeSignInGoogleButton"
-        android:layout_marginTop="5dp"/>
+        <Button
+            android:id="@+id/welcomeSignInGoogleButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="25dp"
+            android:padding="5dp"
+            android:text="@string/welcomeSignInGoogleButton"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcomeSignInButton"
+            app:layout_constraintBottom_toTopOf="@id/welcomeSignInFBButton"/>
 
-    <Button
-        android:id="@+id/welcomeSignUpButton"
-        android:layout_width="match_parent"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="@string/welcomeSignUpButton"
-        android:textAllCaps="true"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"/>
-</RelativeLayout>
+        <Button
+            android:id="@+id/welcomeSignInFBButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:text="@string/welcomeSignInFBButton"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcomeSignInGoogleButton"
+            app:layout_constraintBottom_toTopOf="@id/welcomeSignUpButton" />
+
+        <Button
+            android:id="@+id/welcomeSignUpButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="30dp"
+            android:padding="5dp"
+            android:text="@string/welcomeSignUpButton"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/welcomeSignInFBButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="20dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
