@@ -9,9 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -43,9 +48,9 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void registerUser() {
         // Receiving Email and other stuff from EditTexts
-        String emailID = signUpEmailET.getText().toString().trim();
+        final String emailID = signUpEmailET.getText().toString().trim();
         int phoneNo = Integer.parseInt(signUpPhoneNoET.getText().toString().trim());
-        String password = signUpPwET.getText().toString().trim();
+        final String password = signUpPwET.getText().toString().trim();
         String confPassword = signUpConfPwET.getText().toString().trim();
 
         // Checking if the fields are empty
@@ -61,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
         //Submit Details to Firebase and receive OTP
         else {
             // Creating a dialog box for confirmation
-            new MaterialAlertDialogBuilder(this)
+            AlertDialog signupConfirm = new MaterialAlertDialogBuilder(this)
                     .setTitle("Sure you're good to go?")
                     .setMessage("We'll be sending a verification code to your given e-mail and phone.")
                     .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
@@ -70,13 +75,26 @@ public class SignUpActivity extends AppCompatActivity {
 
                             // Check if Internet connection is established
                             // --
-
-                            Intent intent = new Intent(SignUpActivity.this, OTPActivity.class);
-                            startActivity(intent);
+                            firebaseAuth.createUserWithEmailAndPassword(emailID, password)
+                                    .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()){
+                                                Intent intent = new Intent(SignUpActivity.this, OTPActivity.class);
+                                                startActivity(intent);
+                                            }
+                                            else{
+                                                Toast.makeText(SignUpActivity.this, "Couldn't register. Please retry.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
                         }
                     })
                     .setNegativeButton("Go Back", null)
-                    .show();
+                    .create();
+            signupConfirm.setCanceledOnTouchOutside(false);
+            signupConfirm.setCancelable(false);
+            signupConfirm.show();
         }
     }
 
