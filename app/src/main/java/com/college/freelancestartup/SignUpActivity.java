@@ -49,7 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void registerUser() {
         // Receiving Email and other stuff from EditTexts
         final String emailID = signUpEmailET.getText().toString().trim();
-        int phoneNo = Integer.parseInt(signUpPhoneNoET.getText().toString().trim());
+        // int phoneNo = Integer.parseInt(signUpPhoneNoET.getText().toString().trim());
         final String password = signUpPwET.getText().toString().trim();
         String confPassword = signUpConfPwET.getText().toString().trim();
 
