@@ -16,4 +16,9 @@
     <string name="signupFBButton">Continue with Facebook</string>
     <string name="signupGoogleButton">Continue with Google</string>
 
+    <!-- Strings for Facebook stuff-->
+
+    <string name="facebook_app_id">170733984257685</string>
+    <string name="fb_login_protocol_scheme">fb170733984257685</string>
+
 </resources>

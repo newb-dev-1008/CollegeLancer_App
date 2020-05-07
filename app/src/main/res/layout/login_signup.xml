@@ -93,10 +93,12 @@
             app:layout_constraintTop_toBottomOf="@+id/welcomeSignInButton"
             app:layout_constraintBottom_toTopOf="@id/welcomeSignInFBButton"/>
 
-        <Button
+        <com.facebook.login.widget.LoginButton
             android:id="@+id/welcomeSignInFBButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:text="@string/welcomeSignInFBButton"
