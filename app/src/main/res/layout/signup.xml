@@ -22,7 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
+            app:layout_constraintVertical_bias="0.2" />
 
         <EditText
             android:id="@+id/signupEmailEditText"
@@ -61,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
+            android:inputType="textPassword"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="25dp"
             android:hint="Enter a Strong Password"
@@ -75,6 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
+            android:inputType="textPassword"
             android:hint="Confirm your Password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

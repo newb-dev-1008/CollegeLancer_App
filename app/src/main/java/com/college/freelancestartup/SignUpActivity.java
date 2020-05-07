@@ -144,8 +144,12 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user){
         // Update UI after login
-        Intent intent = new Intent(SignUpActivity.this, OTPActivity.class);
-        startActivity(intent);
+        if (user != null){
+            Toast.makeText(SignUpActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(SignUpActivity.this, "Who the fuck are you, identify yourself nigga", Toast.LENGTH_SHORT).show();
+        }
     }
 
     // Checking if a user is currently signed in
@@ -173,20 +177,21 @@ public class SignUpActivity extends AppCompatActivity {
 
         // Checking if the fields are empty
         if (TextUtils.isEmpty(emailID)) {
-            Toast.makeText(this, "You've not entered your Email ID.", Toast.LENGTH_SHORT).show();
-            return;
+            signUpEmailET.setError("You've not entered your Email ID.");
         }
         // Checking if Email ID entered is valid using function defined below
         else if (!isEmailValid(emailID)) {
-            Toast.makeText(this, "Please enter a valid Email ID.",Toast.LENGTH_SHORT).show();
-            return;
+            signUpEmailET.setError("Please enter a valid Email ID.");
+        }
+        else if (!password.equals(confPassword)){
+            signUpConfPwET.setError("Your passwords do not match. Check again.");
         }
         //Submit Details to Firebase and receive OTP
         else {
             // Creating a dialog box for confirmation
             AlertDialog signupConfirm = new MaterialAlertDialogBuilder(this)
                     .setTitle("Sure you're good to go?")
-                    .setMessage("We'll be sending a verification code to your given e-mail and phone.")
+                    .setMessage("Make sure you recheck your details.")
                     .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -198,7 +203,8 @@ public class SignUpActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<AuthResult> task) {
                                             if (task.isSuccessful()){
-                                                Intent intent = new Intent(SignUpActivity.this, OTPActivity.class);
+                                                Toast.makeText(SignUpActivity.this, "Created Account Successfully.", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(SignUpActivity.this, WelcomeTestScreen.class);
                                                 startActivity(intent);
                                             }
                                             else{

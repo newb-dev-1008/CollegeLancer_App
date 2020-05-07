@@ -130,8 +130,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(LoginActivity.this, "Couldn't connect to Facebook. Try Again.", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, OTPActivity.class);
-                    startActivity(intent);
+                    return;
                 }
             }
         });
@@ -141,6 +140,8 @@ public class LoginActivity extends AppCompatActivity {
         // Update UI after login
         if (user != null){
             Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+            finish();
+            startActivity(new Intent(getApplicationContext(), WelcomeTestScreen.class));
         }
         else{
             Toast.makeText(LoginActivity.this, "Who the fuck are you, identify yourself nigga", Toast.LENGTH_SHORT).show();
