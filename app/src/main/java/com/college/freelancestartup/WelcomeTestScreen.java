@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.login.Login;
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -22,6 +23,7 @@ public class WelcomeTestScreen extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private  AccessTokenTracker accessTokenTracker;
+    private LoginManager fbLoggedIn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class WelcomeTestScreen extends AppCompatActivity {
 
         signOutTest = findViewById(R.id.signOutTest);
         firebaseAuth = FirebaseAuth.getInstance();
+        fbLoggedIn = LoginManager.getInstance();
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -50,6 +53,7 @@ public class WelcomeTestScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 firebaseAuth.signOut();
+                fbLoggedIn.logOut();
                 Intent intent = new Intent(WelcomeTestScreen.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
