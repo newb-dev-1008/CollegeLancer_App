@@ -14,6 +14,9 @@ import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.login.Login;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -22,8 +25,15 @@ public class WelcomeTestScreen extends AppCompatActivity {
     private Button signOutTest;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
-    private  AccessTokenTracker accessTokenTracker;
+    private AccessTokenTracker accessTokenTracker;
     private LoginManager fbLoggedIn;
+    private GoogleSignInClient googleSignInClient;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseAuth.addAuthStateListener(authStateListener);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,17 +44,24 @@ public class WelcomeTestScreen extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         fbLoggedIn = LoginManager.getInstance();
 
+        //GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        //        .requestIdToken(getString(R.string.default_web_client_id))
+        //        .requestEmail()
+        //        .build();
+
+        //googleSignInClient = GoogleSignIn.getClient(this, gso);
+
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null){
-                    return;
-                }
-                else{
+                Toast.makeText(WelcomeTestScreen.this, "AuthStateListener Notified.", Toast.LENGTH_SHORT).show();
+                if (firebaseAuth.getCurrentUser() == null){
+                    Toast.makeText(WelcomeTestScreen.this, "Signed Out Successfully.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(WelcomeTestScreen.this, LoginActivity.class);
-                    startActivity(intent);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     finish();
+                    startActivity(intent);
                 }
             }
         };
@@ -54,10 +71,7 @@ public class WelcomeTestScreen extends AppCompatActivity {
             public void onClick(View view) {
                 firebaseAuth.signOut();
                 fbLoggedIn.logOut();
-                Intent intent = new Intent(WelcomeTestScreen.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-                Toast.makeText(WelcomeTestScreen.this, "Signed Out Successfully", Toast.LENGTH_SHORT).show();
+                // googleSignInClient.signOut();
             }
         });
 
@@ -66,6 +80,12 @@ public class WelcomeTestScreen extends AppCompatActivity {
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
                 if(currentAccessToken == null){
                     firebaseAuth.signOut();
+                    Intent intent = new Intent(WelcomeTestScreen.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    finish();
+                    startActivity(intent);
+                    Toast.makeText(WelcomeTestScreen.this, "Signed Out of Facebook Successfully.", Toast.LENGTH_SHORT).show();
                 }
             }
         };

@@ -1,12 +1,14 @@
 package com.college.freelancestartup;
 
 import android.content.Intent;
+import android.content.LocusId;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +20,17 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.DefaultAudience;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -27,16 +38,21 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button signUpBtn, signInBtn, signInGoogleBtn;
+    private Button signUpBtn, signInBtn;
+    private SignInButton signInGoogleBtn;
     private LoginButton signInFBBtn;
     private EditText signInEmailET, signInPwET;
+    private GoogleSignInClient googleSignInClient;
     private FirebaseAuth firebaseAuth;
     private CallbackManager callbackManager;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private LoginManager fbLoginManager;
     private AccessTokenTracker accessTokenTracker;
+    private int RC_SIGN_IN = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -47,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 //        AppEventsLogger.activateApp(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        fbLoginManager = LoginManager.getInstance();
         signUpBtn = findViewById(R.id.welcomeSignUpButton);
         signInBtn = findViewById(R.id.welcomeSignInButton);
         signInFBBtn = findViewById(R.id.welcomeSignInFBButton);
@@ -72,6 +89,23 @@ public class LoginActivity extends AppCompatActivity {
         signInFBBtn.setPermissions("email", "public_profile");
         callbackManager = CallbackManager.Factory.create();
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        signInGoogleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                googleSignInClient.signOut();
+                Intent googleSignInIntent = googleSignInClient.getSignInIntent();
+                startActivityForResult(googleSignInIntent, RC_SIGN_IN);
+                Toast.makeText(LoginActivity.this, "Select your Google account.", Toast.LENGTH_SHORT).show();;
+            }
+        });
+
         signInFBBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -80,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onCancel() {
-                Toast.makeText(LoginActivity.this, "Cancelled login.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Cancelled login. (Facebook)", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -88,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Failed to connect to Facebook. Try again.", Toast.LENGTH_SHORT).show();
             }
         });
+
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -116,6 +151,48 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == RC_SIGN_IN){
+        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+        if (task.isSuccessful()){
+            handleSignInResult(task);
+        }
+        else{
+            Toast.makeText(LoginActivity.this, "Cancelled Google Login.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // Toast.makeText(LoginActivity.this, "Entered onActivityResult's if block.", Toast.LENGTH_SHORT).show();
+    }
+    }
+
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask){
+        try{
+            GoogleSignInAccount acc = completedTask.getResult(ApiException.class);
+            Toast.makeText(this, "Signed in via Google.", Toast.LENGTH_SHORT).show();
+            FirebaseGoogleAuth(acc);
+        }
+        catch (ApiException e){
+            Toast.makeText(this, "Couldn't sign in using Google. Try again.", Toast.LENGTH_SHORT).show();
+            FirebaseGoogleAuth(null);
+        }
+    }
+
+    private void FirebaseGoogleAuth(GoogleSignInAccount acct){
+        AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(LoginActivity.this, "Signed In. (Google)", Toast.LENGTH_SHORT).show();
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    updateUI(user);
+                }
+                else{
+                    Toast.makeText(LoginActivity.this, "Sign in failed. (Google)", Toast.LENGTH_SHORT).show();
+                    updateUI(null);
+                }
+            }
+        });
     }
 
     private void handleFacebookToken(AccessToken token){
@@ -125,7 +202,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     FirebaseUser user = firebaseAuth.getCurrentUser();
-                    Toast.makeText(LoginActivity.this, "Welcome.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Signed In. (Facebook)", Toast.LENGTH_SHORT).show();
                     updateUI(user);
                 }
                 else{
@@ -140,12 +217,15 @@ public class LoginActivity extends AppCompatActivity {
         // Update UI after login
         if (user != null){
             Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LoginActivity.this, WelcomeTestScreen.class);
             finish();
-            startActivity(new Intent(getApplicationContext(), WelcomeTestScreen.class));
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
-        else{
-            Toast.makeText(LoginActivity.this, "Who the fuck are you, identify yourself nigga", Toast.LENGTH_SHORT).show();
-        }
+        //else{
+        //    Toast.makeText(LoginActivity.this, "Who the fuck are you, identify yourself nigga", Toast.LENGTH_SHORT).show();
+        //}
         // Intent intent = new Intent(LoginActivity.this, OTPActivity.class);
         // startActivity(intent);
     }

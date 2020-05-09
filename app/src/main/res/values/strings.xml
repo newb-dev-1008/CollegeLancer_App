@@ -5,8 +5,8 @@
 
     <string name="welcomeFreelancer">Hello, Freelancer.</string>
     <string name="welcomeSignInButton">Sign In</string>
-    <string name="welcomeSignInGoogleButton">Sign in with Google</string>
-    <string name="welcomeSignInFBButton">Sign in with Facebook</string>
+    <string name="welcomeSignInGoogleButton">Continue with Google</string>
+    <string name="welcomeSignInFBButton">Continue with Facebook</string>
     <string name="welcomeSignUpButton">Don\'t have an account? Sign Up Here</string>
 
     <!-- Strings for Sign Up XML -->

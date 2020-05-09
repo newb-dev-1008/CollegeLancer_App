@@ -25,6 +25,12 @@ import com.facebook.login.Login;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -36,16 +42,20 @@ import com.google.firebase.auth.FirebaseUser;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private Button signUp, signUpGoogle;
+    private Button signUp;
+    private SignInButton signUpGoogle;
     private LoginButton signUpFB;
     private EditText signUpEmailET, signUpPwET, signUpConfPwET, signUpPhoneNoET;
     private FirebaseAuth firebaseAuth;
-    private  CallbackManager callbackManager;
+    private CallbackManager callbackManager;
     private FirebaseAuth.AuthStateListener authStateListener;
     private AccessTokenTracker accessTokenTracker;
+    private GoogleSignInClient googleSignInClient;
+    private int RC_SIGN_IN = 1;
 
 
     @Override
@@ -83,6 +93,13 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
+
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,12 +132,62 @@ public class SignUpActivity extends AppCompatActivity {
             }
         };
 
+        signUpGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent googleSignInIntent = googleSignInClient.getSignInIntent();
+                startActivityForResult(googleSignInIntent, RC_SIGN_IN);
+                Toast.makeText(SignUpActivity.this, "Select your Google account.", Toast.LENGTH_SHORT).show();;
+            }
+        });
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == RC_SIGN_IN){
+        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+        if (task.isSuccessful()){
+            handleSignInResult(task);
+        }
+        else{
+            Toast.makeText(SignUpActivity.this, "Cancelled Google Login.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // Toast.makeText(LoginActivity.this, "Entered onActivityResult's if block.", Toast.LENGTH_SHORT).show();
+    }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask){
+        try{
+            GoogleSignInAccount acc = completedTask.getResult(ApiException.class);
+            Toast.makeText(this, "Signed in via Google.", Toast.LENGTH_SHORT).show();
+            FirebaseGoogleAuth(acc);
+        }
+        catch (ApiException e){
+            Toast.makeText(this, "Couldn't sign in using Google. Try again.", Toast.LENGTH_SHORT).show();
+            FirebaseGoogleAuth(null);
+        }
+    }
+
+    private void FirebaseGoogleAuth(GoogleSignInAccount acct){
+        AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(SignUpActivity.this, "Signed In. (Google)", Toast.LENGTH_SHORT).show();
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    updateUI(user);
+                }
+                else{
+                    Toast.makeText(SignUpActivity.this, "Sign in failed. (Google)", Toast.LENGTH_SHORT).show();
+                    updateUI(null);
+                }
+            }
+        });
     }
 
     private void handleFacebookToken(AccessToken token){
@@ -136,6 +203,8 @@ public class SignUpActivity extends AppCompatActivity {
                 else{
                     Toast.makeText(SignUpActivity.this, "Couldn't connect to Facebook. Try Again.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
             }
@@ -146,9 +215,11 @@ public class SignUpActivity extends AppCompatActivity {
         // Update UI after login
         if (user != null){
             Toast.makeText(SignUpActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(SignUpActivity.this, "Who the fuck are you, identify yourself nigga", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), WelcomeTestScreen.class);
+            finish();
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
     }
 
@@ -194,7 +265,7 @@ public class SignUpActivity extends AppCompatActivity {
                     .setMessage("Make sure you recheck your details.")
                     .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
+                        public void onClick(final DialogInterface dialogInterface, int i) {
 
                             // Check if Internet connection is established
                             // --
@@ -205,6 +276,8 @@ public class SignUpActivity extends AppCompatActivity {
                                             if (task.isSuccessful()){
                                                 Toast.makeText(SignUpActivity.this, "Created Account Successfully.", Toast.LENGTH_SHORT).show();
                                                 Intent intent = new Intent(SignUpActivity.this, WelcomeTestScreen.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(intent);
                                             }
                                             else{
