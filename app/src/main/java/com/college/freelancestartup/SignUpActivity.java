@@ -43,13 +43,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
 
     private Button signUp;
     private SignInButton signUpGoogle;
     private LoginButton signUpFB;
-    private EditText signUpEmailET, signUpPwET, signUpConfPwET, signUpPhoneNoET;
+    private EditText signUpEmailET, signUpPwET, signUpConfPwET, signUpPhoneNoET, signUpNameET;
     private FirebaseAuth firebaseAuth;
     private CallbackManager callbackManager;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -66,6 +67,7 @@ public class SignUpActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FacebookSdk.sdkInitialize(getApplicationContext());
 
+        signUpNameET = findViewById(R.id.signupNameEditText);
         signUp = findViewById(R.id.signupButton);
         signUpGoogle = findViewById(R.id.signupGoogleButton);
         signUpEmailET = findViewById(R.id.signupEmailEditText);
@@ -228,7 +230,9 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         firebaseAuth.addAuthStateListener(authStateListener);
-        // FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        if (firebaseAuth.getCurrentUser() != null){
+            updateUI(firebaseAuth.getCurrentUser());
+        }
     }
 
     @Override
@@ -244,11 +248,19 @@ public class SignUpActivity extends AppCompatActivity {
         final String emailID = signUpEmailET.getText().toString().trim();
         // int phoneNo = Integer.parseInt(signUpPhoneNoET.getText().toString().trim());
         final String password = signUpPwET.getText().toString().trim();
-        String confPassword = signUpConfPwET.getText().toString().trim();
+        final String confPassword = signUpConfPwET.getText().toString().trim();
+        final String phoneNo = signUpPhoneNoET.getText().toString().trim();
+        final String name = signUpNameET.getText().toString().trim();
 
         // Checking if the fields are empty
         if (TextUtils.isEmpty(emailID)) {
             signUpEmailET.setError("You've not entered your Email ID.");
+        }
+        else if (TextUtils.isEmpty(phoneNo)) {
+            signUpPhoneNoET.setError("Enter your phone number.");
+        }
+        else if (TextUtils.isEmpty(name)){
+            signUpNameET.setError("You need to enter your full name.");
         }
         // Checking if Email ID entered is valid using function defined below
         else if (!isEmailValid(emailID)) {
@@ -274,11 +286,29 @@ public class SignUpActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<AuthResult> task) {
                                             if (task.isSuccessful()){
-                                                Toast.makeText(SignUpActivity.this, "Created Account Successfully.", Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(SignUpActivity.this, WelcomeTestScreen.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                startActivity(intent);
+                                                User user = new User(
+                                                  name,
+                                                  emailID,
+                                                  phoneNo
+                                                );
+                                                FirebaseDatabase.getInstance().getReference("Users")
+                                                        .child(firebaseAuth.getCurrentUser().getUid())
+                                                        .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()){
+                                                            firebaseAuth.signInWithEmailAndPassword(emailID, password);
+                                                            Toast.makeText(SignUpActivity.this, "Created Account Successfully.", Toast.LENGTH_SHORT).show();
+                                                            Intent intent = new Intent(SignUpActivity.this, WelcomeTestScreen.class);
+                                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                            startActivity(intent);
+                                                        }
+                                                        else{
+                                                            Toast.makeText(SignUpActivity.this, "The database timed out. Please try again.", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                });
                                             }
                                             else{
                                                 Toast.makeText(SignUpActivity.this, "Couldn't register. Please retry.", Toast.LENGTH_SHORT).show();
