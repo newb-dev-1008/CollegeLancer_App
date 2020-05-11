@@ -32,6 +32,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -235,6 +237,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         firebaseAuth.addAuthStateListener(authStateListener);
+        if (firebaseAuth.getCurrentUser() != null){
+            updateUI(firebaseAuth.getCurrentUser());
+        }
         // FirebaseUser currentUser = firebaseAuth.getCurrentUser();
     }
 
@@ -254,5 +259,23 @@ public class LoginActivity extends AppCompatActivity {
     private void Login(View view){
         String emailID = signInEmailET.getText().toString().trim();
         String password = signInPwET.getText().toString().trim();
+
+        firebaseAuth.signInWithEmailAndPassword(emailID, password)
+                .addOnSuccessListener(LoginActivity.this, new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(LoginActivity.this, "Created Account Successfully, signing you in...", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this, WelcomeTestScreen.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                })
+                .addOnFailureListener(LoginActivity.this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
