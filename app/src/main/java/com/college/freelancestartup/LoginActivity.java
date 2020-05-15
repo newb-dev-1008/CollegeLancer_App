@@ -41,6 +41,10 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -54,7 +58,10 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     private LoginManager fbLoginManager;
     private AccessTokenTracker accessTokenTracker;
+    private final String KEY_NAME = "name";
+    private final String KEY_EMAIL = "emailID";
     private int RC_SIGN_IN = 1;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -179,7 +186,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void FirebaseGoogleAuth(GoogleSignInAccount acct){
+    private void FirebaseGoogleAuth(final GoogleSignInAccount acct){
         AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -187,6 +194,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Toast.makeText(LoginActivity.this, "Signed In. (Google)", Toast.LENGTH_SHORT).show();
                     FirebaseUser user = firebaseAuth.getCurrentUser();
+                    String nameGoogle = acct.getDisplayName();
+                    String emailIDGoogle = acct.getEmail();
                     updateUI(user);
                 }
                 else{

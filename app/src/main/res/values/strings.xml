@@ -15,7 +15,8 @@
     <string name="signupButton">Join CollegeLancer</string>
     <string name="signupFBButton">Continue with Facebook</string>
     <string name="signupGoogleButton">Continue with Google</string>
-
+    <string name="profDescription">Look out for students to help you with projects and research.</string>
+    <string name="studentDescription">Work on projects from professors and organisations, and also look for other developers willing to collaborate on your project.</string>
     <!-- Strings for Facebook stuff-->
 
     <string name="facebook_app_id">170733984257685</string>

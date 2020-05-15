@@ -1,7 +1,10 @@
 package com.college.freelancestartup;
 
+import java.util.Date;
+
 public class User {
     public String name, email, phoneNo;
+    public Date birthDate;
 
     public User(){
 

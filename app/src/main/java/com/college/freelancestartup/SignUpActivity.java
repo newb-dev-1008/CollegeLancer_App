@@ -1,5 +1,6 @@
 package com.college.freelancestartup;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +8,12 @@ import android.telecom.Call;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +26,8 @@ import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.Login;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -40,6 +47,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 
 import com.facebook.FacebookSdk;
@@ -47,8 +55,13 @@ import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import static android.graphics.Color.rgb;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -62,11 +75,14 @@ public class SignUpActivity extends AppCompatActivity {
     private AccessTokenTracker accessTokenTracker;
     private GoogleSignInClient googleSignInClient;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private RadioGroup userType;
+    private RadioButton professor, student;
     private int RC_SIGN_IN = 1;
+    public String userTypeDB;
 
     private static final String KEY_NAME = "name";
     private static final String KEY_EMAIL = "email";
-    private static final String KEY_PHNO = "phoneNo";
+    private static final String KEY_USERTYPE = "userType";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +97,31 @@ public class SignUpActivity extends AppCompatActivity {
         signUpGoogle = findViewById(R.id.signupGoogleButton);
         signUpEmailET = findViewById(R.id.signupEmailEditText);
         signUpPwET = findViewById(R.id.signupPasswordEditText);
-        signUpPhoneNoET = findViewById(R.id.signupPhoneNoEditText);
         signUpConfPwET = findViewById(R.id.signupConfPasswordEditText);
         signUpFB = findViewById(R.id.signupFBButton);
+        userType = findViewById(R.id.userTypeRadioGroup);
+        professor = findViewById(R.id.professor);
+        student = findViewById(R.id.student);
 
         signUpFB.setPermissions("email", "public_profile");
         callbackManager = CallbackManager.Factory.create();
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        userType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (i == R.id.professor){
+                    Toast.makeText(SignUpActivity.this, "Professor chosen.", Toast.LENGTH_SHORT).show();
+                    userTypeDB = "Professor";
+                }
+                else{
+                    Toast.makeText(SignUpActivity.this, "Student chosen.", Toast.LENGTH_SHORT).show();
+                    userTypeDB = "Student";
+                }
+            }
+        });
+
         signUpFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -114,9 +149,8 @@ public class SignUpActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Check if Password and Confirmed Password are matching
-                // Set the EditTexts to red if they aren't
-                // --
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(signUp.getWindowToken(), 0);
                 registerUser();
             }
         });
@@ -148,7 +182,6 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent googleSignInIntent = googleSignInClient.getSignInIntent();
                 startActivityForResult(googleSignInIntent, RC_SIGN_IN);
-                Toast.makeText(SignUpActivity.this, "Select your Google account.", Toast.LENGTH_SHORT).show();;
             }
         });
 
@@ -174,32 +207,8 @@ public class SignUpActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask){
         try{
             GoogleSignInAccount acc = completedTask.getResult(ApiException.class);
-            Toast.makeText(this, "Signed in via Google.", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, "Signed in via Google.", Toast.LENGTH_SHORT).show();
             FirebaseGoogleAuth(acc);
-            String nameGoogle = acc.getDisplayName();
-            String emailIDGoogle = acc.getEmail();
-            // String phoneNoGoogle = firebaseAuth.getCurrentUser().getPhoneNumber()
-
-            Map<String, Object> usersMap = new HashMap<>();
-            // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
-            usersMap.put(KEY_NAME, nameGoogle);
-            usersMap.put(KEY_EMAIL, emailIDGoogle);
-            // usersMap.put(KEY_PHNO, phoneNoGoogle);
-
-            db.collection("Users").document("User " + emailIDGoogle).set(usersMap)
-                    .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(SignUpActivity.this, "Your details have been saved.", Toast.LENGTH_SHORT).show();
-                            // Toast.makeText(SignUpActivity.this, "Created account, please wait...", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
         }
         catch (ApiException e){
             Toast.makeText(this, "Couldn't sign in using Google. Try again.", Toast.LENGTH_SHORT).show();
@@ -207,15 +216,36 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    private void FirebaseGoogleAuth(GoogleSignInAccount acct){
+    private void FirebaseGoogleAuth(final GoogleSignInAccount acct){
         AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(SignUpActivity.this, "Signed In. (Google)", Toast.LENGTH_SHORT).show();
-
                     FirebaseUser user = firebaseAuth.getCurrentUser();
+                    String nameGoogle = acct.getDisplayName();
+                    String emailIDGoogle = acct.getEmail();
+
+                    Map<String, Object> usersMap = new HashMap<>();
+                    // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
+                    usersMap.put(KEY_NAME, nameGoogle);
+                    usersMap.put(KEY_EMAIL, emailIDGoogle);
+
+                    db.collection("Users").document("User " + emailIDGoogle).set(usersMap)
+                            .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(SignUpActivity.this, "Your details have been saved.", Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(SignUpActivity.this, "Created account, please wait...", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                     updateUI(user);
                 }
                 else{
@@ -226,14 +256,33 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    private void handleFacebookToken(AccessToken token){
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+    private void handleFacebookToken(final AccessToken token){
+        final AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     FirebaseUser user = firebaseAuth.getCurrentUser();
-                    Toast.makeText(SignUpActivity.this, "Welcome.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Logged in via Facebook.", Toast.LENGTH_SHORT).show();
+                    String emailIDFB = token.getUserId();
+                    Map<String, Object> usersMap = new HashMap<>();
+                    // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
+                    usersMap.put(KEY_EMAIL, emailIDFB);
+
+                    db.collection("Users").document("User " + emailIDFB).set(usersMap)
+                            .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(SignUpActivity.this, "Your details have been saved.", Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(SignUpActivity.this, "Created account, please wait...", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                     updateUI(user);
                 }
                 else{
@@ -250,7 +299,6 @@ public class SignUpActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user){
         // Update UI after login
         if (user != null){
-            Toast.makeText(SignUpActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), WelcomeTestScreen.class);
             finish();
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -283,15 +331,11 @@ public class SignUpActivity extends AppCompatActivity {
         // int phoneNo = Integer.parseInt(signUpPhoneNoET.getText().toString().trim());
         final String password = signUpPwET.getText().toString().trim();
         final String confPassword = signUpConfPwET.getText().toString().trim();
-        final String phoneNo = signUpPhoneNoET.getText().toString().trim();
         final String name = signUpNameET.getText().toString().trim();
 
         // Checking if the fields are empty
         if (TextUtils.isEmpty(emailID)) {
             signUpEmailET.setError("You've not entered your Email ID.");
-        }
-        else if (TextUtils.isEmpty(phoneNo)) {
-            signUpPhoneNoET.setError("Enter your phone number.");
         }
         else if (TextUtils.isEmpty(name)){
             signUpNameET.setError("You need to enter your full name.");
@@ -302,6 +346,9 @@ public class SignUpActivity extends AppCompatActivity {
         }
         else if (!password.equals(confPassword)){
             signUpConfPwET.setError("Your passwords do not match. Check again.");
+        }
+        else if (userType.getCheckedRadioButtonId() == -1){
+            Toast.makeText(this, "Select your account type.", Toast.LENGTH_SHORT).show();
         }
         //Submit Details to Firebase and receive OTP
         else {
@@ -314,6 +361,7 @@ public class SignUpActivity extends AppCompatActivity {
                         public void onClick(final DialogInterface dialogInterface, int i) {
                             // Check if Internet connection is established
                             // --
+
                             firebaseAuth.createUserWithEmailAndPassword(emailID, password)
                                     .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<AuthResult>() {
                                         @Override
@@ -322,8 +370,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
                                             usersMap.put(KEY_NAME, name);
                                             usersMap.put(KEY_EMAIL, emailID);
-                                            usersMap.put(KEY_PHNO, phoneNo);
-
+                                            usersMap.put(KEY_USERTYPE, userTypeDB);
                                             firebaseAuth.signInWithEmailAndPassword(emailID, password)
                                                     .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<AuthResult>() {
                                                         @Override
@@ -341,7 +388,6 @@ public class SignUpActivity extends AppCompatActivity {
                                                             Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                                         }
                                                     });
-
                                             db.collection("Users").document("User " + emailID).set(usersMap)
                                                     .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<Void>() {
                                                         @Override
