@@ -180,6 +180,7 @@ public class SignUpActivity extends AppCompatActivity {
         signUpGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                googleSignInClient.signOut();       // To make the dialog box for selecting Google account pop up everytime
                 Intent googleSignInIntent = googleSignInClient.getSignInIntent();
                 startActivityForResult(googleSignInIntent, RC_SIGN_IN);
             }

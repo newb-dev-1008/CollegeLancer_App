@@ -1,9 +1,11 @@
 package com.college.freelancestartup;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.LocusId;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -92,6 +94,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Login(view);
+
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(signInBtn.getWindowToken(), 0);
             }
         });
 
@@ -108,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
         signInGoogleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                googleSignInClient.signOut();
+                googleSignInClient.signOut();                 // To make the dialog box for selecting Google account pop up everytime
                 Intent googleSignInIntent = googleSignInClient.getSignInIntent();
                 startActivityForResult(googleSignInIntent, RC_SIGN_IN);
                 Toast.makeText(LoginActivity.this, "Select your Google account.", Toast.LENGTH_SHORT).show();;
