@@ -219,80 +219,81 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void FirebaseGoogleAuth(final GoogleSignInAccount acct){
         AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithCredential(authCredential).addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(SignUpActivity.this, "Signed In. (Google)", Toast.LENGTH_SHORT).show();
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
-                    String nameGoogle = acct.getDisplayName();
-                    String emailIDGoogle = acct.getEmail();
+            public void onSuccess(AuthResult authResult) {
+                Toast.makeText(SignUpActivity.this, "Signed In. (Google)", Toast.LENGTH_SHORT).show();
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                String nameGoogle = acct.getDisplayName();
+                String emailIDGoogle = acct.getEmail();
 
-                    Map<String, Object> usersMap = new HashMap<>();
-                    // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
-                    usersMap.put(KEY_NAME, nameGoogle);
-                    usersMap.put(KEY_EMAIL, emailIDGoogle);
+                Map<String, Object> usersMap = new HashMap<>();
+                // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
+                usersMap.put(KEY_NAME, nameGoogle);
+                usersMap.put(KEY_EMAIL, emailIDGoogle);
 
-                    db.collection("Users").document("User " + emailIDGoogle).set(usersMap)
-                            .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(SignUpActivity.this, "Your details have been saved.", Toast.LENGTH_SHORT).show();
-                                    // Toast.makeText(SignUpActivity.this, "Created account, please wait...", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                    updateUI(user);
-                }
-                else{
-                    Toast.makeText(SignUpActivity.this, "Sign in failed. (Google)", Toast.LENGTH_SHORT).show();
-                    updateUI(null);
-                }
+                db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getUid()).set(usersMap)
+                        .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(SignUpActivity.this, "Your details have been saved.", Toast.LENGTH_SHORT).show();
+                                // Toast.makeText(SignUpActivity.this, "Created account, please wait...", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                updateUI(user);
+            }
+        }).addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                updateUI(null);
             }
         });
     }
 
     private void handleFacebookToken(final AccessToken token){
         final AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithCredential(credential).addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
-                    Toast.makeText(SignUpActivity.this, "Logged in via Facebook.", Toast.LENGTH_SHORT).show();
-                    String emailIDFB = token.getUserId();
-                    Map<String, Object> usersMap = new HashMap<>();
-                    // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
-                    usersMap.put(KEY_EMAIL, emailIDFB);
+            public void onSuccess(AuthResult authResult) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                Toast.makeText(SignUpActivity.this, "Logged in via Facebook.", Toast.LENGTH_SHORT).show();
+                String emailIDFB = token.getUserId();
+                Map<String, Object> usersMap = new HashMap<>();
+                // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
+                usersMap.put(KEY_EMAIL, emailIDFB);
 
-                    db.collection("Users").document("User " + emailIDFB).set(usersMap)
-                            .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(SignUpActivity.this, "Your details have been saved.", Toast.LENGTH_SHORT).show();
-                                    // Toast.makeText(SignUpActivity.this, "Created account, please wait...", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                    updateUI(user);
-                }
-                else{
-                    Toast.makeText(SignUpActivity.this, "Couldn't connect to Facebook. Try Again.", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }
+                db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getUid()).set(usersMap)
+                        .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(SignUpActivity.this, "Your details have been saved.", Toast.LENGTH_SHORT).show();
+                                // Toast.makeText(SignUpActivity.this, "Created account, please wait...", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                updateUI(user);
+            }
+        }).addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                firebaseAuth.signOut();
+                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
     }
@@ -333,7 +334,6 @@ public class SignUpActivity extends AppCompatActivity {
         final String password = signUpPwET.getText().toString().trim();
         final String confPassword = signUpConfPwET.getText().toString().trim();
         final String name = signUpNameET.getText().toString().trim();
-
         // Checking if the fields are empty
         if (TextUtils.isEmpty(emailID)) {
             signUpEmailET.setError("You've not entered your Email ID.");
@@ -389,7 +389,7 @@ public class SignUpActivity extends AppCompatActivity {
                                                             Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                                         }
                                                     });
-                                            db.collection("Users").document("User " + emailID).set(usersMap)
+                                            db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getUid()).set(usersMap)
                                                     .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<Void>() {
                                                         @Override
                                                         public void onSuccess(Void aVoid) {
