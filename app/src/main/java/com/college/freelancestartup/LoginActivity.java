@@ -39,18 +39,24 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button signUpBtn, signInBtn;
+    private Button signUpBtn, signInBtn, enterEmailCheck;
     private SignInButton signInGoogleBtn;
     private LoginButton signInFBBtn;
     private EditText signInEmailET, signInPwET;
@@ -60,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     private LoginManager fbLoginManager;
     private AccessTokenTracker accessTokenTracker;
+    private String EmailID;
     private final String KEY_NAME = "name";
     private final String KEY_EMAIL = "emailID";
     private int RC_SIGN_IN = 1;
@@ -77,12 +84,12 @@ public class LoginActivity extends AppCompatActivity {
         fbLoginManager = LoginManager.getInstance();
         signUpBtn = findViewById(R.id.welcomeSignUpButton);
         signInBtn = findViewById(R.id.welcomeSignInButton);
+        enterEmailCheck = findViewById(R.id.welcomeEnterEmailButton);
         signInFBBtn = findViewById(R.id.welcomeSignInFBButton);
         signInGoogleBtn = findViewById(R.id.welcomeSignInGoogleButton);
 
         signInEmailET = findViewById(R.id.welcomeEmailEditText);
         signInPwET = findViewById(R.id.welcomePasswordEditText);
-
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +104,61 @@ public class LoginActivity extends AppCompatActivity {
 
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(signInBtn.getWindowToken(), 0);
+            }
+        });
+
+        enterEmailCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EmailID = signInEmailET.getText().toString().trim();
+                if (isEmailValid(EmailID) == true){
+                    firebaseAuth.fetchSignInMethodsForEmail(EmailID).addOnCompleteListener(signInMethodsTask -> {
+                        if (signInMethodsTask.isSuccessful()) {
+                            List<String> signInMethods = signInMethodsTask.getResult().getSignInMethods();
+                            for (String signInMethod : signInMethods) {
+                                switch (signInMethod) {
+                                    case GoogleAuthProvider.PROVIDER_ID:
+                                        signInGoogleBtn.setVisibility(VISIBLE);
+                                        signInFBBtn.setVisibility(GONE);
+                                        signUpBtn.setVisibility(GONE);
+                                        signInBtn.setVisibility(GONE);
+                                        enterEmailCheck.setVisibility(GONE);
+                                        signInEmailET.setVisibility(GONE);
+                                        Toast.makeText(LoginActivity.this, "Your account was linked with Google. Sign In with Google.", Toast.LENGTH_LONG).show();
+                                        break;
+                                    case FacebookAuthProvider.PROVIDER_ID:
+                                        enterEmailCheck.setVisibility(GONE);
+                                        signInEmailET.setVisibility(GONE);
+                                        signInGoogleBtn.setVisibility(GONE);
+                                        signUpBtn.setVisibility(GONE);
+                                        signInFBBtn.setVisibility(VISIBLE);
+                                        signInBtn.setVisibility(GONE);
+                                        Toast.makeText(LoginActivity.this, "Your account was linked with Facebook. Sign In with Facebook.", Toast.LENGTH_LONG).show();
+                                        break;
+                                    case EmailAuthProvider.PROVIDER_ID:
+                                        signUpBtn.setVisibility(GONE);
+                                        enterEmailCheck.setVisibility(GONE);
+                                        signInGoogleBtn.setVisibility(GONE);
+                                        signInFBBtn.setVisibility(GONE);
+                                        signInBtn.setVisibility(VISIBLE);
+                                        signInEmailET.setVisibility(GONE);
+                                        signInPwET.setVisibility(VISIBLE);
+                                        Toast.makeText(LoginActivity.this, "Enter your password.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    default:
+                                        signInGoogleBtn.setVisibility(VISIBLE);
+                                        signInFBBtn.setVisibility(VISIBLE);
+                                        signInBtn.setVisibility(VISIBLE);
+                                        Toast.makeText(LoginActivity.this, "You haven't registered with us. Sign up now!", Toast.LENGTH_LONG).show();
+                                        break;
+                                }
+                            }
+                        }
+                    });
+                }
+                else{
+                    signInEmailET.setError("Please enter a valid Email ID.");
+                }
             }
         });
 
@@ -291,5 +353,10 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    // Function to check if entered Email IDs are valid
+    private boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }

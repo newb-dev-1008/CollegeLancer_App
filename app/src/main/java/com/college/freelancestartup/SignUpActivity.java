@@ -53,7 +53,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -80,6 +84,9 @@ public class SignUpActivity extends AppCompatActivity {
     private int RC_SIGN_IN = 1;
     public String userTypeDB;
 
+    private String FBEmail;
+    private int userExistsFlag = 0;
+
     private static final String KEY_NAME = "name";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_USERTYPE = "userType";
@@ -102,6 +109,7 @@ public class SignUpActivity extends AppCompatActivity {
         userType = findViewById(R.id.userTypeRadioGroup);
         professor = findViewById(R.id.professor);
         student = findViewById(R.id.student);
+        db.collection("Users");
 
         signUpFB.setPermissions("email", "public_profile");
         callbackManager = CallbackManager.Factory.create();
@@ -125,6 +133,26 @@ public class SignUpActivity extends AppCompatActivity {
         signUpFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                /*
+                GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject me, GraphResponse response) {
+                                if (response.getError() != null) {
+                                    Toast.makeText(SignUpActivity.this, "Couldn't connect with the server, try again.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    FBEmail = me.optString("email");
+                                }
+                            }
+                        }
+                ).executeAsync();
+                if (userExists(FBEmail) == true){
+
+                }
+                else{
+                    handleFacebookToken(loginResult.getAccessToken());
+                }
+                */
                 handleFacebookToken(loginResult.getAccessToken());
             }
 
@@ -214,6 +242,36 @@ public class SignUpActivity extends AppCompatActivity {
         catch (ApiException e){
             Toast.makeText(this, "Couldn't sign in using Google. Try again.", Toast.LENGTH_SHORT).show();
             FirebaseGoogleAuth(null);
+        }
+    }
+
+    private boolean userExists(final String emailIDs){
+        CollectionReference usersRef = db.collection("Users");
+        Query query = usersRef.whereEqualTo("email", emailIDs);
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot documentSnapshot : task.getResult()){
+                        String user = documentSnapshot.getString("email");
+
+                        if(user.equals(emailIDs)){
+                            userExistsFlag = 1;
+                            break;
+                        }
+                    }
+                }
+
+                if(task.getResult().size() == 0 ){
+                    Toast.makeText(SignUpActivity.this, "First time login.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        if (userExistsFlag == 1){
+            return true;
+        }
+        else{
+            return false;
         }
     }
 
