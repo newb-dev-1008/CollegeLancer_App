@@ -45,6 +45,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -63,13 +64,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static android.graphics.Color.rgb;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private Button signUp;
+    private Button signUp, checkEmailButton;
     private SignInButton signUpGoogle;
     private LoginButton signUpFB;
     private EditText signUpEmailET, signUpPwET, signUpConfPwET, signUpPhoneNoET, signUpNameET;
@@ -83,9 +87,7 @@ public class SignUpActivity extends AppCompatActivity {
     private RadioButton professor, student;
     private int RC_SIGN_IN = 1;
     public String userTypeDB;
-
-    private String FBEmail;
-    private int userExistsFlag = 0;
+    private String EmailID;
 
     private static final String KEY_NAME = "name";
     private static final String KEY_EMAIL = "email";
@@ -101,6 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         signUpNameET = findViewById(R.id.signupNameEditText);
         signUp = findViewById(R.id.signupButton);
+        checkEmailButton = findViewById(R.id.signupEnterEmailButton);
         signUpGoogle = findViewById(R.id.signupGoogleButton);
         signUpEmailET = findViewById(R.id.signupEmailEditText);
         signUpPwET = findViewById(R.id.signupPasswordEditText);
@@ -130,29 +133,52 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        checkEmailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EmailID = signUpEmailET.getText().toString().trim();
+                if (isEmailValid(EmailID) == true){
+                    firebaseAuth.fetchSignInMethodsForEmail(EmailID).addOnCompleteListener(signInMethodsTask -> {
+                        if (signInMethodsTask.isSuccessful()) {
+                            List<String> signInMethods = signInMethodsTask.getResult().getSignInMethods();
+                            if (signInMethods.isEmpty()) {
+                                signUpEmailET.setVisibility(GONE);
+                                checkEmailButton.setVisibility(GONE);
+                                signUpNameET.setVisibility(VISIBLE);
+                                signUpPwET.setVisibility(VISIBLE);
+                                signUpConfPwET.setVisibility(VISIBLE);
+                                signUpPhoneNoET.setVisibility(VISIBLE);
+                                userType.setVisibility(VISIBLE);
+                                signUp.setVisibility(VISIBLE);
+                                signUpGoogle.setVisibility(VISIBLE);
+                                signUpFB.setVisibility(VISIBLE);
+                            }
+                            else{
+                                Toast.makeText(SignUpActivity.this, "You have already registered with that email ID. Please log in.", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                        }
+                        else{
+                            Toast.makeText(SignUpActivity.this, "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                    });
+                }
+                else{
+                    signUpEmailET.setError("Please enter a valid Email ID.");
+                }
+            }
+        });
+
         signUpFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                /*
-                GraphRequest.newMeRequest(
-                        loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject me, GraphResponse response) {
-                                if (response.getError() != null) {
-                                    Toast.makeText(SignUpActivity.this, "Couldn't connect with the server, try again.", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    FBEmail = me.optString("email");
-                                }
-                            }
-                        }
-                ).executeAsync();
-                if (userExists(FBEmail) == true){
-
-                }
-                else{
-                    handleFacebookToken(loginResult.getAccessToken());
-                }
-                */
                 handleFacebookToken(loginResult.getAccessToken());
             }
 
@@ -237,6 +263,7 @@ public class SignUpActivity extends AppCompatActivity {
         try{
             GoogleSignInAccount acc = completedTask.getResult(ApiException.class);
             // Toast.makeText(this, "Signed in via Google.", Toast.LENGTH_SHORT).show();
+            AuthCredential cred = GoogleAuthProvider.getCredential(acc.getIdToken(), null);
             FirebaseGoogleAuth(acc);
         }
         catch (ApiException e){
@@ -245,7 +272,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    private boolean userExists(final String emailIDs){
+    /*private boolean userExists(final String emailIDs){
         CollectionReference usersRef = db.collection("Users");
         Query query = usersRef.whereEqualTo("email", emailIDs);
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -273,7 +300,7 @@ public class SignUpActivity extends AppCompatActivity {
         else{
             return false;
         }
-    }
+    }*/
 
     private void FirebaseGoogleAuth(final GoogleSignInAccount acct){
         AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
