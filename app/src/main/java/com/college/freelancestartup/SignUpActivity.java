@@ -137,28 +137,28 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 EmailID = signUpEmailET.getText().toString().trim();
-                if (isEmailValid(EmailID) == true){
+                if (isEmailValid(EmailID)){
                     firebaseAuth.fetchSignInMethodsForEmail(EmailID).addOnCompleteListener(signInMethodsTask -> {
                         if (signInMethodsTask.isSuccessful()) {
                             List<String> signInMethods = signInMethodsTask.getResult().getSignInMethods();
-                            if (signInMethods.isEmpty()) {
-                                signUpEmailET.setVisibility(GONE);
-                                checkEmailButton.setVisibility(GONE);
-                                signUpNameET.setVisibility(VISIBLE);
-                                signUpPwET.setVisibility(VISIBLE);
-                                signUpConfPwET.setVisibility(VISIBLE);
-                                signUpPhoneNoET.setVisibility(VISIBLE);
-                                userType.setVisibility(VISIBLE);
-                                signUp.setVisibility(VISIBLE);
-                                signUpGoogle.setVisibility(VISIBLE);
-                                signUpFB.setVisibility(VISIBLE);
-                            }
-                            else{
+                            if (!signInMethods.isEmpty()) {
                                 Toast.makeText(SignUpActivity.this, "You have already registered with that email ID. Please log in.", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
+                            }
+                            else{
+                                signUpEmailET.setVisibility(GONE);
+                                checkEmailButton.setVisibility(GONE);
+                                signUpNameET.setVisibility(VISIBLE);
+                                signUpPwET.setVisibility(VISIBLE);
+                                signUpConfPwET.setVisibility(VISIBLE);
+                                // signUpPhoneNoET.setVisibility(VISIBLE);
+                                userType.setVisibility(VISIBLE);
+                                signUp.setVisibility(VISIBLE);
+                                signUpGoogle.setVisibility(VISIBLE);
+                                signUpFB.setVisibility(VISIBLE);
                             }
                         }
                         else{
@@ -385,13 +385,39 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user){
         // Update UI after login
-        if (user != null){
-            Intent intent = new Intent(getApplicationContext(), WelcomeTestScreen.class);
-            finish();
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
+        db.collection("Users").document("Users" + user.getUid()).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            if (documentSnapshot.get("phoneNumber") != null){
+                                Toast.makeText(SignUpActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SignUpActivity.this, GFBDetailsActivity.class);
+                                finish();
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                            else{
+                                Toast.makeText(SignUpActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SignUpActivity.this, WelcomeTestScreen.class);
+                                finish();
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                        }
+                        else{
+                            Toast.makeText(SignUpActivity.this, "User does not exist. Create a new account.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(SignUpActivity.this, "Could not check database. Please try again.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     // Checking if a user is currently signed in

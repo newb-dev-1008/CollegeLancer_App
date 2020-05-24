@@ -45,6 +45,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.SignInMethodQueryResult;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -294,12 +295,39 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user){
         // Update UI after login
         if (user != null){
-            Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(LoginActivity.this, WelcomeTestScreen.class);
-            finish();
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            db.collection("Users").document("Users" + user.getUid()).get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()){
+                                if (documentSnapshot.get("phoneNumber") != null){
+                                    Toast.makeText(LoginActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(LoginActivity.this, GFBDetailsActivity.class);
+                                    finish();
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(LoginActivity.this, WelcomeTestScreen.class);
+                                    finish();
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                }
+                            }
+                            else{
+                                Toast.makeText(LoginActivity.this, "User does not exist. Create a new account.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(LoginActivity.this, "Could not check database. Please try again.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
         //else{
         //    Toast.makeText(LoginActivity.this, "Who the fuck are you, identify yourself nigga", Toast.LENGTH_SHORT).show();
