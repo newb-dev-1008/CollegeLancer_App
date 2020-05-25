@@ -148,6 +148,7 @@ public class SignUpActivity extends AppCompatActivity {
                             else{
                                 signUpEmailET.setVisibility(GONE);
                                 checkEmailButton.setVisibility(GONE);
+                                userType.setVisibility(GONE);
                                 signUpNameET.setVisibility(VISIBLE);
                                 signUpPwET.setVisibility(VISIBLE);
                                 signUpConfPwET.setVisibility(VISIBLE);
@@ -424,10 +425,7 @@ public class SignUpActivity extends AppCompatActivity {
         else if (!password.equals(confPassword)){
             signUpConfPwET.setError("Your passwords do not match. Check again.");
         }
-        else if (userType.getCheckedRadioButtonId() == -1){
-            Toast.makeText(this, "Select your account type.", Toast.LENGTH_SHORT).show();
-        }
-        //Submit Details to Firebase and receive OTP
+        //Submit Details to Firebase
         else {
             // Creating a dialog box for confirmation
             AlertDialog signupConfirm = new MaterialAlertDialogBuilder(this)
@@ -501,4 +499,5 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
+
 }

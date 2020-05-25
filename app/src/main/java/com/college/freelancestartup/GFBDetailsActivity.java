@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,11 @@ public class GFBDetailsActivity extends AppCompatActivity {
     private EditText phoneNumberET, universityET, nameET;
     private RadioGroup userType;
     private FirebaseAuth firebaseAuth;
+    private Spinner deptEngg, studentSem;
+    private String KEY_PH_NO = "phoneNumber";
+    private String KEY_UNI = "university";
+    private String KEY_DEPT = "department";
+    private String KEY_STUD_SEM = "studentSemester";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +49,8 @@ public class GFBDetailsActivity extends AppCompatActivity {
         universityET = findViewById(R.id.universityEditText);
         userType = findViewById(R.id.userTypeRadioGroup);
         nameET = findViewById(R.id.nameEditText);
+        deptEngg = findViewById(R.id.deptEnggSpinner);
+        studentSem = findViewById(R.id.studentSemSpinner);
 
         firebaseAuth = FirebaseAuth.getInstance();
     }
@@ -56,9 +64,9 @@ public class GFBDetailsActivity extends AppCompatActivity {
             phoneNumberET.setError("You've not entered your phone number.");
         } else if (TextUtils.isEmpty(name)) {
             nameET.setError("You need to enter your full name.");
-        } else if (TextUtils.isEmpty(university)){
+        } else if (TextUtils.isEmpty(university)) {
             universityET.setError("Please enter your University name.");
-        }else if (userType.getCheckedRadioButtonId() == -1) {
+        } else if (userType.getCheckedRadioButtonId() == -1) {
             Toast.makeText(this, "Select your account type.", Toast.LENGTH_SHORT).show();
         }
         //Submit Details to Firebase and receive OTP
@@ -72,6 +80,8 @@ public class GFBDetailsActivity extends AppCompatActivity {
                         public void onClick(final DialogInterface dialogInterface, int i) {
                             // Check if Internet connection is established
                             // --
+                            Map<String, Object> userDetails = new HashMap<>();
+
 
                             db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getUid()).get()
                                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
