@@ -1,10 +1,15 @@
 package com.college.freelancestartup;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -23,6 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +36,7 @@ public class GFBDetailsActivity extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button signupButton;
-    private EditText phoneNumberET, universityET, nameET;
+    private EditText phoneNumberET, universityET, nameET, dateOfBirthET;
     private RadioGroup userType;
     private FirebaseAuth firebaseAuth;
     private Spinner deptEngg, studentSem;
@@ -38,6 +44,7 @@ public class GFBDetailsActivity extends AppCompatActivity {
     private String KEY_UNI = "university";
     private String KEY_DEPT = "department";
     private String KEY_STUD_SEM = "studentSemester";
+    private DatePickerDialog.OnDateSetListener dateSetListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,8 +58,37 @@ public class GFBDetailsActivity extends AppCompatActivity {
         nameET = findViewById(R.id.nameEditText);
         deptEngg = findViewById(R.id.deptEnggSpinner);
         studentSem = findViewById(R.id.studentSemSpinner);
+        dateOfBirthET = findViewById(R.id.dateOfBirthET);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        dateOfBirthET.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        GFBDetailsActivity.this,
+                        android.R.style.Theme_Light,
+                        dateSetListener,
+                        day, month, year);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            }
+        });
+
+        dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int day, int month, int year) {
+                String day_date = Integer.toString(day);
+                String month_date = Integer.toString(month);
+                String year_date = Integer.toString(year);
+                String date = day_date + '/' + month_date + '/' + year_date;
+                dateOfBirthET.setText(date);
+            }
+        };
     }
 
     private void registerUser() {
