@@ -133,6 +133,8 @@ public class SignUpActivity extends AppCompatActivity {
         checkEmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(signUp.getWindowToken(), 0);
                 EmailID = signUpEmailET.getText().toString().trim();
                 if (isEmailValid(EmailID)){
                     firebaseAuth.fetchSignInMethodsForEmail(EmailID).addOnCompleteListener(signInMethodsTask -> {

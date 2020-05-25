@@ -111,6 +111,8 @@ public class LoginActivity extends AppCompatActivity {
         enterEmailCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(enterEmailCheck.getWindowToken(), 0);
                 EmailID = signInEmailET.getText().toString().trim();
                 if (isEmailValid(EmailID) == true){
                     firebaseAuth.fetchSignInMethodsForEmail(EmailID).addOnCompleteListener(signInMethodsTask -> {
