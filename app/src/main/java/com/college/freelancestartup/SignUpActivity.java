@@ -84,7 +84,6 @@ public class SignUpActivity extends AppCompatActivity {
     private GoogleSignInClient googleSignInClient;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private RadioGroup userType;
-    private RadioButton professor, student;
     private int RC_SIGN_IN = 1;
     public String userTypeDB;
     private String EmailID;
@@ -110,8 +109,6 @@ public class SignUpActivity extends AppCompatActivity {
         signUpConfPwET = findViewById(R.id.signupConfPasswordEditText);
         signUpFB = findViewById(R.id.signupFBButton);
         userType = findViewById(R.id.userTypeRadioGroup);
-        professor = findViewById(R.id.professor);
-        student = findViewById(R.id.student);
         db.collection("Users");
 
         signUpFB.setPermissions("email", "public_profile");
@@ -154,8 +151,6 @@ public class SignUpActivity extends AppCompatActivity {
                                 signUpNameET.setVisibility(VISIBLE);
                                 signUpPwET.setVisibility(VISIBLE);
                                 signUpConfPwET.setVisibility(VISIBLE);
-                                // signUpPhoneNoET.setVisibility(VISIBLE);
-                                userType.setVisibility(VISIBLE);
                                 signUp.setVisibility(VISIBLE);
                                 signUpGoogle.setVisibility(VISIBLE);
                                 signUpFB.setVisibility(VISIBLE);
@@ -271,36 +266,6 @@ public class SignUpActivity extends AppCompatActivity {
             FirebaseGoogleAuth(null);
         }
     }
-
-    /*private boolean userExists(final String emailIDs){
-        CollectionReference usersRef = db.collection("Users");
-        Query query = usersRef.whereEqualTo("email", emailIDs);
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(DocumentSnapshot documentSnapshot : task.getResult()){
-                        String user = documentSnapshot.getString("email");
-
-                        if(user.equals(emailIDs)){
-                            userExistsFlag = 1;
-                            break;
-                        }
-                    }
-                }
-
-                if(task.getResult().size() == 0 ){
-                    Toast.makeText(SignUpActivity.this, "First time login.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        if (userExistsFlag == 1){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }*/
 
     private void FirebaseGoogleAuth(final GoogleSignInAccount acct){
         AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -482,7 +447,6 @@ public class SignUpActivity extends AppCompatActivity {
                                             // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
                                             usersMap.put(KEY_NAME, name);
                                             usersMap.put(KEY_EMAIL, emailID);
-                                            usersMap.put(KEY_USERTYPE, userTypeDB);
                                             firebaseAuth.signInWithEmailAndPassword(emailID, password)
                                                     .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<AuthResult>() {
                                                         @Override

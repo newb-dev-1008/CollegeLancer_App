@@ -18,80 +18,167 @@
             android:text="Additional Details"
             android:textColor="#000000"
             android:textSize="30sp"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
-            <EditText
-                android:id="@+id/phoneNumberEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
-                android:inputType="phone"
-                android:maxLength="10"
-                android:hint="Enter your 10 digit phone number"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="45dp"
-                app:layout_constraintBottom_toTopOf="@id/userType"
-                app:layout_constraintTop_toBottomOf="@+id/extraDetailsTV" />
+        <EditText
+            android:id="@+id/nameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:hint="Enter your full name"
+            app:layout_constraintTop_toBottomOf="@id/extraDetailsTV"
+            app:layout_constraintBottom_toTopOf="@id/phoneNumberEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
-            <TextView
-                android:id="@+id/userType"
+        <EditText
+            android:id="@+id/phoneNumberEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="25dp"
+            android:hint="Enter your 10 digit phone number"
+            android:inputType="phone"
+            android:maxLength="10"
+            app:layout_constraintBottom_toTopOf="@id/universityEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+
+        <EditText
+            android:id="@+id/universityEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:inputType="phone"
+            android:maxLength="10"
+            android:hint="Which University do you belong to?"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="5dp"
+            app:layout_constraintBottom_toTopOf="@id/userType"
+            app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText" />
+
+        <TextView
+            android:id="@+id/userType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Your User Profile Type:"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/userTypeRadioGroup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/universityEditText"/>
+
+        <RadioGroup
+            android:id="@+id/userTypeRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toTopOf="@id/signupButtonGFB"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/userType">
+
+            <RadioButton
+                android:id="@+id/professor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:fontFamily="sans-serif-black"
-                android:text="Your User Profile Type:"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@id/userTypeRadioGroup"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                android:layout_marginTop="30dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/phoneNumberEditText" />
+                android:layout_marginTop="7dp"
+                android:contentDescription="@string/profDescription"
+                android:padding="5dp"
+                android:text="Lecturer/ Professor"
+                android:textSize="14sp" />
 
-            <RadioGroup
-                android:id="@+id/userTypeRadioGroup"
-                android:layout_width="match_parent"
+            <RadioButton
+                android:id="@+id/student"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                app:layout_constraintBottom_toTopOf="@id/signupButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/userType">
+                android:contentDescription="@string/studentDescription"
+                android:padding="5dp"
+                android:text="Student Developer"
+                android:textSize="14sp" />
 
-                <RadioButton
-                    android:id="@+id/professor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:contentDescription="@string/profDescription"
-                    android:padding="5dp"
-                    android:text="Lecturer/ Professor"
-                    android:textSize="14sp" />
+        </RadioGroup>
 
-                <RadioButton
-                    android:id="@+id/student"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/studentDescription"
-                    android:padding="5dp"
-                    android:text="Student Developer"
-                    android:textSize="14sp" />
+        <TextView
+            android:id="@+id/userDeptTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Select your branch/ department:"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/userTypeRadioGroup"
+            app:layout_constraintBottom_toTopOf="@id/deptEnggSpinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"/>
 
-            </RadioGroup>
-
-        <Button
-            android:id="@+id/signupButton"
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/deptEnggSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:entries="@array/departmentsEngg"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/userDeptTV"
+            app:layout_constraintBottom_toTopOf="@id/signupButtonGFB"/>
+
+        <TextView
+            android:id="@+id/studentSemTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Select your current semester:"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/deptEnggSpinner"
+            app:layout_constraintBottom_toTopOf="@id/studentSemSpinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/studentSemSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:entries="@array/studentSem"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/studentSemTV"
+            app:layout_constraintBottom_toTopOf="@id/signupButtonGFB"/>
+
+        <Button
+            android:id="@+id/signupButtonGFB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp"
             android:padding="10dp"
             android:text="@string/signupButton"
@@ -99,7 +186,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userTypeRadioGroup" />
+            app:layout_constraintTop_toBottomOf="@+id/studentSemSpinner" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

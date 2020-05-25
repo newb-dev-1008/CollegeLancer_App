@@ -22,4 +22,24 @@
     <string name="facebook_app_id">170733984257685</string>
     <string name="fb_login_protocol_scheme">fb170733984257685</string>
 
+    <string-array name="departmentsEngg">
+        <item>Select your branch of study/ department</item>
+        <item>Computer Science and Engineering (CSE)</item>
+        <item>Electronics and Communication Engineering (ECE)</item>
+        <item>Electrical and Electronics Engineering (EEE)</item>
+        <item>Mechanical Engineering</item>
+        <item>Electronics and Instrumentation Engineering (EIE)</item>
+    </string-array>
+
+    <string-array name="studentSem">
+        <item>Select your current semester</item>
+        <item>1st Semester</item>
+        <item>2nd Semester</item>
+        <item>3rd Semester</item>
+        <item>4th Semester</item>
+        <item>5th Semester</item>
+        <item>6th Semester</item>
+        <item>7th Semester</item>
+        <item>8th Semester</item>
+    </string-array>
 </resources>
