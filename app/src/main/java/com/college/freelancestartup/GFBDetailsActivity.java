@@ -27,6 +27,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -40,11 +41,15 @@ public class GFBDetailsActivity extends AppCompatActivity {
     private RadioGroup userType;
     private FirebaseAuth firebaseAuth;
     private Spinner deptEngg, studentSem;
+    private String KEY_NAME = "name";
     private String KEY_PH_NO = "phoneNumber";
     private String KEY_UNI = "university";
     private String KEY_DEPT = "department";
     private String KEY_STUD_SEM = "studentSemester";
+    private String KEY_DOB = "dateOfBirth";
     private DatePickerDialog.OnDateSetListener dateSetListener;
+
+    private String DOB;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,8 +90,8 @@ public class GFBDetailsActivity extends AppCompatActivity {
                 String day_date = Integer.toString(day);
                 String month_date = Integer.toString(month);
                 String year_date = Integer.toString(year);
-                String date = day_date + '/' + month_date + '/' + year_date;
-                dateOfBirthET.setText(date);
+                DOB = day_date + '/' + month_date + '/' + year_date;
+                dateOfBirthET.setText(DOB);
             }
         };
     }
@@ -104,6 +109,12 @@ public class GFBDetailsActivity extends AppCompatActivity {
             universityET.setError("Please enter your University name.");
         } else if (userType.getCheckedRadioButtonId() == -1) {
             Toast.makeText(this, "Select your account type.", Toast.LENGTH_SHORT).show();
+        } else if (deptEngg.getSelectedItem() == "Select your branch of study/ department"){
+            Toast.makeText(this, "Please select your department.", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(DOB)){
+            dateOfBirthET.setError("Please select your date of birth.");
+        } else if (studentSem.getSelectedItem() == "Select your current semester"){
+            Toast.makeText(this, "Select your current semester of study.", Toast.LENGTH_SHORT).show();
         }
         //Submit Details to Firebase and receive OTP
         else {
@@ -117,19 +128,27 @@ public class GFBDetailsActivity extends AppCompatActivity {
                             // Check if Internet connection is established
                             // --
                             Map<String, Object> userDetails = new HashMap<>();
+                            userDetails.put(KEY_NAME, name);
+                            userDetails.put(KEY_PH_NO, phoneNumber);
+                            userDetails.put(KEY_UNI, university);
+                            userDetails.put(KEY_DOB, DOB);
 
-
-                            db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getUid()).get()
-                                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getUid()).set(userDetails, SetOptions.merge())
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
-                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                            // Do something
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(GFBDetailsActivity.this, "Details added successfully, proceeding...", Toast.LENGTH_LONG).show();
+                                            Intent intent = new Intent(GFBDetailsActivity.this, WelcomeTestScreen.class);
+                                            finish();
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            // Do something
+                                            Toast.makeText(GFBDetailsActivity.this, "Could not store details in database. Please check your Internet connection.", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         }

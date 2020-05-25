@@ -198,6 +198,7 @@
             android:layout_marginTop="10dp"
             android:entries="@array/studentSem"
             android:textAlignment="center"
+            android:tooltipText="@string/semesterSelectAdvice"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/studentSemTV"

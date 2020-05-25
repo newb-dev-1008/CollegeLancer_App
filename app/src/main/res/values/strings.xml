@@ -42,4 +42,6 @@
         <item>7th Semester</item>
         <item>8th Semester</item>
     </string-array>
+
+    <string name="semesterSelectAdvice">If you are in your summer break, or a year repeater, please select the semester you last attended.</string>
 </resources>
