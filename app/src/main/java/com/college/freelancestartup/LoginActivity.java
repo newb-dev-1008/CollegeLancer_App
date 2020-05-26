@@ -302,7 +302,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.exists()){
-                                if (documentSnapshot.get("phoneNumber") != null){
+                                if (!documentSnapshot.contains("phoneNumber")){
                                     Toast.makeText(LoginActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, GFBDetailsActivity.class);
                                     finish();
