@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/profHome"
+        android:icon="@drawable/student_home"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/profAddProj"
+        android:icon="@drawable/student_add_proj"
+        android:title="Add Project"/>
+
+    <item
+        android:id="@+id/profStudent"
+        android:icon="@drawable/student_prof"
+        android:title="Students"/>
+</menu>

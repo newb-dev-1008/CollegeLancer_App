@@ -8,23 +8,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/studentHomeNav"
+        app:layout_constraintBottom_toTopOf="@id/profHomeNav"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0">
 
 
-
     </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/studentHomeNav"
+        android:id="@+id/profHomeNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1"
-        app:menu="@menu/student_bottom_nav" />
-
+        app:menu="@menu/prof_bottom_nav" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
