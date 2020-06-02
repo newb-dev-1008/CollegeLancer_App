@@ -21,12 +21,13 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start|left"
-        app:headerLayout="@layout/navigation_header"
+        app:headerLayout="@layout/prof_navigation_header"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/profHomeNav"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/my_navigation_items" />
+        app:menu="@menu/prof_navigation_items" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/profHomeNav"
