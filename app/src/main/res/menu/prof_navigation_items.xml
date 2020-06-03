@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/profHome"
-        android:icon="@drawable/student_home"
-        android:title="Home"/>
 
     <item
-        android:id="@+id/studentAddProj"
+        android:id="@+id/profSettings"
         android:icon="@drawable/student_add_proj"
-        android:title="Add Project"/>
+        android:title="Settings"/>
 
     <item
-        android:id="@+id/studentOrgs"
+        android:id="@+id/profReportBug"
         android:icon="@drawable/student_org"
-        android:title="Organisations"/>
+        android:title="Report Bugs"/>
 
-    <item
-        android:id="@+id/studenProf"
-        android:icon="@drawable/student_prof"
-        android:title="Professors"/>
 </menu>
