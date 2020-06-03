@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/studentFindCollabs"
+        android:icon="@drawable/add_collaborator"
+        android:title="Find Collaborators"/>
+
+    <item
+        android:id="@+id/studSettings"
+        android:icon="@drawable/student_add_proj"
+        android:title="Settings"/>
+
+    <item
+        android:id="@+id/studReportBug"
+        android:icon="@drawable/student_org"
+        android:title="Report Bugs"/>
+
+</menu>
