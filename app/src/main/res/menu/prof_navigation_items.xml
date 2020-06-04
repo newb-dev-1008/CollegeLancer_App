@@ -11,4 +11,9 @@
         android:icon="@drawable/student_org"
         android:title="Report Bugs"/>
 
+    <item
+        android:id="@+id/profLogOut"
+        android:icon="@drawable/signout"
+        android:title="Log out"/>
+
 </menu>
