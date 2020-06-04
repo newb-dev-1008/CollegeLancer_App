@@ -16,7 +16,7 @@
         android:title="Organisations"/>
 
     <item
-        android:id="@+id/studenProf"
+        android:id="@+id/studentProf"
         android:icon="@drawable/student_prof"
         android:title="Professors"/>
 </menu>
