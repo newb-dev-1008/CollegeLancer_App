@@ -18,10 +18,13 @@ public class StudentMainActivity extends AppCompatActivity {
 
         BottomNavigationView studentNavBottom = findViewById(R.id.studentHomeNav);
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.studentHomeFragContainer,
+                new StudentHomeFragment()).commit();
+
         studentNavBottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment;
+                Fragment selectedFragment = null;
 
                 switch (item.getItemId()){
                     case R.id.studentHome:
@@ -37,6 +40,11 @@ public class StudentMainActivity extends AppCompatActivity {
                         selectedFragment = new StudentProfFragment();
                         break;
                 }
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.studentHomeFragContainer,
+                        selectedFragment).commit();
+
+                return true;
             }
         });
     }

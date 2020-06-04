@@ -13,6 +13,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0">
 
+        <FrameLayout
+            android:id="@+id/studentHomeFragContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
 
     </ScrollView>
