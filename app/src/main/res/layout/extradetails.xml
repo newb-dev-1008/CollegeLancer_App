@@ -13,7 +13,7 @@
             android:id="@+id/extraDetailsTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
+            android:layout_marginBottom="30dp"
             android:fontFamily="sans-serif-black"
             android:text="Additional Details"
             android:textColor="#000000"
