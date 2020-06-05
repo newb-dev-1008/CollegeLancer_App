@@ -5,6 +5,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -14,7 +15,10 @@ public class ProfessorMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.student_home);
+        setContentView(R.layout.prof_home);
+
+        Toolbar profToolbar = findViewById(R.id.profToolbar);
+        setSupportActionBar(profToolbar);
 
         BottomNavigationView studentNavBottom = findViewById(R.id.studentHomeNav);
 

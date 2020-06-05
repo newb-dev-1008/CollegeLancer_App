@@ -45,6 +45,6 @@
 
     <string name="semesterSelectAdvice">If you are in your summer break, or a year repeater, please select the semester you last attended.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open_nav_bar">Open the navigation bar.</string>
+    <string name="close_nav_bar">Close the navigation bar.</string>
 </resources>
