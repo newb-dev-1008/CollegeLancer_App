@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start|left"
-        app:headerLayout="@layout/prof_navigation_header"
+        app:headerLayout="@layout/prof_nav_header"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/profHomeNav"
         app:layout_constraintLeft_toLeftOf="parent"
