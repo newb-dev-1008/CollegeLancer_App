@@ -33,9 +33,6 @@ public class ProfessorMainActivity extends AppCompatActivity {
                     case R.id.profAddProj:
                         selectedFragment = new ProfessorAddProjFragment();
                         break;
-                    case R.id.studentOrgs:
-                        selectedFragment = new ProfessorOrgsFragment();
-                        break;
                     case R.id.profStudent:
                         selectedFragment = new ProfStudentFragment();
                         break;
