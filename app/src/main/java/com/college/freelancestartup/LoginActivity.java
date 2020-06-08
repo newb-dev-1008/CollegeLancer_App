@@ -118,43 +118,44 @@ public class LoginActivity extends AppCompatActivity {
                     firebaseAuth.fetchSignInMethodsForEmail(EmailID).addOnCompleteListener(signInMethodsTask -> {
                         if (signInMethodsTask.isSuccessful()) {
                             List<String> signInMethods = signInMethodsTask.getResult().getSignInMethods();
-                            for (String signInMethod : signInMethods) {
-                                switch (signInMethod) {
-                                    case GoogleAuthProvider.PROVIDER_ID:
-                                        signInGoogleBtn.setVisibility(VISIBLE);
-                                        signInFBBtn.setVisibility(GONE);
-                                        signUpBtn.setVisibility(GONE);
-                                        signInBtn.setVisibility(GONE);
-                                        enterEmailCheck.setVisibility(GONE);
-                                        signInEmailET.setVisibility(GONE);
-                                        Toast.makeText(LoginActivity.this, "Your account was linked with Google. Sign In with Google.", Toast.LENGTH_LONG).show();
-                                        break;
-                                    case FacebookAuthProvider.PROVIDER_ID:
-                                        enterEmailCheck.setVisibility(GONE);
-                                        signInEmailET.setVisibility(GONE);
-                                        signInGoogleBtn.setVisibility(GONE);
-                                        signUpBtn.setVisibility(GONE);
-                                        signInFBBtn.setVisibility(VISIBLE);
-                                        signInBtn.setVisibility(GONE);
-                                        Toast.makeText(LoginActivity.this, "Your account was linked with Facebook. Sign In with Facebook.", Toast.LENGTH_LONG).show();
-                                        break;
-                                    case EmailAuthProvider.PROVIDER_ID:
-                                        signUpBtn.setVisibility(GONE);
-                                        enterEmailCheck.setVisibility(GONE);
-                                        signInGoogleBtn.setVisibility(GONE);
-                                        signInFBBtn.setVisibility(GONE);
-                                        signInBtn.setVisibility(VISIBLE);
-                                        signInEmailET.setVisibility(GONE);
-                                        signInPwET.setVisibility(VISIBLE);
-                                        Toast.makeText(LoginActivity.this, "Enter your password.", Toast.LENGTH_SHORT).show();
-                                        break;
-                                    default:
-                                        signInGoogleBtn.setVisibility(VISIBLE);
-                                        signInFBBtn.setVisibility(VISIBLE);
-                                        signInBtn.setVisibility(VISIBLE);
-                                        Toast.makeText(LoginActivity.this, "You haven't registered with us. Sign up now!", Toast.LENGTH_LONG).show();
-                                        break;
+                            if (signInMethods.size() != 0) {
+                                for (String signInMethod : signInMethods) {
+                                    switch (signInMethod) {
+                                        case GoogleAuthProvider.PROVIDER_ID:
+                                            signInGoogleBtn.setVisibility(VISIBLE);
+                                            signInFBBtn.setVisibility(GONE);
+                                            signUpBtn.setVisibility(GONE);
+                                            signInBtn.setVisibility(GONE);
+                                            enterEmailCheck.setVisibility(GONE);
+                                            signInEmailET.setVisibility(GONE);
+                                            Toast.makeText(LoginActivity.this, "Your account was linked with Google. Sign In with Google.", Toast.LENGTH_LONG).show();
+                                            break;
+                                        case FacebookAuthProvider.PROVIDER_ID:
+                                            enterEmailCheck.setVisibility(GONE);
+                                            signInEmailET.setVisibility(GONE);
+                                            signInGoogleBtn.setVisibility(GONE);
+                                            signUpBtn.setVisibility(GONE);
+                                            signInFBBtn.setVisibility(VISIBLE);
+                                            signInBtn.setVisibility(GONE);
+                                            Toast.makeText(LoginActivity.this, "Your account was linked with Facebook. Sign In with Facebook.", Toast.LENGTH_LONG).show();
+                                            break;
+                                        case EmailAuthProvider.PROVIDER_ID:
+                                            signUpBtn.setVisibility(GONE);
+                                            enterEmailCheck.setVisibility(GONE);
+                                            signInGoogleBtn.setVisibility(GONE);
+                                            signInFBBtn.setVisibility(GONE);
+                                            signInBtn.setVisibility(VISIBLE);
+                                            signInEmailET.setVisibility(GONE);
+                                            signInPwET.setVisibility(VISIBLE);
+                                            Toast.makeText(LoginActivity.this, "Enter your password.", Toast.LENGTH_SHORT).show();
+                                            break;
+                                    }
                                 }
+                            }
+                            else{
+                                Toast.makeText(LoginActivity.this, "You haven't registered with us. Sign up now!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                                startActivity(intent);
                             }
                         }
                     });
@@ -370,7 +371,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnSuccessListener(LoginActivity.this, new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(LoginActivity.this, "Created Account Successfully, signing you in...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Signing you in...", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, WelcomeTestScreen.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
