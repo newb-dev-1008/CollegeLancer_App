@@ -87,6 +87,7 @@ public class SignUpActivity extends AppCompatActivity {
     private int RC_SIGN_IN = 1;
     public String userTypeDB;
     private String EmailID;
+    private String UIDEmailID;
 
     private static final String KEY_NAME = "name";
     private static final String KEY_EMAIL = "email";
@@ -279,6 +280,7 @@ public class SignUpActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 String nameGoogle = acct.getDisplayName();
                 String emailIDGoogle = acct.getEmail();
+                UIDEmailID = emailIDGoogle;
 
                 Map<String, Object> usersMap = new HashMap<>();
                 // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
@@ -290,6 +292,7 @@ public class SignUpActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(SignUpActivity.this, "Your details have been saved.", Toast.LENGTH_SHORT).show();
+                                updateUI(user);
                                 // Toast.makeText(SignUpActivity.this, "Created account, please wait...", Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -297,9 +300,13 @@ public class SignUpActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                firebaseAuth.signOut();
+                                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
                             }
                         });
-                updateUI(user);
             }
         }).addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
             @Override
@@ -318,15 +325,17 @@ public class SignUpActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 Toast.makeText(SignUpActivity.this, "Logged in via Facebook.", Toast.LENGTH_SHORT).show();
                 String emailIDFB = token.getUserId();
+                UIDEmailID = emailIDFB;
                 Map<String, Object> usersMap = new HashMap<>();
                 // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
                 usersMap.put(KEY_EMAIL, emailIDFB);
 
-                db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getUid()).set(usersMap)
+                db.collection("Users").document("User " + UIDEmailID).set(usersMap)
                         .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(SignUpActivity.this, "Your details have been saved.", Toast.LENGTH_SHORT).show();
+                                updateUI(user);
                                 // Toast.makeText(SignUpActivity.this, "Created account, please wait...", Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -334,9 +343,13 @@ public class SignUpActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                firebaseAuth.signOut();
+                                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
                             }
                         });
-                updateUI(user);
             }
         }).addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
             @Override
@@ -354,38 +367,37 @@ public class SignUpActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user){
         // Update UI after login
         if (user != null) {
-            db.collection("Users").document("Users" + user.getUid()).get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            db.collection("Users").document("Users" + UIDEmailID).get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()){
-                                DocumentSnapshot documentSnapshot = task.getResult();
-                                if (documentSnapshot.exists()){
-                                    Toast.makeText(SignUpActivity.this, "DocumentSnapshot Exists.", Toast.LENGTH_SHORT).show();
-                                    if (!documentSnapshot.contains("phoneNumber")) {
-                                        Toast.makeText(SignUpActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(SignUpActivity.this, GFBDetailsActivity.class);
-                                        finish();
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intent);
-                                    } else {
-                                        Toast.makeText(SignUpActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(SignUpActivity.this, WelcomeTestScreen.class);
-                                        finish();
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intent);
-                                    }
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()){
+                                Toast.makeText(SignUpActivity.this, "DocumentSnapshot Exists.", Toast.LENGTH_SHORT).show();
+                                if (!documentSnapshot.contains("phoneNumber")) {
+                                    Toast.makeText(SignUpActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(SignUpActivity.this, GFBDetailsActivity.class);
+                                    finish();
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
                                 } else {
-                                    Toast.makeText(SignUpActivity.this, "User doesn't seem to have logged in before.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignUpActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(SignUpActivity.this, WelcomeTestScreen.class);
+                                    finish();
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
                                 }
-                            }
-                            else{
-                                Toast.makeText(SignUpActivity.this, "Could not check database. Please try again.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(SignUpActivity.this, "User doesn't seem to have logged in before.", Toast.LENGTH_SHORT).show();
                             }
                         }
-                    });
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.LocusId;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -72,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
     private final String KEY_EMAIL = "emailID";
     private int RC_SIGN_IN = 1;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String UIDEmailID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -114,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(enterEmailCheck.getWindowToken(), 0);
                 EmailID = signInEmailET.getText().toString().trim();
+                UIDEmailID = EmailID;
                 if (isEmailValid(EmailID) == true){
                     firebaseAuth.fetchSignInMethodsForEmail(EmailID).addOnCompleteListener(signInMethodsTask -> {
                         if (signInMethodsTask.isSuccessful()) {
@@ -231,17 +234,17 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
-    if (requestCode == RC_SIGN_IN){
-        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-        if (task.isSuccessful()){
-            handleSignInResult(task);
+        if (requestCode == RC_SIGN_IN){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            if (task.isSuccessful()){
+                handleSignInResult(task);
+            }
+            else{
+                Toast.makeText(LoginActivity.this, "Cancelled Google Login.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            // Toast.makeText(LoginActivity.this, "Entered onActivityResult's if block.", Toast.LENGTH_SHORT).show();
         }
-        else{
-            Toast.makeText(LoginActivity.this, "Cancelled Google Login.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        // Toast.makeText(LoginActivity.this, "Entered onActivityResult's if block.", Toast.LENGTH_SHORT).show();
-    }
     }
 
 
@@ -259,59 +262,108 @@ public class LoginActivity extends AppCompatActivity {
 
     private void FirebaseGoogleAuth(final GoogleSignInAccount acct){
         AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithCredential(authCredential).addOnSuccessListener(LoginActivity.this, new OnSuccessListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(LoginActivity.this, "Signed In. (Google)", Toast.LENGTH_SHORT).show();
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
-                    String nameGoogle = acct.getDisplayName();
-                    String emailIDGoogle = acct.getEmail();
-                    updateUI(user);
-                }
-                else{
-                    Toast.makeText(LoginActivity.this, "Sign in failed. (Google)", Toast.LENGTH_SHORT).show();
-                    updateUI(null);
-                }
+            public void onSuccess(AuthResult authResult) {
+                Toast.makeText(LoginActivity.this, "Signed In. (Google)", Toast.LENGTH_SHORT).show();
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                String nameGoogle = acct.getDisplayName();
+                String emailIDGoogle = acct.getEmail();
+                UIDEmailID = emailIDGoogle;
+
+                Map<String, Object> usersMap = new HashMap<>();
+                // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
+                usersMap.put(KEY_NAME, nameGoogle);
+                usersMap.put(KEY_EMAIL, emailIDGoogle);
+
+                db.collection("Users").document("User " + UIDEmailID).set(usersMap)
+                        .addOnSuccessListener(LoginActivity.this, new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(LoginActivity.this, "Your details have been saved.", Toast.LENGTH_SHORT).show();
+                                updateUI(user);
+                                // Toast.makeText(SignUpActivity.this, "Created account, please wait...", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(LoginActivity.this, new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                firebaseAuth.signOut();
+                                Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                        });
+            }
+        }).addOnFailureListener(LoginActivity.this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                updateUI(null);
             }
         });
     }
 
     private void handleFacebookToken(AccessToken token){
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        final AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        firebaseAuth.signInWithCredential(credential).addOnSuccessListener(LoginActivity.this, new OnSuccessListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
-                    Toast.makeText(LoginActivity.this, "Signed In. (Facebook)", Toast.LENGTH_SHORT).show();
-                    updateUI(user);
-                }
-                else{
-                    Toast.makeText(LoginActivity.this, "Couldn't connect to Facebook. Try Again.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+            public void onSuccess(AuthResult authResult) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                Toast.makeText(LoginActivity.this, "Logged in via Facebook.", Toast.LENGTH_SHORT).show();
+                String emailIDFB = token.getUserId();
+                Map<String, Object> usersMap = new HashMap<>();
+                // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
+                usersMap.put(KEY_EMAIL, emailIDFB);
+
+                db.collection("Users").document("User " + UIDEmailID).set(usersMap)
+                        .addOnSuccessListener(LoginActivity.this, new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(LoginActivity.this, "Your details have been saved.", Toast.LENGTH_SHORT).show();
+                                // Toast.makeText(SignUpActivity.this, "Created account, please wait...", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(LoginActivity.this, new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                updateUI(user);
+            }
+        }).addOnFailureListener(LoginActivity.this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                firebaseAuth.signOut();
+                Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
     }
 
     private void updateUI(FirebaseUser user){
         // Update UI after login
-        if (user != null){
-            db.collection("Users").document("Users" + user.getUid()).get()
+        if (user != null) {
+            db.collection("Users").document("Users" + UIDEmailID).get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.exists()){
-                                if (!documentSnapshot.contains("phoneNumber")){
+                                Toast.makeText(LoginActivity.this, "DocumentSnapshot Exists.", Toast.LENGTH_SHORT).show();
+                                if (!documentSnapshot.contains("phoneNumber")) {
                                     Toast.makeText(LoginActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, GFBDetailsActivity.class);
                                     finish();
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
-                                }
-                                else{
+                                } else {
                                     Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, WelcomeTestScreen.class);
                                     finish();
@@ -319,24 +371,18 @@ public class LoginActivity extends AppCompatActivity {
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }
-                            }
-                            else{
-                                Toast.makeText(LoginActivity.this, "User does not exist. Create a new account.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "User doesn't seem to have logged in before.", Toast.LENGTH_SHORT).show();
                             }
                         }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(LoginActivity.this, "Could not check database. Please try again.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
-        //else{
-        //    Toast.makeText(LoginActivity.this, "Who the fuck are you, identify yourself nigga", Toast.LENGTH_SHORT).show();
-        //}
-        // Intent intent = new Intent(LoginActivity.this, OTPActivity.class);
-        // startActivity(intent);
     }
 
     // Checking if a user is currently signed in
@@ -365,17 +411,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void Login(View view){
         String emailID = signInEmailET.getText().toString().trim();
+        UIDEmailID = emailID;
         String password = signInPwET.getText().toString().trim();
 
         firebaseAuth.signInWithEmailAndPassword(emailID, password)
                 .addOnSuccessListener(LoginActivity.this, new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(LoginActivity.this, "Signing you in...", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, WelcomeTestScreen.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+                        updateUI(firebaseAuth.getCurrentUser());
                     }
                 })
                 .addOnFailureListener(LoginActivity.this, new OnFailureListener() {
