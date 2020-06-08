@@ -287,7 +287,7 @@ public class SignUpActivity extends AppCompatActivity {
                 usersMap.put(KEY_NAME, nameGoogle);
                 usersMap.put(KEY_EMAIL, emailIDGoogle);
 
-                db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getUid()).set(usersMap)
+                db.collection("Users").document("User " + UIDEmailID).set(usersMap)
                         .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
@@ -461,15 +461,13 @@ public class SignUpActivity extends AppCompatActivity {
                                             // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
                                             usersMap.put(KEY_NAME, name);
                                             usersMap.put(KEY_EMAIL, emailID);
+                                            UIDEmailID = emailID;
                                             firebaseAuth.signInWithEmailAndPassword(emailID, password)
                                                     .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<AuthResult>() {
                                                         @Override
                                                         public void onSuccess(AuthResult authResult) {
                                                             Toast.makeText(SignUpActivity.this, "Created Account Successfully, signing you in...", Toast.LENGTH_SHORT).show();
-                                                            Intent intent = new Intent(SignUpActivity.this, WelcomeTestScreen.class);
-                                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                            startActivity(intent);
+                                                            updateUI(firebaseAuth.getCurrentUser());
                                                         }
                                                     })
                                                     .addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
@@ -478,7 +476,7 @@ public class SignUpActivity extends AppCompatActivity {
                                                             Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                                         }
                                                     });
-                                            db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getUid()).set(usersMap)
+                                            db.collection("Users").document("User " + UIDEmailID).set(usersMap)
                                                     .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<Void>() {
                                                         @Override
                                                         public void onSuccess(Void aVoid) {
