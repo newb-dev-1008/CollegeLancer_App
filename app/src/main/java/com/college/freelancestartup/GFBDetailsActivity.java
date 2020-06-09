@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,6 +33,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -80,23 +82,10 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         dateOfBirthET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog dialog = new DatePickerDialog(
-                        GFBDetailsActivity.this,
-                        android.R.style.Theme_Light,
-                        dateSetListener,
-                        year, month, day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "DatePicker");
             }
         });
-
-        dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int dayOfMonth, int month, int year) {
-                String DOB = day + "/" + month + "/" + year;
-                dateOfBirthET.setText(DOB);
-            }
-        };
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,7 +162,13 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     }
 
     @Override
-    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
+        String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+        dateOfBirthET.setText(currentDate);
     }
 }
