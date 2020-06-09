@@ -91,7 +91,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     private static final String KEY_NAME = "name";
     private static final String KEY_EMAIL = "email";
-    private static final String KEY_USERTYPE = "userType";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -371,16 +370,16 @@ public class SignUpActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (!documentSnapshot.contains("phoneNumber")) {
-                                Toast.makeText(SignUpActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(SignUpActivity.this, GFBDetailsActivity.class);
+                            if (documentSnapshot.get("phoneNumber") != null) {
+                                Toast.makeText(SignUpActivity.this, "Welcome.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SignUpActivity.this, WelcomeTestScreen.class);
                                 finish();
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(SignUpActivity.this, "Welcome.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(SignUpActivity.this, WelcomeTestScreen.class);
+                                Toast.makeText(SignUpActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SignUpActivity.this, GFBDetailsActivity.class);
                                 finish();
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
