@@ -312,35 +312,33 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.exists()){
-                                Toast.makeText(LoginActivity.this, "DocumentSnapshot Exists.", Toast.LENGTH_SHORT).show();
-                                if (!documentSnapshot.contains("phoneNumber")) {
-                                    Toast.makeText(LoginActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(LoginActivity.this, GFBDetailsActivity.class);
-                                    finish();
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(LoginActivity.this, WelcomeTestScreen.class);
-                                    finish();
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                }
+                            if (!documentSnapshot.contains("phoneNumber")) {
+                                Toast.makeText(LoginActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, GFBDetailsActivity.class);
+                                finish();
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
                             } else {
-                                Toast.makeText(LoginActivity.this, "User doesn't seem to have logged in before.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Welcome.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, WelcomeTestScreen.class);
+                                finish();
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
                             }
+                            //} else {
+                            //    Toast.makeText(SignUpActivity.this, "User doesn't seem to have logged in before.", Toast.LENGTH_SHORT).show();
+                            // }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
+
     }
 
     // Checking if a user is currently signed in

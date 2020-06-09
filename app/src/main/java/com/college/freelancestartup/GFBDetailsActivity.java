@@ -36,7 +36,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GFBDetailsActivity extends AppCompatActivity{
+public class GFBDetailsActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button signupButton;
@@ -172,4 +172,8 @@ public class GFBDetailsActivity extends AppCompatActivity{
         }
     }
 
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+
+    }
 }
