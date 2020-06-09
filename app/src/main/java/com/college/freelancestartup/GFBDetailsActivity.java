@@ -36,7 +36,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GFBDetailsActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class GFBDetailsActivity extends AppCompatActivity{
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button signupButton;
@@ -72,30 +72,28 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
         dateOfBirthET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-
                 DatePickerDialog dialog = new DatePickerDialog(
                         GFBDetailsActivity.this,
                         android.R.style.Theme_Light,
                         dateSetListener,
-                        day, month, year);
+                        year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
             }
         });
 
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int day, int month, int year) {
-                String day_date = Integer.toString(day);
-                String month_date = Integer.toString(month);
-                String year_date = Integer.toString(year);
-                DOB = day_date + '/' + month_date + '/' + year_date;
+            public void onDateSet(DatePicker datePicker, int dayOfMonth, int month, int year) {
+                String DOB = day + "/" + month + "/" + year;
                 dateOfBirthET.setText(DOB);
             }
         };
@@ -174,12 +172,4 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         }
     }
 
-    @Override
-    public void onDateSet(DatePicker datePicker, int day, int month, int year) {
-        String day_date = Integer.toString(day);
-        String month_date = Integer.toString(month);
-        String year_date = Integer.toString(year);
-        DOB = day_date + '/' + month_date + '/' + year_date;
-        dateOfBirthET.setText(DOB);
-    }
 }
