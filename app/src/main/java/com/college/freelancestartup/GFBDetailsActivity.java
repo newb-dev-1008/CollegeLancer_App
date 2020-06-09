@@ -36,7 +36,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GFBDetailsActivity extends AppCompatActivity {
+public class GFBDetailsActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button signupButton;
@@ -147,7 +147,7 @@ public class GFBDetailsActivity extends AppCompatActivity {
                             userDetails.put(KEY_UNI, university);
                             userDetails.put(KEY_DOB, DOB);
 
-                            db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getUid()).set(userDetails, SetOptions.merge())
+                            db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).set(userDetails, SetOptions.merge())
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
@@ -172,5 +172,14 @@ public class GFBDetailsActivity extends AppCompatActivity {
             signupConfirm.setCancelable(false);
             signupConfirm.show();
         }
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int day, int month, int year) {
+        String day_date = Integer.toString(day);
+        String month_date = Integer.toString(month);
+        String year_date = Integer.toString(year);
+        DOB = day_date + '/' + month_date + '/' + year_date;
+        dateOfBirthET.setText(DOB);
     }
 }
