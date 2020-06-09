@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,14 +36,20 @@ import com.google.firebase.firestore.SetOptions;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
 
 public class GFBDetailsActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button signupButton;
-    private EditText phoneNumberET, universityET, nameET, dateOfBirthET;
+    private EditText phoneNumberET, universityET, nameET;
+    private TextView dateOfBirthET;
     private RadioGroup userType;
     private FirebaseAuth firebaseAuth;
     private Spinner deptEngg, studentSem;
@@ -55,6 +62,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     private DatePickerDialog.OnDateSetListener dateSetListener;
 
     private String DOB;
+    private Date DOBDate, currentDate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,14 +78,11 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         studentSem = findViewById(R.id.studentSemSpinner);
         dateOfBirthET = findViewById(R.id.dateOfBirthET);
 
+        currentDate = Calendar.getInstance().getTime();
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         dateOfBirthET.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +121,8 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
             dateOfBirthET.setError("Please select your date of birth.");
         } else if (studentSem.getSelectedItem() == "Select your current semester"){
             Toast.makeText(this, "Select your current semester of study.", Toast.LENGTH_SHORT).show();
+        } else if ((checkDOBValidity(currentDate, DOBDate))){
+            dateOfBirthET.setError("You need to be at least 18 years old to join.");
         }
         //Submit Details to Firebase and receive OTP
         else {
@@ -164,11 +171,35 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
         Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
+        c.set(YEAR, year);
+        c.set(MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-        String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
-        dateOfBirthET.setText(currentDate);
+        DOBDate = c.getTime();
+        DOB = DateFormat.getDateInstance(DateFormat.FULL).format(DOBDate);
+        dateOfBirthET.setText(DOB);
+    }
+
+    private boolean checkDOBValidity(Date cDate, Date bDate){
+
+        Calendar a = getCalendar(bDate);
+        Calendar b = getCalendar(cDate);
+        int diff = b.get(YEAR) - a.get(YEAR);
+        if (a.get(MONTH) > b.get(MONTH) ||
+                (a.get(MONTH) == b.get(MONTH) && a.get(Calendar.DAY_OF_MONTH) > b.get(Calendar.DAY_OF_MONTH))) {
+            diff--;
+        }
+
+        if (diff > 18){
+            return false;
+        } else{
+            return true;
+        }
+    }
+
+    public static Calendar getCalendar(Date date) {
+        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+        cal.setTime(date);
+        return cal;
     }
 }
