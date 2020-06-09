@@ -312,16 +312,16 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (!documentSnapshot.contains("phoneNumber")) {
-                                Toast.makeText(LoginActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, GFBDetailsActivity.class);
+                            if (documentSnapshot.get("phoneNumber") != null) {
+                                Toast.makeText(LoginActivity.this, "Welcome.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, WelcomeTestScreen.class);
                                 finish();
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(LoginActivity.this, "Welcome.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, WelcomeTestScreen.class);
+                                Toast.makeText(LoginActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, GFBDetailsActivity.class);
                                 finish();
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
