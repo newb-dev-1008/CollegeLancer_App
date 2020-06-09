@@ -270,32 +270,7 @@ public class LoginActivity extends AppCompatActivity {
                 String nameGoogle = acct.getDisplayName();
                 String emailIDGoogle = acct.getEmail();
                 UIDEmailID = emailIDGoogle;
-
-                Map<String, Object> usersMap = new HashMap<>();
-                // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
-                usersMap.put(KEY_NAME, nameGoogle);
-                usersMap.put(KEY_EMAIL, emailIDGoogle);
-
-                db.collection("Users").document("User " + UIDEmailID).set(usersMap)
-                        .addOnSuccessListener(LoginActivity.this, new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(LoginActivity.this, "Your details have been saved.", Toast.LENGTH_SHORT).show();
-                                updateUI(user);
-                                // Toast.makeText(SignUpActivity.this, "Created account, please wait...", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(LoginActivity.this, new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                firebaseAuth.signOut();
-                                Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                            }
-                        });
+                updateUI(user);
             }
         }).addOnFailureListener(LoginActivity.this, new OnFailureListener() {
             @Override
@@ -314,24 +289,7 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 Toast.makeText(LoginActivity.this, "Logged in via Facebook.", Toast.LENGTH_SHORT).show();
                 String emailIDFB = token.getUserId();
-                Map<String, Object> usersMap = new HashMap<>();
-                // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
-                usersMap.put(KEY_EMAIL, emailIDFB);
-
-                db.collection("Users").document("User " + UIDEmailID).set(usersMap)
-                        .addOnSuccessListener(LoginActivity.this, new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(LoginActivity.this, "Your details have been saved.", Toast.LENGTH_SHORT).show();
-                                // Toast.makeText(SignUpActivity.this, "Created account, please wait...", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(LoginActivity.this, new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                UIDEmailID = emailIDFB;
                 updateUI(user);
             }
         }).addOnFailureListener(LoginActivity.this, new OnFailureListener() {

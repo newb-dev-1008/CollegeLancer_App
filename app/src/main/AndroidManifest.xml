@@ -37,6 +37,10 @@
         </activity>
         <activity android:name=".WelcomeTestScreen"/>
 
+        <activity android:name=".GFBDetailsActivity"/>
+        <activity android:name=".StudentMainActivity"/>
+        <activity android:name=".ProfessorMainActivity"/>
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>
