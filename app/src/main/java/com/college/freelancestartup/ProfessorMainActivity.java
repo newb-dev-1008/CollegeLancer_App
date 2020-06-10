@@ -12,8 +12,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
-public class ProfessorMainActivity extends AppCompatActivity {
+public class ProfessorMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
 
     @Override
@@ -25,6 +26,8 @@ public class ProfessorMainActivity extends AppCompatActivity {
         setSupportActionBar(profToolbar);
 
         drawer = findViewById(R.id.prof_drawer_layout);
+        NavigationView navigationView = findViewById(R.id.prof_na);
+        navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, profToolbar,
                 R.string.open_nav_bar, R.string.close_nav_bar);
@@ -68,5 +71,20 @@ public class ProfessorMainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.profSettings:
+                getSupportFragmentManager().beginTransaction().replace(R.id.prof_home_container,
+                        new ProfessorSettingsFragment()).commit();
+                break;
+            case R.id.profReportBug:
+                getSupportFragmentManager().beginTransaction().replace(R.id.prof_home_container,
+                        new ProfessorReportBugFragment()).commit();
+                break;
+        }
+        return true;
     }
 }
