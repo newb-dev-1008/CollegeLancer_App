@@ -97,7 +97,7 @@ public class ProfessorMainActivity extends AppCompatActivity implements Navigati
                 break;
             case R.id.profReportBug:
                 getSupportFragmentManager().beginTransaction().replace(R.id.prof_home_container,
-                        new ProfessorReportBugFragment()).commit();
+                        new ReportBugFragment()).commit();
                 break;
             case R.id.profLogOut:
                 AlertDialog profLogOutConfirm = new MaterialAlertDialogBuilder(this)
