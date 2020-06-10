@@ -212,6 +212,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null){
+                    UIDEmailID = user.getEmail();
                     updateUI(user);
                 }
                 else{
@@ -308,8 +309,8 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user){
         // Update UI after login
         if (user != null) {
-            Toast.makeText(LoginActivity.this, "Users" + UIDEmailID, Toast.LENGTH_LONG).show();
-            db.collection("Users").document("Users" + UIDEmailID).get()
+            Toast.makeText(LoginActivity.this, "User " + UIDEmailID, Toast.LENGTH_LONG).show();
+            db.collection("Users").document("User " + UIDEmailID).get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {

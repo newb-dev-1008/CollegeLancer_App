@@ -123,6 +123,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
             Toast.makeText(this, "Select your current semester of study.", Toast.LENGTH_SHORT).show();
         } else if ((checkDOBValidity(currentDate, DOBDate))){
             dateOfBirthET.setError("You need to be at least 18 years old to join.");
+            Toast.makeText(this, "You need to be at least 18 years old to join.", Toast.LENGTH_SHORT).show();
         }
         //Submit Details to Firebase and receive OTP
         else {
