@@ -44,6 +44,11 @@ public class ProfessorMainActivity extends AppCompatActivity implements Navigati
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.prof_home_container,
+                    new ProfessorHomeFragment()).commit();
+        }
+
         BottomNavigationView studentNavBottom = findViewById(R.id.studentHomeNav);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.studentHomeFragContainer,
@@ -110,7 +115,11 @@ public class ProfessorMainActivity extends AppCompatActivity implements Navigati
                             }
                         })
                         .setNegativeButton("Cancel", null).create();
+                profLogOutConfirm.setCanceledOnTouchOutside(false);
+                profLogOutConfirm.setCancelable(true);
+                profLogOutConfirm.show();
         }
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }
