@@ -308,6 +308,7 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user){
         // Update UI after login
         if (user != null) {
+            Toast.makeText(LoginActivity.this, "Users" + UIDEmailID, Toast.LENGTH_LONG).show();
             db.collection("Users").document("Users" + UIDEmailID).get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
