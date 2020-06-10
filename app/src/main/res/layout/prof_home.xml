@@ -37,6 +37,7 @@
             app:layout_constraintVertical_bias="0">
 
             <FrameLayout
+                android:id="@+id/prof_home_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
