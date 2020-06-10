@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -51,14 +52,17 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     private EditText phoneNumberET, universityET, nameET;
     private TextView dateOfBirthET;
     private RadioGroup userType;
+    private RadioButton userTypeSelectedRadioButton;
     private FirebaseAuth firebaseAuth;
     private Spinner deptEngg, studentSem;
+    private String userTypeSelected;
     private String KEY_NAME = "name";
     private String KEY_PH_NO = "phoneNumber";
     private String KEY_UNI = "university";
     private String KEY_DEPT = "department";
     private String KEY_STUD_SEM = "studentSemester";
     private String KEY_DOB = "dateOfBirth";
+    private String KEY_USER_TYPE = "userType";
     private DatePickerDialog.OnDateSetListener dateSetListener;
 
     private String DOB;
@@ -102,6 +106,14 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         });
     }
 
+    private String checkUserType(){
+        int userTypeSelectedRadioID = userType.getCheckedRadioButtonId();
+        userTypeSelectedRadioButton = findViewById(userTypeSelectedRadioID);
+        userTypeSelected = userTypeSelectedRadioButton.getText().toString();
+
+        return userTypeSelected;
+    }
+
     private void registerUser() {
         final String name = nameET.getText().toString().trim();
         final String phoneNumber = phoneNumberET.getText().toString().trim();
@@ -141,6 +153,9 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
                             userDetails.put(KEY_PH_NO, phoneNumber);
                             userDetails.put(KEY_UNI, university);
                             userDetails.put(KEY_DOB, DOB);
+                            userDetails.put(KEY_USER_TYPE, checkUserType());
+                            userDetails.put(KEY_DEPT, deptEngg.getSelectedItem());
+                            userDetails.put(KEY_STUD_SEM, studentSem.getSelectedItem());
 
                             db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).set(userDetails, SetOptions.merge())
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
