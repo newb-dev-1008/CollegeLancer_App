@@ -8,12 +8,12 @@
 
     <item
         android:id="@+id/studSettings"
-        android:icon="@drawable/student_add_proj"
+        android:icon="@drawable/settings"
         android:title="Settings"/>
 
     <item
         android:id="@+id/studReportBug"
-        android:icon="@drawable/student_org"
+        android:icon="@drawable/bugs"
         android:title="Report Bugs"/>
 
     <item
