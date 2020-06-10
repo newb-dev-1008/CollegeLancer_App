@@ -315,12 +315,20 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.get("phoneNumber") != null) {
-                                Toast.makeText(LoginActivity.this, "Welcome.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, WelcomeTestScreen.class);
-                                finish();
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
+                                if (documentSnapshot.get("userType") == "Professor/ Lecturer"){
+                                    Intent intent = new Intent(LoginActivity.this, ProfessorMainActivity.class);
+                                    finish();
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    Intent intent = new Intent(LoginActivity.this, StudentMainActivity.class);
+                                    finish();
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                }
                             } else {
                                 Toast.makeText(LoginActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, GFBDetailsActivity.class);

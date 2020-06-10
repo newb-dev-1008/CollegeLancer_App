@@ -373,12 +373,20 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.get("phoneNumber") != null) {
-                                Toast.makeText(SignUpActivity.this, "Welcome.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(SignUpActivity.this, WelcomeTestScreen.class);
-                                finish();
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
+                                if (documentSnapshot.get("userType") == "Professor/ Lecturer"){
+                                    Intent intent = new Intent(SignUpActivity.this, ProfessorMainActivity.class);
+                                    finish();
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    Intent intent = new Intent(SignUpActivity.this, StudentMainActivity.class);
+                                    finish();
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                }
                             } else {
                                 Toast.makeText(SignUpActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SignUpActivity.this, GFBDetailsActivity.class);
