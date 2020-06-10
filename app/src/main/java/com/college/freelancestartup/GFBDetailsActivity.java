@@ -162,11 +162,20 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Toast.makeText(GFBDetailsActivity.this, "Details added successfully, proceeding...", Toast.LENGTH_LONG).show();
-                                            Intent intent = new Intent(GFBDetailsActivity.this, WelcomeTestScreen.class);
-                                            finish();
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                            startActivity(intent);
+                                            if (checkUserType() == "Professor/ Lecturer"){
+                                                Intent intent = new Intent(GFBDetailsActivity.this, ProfessorMainActivity.class);
+                                                finish();
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                startActivity(intent);
+                                            }
+                                            else{
+                                                Intent intent = new Intent(GFBDetailsActivity.this, StudentMainActivity.class);
+                                                finish();
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                startActivity(intent);
+                                            }
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
