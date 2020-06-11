@@ -7,17 +7,17 @@
         android:title="Find Collaborators"/>
 
     <item
-        android:id="@+id/studSettings"
+        android:id="@+id/studentSettings"
         android:icon="@drawable/settings"
         android:title="Settings"/>
 
     <item
-        android:id="@+id/studReportBug"
+        android:id="@+id/studentReportBug"
         android:icon="@drawable/bugs"
         android:title="Report Bugs"/>
 
     <item
-        android:id="@+id/studLogOut"
+        android:id="@+id/studentLogOut"
         android:icon="@drawable/signout"
         android:title="Log out"/>
 

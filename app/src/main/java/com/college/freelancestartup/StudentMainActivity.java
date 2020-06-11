@@ -43,6 +43,9 @@ public class StudentMainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
+                    case R.id.studentFindCollabs:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                                new StudentFindCollabsFragment()).commit();
                     case R.id.studentSettings:
                         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
                                 new StudentSettingsFragment()).commit();
