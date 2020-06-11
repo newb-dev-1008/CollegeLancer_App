@@ -51,7 +51,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button signupButton;
     private EditText phoneNumberET, universityET, nameET;
-    private TextView dateOfBirthET;
+    private TextView dateOfBirthET, studentSemTV;
     private RadioGroup userType;
     private RadioButton userTypeSelectedRadioButton;
     private FirebaseAuth firebaseAuth;
@@ -80,6 +80,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         userType = findViewById(R.id.userTypeRadioGroup);
         nameET = findViewById(R.id.nameEditText);
         deptEngg = findViewById(R.id.deptEnggSpinner);
+        studentSemTV = findViewById(R.id.studentSemTV);
         studentSem = findViewById(R.id.studentSemSpinner);
         dateOfBirthET = findViewById(R.id.dateOfBirthET);
 
@@ -113,6 +114,11 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
                 String selectedType = checkedButton.getText().toString();
                 if (!selectedType.equals("Lecturer/ Professor")){
                     studentSem.setVisibility(View.VISIBLE);
+                    studentSemTV.setVisibility(View.VISIBLE);
+                }
+                else{
+                    studentSem.setVisibility(View.GONE);
+                    studentSemTV.setVisibility(View.GONE);
                 }
             }
         });
