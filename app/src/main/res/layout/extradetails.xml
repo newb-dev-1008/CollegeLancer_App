@@ -189,7 +189,8 @@
             app:layout_constraintBottom_toTopOf="@id/studentSemSpinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"/>
+            app:layout_constraintHorizontal_bias="0.0"
+            android:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/studentSemSpinner"
@@ -202,7 +203,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/studentSemTV"
-            app:layout_constraintBottom_toTopOf="@id/signupButtonGFB"/>
+            app:layout_constraintBottom_toTopOf="@id/signupButtonGFB"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/signupButtonGFB"

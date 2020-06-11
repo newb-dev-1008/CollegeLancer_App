@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
@@ -102,6 +103,17 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(signupButton.getWindowToken(), 0);
                 registerUser();
+            }
+        });
+
+        userType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton checkedButton = findViewById(i);
+                String selectedType = checkedButton.getText().toString();
+                if (!selectedType.equals("Lecturer/ Professor")){
+                    studentSem.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
