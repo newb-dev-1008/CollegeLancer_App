@@ -315,14 +315,14 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.get("phoneNumber") != null) {
-                                if (documentSnapshot.get("userType") == "Professor/ Lecturer"){
+                                if (documentSnapshot.get("userType") == "Professor/ Lecturer") {
                                     Intent intent = new Intent(LoginActivity.this, ProfessorMainActivity.class);
                                     finish();
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }
-                                else{
+                                else {
                                     Intent intent = new Intent(LoginActivity.this, StudentMainActivity.class);
                                     finish();
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

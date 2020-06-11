@@ -24,6 +24,7 @@ public class ProfessorMainActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private FirebaseAuth firebaseAuth;
     private LoginManager fbLoggedIn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -36,8 +37,8 @@ public class ProfessorMainActivity extends AppCompatActivity {
         fbLoggedIn = LoginManager.getInstance();
 
         drawer = findViewById(R.id.prof_drawer_layout);
-        NavigationView navigationView = findViewById(R.id.prof_navigation_drawer);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        NavigationView profNavigationView = findViewById(R.id.prof_navigation_drawer);
+        profNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
@@ -72,7 +73,7 @@ public class ProfessorMainActivity extends AppCompatActivity {
                 drawer.closeDrawer(GravityCompat.START);
                 return true;
             }
-                                                         });
+        });
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, profToolbar,
                 R.string.open_nav_bar, R.string.close_nav_bar);
@@ -84,30 +85,28 @@ public class ProfessorMainActivity extends AppCompatActivity {
                     new ProfessorHomeFragment()).commit();
         }
 
-        BottomNavigationView profNavBottom = findViewById(R.id.studentHomeNav);
+        BottomNavigationView profNavBottom = findViewById(R.id.profBottomNav);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.prof_fragment_container,
-                new StudentHomeFragment()).commit();
+                new ProfessorHomeFragment()).commit();
 
         profNavBottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = null;
-
                 switch (item.getItemId()){
                     case R.id.profHome:
-                        selectedFragment = new ProfessorHomeFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.prof_fragment_container,
+                                new ProfessorHomeFragment()).commit();
                         break;
                     case R.id.profAddProj:
-                        selectedFragment = new ProfessorAddProjFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.prof_fragment_container,
+                                new ProfessorAddProjFragment()).commit();
                         break;
                     case R.id.profStudent:
-                        selectedFragment = new ProfessorStudentFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.prof_fragment_container,
+                                new ProfessorStudentFragment()).commit();
                         break;
                 }
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.prof_fragment_container,
-                        selectedFragment).commit();
 
                 return true;
             }

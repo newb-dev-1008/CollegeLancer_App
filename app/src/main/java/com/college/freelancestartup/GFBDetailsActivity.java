@@ -133,9 +133,10 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
             dateOfBirthET.setError("Please select your date of birth.");
         } else if (studentSem.getSelectedItem() == "Select your current semester"){
             Toast.makeText(this, "Select your current semester of study.", Toast.LENGTH_SHORT).show();
-        } else if ((checkDOBValidity(currentDate, DOBDate))){
+        } else if ((checkDOBValidity(currentDate, DOBDate) < 18)){
+            Toast.makeText(this, "Your age: " + Integer.toString((checkDOBValidity(currentDate, DOBDate))), Toast.LENGTH_SHORT).show();
             dateOfBirthET.setError("You need to be at least 18 years old to join.");
-            Toast.makeText(this, "You need to be at least 18 years old to join.", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, "You need to be at least 18 years old to join.", Toast.LENGTH_SHORT).show();
         }
         //Submit Details to Firebase and receive OTP
         else {
@@ -148,6 +149,8 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
                         public void onClick(final DialogInterface dialogInterface, int i) {
                             // Check if Internet connection is established
                             // --
+                            String proStud = checkUserType();
+                            Toast.makeText(GFBDetailsActivity.this, checkUserType(), Toast.LENGTH_SHORT).show();
                             Map<String, Object> userDetails = new HashMap<>();
                             userDetails.put(KEY_NAME, name);
                             userDetails.put(KEY_PH_NO, phoneNumber);
@@ -162,7 +165,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Toast.makeText(GFBDetailsActivity.this, "Details added successfully, proceeding...", Toast.LENGTH_LONG).show();
-                                            if (checkUserType() == "Professor/ Lecturer"){
+                                            if (proStud.equals("Lecturer/ Professor")){
                                                 Intent intent = new Intent(GFBDetailsActivity.this, ProfessorMainActivity.class);
                                                 finish();
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -205,7 +208,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         dateOfBirthET.setText(DOB);
     }
 
-    private boolean checkDOBValidity(Date cDate, Date bDate){
+    private int checkDOBValidity(Date cDate, Date bDate){
 
         Calendar a = getCalendar(bDate);
         Calendar b = getCalendar(cDate);
@@ -215,11 +218,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
             diff--;
         }
 
-        if (diff > 18){
-            return false;
-        } else{
-            return true;
-        }
+        return diff;
     }
 
     public static Calendar getCalendar(Date date) {
