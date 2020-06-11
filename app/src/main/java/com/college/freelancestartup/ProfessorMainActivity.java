@@ -36,17 +36,17 @@ public class ProfessorMainActivity extends AppCompatActivity {
         fbLoggedIn = LoginManager.getInstance();
 
         drawer = findViewById(R.id.prof_drawer_layout);
-        NavigationView navigationView = findViewById(R.id.prof_navigation);
+        NavigationView navigationView = findViewById(R.id.prof_navigation_drawer);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.profSettings:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.prof_home_container,
+                        getSupportFragmentManager().beginTransaction().replace(R.id.prof_fragment_container,
                                 new ProfessorSettingsFragment()).commit();
                         break;
                     case R.id.profReportBug:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.prof_home_container,
+                        getSupportFragmentManager().beginTransaction().replace(R.id.prof_fragment_container,
                                 new ReportBugFragment()).commit();
                         break;
                     case R.id.profLogOut:
@@ -80,16 +80,16 @@ public class ProfessorMainActivity extends AppCompatActivity {
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.prof_home_container,
+            getSupportFragmentManager().beginTransaction().replace(R.id.prof_fragment_container,
                     new ProfessorHomeFragment()).commit();
         }
 
-        BottomNavigationView studentNavBottom = findViewById(R.id.studentHomeNav);
+        BottomNavigationView profNavBottom = findViewById(R.id.studentHomeNav);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.studentHomeFragContainer,
+        getSupportFragmentManager().beginTransaction().replace(R.id.prof_fragment_container,
                 new StudentHomeFragment()).commit();
 
-        studentNavBottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        profNavBottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
@@ -106,7 +106,7 @@ public class ProfessorMainActivity extends AppCompatActivity {
                         break;
                 }
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.studentHomeFragContainer,
+                getSupportFragmentManager().beginTransaction().replace(R.id.prof_fragment_container,
                         selectedFragment).commit();
 
                 return true;

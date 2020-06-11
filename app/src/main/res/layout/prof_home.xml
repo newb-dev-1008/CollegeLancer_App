@@ -13,61 +13,56 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/profFragmentConstraintLayout">
+
          <androidx.appcompat.widget.Toolbar
              android:layout_width="match_parent"
-             app:layout_constraintTop_toTopOf="parent"
-             app:layout_constraintBottom_toBottomOf="parent"
-             app:layout_constraintVertical_bias="0"
+             android:layout_height="?attr/actionBarSize"
+             app:layout_constraintTop_toTopOf="@id/profFragmentConstraintLayout"
              app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintEnd_toEndOf="parent"
-             android:layout_height="?attr/actionBarSize"
+             app:layout_constraintBottom_toTopOf="@id/prof_fragment_container"
              android:background="@color/colorPrimary"
              android:id="@+id/profToolbar"
              android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
              app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
              android:elevation="4dp"/>
 
-        <ScrollView
+        <FrameLayout
+            android:id="@+id/prof_fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/profHomeNav"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0">
-
-            <FrameLayout
-                android:id="@+id/prof_home_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </ScrollView>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profToolbar" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/profHomeNav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/prof_fragment_container"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintVertical_bias="1"
-            app:menu="@menu/prof_bottom_nav" />
-
+            app:menu="@menu/prof_bottom_nav"
+            android:background="?android:attr/windowBackground" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation"
+        android:id="@+id/prof_navigation_drawer"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start|left"
+        android:layout_gravity="start"
         app:headerLayout="@layout/prof_nav_header"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/profHomeNav"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/prof_navigation_items" />
-
 
 </androidx.drawerlayout.widget.DrawerLayout>

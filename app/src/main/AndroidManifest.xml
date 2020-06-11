@@ -38,8 +38,10 @@
         <activity android:name=".WelcomeTestScreen"/>
 
         <activity android:name=".GFBDetailsActivity"/>
-        <activity android:name=".StudentMainActivity"/>
-        <activity android:name=".ProfessorMainActivity"/>
+        <activity android:name=".StudentMainActivity"
+            android:theme="@style/AppActionBarTheme"/>
+        <activity android:name=".ProfessorMainActivity"
+            android:theme="@style/AppActionBarTheme"/>
 
     </application>
 
