@@ -373,7 +373,7 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.get("phoneNumber") != null) {
-                                if (documentSnapshot.get("userType") == "Professor/ Lecturer"){
+                                if (documentSnapshot.get("userType") == "Lecturer/ Professor"){
                                     Intent intent = new Intent(SignUpActivity.this, ProfessorMainActivity.class);
                                     finish();
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
