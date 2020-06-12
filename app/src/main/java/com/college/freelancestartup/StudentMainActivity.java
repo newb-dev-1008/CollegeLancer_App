@@ -13,22 +13,36 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.login.LoginManager;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 public class StudentMainActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private FirebaseAuth firebaseAuth;
     private LoginManager fbLoggedIn;
 
+    private StudentProjectsListAdapter studentProjectsListAdapter;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference studentProjectsRef = db.collection("Projects");
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
+
+        setUpStudentRecyclerView();
 
         Toolbar studentToolbar = findViewById(R.id.studentToolbar);
         setSupportActionBar(studentToolbar);
@@ -123,6 +137,22 @@ public class StudentMainActivity extends AppCompatActivity {
         });
     }
 
+    private void setUpStudentRecyclerView() {
+        Query query = studentProjectsRef.orderBy("priority", Query.Direction.DESCENDING);
+
+        FirestoreRecyclerOptions<StudentProjectsListClass> studentProjects = new FirestoreRecyclerOptions.Builder<StudentProjectsListClass>()
+                .setQuery(query, StudentProjectsListClass.class)
+                .build();
+
+        studentProjectsListAdapter = new StudentProjectsListAdapter(studentProjects);
+
+        RecyclerView studentHomeRecyclerView = findViewById(R.id.student_home_recyclerview);
+        studentHomeRecyclerView.setHasFixedSize(true);
+        studentHomeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        studentHomeRecyclerView.setAdapter(studentProjectsListAdapter);
+    }
+
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -132,4 +162,15 @@ public class StudentMainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        studentProjectsListAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        studentProjectsListAdapter.stopListening();
+    }
 }
