@@ -151,10 +151,16 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
             dateOfBirthET.setError("Please select your date of birth.");
         } else if (studentSem.getSelectedItem() == "Select your current semester"){
             Toast.makeText(this, "Select your current semester of study.", Toast.LENGTH_SHORT).show();
-        } else if ((checkDOBValidity(currentDate, DOBDate) < 18)){
+        } else if (((checkDOBValidity(currentDate, DOBDate) > 0) && (checkDOBValidity(currentDate, DOBDate) < 18))){
             Toast.makeText(this, "Your age: " + Integer.toString((checkDOBValidity(currentDate, DOBDate))), Toast.LENGTH_SHORT).show();
             dateOfBirthET.setError("You need to be at least 18 years old to join.");
             // Toast.makeText(this, "You need to be at least 18 years old to join.", Toast.LENGTH_SHORT).show();
+        } else if (checkDOBValidity(currentDate, DOBDate) < 0) {
+            Toast.makeText(this, "Enter your actual date of birth. You're too young to be able to even to use this app.", Toast.LENGTH_LONG).show();
+            dateOfBirthET.setError("Enter your actual date of birth.");
+        } else if (checkDOBValidity(currentDate, DOBDate) > 27){
+            Toast.makeText(this, "The maximum permissible age for using this app is 26 years. You need to be a college student for signing up with us.", Toast.LENGTH_LONG).show();
+            dateOfBirthET.setError("You do not appear to be a college undergraduate.");
         }
         //Submit Details to Firebase and receive OTP
         else {
