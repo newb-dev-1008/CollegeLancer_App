@@ -19,6 +19,8 @@ public class StudentProjectsListAdapter extends FirestoreRecyclerAdapter<Student
     @Override
     protected void onBindViewHolder(@NonNull StudentProjectsHolder studentProjectsHolder, int position, @NonNull StudentProjectsListClass studentProjectsListClass) {
         studentProjectsHolder.studentProjectTitle.setText(studentProjectsListClass.getProjectTitle());
+        studentProjectsHolder.studentProjectDescription.setText(studentProjectsListClass.getProjectDescription());
+        studentProjectsHolder.studentProjectPriority.setText(studentProjectsListClass.getPriority());
     }
 
     @NonNull
