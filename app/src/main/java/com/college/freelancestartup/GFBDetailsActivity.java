@@ -160,7 +160,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
             dateOfBirthET.setError("Enter your actual date of birth.");
         } else if (checkDOBValidity(currentDate, DOBDate) > 27){
             Toast.makeText(this, "The maximum permissible age for using this app is 26 years. You need to be a college student for signing up with us.", Toast.LENGTH_LONG).show();
-            dateOfBirthET.setError("You do not appear to be a college undergraduate.");
+            dateOfBirthET.setError("You do not seem to be a college undergraduate.");
         }
         //Submit Details to Firebase and receive OTP
         else {
