@@ -32,17 +32,10 @@ public class StudentMainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private LoginManager fbLoggedIn;
 
-    private StudentProjectsListAdapter studentProjectsListAdapter;
-
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference studentProjectsRef = db.collection("Projects");
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
-
-        setUpStudentRecyclerView();
 
         Toolbar studentToolbar = findViewById(R.id.studentToolbar);
         setSupportActionBar(studentToolbar);
@@ -137,21 +130,6 @@ public class StudentMainActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpStudentRecyclerView() {
-        Query query = studentProjectsRef.orderBy("priority", Query.Direction.DESCENDING);
-
-        FirestoreRecyclerOptions<StudentProjectsListClass> studentProjects = new FirestoreRecyclerOptions.Builder<StudentProjectsListClass>()
-                .setQuery(query, StudentProjectsListClass.class)
-                .build();
-
-        studentProjectsListAdapter = new StudentProjectsListAdapter(studentProjects);
-
-        RecyclerView studentHomeRecyclerView = findViewById(R.id.student_home_recyclerview);
-        studentHomeRecyclerView.setHasFixedSize(true);
-        studentHomeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        studentHomeRecyclerView.setAdapter(studentProjectsListAdapter);
-    }
 
     @Override
     public void onBackPressed() {
@@ -162,15 +140,4 @@ public class StudentMainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        studentProjectsListAdapter.startListening();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        studentProjectsListAdapter.stopListening();
-    }
 }
