@@ -104,7 +104,6 @@ public class StudentMainActivity extends AppCompatActivity {
         studentNavBottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = null;
 
                 switch (item.getItemId()){
                     case R.id.studentHome:

@@ -27,11 +27,11 @@ public class StudentProjectsListAdapter extends FirestoreRecyclerAdapter<Student
     @NonNull
     @Override
     public StudentProjectsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.student_home_frag, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.student_home_cardview, parent, false);
         return new StudentProjectsHolder(v);
     }
 
-    class StudentProjectsHolder extends RecyclerView.ViewHolder{
+    class StudentProjectsHolder extends RecyclerView.ViewHolder {
 
         TextView studentProjectTitle;
         TextView studentProjectDescription;
