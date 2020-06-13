@@ -22,10 +22,13 @@ public class StudentHomeFragment extends Fragment {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference studentProjectsRef = db.collection("Projects");
+    private View root;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        root = inflater.inflate(R.layout.student_home_frag, container, false);
 
         setUpStudentRecyclerView();
 
@@ -42,7 +45,7 @@ public class StudentHomeFragment extends Fragment {
 
         studentProjectsListAdapter = new StudentProjectsListAdapter(studentProjects);
 
-        RecyclerView studentHomeRecyclerView = getView().findViewById(R.id.student_home_recyclerview);
+        RecyclerView studentHomeRecyclerView = root.findViewById(R.id.student_home_recyclerview);
         studentHomeRecyclerView.setHasFixedSize(true);
         studentHomeRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

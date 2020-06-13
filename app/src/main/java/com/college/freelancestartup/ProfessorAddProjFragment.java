@@ -57,7 +57,7 @@ public class ProfessorAddProjFragment extends Fragment {
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.student_fragment_container, new ProfessorHomeFragment());
+        fragmentTransaction.replace(R.id.prof_fragment_container, new ProfessorHomeFragment());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
