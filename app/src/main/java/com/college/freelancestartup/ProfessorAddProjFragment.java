@@ -22,14 +22,22 @@ public class ProfessorAddProjFragment extends Fragment {
     private EditText profProjectTitle, profProjectDescription, profProjectPriority;
     private MaterialButton profCreateProjectButton;
 
+    private View root;
+
+    public ProfessorAddProjFragment(){
+        // Empty Constructor Added
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        profProjectTitle = getView().findViewById(R.id.profProjectTitleET);
-        profProjectDescription = getView().findViewById(R.id.profProjectDescriptionET);
-        profProjectPriority = getView().findViewById(R.id.profProjectPriorityET);
-        profCreateProjectButton = getView().findViewById(R.id.profCreateProjectButton);
+        root = inflater.inflate(R.layout.prof_addproj_frag, container, false);
+
+        profProjectTitle = root.findViewById(R.id.profProjectTitleET);
+        profProjectDescription = root.findViewById(R.id.profProjectDescriptionET);
+        profProjectPriority = root.findViewById(R.id.profProjectPriorityET);
+        profCreateProjectButton = root.findViewById(R.id.profCreateProjectButton);
 
         profCreateProjectButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +45,8 @@ public class ProfessorAddProjFragment extends Fragment {
                 saveProfCreatedProject();
             }
         });
-        return inflater.inflate(R.layout.prof_addproj_frag, container, false);
+
+        return root;
     }
 
     private void saveProfCreatedProject(){
@@ -58,6 +67,7 @@ public class ProfessorAddProjFragment extends Fragment {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.prof_fragment_container, new ProfessorHomeFragment());
+
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

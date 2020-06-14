@@ -24,6 +24,10 @@ public class StudentHomeFragment extends Fragment {
     private CollectionReference studentProjectsRef = db.collection("Projects");
     private View root;
 
+    public StudentHomeFragment(){
+        // Empty Constructor Required
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

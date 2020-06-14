@@ -11,9 +11,13 @@ import androidx.fragment.app.Fragment;
 
 public class ProfessorHomeFragment extends Fragment {
 
+    private View root;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.prof_home_frag, container, false);
+        root = inflater.inflate(R.layout.prof_home_frag, container, false);
+
+        return root;
     }
 }

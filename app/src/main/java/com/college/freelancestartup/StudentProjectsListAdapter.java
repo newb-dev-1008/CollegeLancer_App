@@ -31,7 +31,7 @@ public class StudentProjectsListAdapter extends FirestoreRecyclerAdapter<Student
         return new StudentProjectsHolder(v);
     }
 
-    class StudentProjectsHolder extends RecyclerView.ViewHolder {
+    public static class StudentProjectsHolder extends RecyclerView.ViewHolder {
 
         TextView studentProjectTitle;
         TextView studentProjectDescription;
