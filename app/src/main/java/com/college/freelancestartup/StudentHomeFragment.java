@@ -44,7 +44,7 @@ public class StudentHomeFragment extends Fragment {
 
         RecyclerView studentHomeRecyclerView = root.findViewById(R.id.student_home_recyclerview);
         studentHomeRecyclerView.setHasFixedSize(true);
-        studentHomeRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        studentHomeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         studentHomeRecyclerView.setAdapter(studentProjectsListAdapter);
 
