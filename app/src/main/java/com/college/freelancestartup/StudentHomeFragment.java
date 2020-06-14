@@ -34,13 +34,6 @@ public class StudentHomeFragment extends Fragment {
 
         root = inflater.inflate(R.layout.student_home_frag, container, false);
 
-        setUpStudentRecyclerView();
-
-        return inflater.inflate(R.layout.student_home_frag, container, false);
-
-    }
-
-    private void setUpStudentRecyclerView() {
         Query query = studentProjectsRef.orderBy("priority", Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions<StudentProjectsListClass> studentProjects = new FirestoreRecyclerOptions.Builder<StudentProjectsListClass>()
@@ -54,7 +47,11 @@ public class StudentHomeFragment extends Fragment {
         studentHomeRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         studentHomeRecyclerView.setAdapter(studentProjectsListAdapter);
+
+        return inflater.inflate(R.layout.student_home_frag, container, false);
+
     }
+
 
     @Override
     public void onStart() {

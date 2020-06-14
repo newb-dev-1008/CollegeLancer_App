@@ -37,7 +37,7 @@ public class StudentProjectsListAdapter extends FirestoreRecyclerAdapter<Student
         TextView studentProjectDescription;
         TextView studentProjectPriority;
 
-        public StudentProjectsHolder(@NonNull View itemView) {
+        public StudentProjectsHolder(View itemView) {
             super(itemView);
 
             studentProjectTitle = itemView.findViewById(R.id.student_home_cardtitle1);
