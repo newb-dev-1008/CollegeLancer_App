@@ -23,6 +23,7 @@ public class StudentHomeFragment extends Fragment {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference studentProjectsRef = db.collection("Projects");
     private View root;
+    private RecyclerView studentHomeRecyclerView;
 
     public StudentHomeFragment(){
         // Empty Constructor Required
@@ -42,7 +43,7 @@ public class StudentHomeFragment extends Fragment {
 
         studentProjectsListAdapter = new StudentProjectsListAdapter(studentProjects);
 
-        RecyclerView studentHomeRecyclerView = root.findViewById(R.id.student_home_recyclerview);
+        studentHomeRecyclerView = root.findViewById(R.id.student_home_recyclerview);
         // studentHomeRecyclerView.setHasFixedSize(true);
         studentHomeRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -64,4 +65,5 @@ public class StudentHomeFragment extends Fragment {
         super.onStop();
         studentProjectsListAdapter.stopListening();
     }
+
 }
