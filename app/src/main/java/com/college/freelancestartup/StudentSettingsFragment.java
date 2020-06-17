@@ -25,7 +25,7 @@ public class StudentSettingsFragment extends Fragment {
         root = inflater.inflate(R.layout.student_settings_frag, container, false);
         studentSettingsListView = root.findViewById(R.id.student_settings_listview);
 
-        ArrayAdapter studentSettingsAdapter = new ArrayAdapter<String>(getActivity(), R.layout.student_settings_frag, studentSettingsArray);
+        ArrayAdapter studentSettingsAdapter = new ArrayAdapter<String>(getContext(), R.layout.student_settings_frag, studentSettingsArray);
         studentSettingsListView.setAdapter(studentSettingsAdapter);
 
         return root;
