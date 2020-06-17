@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="app_name">CollegeLancer</string>
 
     <!-- Strings for Sign In XML -->
@@ -47,4 +47,37 @@
 
     <string name="open_nav_bar">Open the navigation bar.</string>
     <string name="close_nav_bar">Close the navigation bar.</string>
+
+    <string-array name="studentSettingsArray">
+        <item
+            android:id="@+id/studentProfileSettings"
+            android:icon="@drawable/student_home"
+            android:title="User Profile"/>
+
+        <item
+            android:id="@+id/studentStatus"
+            android:icon="@drawable/student_add_proj"
+            android:title="Your status"/>
+
+        <item
+            android:id="@+id/studentProjects"
+            android:icon="@drawable/student_prof"
+            android:title="Projects"/>
+
+        <item
+            android:id="@+id/studentYourProjects"
+            android:title="Your posted projects"/>
+
+        <item
+            android:id="@+id/studentBadgesCertificates"
+            android:title="Badges and Certificates"/>
+
+        <item
+            android:id="@+id/studentComplaints"
+            android:title="Help/ Complaints"/>
+
+        <item
+            android:id="@+id/studentNotificationSettings"
+            android:title="Notification settings"/>
+    </string-array>
 </resources>
