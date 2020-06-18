@@ -314,7 +314,7 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.get("phoneNumber") != null) {
+                            if (documentSnapshot.get("department") != null) {
                                 if (documentSnapshot.get("userType") == "Lecturer/ Professor") {
                                     Intent intent = new Intent(LoginActivity.this, ProfessorMainActivity.class);
                                     finish();
