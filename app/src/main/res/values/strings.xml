@@ -57,7 +57,7 @@
         <item
             android:id="@+id/studentStatus"
             android:icon="@drawable/student_add_proj"
-            android:title="Your status"/>
+            android:title="Your status" />
 
         <item
             android:id="@+id/studentProjects"
