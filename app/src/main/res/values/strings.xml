@@ -49,35 +49,12 @@
     <string name="close_nav_bar">Close the navigation bar.</string>
 
     <string-array name="studentSettingsArray">
-        <item
-            android:id="@+id/studentProfileSettings"
-            android:icon="@drawable/student_home"
-            android:title="User Profile"/>
-
-        <item
-            android:id="@+id/studentStatus"
-            android:icon="@drawable/student_add_proj"
-            android:title="Your status" />
-
-        <item
-            android:id="@+id/studentProjects"
-            android:icon="@drawable/student_prof"
-            android:title="Projects"/>
-
-        <item
-            android:id="@+id/studentYourProjects"
-            android:title="Your posted projects"/>
-
-        <item
-            android:id="@+id/studentBadgesCertificates"
-            android:title="Badges and Certificates"/>
-
-        <item
-            android:id="@+id/studentComplaints"
-            android:title="Help/ Complaints"/>
-
-        <item
-            android:id="@+id/studentNotificationSettings"
-            android:title="Notification settings"/>
+        <item>User Profile</item>
+        <item>Your Status</item>
+        <item>Projects</item>
+        <item>Your posted projects</item>
+        <item>Badges and Certificates</item>
+        <item>Help/ Complaints</item>
+        <item>Notification Settings</item>
     </string-array>
 </resources>
