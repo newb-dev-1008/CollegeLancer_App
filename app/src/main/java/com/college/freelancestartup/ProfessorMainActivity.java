@@ -118,7 +118,7 @@ public class ProfessorMainActivity extends AppCompatActivity {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if(getFragmentManager().getBackStackEntryCount() > 0){
-            getFragmentManager().popBackStackImmediate();
+            getFragmentManager().popBackStack();
         } else {
             super.onBackPressed();
         }
