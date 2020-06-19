@@ -57,4 +57,12 @@
         <item>Help/ Complaints</item>
         <item>Notification Settings</item>
     </string-array>
+
+    <string-array name="profSettingsArray">
+        <item>User Profile</item>
+        <item>Your Status</item>
+        <item>Your posted projects</item>
+        <item>Help/ Complaints</item>
+        <item>Notification Settings</item>
+    </string-array>
 </resources>
