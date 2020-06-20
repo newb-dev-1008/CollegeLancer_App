@@ -1,5 +1,6 @@
 package com.college.freelancestartup;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,15 +43,18 @@ public class ProfessorSettingsFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
-                        String[] status = {"Available for research", "Looking for students", "Busy", "Unavailable for a while"};
+                        int checkedStatus = 1;
+                        String[] status = {"Available for research", "Looking for students", "Busy, but can provide projects", "Unavailable for a while"};
                         androidx.appcompat.app.AlertDialog.Builder statusSetting = new MaterialAlertDialogBuilder(getContext())
                                 .setTitle("Set your current status")
                                 .setMessage("Please note that your status determines your availability for providing and receiving projects.")
-                                .
-
+                                .setSingleChoiceItems(status, checkedStatus, new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
+                                    public void onClick(DialogInterface dialogInterface, int statusNo) {
+                                        switch (statusNo){
+                                            case 0:
 
+                                        }
                                     }
                                 })
                 }
