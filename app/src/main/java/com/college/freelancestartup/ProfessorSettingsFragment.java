@@ -10,7 +10,10 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class ProfessorSettingsFragment extends Fragment {
 
@@ -39,7 +42,20 @@ public class ProfessorSettingsFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
+                        androidx.appcompat.app.AlertDialog.Builder statusSetting = new MaterialAlertDialogBuilder(getContext())
+                                .setTitle("Set your current status")
+                                .setMessage("Please note that your status determines your availability for providing and receiving projects.")
+                                .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                    }
+                                })
                 }
             }
         });
