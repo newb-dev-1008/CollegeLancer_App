@@ -69,7 +69,13 @@ public class ProfessorSettingsFragment extends Fragment {
                                                 Toast.makeText(getContext(), "Status updated. You will not be contacted for projects or research until you change your status.", Toast.LENGTH_LONG).show();s
                                         }
                                     }
-                                }).setPositiveButton()
+                                }).setPositiveButton("Set Status", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                }).setNegativeButton("Go back", null)
+                                .create();
                 }
             }
         });
