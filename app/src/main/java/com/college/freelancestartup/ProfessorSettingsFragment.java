@@ -42,14 +42,11 @@ public class ProfessorSettingsFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
+                        String[] status = {"Available for research", "Looking for students", "Busy", "Unavailable for a while"};
                         androidx.appcompat.app.AlertDialog.Builder statusSetting = new MaterialAlertDialogBuilder(getContext())
                                 .setTitle("Set your current status")
                                 .setMessage("Please note that your status determines your availability for providing and receiving projects.")
-                                .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                                    }
+                                .
 
                                     @Override
                                     public void onNothingSelected(AdapterView<?> adapterView) {
