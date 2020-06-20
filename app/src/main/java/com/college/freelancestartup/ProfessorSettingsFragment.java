@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,7 +45,7 @@ public class ProfessorSettingsFragment extends Fragment {
                 switch (i) {
                     case 0:
                         int checkedStatus = 1;
-                        String[] status = {"Available for research", "Looking for students", "Busy, but can provide projects", "Unavailable for a while"};
+                        String[] status = {"Available for research (with colleagues)", "Looking for students", "Busy, but can provide projects", "Unavailable for a while"};
                         androidx.appcompat.app.AlertDialog.Builder statusSetting = new MaterialAlertDialogBuilder(getContext())
                                 .setTitle("Set your current status")
                                 .setMessage("Please note that your status determines your availability for providing and receiving projects.")
@@ -53,6 +54,9 @@ public class ProfessorSettingsFragment extends Fragment {
                                     public void onClick(DialogInterface dialogInterface, int statusNo) {
                                         switch (statusNo){
                                             case 0:
+                                                Toast.makeText(getContext(), "Status set. Your colleagues will now see you're available for research.", Toast.LENGTH_LONG).show();
+                                                break;
+                                            case 1:
 
                                         }
                                     }
