@@ -37,7 +37,10 @@ public class ProfessorSettingsFragment extends Fragment {
         profSettingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                    case 0:
 
+                }
             }
         });
     }
