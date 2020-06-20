@@ -54,10 +54,17 @@ public class ProfessorSettingsFragment extends Fragment {
                                     public void onClick(DialogInterface dialogInterface, int statusNo) {
                                         switch (statusNo){
                                             case 0:
-                                                Toast.makeText(getContext(), "Status set. Your colleagues will now see you're available for research.", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getContext(), "Status set. Your colleagues will now see you're available for research collaboration.", Toast.LENGTH_LONG).show();
                                                 break;
                                             case 1:
-
+                                                Toast.makeText(getContext(), "Status set. Students will now see you're available for research.", Toast.LENGTH_LONG).show();
+                                                break;
+                                            case 2:
+                                                Toast.makeText(getContext(), "Status set. Students will now be able to contact you for projects.", Toast.LENGTH_LONG).show();
+                                                break;
+                                            case 3:
+                                                Toast.makeText(getContext(), "Status set. Students can still contact you for research or projects if necessary.", Toast.LENGTH_LONG).show();
+                                                break;
                                         }
                                     }
                                 })
