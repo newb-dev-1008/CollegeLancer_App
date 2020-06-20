@@ -46,7 +46,7 @@ public class ProfessorSettingsFragment extends Fragment {
                     case 0:
                         int checkedStatus = 1;
                         String[] status = {"Available for research (with colleagues)", "Available for research (with colleagues)", "Looking for students", "Busy, but can provide projects", "Unavailable for a while"};
-                        androidx.appcompat.app.AlertDialog.Builder statusSetting = new MaterialAlertDialogBuilder(getContext())
+                        AlertDialog statusSetting = new MaterialAlertDialogBuilder(getContext())
                                 .setTitle("Set your current status")
                                 .setMessage("Please note that your status determines your availability for providing and receiving projects.")
                                 .setSingleChoiceItems(status, checkedStatus, new DialogInterface.OnClickListener() {
@@ -66,16 +66,21 @@ public class ProfessorSettingsFragment extends Fragment {
                                                 Toast.makeText(getContext(), "Status updated. Students can still contact you for research or projects if necessary.", Toast.LENGTH_LONG).show();
                                                 break;
                                             case 4:
-                                                Toast.makeText(getContext(), "Status updated. You will not be contacted for projects or research until you change your status.", Toast.LENGTH_LONG).show();s
+                                                Toast.makeText(getContext(), "Status updated. You will not be contacted for projects or research until you change your status.", Toast.LENGTH_LONG).show();
+                                                break;
                                         }
                                     }
                                 }).setPositiveButton("Set Status", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
 
+                                        // Add Firestore Document to store the Professor Status
+
                                     }
                                 }).setNegativeButton("Go back", null)
                                 .create();
+                        statusSetting.setCanceledOnTouchOutside(false);
+                        statusSetting.show();
                 }
             }
         });
