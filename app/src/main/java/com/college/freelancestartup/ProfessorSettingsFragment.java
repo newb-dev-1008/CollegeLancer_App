@@ -45,7 +45,7 @@ public class ProfessorSettingsFragment extends Fragment {
                 switch (i) {
                     case 0:
                         int checkedStatus = 1;
-                        String[] status = {"Available for research (with colleagues)", "Looking for students", "Busy, but can provide projects", "Unavailable for a while"};
+                        String[] status = {"Available for research (with colleagues)", "Available for research (with colleagues)", "Looking for students", "Busy, but can provide projects", "Unavailable for a while"};
                         androidx.appcompat.app.AlertDialog.Builder statusSetting = new MaterialAlertDialogBuilder(getContext())
                                 .setTitle("Set your current status")
                                 .setMessage("Please note that your status determines your availability for providing and receiving projects.")
