@@ -107,7 +107,7 @@ public class ProfessorSettingsFragment extends Fragment {
                                                     public void onFailure(@NonNull Exception e) {
                                                         Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                                                     }
-                                                })
+                                                });
 
                                     }
                                 }).setNegativeButton("Go back", null)
