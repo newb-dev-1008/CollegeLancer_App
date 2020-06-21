@@ -15,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -71,19 +73,19 @@ public class ProfessorSettingsFragment extends Fragment {
                                         professorStatus = status[checkedStatus];
                                         switch (checkedStatus){
                                             case 0:
-                                                Toast.makeText(getContext(), "Status updated. Your colleagues will now see you're available for research collaboration.", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getContext(), "Setting status. Your colleagues will now see you're available for research collaboration.", Toast.LENGTH_LONG).show();
                                                 break;
                                             case 1:
-                                                Toast.makeText(getContext(), "Status updated. Students will now see you're available for research.", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getContext(), "Setting status. Students will now see you're available for research.", Toast.LENGTH_LONG).show();
                                                 break;
                                             case 2:
-                                                Toast.makeText(getContext(), "Status updated. Students will now be able to contact you for projects.", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getContext(), "Setting status. Students will now be able to contact you for projects.", Toast.LENGTH_LONG).show();
                                                 break;
                                             case 3:
-                                                Toast.makeText(getContext(), "Status updated. Students can still contact you for research or projects if necessary.", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getContext(), "Setting status. Students can still contact you for research or projects if necessary.", Toast.LENGTH_LONG).show();
                                                 break;
                                             case 4:
-                                                Toast.makeText(getContext(), "Status updated. You will not be contacted for projects or research until you change your status.", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getContext(), "Setting status. You will not be contacted for projects or research until you change your status.", Toast.LENGTH_LONG).show();
                                                 break;
                                         }
                                     }
@@ -93,7 +95,19 @@ public class ProfessorSettingsFragment extends Fragment {
                                         Map<String, Object> profStatusMap = new HashMap<>();
                                         profStatusMap.put(KEY_PROFSTATUS, professorStatus);
 
-                                        statusDB.collection("Users").document("User " + )
+                                        statusDB.collection("Users").document("User " + UIDEmailID).set(profStatusMap)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Toast.makeText(getContext(), "Your status has been updated.", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                })
 
                                     }
                                 }).setNegativeButton("Go back", null)
