@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -28,12 +29,16 @@ public class ProfessorSettingsFragment extends Fragment {
     View root;
     FirebaseFirestore statusDB;
     int checkedStatus = 1;
+    String professorStatus;
 
     private static final String KEY_PROFSTATUS = "profStatus";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
         profSettingsArray = getResources().getStringArray(R.array.profSettingsArray);
         root = inflater.inflate(R.layout.prof_settings_frag, container, false);
         profSettingsListView = root.findViewById(R.id.prof_settings_listview);
@@ -61,6 +66,7 @@ public class ProfessorSettingsFragment extends Fragment {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int statusNo) {
                                         checkedStatus = statusNo;
+                                        professorStatus = status[checkedStatus];
                                         switch (checkedStatus){
                                             case 0:
                                                 Toast.makeText(getContext(), "Status updated. Your colleagues will now see you're available for research collaboration.", Toast.LENGTH_LONG).show();
@@ -83,9 +89,11 @@ public class ProfessorSettingsFragment extends Fragment {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                                        // Add Firestore Document to store the Professor Status
                                         Map<String, Object> profStatusMap = new HashMap<>();
-                                        profStatusMap.put(KEY_PROFSTATUS, statusSetting.)
+                                        profStatusMap.put(KEY_PROFSTATUS, professorStatus);
+
+                                        statusDB.collection("Users").document("User " + )
+
                                     }
                                 }).setNegativeButton("Go back", null)
                                 .create();
