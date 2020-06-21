@@ -16,12 +16,17 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ProfessorSettingsFragment extends Fragment {
 
     String[] profSettingsArray;
     ListView profSettingsListView;
     View root;
+    FirebaseFirestore statusDB;
+
+    private static final String PROF_STATUS = "profStatus";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
