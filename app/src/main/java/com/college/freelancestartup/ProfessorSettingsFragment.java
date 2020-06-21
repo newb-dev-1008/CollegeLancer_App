@@ -18,14 +18,18 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ProfessorSettingsFragment extends Fragment {
 
     String[] profSettingsArray;
     ListView profSettingsListView;
     View root;
     FirebaseFirestore statusDB;
+    int checkedStatus = 1;
 
-    private static final String PROF_STATUS = "profStatus";
+    private static final String KEY_PROFSTATUS = "profStatus";
 
     @Nullable
     @Override
@@ -49,7 +53,6 @@ public class ProfessorSettingsFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
-                        int checkedStatus = 1;
                         String[] status = {"Available for research (with colleagues)", "Available for research (with colleagues)", "Looking for students", "Busy, but can provide projects", "Unavailable for a while"};
                         AlertDialog statusSetting = new MaterialAlertDialogBuilder(getContext())
                                 .setTitle("Set your current status")
@@ -57,7 +60,8 @@ public class ProfessorSettingsFragment extends Fragment {
                                 .setSingleChoiceItems(status, checkedStatus, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int statusNo) {
-                                        switch (statusNo){
+                                        checkedStatus = statusNo;
+                                        switch (checkedStatus){
                                             case 0:
                                                 Toast.makeText(getContext(), "Status updated. Your colleagues will now see you're available for research collaboration.", Toast.LENGTH_LONG).show();
                                                 break;
@@ -80,7 +84,8 @@ public class ProfessorSettingsFragment extends Fragment {
                                     public void onClick(DialogInterface dialogInterface, int i) {
 
                                         // Add Firestore Document to store the Professor Status
-
+                                        Map<String, Object> profStatusMap = new HashMap<>();
+                                        profStatusMap.put(KEY_PROFSTATUS, statusSetting.)
                                     }
                                 }).setNegativeButton("Go back", null)
                                 .create();
