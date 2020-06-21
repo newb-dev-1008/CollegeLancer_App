@@ -24,12 +24,13 @@ import java.util.Map;
 
 public class ProfessorSettingsFragment extends Fragment {
 
-    String[] profSettingsArray;
-    ListView profSettingsListView;
-    View root;
-    FirebaseFirestore statusDB;
-    int checkedStatus = 1;
-    String professorStatus;
+    private String[] profSettingsArray;
+    private ListView profSettingsListView;
+    private View root;
+    private FirebaseFirestore statusDB;
+    private int checkedStatus = 1;
+    private String professorStatus;
+    private String UIDEmailID;
 
     private static final String KEY_PROFSTATUS = "profStatus";
 
