@@ -38,10 +38,11 @@ public class ProfessorSettingsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        root = inflater.inflate(R.layout.prof_settings_frag, container, false);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
+        UIDEmailID = firebaseAuth.getCurrentUser().getEmail();
         profSettingsArray = getResources().getStringArray(R.array.profSettingsArray);
-        root = inflater.inflate(R.layout.prof_settings_frag, container, false);
         profSettingsListView = root.findViewById(R.id.prof_settings_listview);
 
         ArrayAdapter<String> studentSettingsAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, profSettingsArray);
@@ -89,7 +90,6 @@ public class ProfessorSettingsFragment extends Fragment {
                                 }).setPositiveButton("Set Status", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-
                                         Map<String, Object> profStatusMap = new HashMap<>();
                                         profStatusMap.put(KEY_PROFSTATUS, professorStatus);
 
