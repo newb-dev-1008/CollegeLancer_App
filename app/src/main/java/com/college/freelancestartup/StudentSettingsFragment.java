@@ -15,9 +15,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class StudentSettingsFragment extends Fragment {
 
-    String[] studentSettingsArray;
-    ListView studentSettingsListView;
-    View root;
+    private String[] studentSettingsArray;
+    private ListView studentSettingsListView;
+    private View root;
     private FirebaseFirestore statusDB;
     private int checkedStatus = 1;
     private String professorStatus;
