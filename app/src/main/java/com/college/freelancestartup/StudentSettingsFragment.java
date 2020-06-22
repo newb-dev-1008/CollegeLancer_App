@@ -95,10 +95,10 @@ public class StudentSettingsFragment extends Fragment {
                                 }).setPositiveButton("Set Status", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        Map<String, Object> profStatusMap = new HashMap<>();
-                                        profStatusMap.put(KEY_STUDSTATUS, studentStatus);
+                                        Map<String, Object> studentStatusMap = new HashMap<>();
+                                        studentStatusMap.put(KEY_STUDSTATUS, studentStatus);
 
-                                        statusDB.collection("Users").document("User " + UIDEmailID).set(profStatusMap)
+                                        statusDB.collection("Users").document("User " + UIDEmailID).set(studentStatusMap)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
