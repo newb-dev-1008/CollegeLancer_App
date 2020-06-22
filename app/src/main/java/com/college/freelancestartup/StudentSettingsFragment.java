@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -66,6 +67,25 @@ public class StudentSettingsFragment extends Fragment {
                                 .setSingleChoiceItems(status, checkedStatus, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int statusNo) {
+                                        checkedStatus = statusNo;
+                                        studentStatus = status[checkedStatus];
+                                        switch (checkedStatus){
+                                            case 0:
+                                                Toast.makeText(getContext(), "Setting status. Your colleagues will now see you're available for research collaboration.", Toast.LENGTH_LONG).show();
+                                                break;
+                                            case 1:
+                                                Toast.makeText(getContext(), "Setting status. Students will now see you're available for research.", Toast.LENGTH_LONG).show();
+                                                break;
+                                            case 2:
+                                                Toast.makeText(getContext(), "Setting status. Students will now be able to contact you for projects.", Toast.LENGTH_LONG).show();
+                                                break;
+                                            case 3:
+                                                Toast.makeText(getContext(), "Setting status. Students can still contact you for research or projects if necessary.", Toast.LENGTH_LONG).show();
+                                                break;
+                                            case 4:
+                                                Toast.makeText(getContext(), "Setting status. You will not be contacted for projects or research until you change your status.", Toast.LENGTH_LONG).show();
+                                                break;
+                                        }
                                     }
                                 })
                 }
