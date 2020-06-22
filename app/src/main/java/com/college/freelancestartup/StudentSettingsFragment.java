@@ -11,12 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class StudentSettingsFragment extends Fragment {
 
     String[] studentSettingsArray;
     ListView studentSettingsListView;
     View root;
-
+    private FirebaseFirestore statusDB;
+    private int checkedStatus = 1;
+    private String professorStatus;
+    private String UIDEmailID;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
