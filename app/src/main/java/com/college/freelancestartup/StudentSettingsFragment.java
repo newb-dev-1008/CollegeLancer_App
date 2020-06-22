@@ -15,9 +15,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class StudentSettingsFragment extends Fragment {
 
@@ -87,7 +92,31 @@ public class StudentSettingsFragment extends Fragment {
                                                 break;
                                         }
                                     }
-                                })
+                                }).setPositiveButton("Set Status", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Map<String, Object> profStatusMap = new HashMap<>();
+                                        profStatusMap.put(KEY_STUDSTATUS, studentStatus);
+
+                                        statusDB.collection("Users").document("User " + UIDEmailID).set(profStatusMap)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Toast.makeText(getContext(), "Your status has been updated.", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+
+                                    }
+                                }).setNegativeButton("Go back", null)
+                                .create();
+                        statusSetting.setCanceledOnTouchOutside(false);
+                        statusSetting.show();
                 }
             }
         });
