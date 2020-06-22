@@ -20,8 +20,11 @@ public class StudentSettingsFragment extends Fragment {
     private View root;
     private FirebaseFirestore statusDB;
     private int checkedStatus = 1;
-    private String professorStatus;
+    private String studentStatus;
     private String UIDEmailID;
+
+    private static final String KEY_STUDSTATUS = "studentStatus";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
