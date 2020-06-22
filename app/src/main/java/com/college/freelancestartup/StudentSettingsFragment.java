@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -44,5 +45,18 @@ public class StudentSettingsFragment extends Fragment {
         studentSettingsListView.setAdapter(studentSettingsAdapter);
 
         return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        studentSettingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                }
+            }
+        });
     }
 }
