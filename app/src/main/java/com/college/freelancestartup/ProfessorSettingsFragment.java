@@ -43,6 +43,8 @@ public class ProfessorSettingsFragment extends Fragment {
         root = inflater.inflate(R.layout.prof_settings_frag, container, false);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
+        statusDB = FirebaseFirestore.getInstance();
+
         UIDEmailID = firebaseAuth.getCurrentUser().getEmail();
         profSettingsArray = getResources().getStringArray(R.array.profSettingsArray);
         profSettingsListView = root.findViewById(R.id.prof_settings_listview);
