@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class StudentSettingsFragment extends Fragment {
@@ -32,6 +33,12 @@ public class StudentSettingsFragment extends Fragment {
         studentSettingsArray = getResources().getStringArray(R.array.studentSettingsArray);
         root = inflater.inflate(R.layout.student_settings_frag, container, false);
         studentSettingsListView = root.findViewById(R.id.student_settings_listview);
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+        statusDB = FirebaseFirestore.getInstance();
+
+        UIDEmailID = firebaseAuth.getCurrentUser().getEmail();
 
         ArrayAdapter<String> studentSettingsAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, studentSettingsArray);
         studentSettingsListView.setAdapter(studentSettingsAdapter);
