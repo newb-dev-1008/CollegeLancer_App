@@ -65,7 +65,7 @@ public class StudentSettingsFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
-                        String[] status = {"Available for research (with colleagues)", "Available for research (with colleagues)", "Looking for students", "Busy, but can provide projects", "Unavailable for a while"};
+                        String[] status = {"Available for projects/ research", "Looking for research with professors", "Looking for collaborators", "Paid projects only", "Unavailable for a while"};
                         AlertDialog statusSetting = new MaterialAlertDialogBuilder(getContext())
                                 .setTitle("Set your current status")
                                 .setMessage("Please note that your status determines your availability for providing and receiving projects.")
@@ -76,16 +76,16 @@ public class StudentSettingsFragment extends Fragment {
                                         studentStatus = status[checkedStatus];
                                         switch (checkedStatus){
                                             case 0:
-                                                Toast.makeText(getContext(), "Setting status. Your colleagues will now see you're available for research collaboration.", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getContext(), "Setting status. Your colleagues will now see you're available for projects and research work.", Toast.LENGTH_LONG).show();
                                                 break;
                                             case 1:
-                                                Toast.makeText(getContext(), "Setting status. Students will now see you're available for research.", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getContext(), "Setting status. Professors will now see you're up for research.", Toast.LENGTH_LONG).show();
                                                 break;
                                             case 2:
-                                                Toast.makeText(getContext(), "Setting status. Students will now be able to contact you for projects.", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getContext(), "Setting status. Your fellow freelancers will now be able to contact you for project collaboration.", Toast.LENGTH_LONG).show();
                                                 break;
                                             case 3:
-                                                Toast.makeText(getContext(), "Setting status. Students can still contact you for research or projects if necessary.", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getContext(), "Setting status. You will be made available only to organizations and premium clients.", Toast.LENGTH_LONG).show();
                                                 break;
                                             case 4:
                                                 Toast.makeText(getContext(), "Setting status. You will not be contacted for projects or research until you change your status.", Toast.LENGTH_LONG).show();
