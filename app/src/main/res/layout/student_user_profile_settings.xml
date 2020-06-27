@@ -18,7 +18,7 @@
             android:layout_marginTop="60dp"/>
 
         <TextView
-            android:id="@+id/prof_profileName"
+            android:id="@+id/student_profileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
@@ -28,6 +28,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:textAlignment="center"
             android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/student_profilePhNoTV"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/student_profileName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/student_profilePhNo"
+            android:layout_marginStart="25dp"
+            app:layout_constraintHorizontal_bias="0"
+            android:textSize="25sp"
+            android:fontFamily="sans-serif-black"
+            android:text="Phone Number:"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
