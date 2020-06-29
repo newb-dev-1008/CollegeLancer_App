@@ -112,7 +112,7 @@
             android:fontFamily="sans-serif-black"/>
 
         <TextView
-            android:id="@+id/prof_profileEmailTV"
+            android:id="@+id/student_profileEmailTV"
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -123,6 +123,19 @@
             app:layout_constraintHorizontal_bias="0"
             android:textSize="25sp"
             android:text="E-mail ID:"
+            android:fontFamily="sans-serif-black"/>
+
+        <TextView
+            android:id="@+id/student_profileEmail"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/student_profileEmailTV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="25dp"
+            app:layout_constraintHorizontal_bias="0"
+            android:textSize="20sp"
             android:fontFamily="sans-serif-black"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
