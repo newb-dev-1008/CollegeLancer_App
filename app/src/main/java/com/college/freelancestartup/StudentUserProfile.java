@@ -5,6 +5,7 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -12,6 +13,7 @@ class StudentUserProfile extends AppCompatActivity {
 
     private EditText phoneNumberET, departmentET, semesterET, emailET, DOBET, universityET, bioET;
     private MaterialButton applyChanges, cancelChanges;
+    private Toolbar studentProfileToolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +30,8 @@ class StudentUserProfile extends AppCompatActivity {
 
         applyChanges = findViewById(R.id.student_apply_changes);
         cancelChanges = findViewById(R.id.student_cancel_changes);
+
+        studentProfileToolbar = findViewById(R.id.student_profileToolbar);
     }
 
 
