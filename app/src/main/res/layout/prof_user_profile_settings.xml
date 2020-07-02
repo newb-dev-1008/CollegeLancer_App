@@ -54,8 +54,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="25dp"
             app:layout_constraintHorizontal_bias="0"
-            android:textSize="20sp"
-            android:fontFamily="sans-serif-black"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/prof_DeptTV"
@@ -81,8 +80,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="25dp"
             app:layout_constraintHorizontal_bias="0"
-            android:textSize="20sp"
-            android:fontFamily="sans-serif-black"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/prof_profileEmailTV"
@@ -108,8 +106,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="25dp"
             app:layout_constraintHorizontal_bias="0"
-            android:textSize="20sp"
-            android:fontFamily="sans-serif-black"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/prof_profileDOBTV"
@@ -135,8 +132,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="25dp"
             app:layout_constraintHorizontal_bias="0"
-            android:textSize="20sp"
-            android:fontFamily="sans-serif-black"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/prof_profileUniversityTV"
@@ -162,8 +158,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="25dp"
             app:layout_constraintHorizontal_bias="0"
-            android:textSize="25sp"
-            android:fontFamily="sans-serif-black"/>
+            android:textSize="25sp"/>
 
         <TextView
             android:id="@+id/prof_profileBioTV"
@@ -189,8 +184,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="25dp"
             app:layout_constraintHorizontal_bias="0"
-            android:textSize="25sp"
-            android:fontFamily="sans-serif-black"/>
+            android:textSize="25sp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
