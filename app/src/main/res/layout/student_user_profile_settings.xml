@@ -236,6 +236,7 @@
             android:layout_marginTop="30dp"/>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/student_cancel_changes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cancel"
