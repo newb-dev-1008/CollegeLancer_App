@@ -43,6 +43,8 @@
         <activity android:name=".ProfessorMainActivity"
             android:theme="@style/AppActionBarTheme"/>
 
+        <activity android:name=".StudentUserProfile"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>
