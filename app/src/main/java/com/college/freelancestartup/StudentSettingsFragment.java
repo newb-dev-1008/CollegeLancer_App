@@ -1,6 +1,7 @@
 package com.college.freelancestartup;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,6 +66,9 @@ public class StudentSettingsFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
+                        Intent intent = new Intent(getContext(), StudentUserProfile.class);
+                        startActivity(intent);
+                    case 1:
                         String[] status = {"Available for projects/ research", "Looking for research with professors", "Looking for collaborators", "Paid projects only", "Unavailable for a while"};
                         AlertDialog statusSetting = new MaterialAlertDialogBuilder(getContext())
                                 .setTitle("Set your current status")
