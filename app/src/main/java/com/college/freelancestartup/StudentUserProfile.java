@@ -32,6 +32,8 @@ class StudentUserProfile extends AppCompatActivity {
         cancelChanges = findViewById(R.id.student_cancel_changes);
 
         studentProfileToolbar = findViewById(R.id.student_profileToolbar);
+
+        setSupportActionBar(studentProfileToolbar);
     }
 
 
