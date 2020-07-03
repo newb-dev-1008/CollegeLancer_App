@@ -76,6 +76,8 @@ class StudentUserProfile extends AppCompatActivity {
                                     // change the field in Firestore
                                 } else if (!dbDOB.equals(DOBET.getText().toString())) {
                                     // change the field in Firestore
+                                } else if (!dbUniversity.equals(universityET.getText().toString())) {
+                                    // change the field in Firestore
                                 }
                             }
                         }).addOnFailureListener(new OnFailureListener() {
