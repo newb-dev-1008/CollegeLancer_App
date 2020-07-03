@@ -21,7 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 class StudentUserProfile extends AppCompatActivity {
 
-    private EditText phoneNumberET, departmentET, semesterET, emailET, DOBET, universityET, bioET;
+    private EditText nameET, phoneNumberET, departmentET, semesterET, emailET, DOBET, universityET, bioET;
     private MaterialButton applyChanges, cancelChanges;
     private Toolbar studentProfileToolbar;
 
@@ -33,6 +33,7 @@ class StudentUserProfile extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
+        nameET = findViewById(R.id.student_profileName);
         phoneNumberET = findViewById(R.id.student_profilePhNo);
         departmentET = findViewById(R.id.student_profileDepartment);
         semesterET = findViewById(R.id.student_profileSemester);
@@ -63,7 +64,7 @@ class StudentUserProfile extends AppCompatActivity {
                                 String dbUniversity = documentSnapshot.get("university").toString();
                                 String dbBio = documentSnapshot.get("userBio").toString();
 
-
+                                if (dbName.equals())
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
