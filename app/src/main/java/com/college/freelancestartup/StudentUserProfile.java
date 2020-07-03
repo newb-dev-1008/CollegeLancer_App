@@ -66,7 +66,9 @@ class StudentUserProfile extends AppCompatActivity {
 
                                 if (!dbName.equals(nameET.getText().toString())){
                                     // change the field in Firestore
-                                } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString()){
+                                } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString())){
+                                    // change the field in Firestore
+                                } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString())) {
                                     // change the field in Firestore
                                 }
                             }
