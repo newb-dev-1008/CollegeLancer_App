@@ -50,7 +50,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button signupButton;
-    private EditText phoneNumberET, universityET, nameET;
+    private EditText phoneNumberET, universityET, nameET, bioET;
     private TextView dateOfBirthET, studentSemTV;
     private RadioGroup userType;
     private RadioButton userTypeSelectedRadioButton;
@@ -84,7 +84,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         studentSemTV = findViewById(R.id.studentSemTV);
         studentSem = findViewById(R.id.studentSemSpinner);
         dateOfBirthET = findViewById(R.id.dateOfBirthET);
-
+        bioET = findViewById(R.id.student_profileBio);
 
         currentDate = Calendar.getInstance().getTime();
 
@@ -138,6 +138,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         final String name = nameET.getText().toString().trim();
         final String phoneNumber = phoneNumberET.getText().toString().trim();
         final String university = universityET.getText().toString().trim();
+        final String bio = bioET.getText().toString().trim();
         // Checking if the fields are empty
         if (TextUtils.isEmpty(phoneNumber)) {
             phoneNumberET.setError("You've not entered your phone number.");
@@ -185,6 +186,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
                             userDetails.put(KEY_USER_TYPE, checkUserType());
                             userDetails.put(KEY_DEPT, deptEngg.getSelectedItem());
                             userDetails.put(KEY_STUD_SEM, studentSem.getSelectedItem());
+                            userDetails.put(KEY_BIO, bio);
 
                             db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).set(userDetails, SetOptions.merge())
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
