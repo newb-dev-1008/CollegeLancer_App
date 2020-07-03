@@ -136,7 +136,8 @@
             android:textSize="25sp"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:clickable="false"/>
+            android:clickable="false"
+            android:cursorVisible="false"/>
 
         <TextView
             android:id="@+id/student_profileEmailTV"
@@ -166,7 +167,8 @@
             android:textSize="20sp"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:clickable="false"/>
+            android:clickable="false"
+            android:cursorVisible="false"/>
 
         <TextView
             android:id="@+id/student_profileDOBTV"
@@ -196,7 +198,8 @@
             android:textSize="20sp"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:clickable="false"/>
+            android:clickable="false"
+            android:cursorVisible="false"/>
 
         <TextView
             android:id="@+id/student_profileUniversityTV"
@@ -226,7 +229,8 @@
             android:textSize="30sp"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:clickable="false"/>
+            android:clickable="false"
+            android:cursorVisible="false"/>
 
         <TextView
             android:id="@+id/student_profileBioTV"
@@ -257,7 +261,8 @@
             android:textSize="25sp"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:clickable="false"/>
+            android:clickable="false"
+            android:cursorVisible="false"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/student_apply_changes"
