@@ -64,7 +64,9 @@ class StudentUserProfile extends AppCompatActivity {
                                 String dbUniversity = documentSnapshot.get("university").toString();
                                 String dbBio = documentSnapshot.get("userBio").toString();
 
-                                if (dbName.equals())
+                                if (!dbName.equals(nameET.getText().toString())){
+                                    // change the field in Firestore
+                                }
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
