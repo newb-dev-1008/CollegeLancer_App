@@ -53,7 +53,15 @@ class StudentUserProfile extends AppCompatActivity {
         if (id == R.id.editProfile) {
             Toast.makeText(StudentUserProfile.this, "Edit your profile. You can now change the contents.", Toast.LENGTH_LONG).show();
 
-            phoneNumberET.ed
+            phoneNumberET.setFocusable(true);
+            phoneNumberET.setFocusableInTouchMode(true);
+            phoneNumberET.setClickable(true);
+
+            departmentET.setFocusable(true);
+            departmentET.setFocusableInTouchMode(true);
+            departmentET.setClickable(true);
+
+
             return true;
         }
 
