@@ -54,6 +54,7 @@ class StudentUserProfile extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                String dbName = documentSnapshot.get("name").toString();
                                 String dbPhoneNumber = documentSnapshot.get("phoneNumber").toString();
                                 String dbDepartment = documentSnapshot.get("department").toString();
                                 String dbSemester = documentSnapshot.get("studentSemester").toString();
