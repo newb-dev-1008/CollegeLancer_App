@@ -76,14 +76,17 @@ class StudentUserProfile extends AppCompatActivity {
             departmentET.setFocusable(true);
             departmentET.setFocusableInTouchMode(true);
             departmentET.setClickable(true);
+            departmentET.setCursorVisible(true);
 
             semesterET.setFocusable(true);
             semesterET.setFocusableInTouchMode(true);
             semesterET.setClickable(true);
+            semesterET.setCursorVisible(true);
 
             emailET.setFocusable(true);
             emailET.setFocusableInTouchMode(true);
             emailET.setClickable(true);
+            emailET
 
             DOBET.setFocusable(true);
             DOBET.setFocusableInTouchMode(true);
