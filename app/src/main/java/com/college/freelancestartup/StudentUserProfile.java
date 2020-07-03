@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 class StudentUserProfile extends AppCompatActivity {
 
@@ -23,6 +25,9 @@ class StudentUserProfile extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_user_profile_settings);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
         phoneNumberET = findViewById(R.id.student_profilePhNo);
         departmentET = findViewById(R.id.student_profileDepartment);
@@ -41,7 +46,7 @@ class StudentUserProfile extends AppCompatActivity {
         applyChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
             }
         });
 
