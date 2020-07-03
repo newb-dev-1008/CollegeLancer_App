@@ -71,6 +71,7 @@ class StudentUserProfile extends AppCompatActivity {
             phoneNumberET.setFocusable(true);
             phoneNumberET.setFocusableInTouchMode(true);
             phoneNumberET.setClickable(true);
+            phoneNumberET.setCursorVisible(true);
 
             departmentET.setFocusable(true);
             departmentET.setFocusableInTouchMode(true);
