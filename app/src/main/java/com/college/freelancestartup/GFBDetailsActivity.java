@@ -85,6 +85,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         studentSem = findViewById(R.id.studentSemSpinner);
         dateOfBirthET = findViewById(R.id.dateOfBirthET);
 
+
         currentDate = Calendar.getInstance().getTime();
 
         firebaseAuth = FirebaseAuth.getInstance();

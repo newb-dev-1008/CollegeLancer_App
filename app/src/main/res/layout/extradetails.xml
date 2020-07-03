@@ -206,6 +206,22 @@
             app:layout_constraintBottom_toTopOf="@id/signupButtonGFB"
             android:visibility="gone"/>
 
+        <TextView
+            android:id="@+id/student_profileBioTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Type in a short bio:"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/studentSemSpinner"
+            app:layout_constraintBottom_toTopOf="@id/signupButtonGFB"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"/>
+
         <Button
             android:id="@+id/signupButtonGFB"
             android:layout_width="wrap_content"
