@@ -41,7 +41,8 @@
             android:textSize="30sp"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:clickable="false"/>
+            android:clickable="false"
+            android:cursorVisible="false"/>
 
         <TextView
             android:id="@+id/student_profilePhNoTV"
@@ -73,7 +74,8 @@
             android:textSize="20sp"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:clickable="false"/>
+            android:clickable="false"
+            android:cursorVisible="false"/>
 
         <TextView
             android:id="@+id/student_DeptTV"
@@ -103,7 +105,8 @@
             android:textSize="20sp"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:clickable="false"/>
+            android:clickable="false"
+            android:cursorVisible="false"/>
 
         <TextView
             android:id="@+id/student_profileSemesterTV"
