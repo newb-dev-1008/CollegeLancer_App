@@ -52,7 +52,13 @@ class StudentUserProfile extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-
+                                String dbPhoneNumber = documentSnapshot.get("phoneNumber").toString();
+                                String dbDepartment = documentSnapshot.get("department").toString();
+                                String dbSemester = documentSnapshot.get("studentSemester").toString();
+                                String dbEmail = documentSnapshot.get("emailID").toString();
+                                String dbDOB = documentSnapshot.get("dateOfBirth").toString();
+                                String dbUniversity = documentSnapshot.get("university").toString();
+                                String db
                             }
                         })
             }
