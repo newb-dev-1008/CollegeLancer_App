@@ -52,6 +52,8 @@ class StudentUserProfile extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.editProfile) {
             Toast.makeText(StudentUserProfile.this, "Edit your profile. You can now change the contents.", Toast.LENGTH_LONG).show();
+
+            phoneNumberET.ed
             return true;
         }
 

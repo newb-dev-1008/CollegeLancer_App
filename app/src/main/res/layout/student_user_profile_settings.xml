@@ -38,7 +38,10 @@
             android:inputType="none"
             app:layout_constraintEnd_toEndOf="parent"
             android:textAlignment="center"
-            android:textSize="30sp"/>
+            android:textSize="30sp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:clickable="false"/>
 
         <TextView
             android:id="@+id/student_profilePhNoTV"
@@ -53,7 +56,7 @@
             app:layout_constraintHorizontal_bias="0"
             android:textSize="25sp"
             android:fontFamily="sans-serif-black"
-            android:text="Phone Number:"/>
+            android:text="Your 10 Digit Phone Number:"/>
 
         <EditText
             android:id="@+id/student_profilePhNo"
@@ -64,9 +67,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="25dp"
-            android:inputType="none"
+            android:inputType="number"
+            android:maxLength="10"
             app:layout_constraintHorizontal_bias="0"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:clickable="false"/>
 
         <TextView
             android:id="@+id/student_DeptTV"
@@ -93,7 +100,10 @@
             android:inputType="none"
             android:layout_marginStart="25dp"
             app:layout_constraintHorizontal_bias="0"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:clickable="false"/>
 
         <TextView
             android:id="@+id/student_profileSemesterTV"
@@ -120,7 +130,10 @@
             android:layout_marginStart="25dp"
             android:inputType="none"
             app:layout_constraintHorizontal_bias="0"
-            android:textSize="25sp"/>
+            android:textSize="25sp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:clickable="false"/>
 
         <TextView
             android:id="@+id/student_profileEmailTV"
@@ -147,7 +160,10 @@
             android:layout_marginStart="25dp"
             android:inputType="none"
             app:layout_constraintHorizontal_bias="0"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:clickable="false"/>
 
         <TextView
             android:id="@+id/student_profileDOBTV"
@@ -174,7 +190,10 @@
             android:layout_marginStart="25dp"
             android:inputType="none"
             app:layout_constraintHorizontal_bias="0"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:clickable="false"/>
 
         <TextView
             android:id="@+id/student_profileUniversityTV"
@@ -201,7 +220,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="25dp"
             app:layout_constraintHorizontal_bias="0"
-            android:textSize="30sp"/>
+            android:textSize="30sp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:clickable="false"/>
 
         <TextView
             android:id="@+id/student_profileBioTV"
@@ -229,7 +251,10 @@
             android:layout_marginStart="25dp"
             android:layout_marginBottom="20dp"
             app:layout_constraintHorizontal_bias="0"
-            android:textSize="25sp"/>
+            android:textSize="25sp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:clickable="false"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/student_apply_changes"
