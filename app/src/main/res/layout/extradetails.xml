@@ -217,10 +217,23 @@
             android:textSize="20sp"
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/studentSemSpinner"
-            app:layout_constraintBottom_toTopOf="@id/signupButtonGFB"
+            app:layout_constraintBottom_toTopOf="@id/student_profileBio"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.0"/>
+
+        <EditText
+            android:id="@+id/student_profileBio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:hint="Enter your bio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/student_profileBioTV"
+            app:layout_constraintBottom_toTopOf="@id/signupButtonGFB"/>
 
         <Button
             android:id="@+id/signupButtonGFB"
