@@ -98,6 +98,11 @@ class StudentUserProfile extends AppCompatActivity {
             universityET.setClickable(true);
             universityET.setCursorVisible(true);
 
+            bioET.setFocusable(true);
+            bioET.setFocusableInTouchMode(true);
+            bioET.setClickable(true);
+            bioET.setCursorVisible(true);
+
             return true;
         }
 
