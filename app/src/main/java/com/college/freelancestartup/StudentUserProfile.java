@@ -64,19 +64,17 @@ class StudentUserProfile extends AppCompatActivity {
                                 String dbUniversity = documentSnapshot.get("university").toString();
                                 String dbBio = documentSnapshot.get("userBio").toString();
 
-                                if (!dbName.equals(nameET.getText().toString())){
-                                    // change the field in Firestore
-                                } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString())){
-                                    // change the field in Firestore
-                                } else if (!dbDepartment.equals(departmentET.getText().toString())) {
-                                    // change the field in Firestore
+                                if (!dbName.equals(nameET.getText().toString()) ||
+                                        !dbPhoneNumber.equals(phoneNumberET.getText().toString()) ||
+                                        !dbDepartment.equals(departmentET.getText().toString()) ||
+                                        !dbDOB.equals(DOBET.getText().toString()) ||
+                                        !dbUniversity.equals(universityET.getText().toString())){
+                                    // change the field in Firestore after confirmation with ID
+
                                 } else if (!dbSemester.equals(semesterET.getText().toString())) {
                                     // change the field in Firestore
+
                                 } else if (!dbEmail.equals(emailET.getText().toString())) {
-                                    // change the field in Firestore
-                                } else if (!dbDOB.equals(DOBET.getText().toString())) {
-                                    // change the field in Firestore
-                                } else if (!dbUniversity.equals(universityET.getText().toString())) {
                                     // change the field in Firestore
                                 } else if (!dbBio.equals(bioET.getText().toString())) {
                                     // change the field in Firestore
@@ -94,7 +92,7 @@ class StudentUserProfile extends AppCompatActivity {
         cancelChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                // Write this stuff
             }
         });
     }
