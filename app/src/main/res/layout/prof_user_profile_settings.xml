@@ -153,7 +153,7 @@
             android:text="Date of Birth:"
             android:fontFamily="sans-serif-black"/>
 
-        <TextView
+        <EditText
             android:id="@+id/prof_profileDOB"
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
@@ -162,8 +162,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="25dp"
+            android:inputType="none"
             app:layout_constraintHorizontal_bias="0"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:clickable="false"
+            android:cursorVisible="false"/>
 
         <TextView
             android:id="@+id/prof_profileUniversityTV"
