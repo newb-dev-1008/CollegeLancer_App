@@ -33,6 +33,20 @@
         app:otp_box_background_active="#D3D3D3"
         app:otp_text_size="24dp" />
 
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send OTP via SMS"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/phoneVerificationOTPView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_marginTop="100dp"/>
+
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
