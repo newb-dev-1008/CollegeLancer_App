@@ -99,7 +99,7 @@ class StudentUserProfile extends AppCompatActivity {
                                             })
                                             .setNegativeButton("Cancel", null)
                                             .create();
-
+                                    confirmEditPhoneNo.setCanceledOnTouchOutside(false);
                                 } else if (!dbSemester.equals(semesterET.getText().toString())) {
                                     // change the field in Firestore
 
