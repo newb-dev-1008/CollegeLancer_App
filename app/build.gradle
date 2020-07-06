@@ -39,4 +39,5 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-firestore:4.1.0'
     implementation 'com.google.firebase:firebase-firestore:21.4.3'
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
+    implementation 'com.github.aabhasr1:OtpView:v1.1.2'
 }
