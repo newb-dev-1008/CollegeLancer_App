@@ -24,7 +24,9 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
         ProgressBar phoneVerificationProgressBar;
 
         String phoneNumber = getIntent().getExtras().getString("phoneNo");
+        String displayPhoneNo = "+91 - " + phoneNumber;
+        String textViewDisplay = "Enter the OTP sent to your phone number:\n" + displayPhoneNo;
 
-        phoneNumberOTPTextView.setText("Enter the OTP sent to your phone number: \n+91-" + phoneNumber);
+        phoneNumberOTPTextView.setText(textViewDisplay);
     }
 }
