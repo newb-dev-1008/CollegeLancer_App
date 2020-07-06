@@ -83,7 +83,8 @@ class StudentUserProfile extends AppCompatActivity {
                                             })
                                             .setNegativeButton("Go Back", null)
                                             .create();
-
+                                    confirmEditWithID.setCanceledOnTouchOutside(false);
+                                    confirmEditWithID.show();
 
                                 } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString())) {
                                     // change the field in Firestore after sending OTP
