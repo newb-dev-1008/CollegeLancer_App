@@ -78,7 +78,7 @@ class StudentUserProfile extends AppCompatActivity {
                                             .setPositiveButton("Upload/ Click a Photo", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                                    // Finish this
+                                                    // Finish this (Add another dialog to choose between photo or upload)
                                                 }
                                             })
                                             .setNegativeButton("Go Back", null)
@@ -88,7 +88,9 @@ class StudentUserProfile extends AppCompatActivity {
 
                                 } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString())) {
                                     // change the field in Firestore after sending OTP
-
+                                    AlertDialog confirmEditPhoneNo = new MaterialAlertDialogBuilder(StudentUserProfile.this)
+                                            .setTitle("Confirm your phone number.")
+                                            .setMessage("We'll send an OTP to your phone number for confirmation.")
                                 } else if (!dbSemester.equals(semesterET.getText().toString())) {
                                     // change the field in Firestore
 
