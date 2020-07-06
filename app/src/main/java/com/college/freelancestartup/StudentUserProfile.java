@@ -98,6 +98,7 @@ class StudentUserProfile extends AppCompatActivity {
                                                 }
                                             })
                                             .setNegativeButton("Cancel", null)
+                                            .create();
 
                                 } else if (!dbSemester.equals(semesterET.getText().toString())) {
                                     // change the field in Firestore
