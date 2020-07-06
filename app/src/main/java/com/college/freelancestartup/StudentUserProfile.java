@@ -82,6 +82,8 @@ class StudentUserProfile extends AppCompatActivity {
                                                 }
                                             })
                                             .setNegativeButton("Go Back", null)
+                                            .create();
+
 
                                 } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString())) {
                                     // change the field in Firestore after sending OTP
