@@ -1,6 +1,7 @@
 package com.college.freelancestartup;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -98,6 +99,9 @@ class StudentUserProfile extends AppCompatActivity {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
                                                     // Add Firebase OTP Verification
+                                                    Intent OTPVerificationIntent = new Intent(StudentUserProfile.this, UpdatePhoneNumberOTP.class);
+                                                    OTPVerificationIntent.putExtra("phoneNo", phoneNumberET.getText());
+                                                    startActivity(OTPVerificationIntent);
                                                 }
                                             })
                                             .setNegativeButton("Cancel", null)

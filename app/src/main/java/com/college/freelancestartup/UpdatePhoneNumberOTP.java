@@ -19,8 +19,12 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
         setContentView(R.layout.phone_number_verification);
 
         OtpTextView phoneNumberOTP;
-        TextView phoneNumberOTPTextView;
+        TextView phoneNumberOTPTextView = findViewById(R.id.phoneVerificationTV);
         MaterialButton phoneVerificationOTPButton;
         ProgressBar phoneVerificationProgressBar;
+
+        String phoneNumber = getIntent().getExtras().getString("phoneNo");
+
+        phoneNumberOTPTextView.setText("Enter the OTP sent to your phone number: \n+91-" + phoneNumber);
     }
 }
