@@ -18,7 +18,7 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phone_number_verification);
 
-        OtpTextView phoneNumberOTP;
+        OtpTextView phoneNumberOTP = findViewById(R.id.phoneVerificationOTPView);
         TextView phoneNumberOTPTextView = findViewById(R.id.phoneVerificationTV);
         MaterialButton phoneVerificationOTPButton = findViewById(R.id.phoneVerificationOTPButton);
         ProgressBar phoneVerificationProgressBar;
@@ -28,5 +28,12 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
         String textViewDisplay = "Enter the OTP sent to your phone number:\n" + displayPhoneNo;
 
         phoneNumberOTPTextView.setText(textViewDisplay);
+
+
+    }
+
+    @Override
+    public void onOTPComplete(String OTP) {
+        // fired when user has entered the OTP fully.
     }
 }
