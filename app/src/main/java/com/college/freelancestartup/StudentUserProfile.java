@@ -1,5 +1,6 @@
 package com.college.freelancestartup;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -74,7 +75,12 @@ class StudentUserProfile extends AppCompatActivity {
                                     AlertDialog confirmEditWithID = new MaterialAlertDialogBuilder(StudentUserProfile.this)
                                             .setTitle("Please upload an ID Proof for confirmation.")
                                             .setMessage("You seem to have edited some of your essential background details (Name, Department, Date of Birth or University). Please upload a valid ID proof for verification.")
-
+                                            .setPositiveButton("Upload/ Click a Photo", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    // Finish this
+                                                }
+                                            })
 
                                 } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString())) {
                                     // change the field in Firestore after sending OTP
