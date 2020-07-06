@@ -20,7 +20,7 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
 
         OtpTextView phoneNumberOTP;
         TextView phoneNumberOTPTextView = findViewById(R.id.phoneVerificationTV);
-        MaterialButton phoneVerificationOTPButton;
+        MaterialButton phoneVerificationOTPButton = findViewById(R.id.phoneVerificationOTPButton);
         ProgressBar phoneVerificationProgressBar;
 
         String phoneNumber = getIntent().getExtras().getString("phoneNo");

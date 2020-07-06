@@ -38,7 +38,7 @@
         android:id="@+id/phoneVerificationOTPButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send OTP via SMS"
+        android:text="Enter OTP"
         android:visibility="gone"
         android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@id/phoneVerificationOTPView"
