@@ -60,4 +60,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="50dp"/>
 
+    <TextView
+        android:id="@+id/waitingSMSTV1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Waiting for the SMS..."
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/phoneVerificationProgressBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/waitingSMSTV2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="If you are receiving the OTP on a different device, you can manually key in the OTP."
+        app:layout_constraintTop_toBottomOf="@id/waitingSMSTV1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"
+        android:textColor="#000000"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
