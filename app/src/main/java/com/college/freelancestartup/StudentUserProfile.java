@@ -67,6 +67,9 @@ class StudentUserProfile extends AppCompatActivity {
                                 String dbUniversity = documentSnapshot.get("university").toString();
                                 String dbBio = documentSnapshot.get("userBio").toString();
 
+                                // Add if statements to first check if the inputs are invalid, and then nest the below ifs within
+                                // the else (when inputs are valid)
+
                                 if (!dbName.equals(nameET.getText().toString()) ||
                                         !dbDepartment.equals(departmentET.getText().toString()) ||
                                         !dbDOB.equals(DOBET.getText().toString()) ||
@@ -104,7 +107,7 @@ class StudentUserProfile extends AppCompatActivity {
                                     // change the field in Firestore
 
                                 } else if (!dbEmail.equals(emailET.getText().toString())) {
-                                    // change the field in Firestore
+                                    // Do not change the login credentials. Inform that the email ID will be used only for communication purposes.
                                 } else if (!dbBio.equals(bioET.getText().toString())) {
                                     // change the field in Firestore
                                 }
