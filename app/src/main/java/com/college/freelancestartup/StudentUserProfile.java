@@ -91,6 +91,12 @@ class StudentUserProfile extends AppCompatActivity {
                                     AlertDialog confirmEditPhoneNo = new MaterialAlertDialogBuilder(StudentUserProfile.this)
                                             .setTitle("Confirm your phone number.")
                                             .setMessage("We'll send an OTP to your phone number for confirmation.")
+                                            .setPositiveButton("Send OTP", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    // Add Firebase OTP Verification
+                                                }
+                                            })
                                 } else if (!dbSemester.equals(semesterET.getText().toString())) {
                                     // change the field in Firestore
 
