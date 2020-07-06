@@ -4,8 +4,24 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <TextView
+        android:id="@+id/phoneVerificationTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="60dp"
+        android:textSize="25sp"
+        android:fontFamily="sans-serif-black"
+        android:textColor="#000000"/>
+
     <in.aabhasjindal.otptextview.OtpTextView
-        android:id="@+id/otp_view"
+        android:id="@+id/phoneVerificationOTPView"
+        app:layout_constraintTop_toBottomOf="@id/phoneVerificationTV"
+        android:layout_marginTop="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#000000"
@@ -13,8 +29,13 @@
         app:width="40dp"
         app:bar_enabled="true"
         app:bar_height="2dp"
-        app:length="4"
-        app:otp="1234"
-        app:otp_text_size="24dp"/>
+        app:length="6"
+        app:otp_box_background_active="#D3D3D3"
+        app:otp_text_size="24dp" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
