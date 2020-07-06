@@ -9,12 +9,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -65,11 +67,17 @@ class StudentUserProfile extends AppCompatActivity {
                                 String dbBio = documentSnapshot.get("userBio").toString();
 
                                 if (!dbName.equals(nameET.getText().toString()) ||
-                                        !dbPhoneNumber.equals(phoneNumberET.getText().toString()) ||
                                         !dbDepartment.equals(departmentET.getText().toString()) ||
                                         !dbDOB.equals(DOBET.getText().toString()) ||
                                         !dbUniversity.equals(universityET.getText().toString())){
                                     // change the field in Firestore after confirmation with ID
+                                    AlertDialog confirmEditWithID = new MaterialAlertDialogBuilder(StudentUserProfile.this)
+                                            .setTitle("Please upload an ID Proof for confirmation.")
+                                            .setMessage("You seem to have edited some of your essential background details (Name, Department, Date of Birth or University). Please upload a valid ID proof for verification.")
+
+
+                                } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString())) {
+                                    // change the field in Firestore after sending OTP
 
                                 } else if (!dbSemester.equals(semesterET.getText().toString())) {
                                     // change the field in Firestore
