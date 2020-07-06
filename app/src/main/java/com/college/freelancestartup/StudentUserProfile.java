@@ -97,6 +97,8 @@ class StudentUserProfile extends AppCompatActivity {
                                                     // Add Firebase OTP Verification
                                                 }
                                             })
+                                            .setNegativeButton("Cancel", null)
+
                                 } else if (!dbSemester.equals(semesterET.getText().toString())) {
                                     // change the field in Firestore
 
