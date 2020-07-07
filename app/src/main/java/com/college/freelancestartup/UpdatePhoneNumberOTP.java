@@ -33,7 +33,7 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
     private Integer realPhoneNo;
     private FirebaseAuth firebaseAuth;
     private OtpTextView phoneNumberOTP;
-    private TextView phoneNumberOTPTextView;
+    private TextView phoneNumberOTPTextView, waiting1, waiting2;
     private MaterialButton phoneVerificationOTPButton;
     private ProgressBar phoneVerificationProgressBar;
 
@@ -48,6 +48,8 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
         phoneNumberOTPTextView = findViewById(R.id.phoneVerificationTV);
         phoneVerificationOTPButton = findViewById(R.id.phoneVerificationOTPButton);
         phoneVerificationProgressBar = findViewById(R.id.phoneVerificationProgressBar);
+        waiting1 = findViewById(R.id.waitingSMSTV1);
+        waiting1 = findViewById(R.id.waitingSMSTV1);
 
         phoneNumber = getIntent().getExtras().getString("phoneNo");
         realPhoneNo = Integer.parseInt("+91" + phoneNumber);
@@ -98,6 +100,7 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
 
                     @Override
                     public void onCodeAutoRetrievalTimeOut(@NonNull String s) {
+                        phoneVerificationProgressBar.setVisibility(View.GONE);
 
                         AlertDialog retryOTP = new MaterialAlertDialogBuilder(UpdatePhoneNumberOTP.this)
                                 .setTitle("Your code hasn't arrived yet.")
