@@ -29,9 +29,13 @@ import in.aabhasjindal.otptextview.OtpTextView;
 
 class UpdatePhoneNumberOTP extends AppCompatActivity {
 
-    String phoneNumber;
-    Integer realPhoneNo;
-    FirebaseAuth firebaseAuth;
+    private String phoneNumber;
+    private Integer realPhoneNo;
+    private FirebaseAuth firebaseAuth;
+    private OtpTextView phoneNumberOTP;
+    private TextView phoneNumberOTPTextView;
+    private MaterialButton phoneVerificationOTPButton;
+    private ProgressBar phoneVerificationProgressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,10 +44,10 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        OtpTextView phoneNumberOTP = findViewById(R.id.phoneVerificationOTPView);
-        TextView phoneNumberOTPTextView = findViewById(R.id.phoneVerificationTV);
-        MaterialButton phoneVerificationOTPButton = findViewById(R.id.phoneVerificationOTPButton);
-        ProgressBar phoneVerificationProgressBar;
+        phoneNumberOTP = findViewById(R.id.phoneVerificationOTPView);
+        phoneNumberOTPTextView = findViewById(R.id.phoneVerificationTV);
+        phoneVerificationOTPButton = findViewById(R.id.phoneVerificationOTPButton);
+        phoneVerificationProgressBar = findViewById(R.id.phoneVerificationProgressBar);
 
         phoneNumber = getIntent().getExtras().getString("phoneNo");
         realPhoneNo = Integer.parseInt("+91" + phoneNumber);
