@@ -85,7 +85,14 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
                 new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
                     public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-
+                        phoneVerificationProgressBar.setVisibility(View.GONE);
+                        waiting1.setVisibility(View.GONE);
+                        waiting2.setVisibility(View.GONE);
+                        Toast.makeText(UpdatePhoneNumberOTP.this, "Your phone number has been verified and updated.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(UpdatePhoneNumberOTP.this, StudentUserProfile.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
                     }
 
                     @Override
