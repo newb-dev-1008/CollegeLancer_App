@@ -90,7 +90,31 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
 
                     @Override
                     public void onVerificationFailed(@NonNull FirebaseException e) {
-
+                        phoneVerificationProgressBar.setVisibility(View.GONE);
+                        waiting1.setVisibility(View.GONE);
+                        waiting2.setVisibility(View.GONE);
+                        AlertDialog retryOTP = new MaterialAlertDialogBuilder(UpdatePhoneNumberOTP.this)
+                                .setTitle("Verification failed.")
+                                .setMessage(e.getMessage() + " Would you like to retry?")
+                                .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        verifyPhoneNumber();
+                                    }
+                                })
+                                .setNegativeButton("Cancel Verification", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Intent intent = new Intent(UpdatePhoneNumberOTP.this, StudentUserProfile.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .create();
+                        retryOTP.setCanceledOnTouchOutside(false);
+                        retryOTP.setCancelable(false);
+                        retryOTP.show();
                     }
 
                     @Override
@@ -125,6 +149,10 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 })
+                                .create();
+                        retryOTP.setCanceledOnTouchOutside(false);
+                        retryOTP.setCancelable(false);
+                        retryOTP.show();
                     }
                 });
     }
