@@ -2,6 +2,7 @@ package com.college.freelancestartup;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
@@ -113,6 +114,16 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         verifyPhoneNumber();
+                                    }
+                                })
+                                .setNegativeButton("Cancel Verification", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Intent intent = new Intent(UpdatePhoneNumberOTP.this, StudentUserProfile.class);
+                                        intent.putExtra("flagContinueValue", 1);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
                                     }
                                 })
                     }
