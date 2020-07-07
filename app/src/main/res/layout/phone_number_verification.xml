@@ -32,7 +32,8 @@
         app:bar_height="2dp"
         app:length="6"
         app:otp_box_background_active="#D3D3D3"
-        app:otp_text_size="24dp" />
+        app:otp_text_size="24dp"
+        app:hide_otp="true"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/phoneVerificationOTPButton"
@@ -57,6 +58,7 @@
         app:layout_constraintTop_toBottomOf="@id/phoneVerificationOTPButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
         android:layout_marginTop="50dp"/>
 
     <TextView
@@ -68,6 +70,7 @@
         app:layout_constraintTop_toBottomOf="@id/phoneVerificationProgressBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
         android:layout_marginTop="40dp"
         android:textColor="#000000"/>
 
@@ -80,5 +83,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textAlignment="center"
+        android:visibility="gone"
         android:textColor="#000000"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

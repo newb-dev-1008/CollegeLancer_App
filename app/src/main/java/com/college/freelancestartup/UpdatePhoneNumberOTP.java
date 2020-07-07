@@ -94,7 +94,7 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
 
                     @Override
                     public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                        String verificationID = s;
+                        // String verificationID = s;
                         Toast.makeText(UpdatePhoneNumberOTP.this, "Your verification code has been sent.", Toast.LENGTH_SHORT).show();
                         phoneVerificationProgressBar.setVisibility(View.VISIBLE);
                         waiting1.setVisibility(View.VISIBLE);
