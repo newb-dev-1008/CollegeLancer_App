@@ -23,11 +23,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Map;
+
 class StudentUserProfile extends AppCompatActivity {
 
     private EditText nameET, phoneNumberET, departmentET, semesterET, emailET, DOBET, universityET, bioET;
     private MaterialButton applyChanges, cancelChanges;
     private Toolbar studentProfileToolbar;
+    private String KEY_BIO = "userBio";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,6 +100,8 @@ class StudentUserProfile extends AppCompatActivity {
                                     // Do not change the login credentials. Inform that the email ID will be used only for communication purposes.
                                 } else if (!dbBio.equals(bioET.getText().toString())) {
                                     // change the field in Firestore
+                                    db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).update(
+                                            KEY_BIO, bioET.getText().toString());
                                 } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString())) {
                                     // change the field in Firestore after sending OTP
                                     AlertDialog confirmEditPhoneNo = new MaterialAlertDialogBuilder(StudentUserProfile.this)
@@ -144,7 +149,6 @@ class StudentUserProfile extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.editProfile) {
             Toast.makeText(StudentUserProfile.this, "Edit your profile. You can now change the contents.", Toast.LENGTH_LONG).show();
 
