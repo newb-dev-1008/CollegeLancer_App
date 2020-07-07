@@ -2,16 +2,21 @@ package com.college.freelancestartup;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
@@ -23,7 +28,6 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
 
     String phoneNumber;
     Integer realPhoneNo;
-    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     FirebaseAuth firebaseAuth;
 
     @Override
@@ -58,15 +62,37 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
                 phoneVerificationOTPButton.setVisibility(View.VISIBLE);
             }
         });
+
+        verifyPhoneNumber();
     }
 
     private void verifyPhoneNumber(){
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                realPhoneNo,
+                realPhoneNo.toString(),
                 60,
-                TimeUnit.SECONDS;
+                TimeUnit.SECONDS,
                 this,
-                mCallbacks);
-        );
+                new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                    @Override
+                    public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+
+                    }
+
+                    @Override
+                    public void onVerificationFailed(@NonNull FirebaseException e) {
+
+                    }
+
+                    @Override
+                    public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                        String verificationID = s;
+                        Toast.makeText(UpdatePhoneNumberOTP.this, "Your verification code has been sent.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCodeAutoRetrievalTimeOut(@NonNull String s) {
+
+                    }
+                });
     }
 }
