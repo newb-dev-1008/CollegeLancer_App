@@ -90,6 +90,13 @@ class StudentUserProfile extends AppCompatActivity {
                                     confirmEditWithID.setCanceledOnTouchOutside(false);
                                     confirmEditWithID.show();
 
+                                } else if (!dbSemester.equals(semesterET.getText().toString())) {
+                                    // change the field in Firestore
+
+                                } else if (!dbEmail.equals(emailET.getText().toString())) {
+                                    // Do not change the login credentials. Inform that the email ID will be used only for communication purposes.
+                                } else if (!dbBio.equals(bioET.getText().toString())) {
+                                    // change the field in Firestore
                                 } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString())) {
                                     // change the field in Firestore after sending OTP
                                     AlertDialog confirmEditPhoneNo = new MaterialAlertDialogBuilder(StudentUserProfile.this)
@@ -107,14 +114,6 @@ class StudentUserProfile extends AppCompatActivity {
                                             .setNegativeButton("Cancel", null)
                                             .create();
                                     confirmEditPhoneNo.setCanceledOnTouchOutside(false);
-
-                                } else if (!dbSemester.equals(semesterET.getText().toString())) {
-                                    // change the field in Firestore
-
-                                } else if (!dbEmail.equals(emailET.getText().toString())) {
-                                    // Do not change the login credentials. Inform that the email ID will be used only for communication purposes.
-                                } else if (!dbBio.equals(bioET.getText().toString())) {
-                                    // change the field in Firestore
                                 }
                             }
                         }).addOnFailureListener(new OnFailureListener() {

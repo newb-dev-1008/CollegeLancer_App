@@ -120,7 +120,6 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         Intent intent = new Intent(UpdatePhoneNumberOTP.this, StudentUserProfile.class);
-                                        intent.putExtra("flagContinueValue", 1);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
