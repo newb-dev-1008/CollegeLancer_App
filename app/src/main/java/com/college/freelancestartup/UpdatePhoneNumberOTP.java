@@ -1,6 +1,7 @@
 package com.college.freelancestartup;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
@@ -11,9 +12,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -92,6 +95,15 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
                     @Override
                     public void onCodeAutoRetrievalTimeOut(@NonNull String s) {
 
+                        AlertDialog retryOTP = new MaterialAlertDialogBuilder(UpdatePhoneNumberOTP.this)
+                                .setTitle("Your code hasn't arrived yet.")
+                                .setMessage("Your current request for a verification code timed out. Please check your Internet connection/ mobile network and retry.")
+                                .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        verifyPhoneNumber();
+                                    }
+                                })
                     }
                 });
     }
