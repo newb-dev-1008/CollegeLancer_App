@@ -23,13 +23,15 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
 
     String phoneNumber;
     Integer realPhoneNo;
+    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phone_number_verification);
 
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         OtpTextView phoneNumberOTP = findViewById(R.id.phoneVerificationOTPView);
         TextView phoneNumberOTPTextView = findViewById(R.id.phoneVerificationTV);
