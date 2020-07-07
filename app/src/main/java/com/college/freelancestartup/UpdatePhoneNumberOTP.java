@@ -96,12 +96,16 @@ class UpdatePhoneNumberOTP extends AppCompatActivity {
                     public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                         String verificationID = s;
                         Toast.makeText(UpdatePhoneNumberOTP.this, "Your verification code has been sent.", Toast.LENGTH_SHORT).show();
+                        phoneVerificationProgressBar.setVisibility(View.VISIBLE);
+                        waiting1.setVisibility(View.VISIBLE);
+                        waiting2.setVisibility(View.VISIBLE);
                     }
 
                     @Override
                     public void onCodeAutoRetrievalTimeOut(@NonNull String s) {
                         phoneVerificationProgressBar.setVisibility(View.GONE);
-
+                        waiting1.setVisibility(View.GONE);
+                        waiting2.setVisibility(View.GONE);
                         AlertDialog retryOTP = new MaterialAlertDialogBuilder(UpdatePhoneNumberOTP.this)
                                 .setTitle("Your code hasn't arrived yet.")
                                 .setMessage("Your current request for a verification code timed out. Please check your Internet connection/ mobile network and retry.")
