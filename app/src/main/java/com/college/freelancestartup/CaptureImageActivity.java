@@ -3,6 +3,9 @@ package com.college.freelancestartup;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -14,6 +17,7 @@ import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCapture;
+import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.Preview;
 import androidx.camera.extensions.HdrImageCaptureExtender;
 import androidx.camera.lifecycle.ProcessCameraProvider;
@@ -24,6 +28,10 @@ import androidx.lifecycle.LifecycleOwner;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -125,8 +133,37 @@ class CaptureImageActivity extends AppCompatActivity {
         captureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
+                File file = new File(getBatchDirectoryName(), mDateFormat.format(new Date())+ ".jpg");
 
+                ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder(file).build();
+                imageCapture.takePicture(outputFileOptions, executor, new ImageCapture.OnImageSavedCallback () {
+                    @Override
+                    public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(CaptureImageActivity.this, "Image saved successfully.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                    @Override
+                    public void onError(@NonNull ImageCaptureException error) {
+                        error.printStackTrace();
+                    }
+                });
             }
         });
+    }
+
+    public String getBatchDirectoryName() {
+        String app_folder_path = "";
+        app_folder_path = Environment.getExternalStorageDirectory().toString() + "/images";
+        File dir = new File(app_folder_path);
+        if (!dir.exists() && !dir.mkdirs()) {
+            Toast.makeText(this, "Unable to save photo. Please report a bug in this regard.", Toast.LENGTH_LONG).show();
+        }
+
+        return app_folder_path;
     }
 }
