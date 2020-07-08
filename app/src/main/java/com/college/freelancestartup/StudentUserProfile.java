@@ -31,6 +31,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Map;
 
+import bolts.Capture;
+
 class StudentUserProfile extends AppCompatActivity {
 
     private EditText nameET, phoneNumberET, departmentET, semesterET, emailET, DOBET, universityET, bioET;
@@ -95,11 +97,11 @@ class StudentUserProfile extends AppCompatActivity {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
                                                     if (options[i].equals("Take a Photo")){
-                                                        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                                        startActivityForResult(takePicture, 0);
+                                                        Intent takePicture = new Intent(StudentUserProfile.this, CaptureImageActivity.class);
+                                                        startActivity(takePicture);
                                                     } else if (options[i].equals("Choose from Gallery")){
                                                         Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                                                        startActivityForResult(pickPhoto, 1);
+                                                        startActivityForResult(pickPhoto, 0);
                                                     } else if (options[i].equals("Cancel")){
                                                         dialogInterface.dismiss();
                                                     }
@@ -166,13 +168,6 @@ class StudentUserProfile extends AppCompatActivity {
         if (resultCode != RESULT_CANCELED) {
             switch (requestCode) {
                 case 0:
-                    if (resultCode == RESULT_OK && data != null) {
-                        Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
-                        idImage.setImageBitmap(selectedImage);
-                    }
-
-                    break;
-                case 1:
                     if (resultCode == RESULT_OK && data != null) {
                         Uri selectedImage = data.getData();
                         String[] filePathColumn = {MediaStore.Images.Media.DATA};
