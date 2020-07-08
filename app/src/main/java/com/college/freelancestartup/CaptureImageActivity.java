@@ -18,6 +18,7 @@ import androidx.camera.core.Preview;
 import androidx.camera.extensions.HdrImageCaptureExtender;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
@@ -42,6 +43,12 @@ class CaptureImageActivity extends AppCompatActivity {
 
         cameraView = findViewById(R.id.camera);
         captureButton = findViewById(R.id.captureImg);
+
+        if (allPermissionsGranted()) {
+            startCamera();
+        } else {
+            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
+        }
     }
 
     private boolean allPermissionsGranted(){
