@@ -4,15 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF000000"
-    >
+    android:background="#FF000000">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/camera"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        android:contentDescription="@string/preview_area"
+        android:contentDescription="Camera Preview"
         android:importantForAccessibility="no"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="Capture Photo"
-                android:src="@mipmap/" />
+                android:src="@drawable/capture_photo" />
 
         </androidx.cardview.widget.CardView>
 
