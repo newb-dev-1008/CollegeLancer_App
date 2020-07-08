@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="Capture Photo"
-                android:src="@mipmap/ic_capture" />
+                android:src="@mipmap/" />
 
         </androidx.cardview.widget.CardView>
 
