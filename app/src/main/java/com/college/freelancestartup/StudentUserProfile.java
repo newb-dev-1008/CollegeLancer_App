@@ -3,6 +3,7 @@ package com.college.freelancestartup;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -87,7 +88,8 @@ class StudentUserProfile extends AppCompatActivity {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
                                                     if (options[i].equals("Take a Photo")){
-
+                                                        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                                        startActivityForResult(takePicture, 0);
                                                     }
                                                 }
                                             })
