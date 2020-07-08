@@ -134,7 +134,8 @@ class CaptureImageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
-                File file = new File(getBatchDirectoryName(), mDateFormat.format(new Date())+ ".jpg");
+                String filePath = getBatchDirectoryName() + '/' + mDateFormat.format(new Date())+ ".jpg";
+                File file = new File(filePath);
 
                 ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder(file).build();
                 imageCapture.takePicture(outputFileOptions, executor, new ImageCapture.OnImageSavedCallback () {
@@ -144,12 +145,16 @@ class CaptureImageActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(CaptureImageActivity.this, "Image saved successfully.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(CaptureImageActivity.this, StudentUserProfile.class);
+                                intent.putExtra("imageFilePath", filePath);
+                                startActivity(intent);
                             }
                         });
                     }
                     @Override
                     public void onError(@NonNull ImageCaptureException error) {
                         error.printStackTrace();
+                        finish();
                     }
                 });
             }
@@ -162,6 +167,7 @@ class CaptureImageActivity extends AppCompatActivity {
         File dir = new File(app_folder_path);
         if (!dir.exists() && !dir.mkdirs()) {
             Toast.makeText(this, "Unable to save photo. Please report a bug in this regard.", Toast.LENGTH_LONG).show();
+            finish();
         }
 
         return app_folder_path;
