@@ -79,17 +79,18 @@ class StudentUserProfile extends AppCompatActivity {
                                         !dbDOB.equals(DOBET.getText().toString()) ||
                                         !dbUniversity.equals(universityET.getText().toString())){
                                     // change the field in Firestore after confirmation with ID
+                                    final CharSequence[] options = {"Take a Photo", "Choose from Gallery", "Cancel"};
                                     AlertDialog confirmEditWithID = new MaterialAlertDialogBuilder(StudentUserProfile.this)
                                             .setTitle("Please upload an ID Proof for confirmation.")
                                             .setMessage("You seem to have edited some of your essential background details (Name, Department, Date of Birth or University). Please upload a valid ID proof for verification.")
-                                            .setPositiveButton("Upload/ Click a Photo", new DialogInterface.OnClickListener() {
+                                            .setItems(options, new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                                    // Finish this (Add another dialog to choose between photo or upload)
+                                                    if (options[i].equals("Take a Photo")){
+
+                                                    }
                                                 }
                                             })
-                                            .setNegativeButton("Go Back", null)
-                                            .create();
                                     confirmEditWithID.setCanceledOnTouchOutside(false);
                                     confirmEditWithID.show();
 
