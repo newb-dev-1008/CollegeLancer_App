@@ -81,7 +81,7 @@ class StudentUserProfile extends AppCompatActivity {
                                         !dbUniversity.equals(universityET.getText().toString())){
                                     // change the field in Firestore after confirmation with ID
                                     final CharSequence[] options = {"Take a Photo", "Choose from Gallery", "Cancel"};
-                                    AlertDialog confirmEditWithID = new MaterialAlertDialogBuilder(StudentUserProfile.this)
+                                    MaterialAlertDialogBuilder confirmEditWithID = new MaterialAlertDialogBuilder(StudentUserProfile.this)
                                             .setTitle("Please upload an ID Proof for confirmation.")
                                             .setMessage("You seem to have edited some of your essential background details (Name, Department, Date of Birth or University). Please upload a valid ID proof for verification.")
                                             .setItems(options, new DialogInterface.OnClickListener() {
@@ -90,10 +90,15 @@ class StudentUserProfile extends AppCompatActivity {
                                                     if (options[i].equals("Take a Photo")){
                                                         Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                                                         startActivityForResult(takePicture, 0);
+                                                    } else if (options[i].equals("Choose from Gallery")){
+                                                        Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                                        startActivityForResult(pickPhoto, 1);
+                                                    } else if (options[i].equals("Cancel")){
+                                                        dialogInterface.dismiss();
                                                     }
                                                 }
-                                            })
-                                    confirmEditWithID.setCanceledOnTouchOutside(false);
+                                            });
+                                    confirmEditWithID.setCancelable(false);
                                     confirmEditWithID.show();
 
                                 } else if (!dbSemester.equals(semesterET.getText().toString())) {
