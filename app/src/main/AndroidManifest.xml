@@ -45,6 +45,9 @@
 
         <activity android:name=".StudentUserProfile"
             android:theme="@style/Theme.MaterialComponents.NoActionBar"/>
+
+        <activity android:name=".UpdatePhoneNumberOTP"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>
