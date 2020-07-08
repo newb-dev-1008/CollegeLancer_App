@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,7 @@ class StudentUserProfile extends AppCompatActivity {
     private EditText nameET, phoneNumberET, departmentET, semesterET, emailET, DOBET, universityET, bioET;
     private MaterialButton applyChanges, cancelChanges;
     private Toolbar studentProfileToolbar;
+    private ImageView idImage;
     private String KEY_BIO = "userBio";
 
     @Override
@@ -53,6 +55,7 @@ class StudentUserProfile extends AppCompatActivity {
         DOBET = findViewById(R.id.student_profileDOB);
         universityET = findViewById(R.id.student_profileUniversity);
         bioET = findViewById(R.id.student_profileBio);
+        idImage = findViewById(R.id.idVerification);
 
         applyChanges = findViewById(R.id.student_apply_changes);
         cancelChanges = findViewById(R.id.student_cancel_changes);
