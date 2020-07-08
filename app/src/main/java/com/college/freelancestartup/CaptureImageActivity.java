@@ -1,5 +1,6 @@
 package com.college.freelancestartup;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
@@ -55,9 +56,9 @@ class CaptureImageActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode == REQUEST_CODE_PERMISSIONS){
-            if(allPermissionsGranted()){
+            if (allPermissionsGranted()) {
                 startCamera();
-            } else{
+            } else {
                 Toast.makeText(this, "Permissions not granted by the user.", Toast.LENGTH_SHORT).show();
                 this.finish();
             }
@@ -71,13 +72,16 @@ class CaptureImageActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-
                     ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
                     bindPreview(cameraProvider);
-
                 } catch (ExecutionException | InterruptedException e) {
                     // No errors need to be handled for this Future.
                     // This should never be reached.
+                    Toast.makeText(CaptureImageActivity.this, "Can't find a camera for preview.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(CaptureImageActivity.this, StudentUserProfile.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 }
             }
         }, ContextCompat.getMainExecutor(this));
