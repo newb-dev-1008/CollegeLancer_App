@@ -94,8 +94,7 @@ class CaptureImageActivity extends AppCompatActivity {
                     // This should never be reached.
                     Toast.makeText(CaptureImageActivity.this, "Can't find a camera for preview.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(CaptureImageActivity.this, StudentUserProfile.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    finish();
                     startActivity(intent);
                 }
             }
@@ -147,6 +146,7 @@ class CaptureImageActivity extends AppCompatActivity {
                                 Toast.makeText(CaptureImageActivity.this, "Image saved successfully.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(CaptureImageActivity.this, StudentUserProfile.class);
                                 intent.putExtra("imageFilePath", filePath);
+                                finish();
                                 startActivity(intent);
                             }
                         });
