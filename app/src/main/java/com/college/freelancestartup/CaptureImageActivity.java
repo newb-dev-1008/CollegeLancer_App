@@ -32,10 +32,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.Text;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -315,8 +320,37 @@ class CaptureImageActivity extends AppCompatActivity {
 
         return app_folder_path;
     }
+
+    private void verifyID(InputImage IDImage){
+        TextRecognizer recognizer = TextRecognition.getClient();
+
+        Task<Text> result = recognizer.process(IDImage).addOnSuccessListener(new OnSuccessListener<Text>() {
+            @Override
+            public void onSuccess(Text text) {
+                AlertDialog textRegistered = new MaterialAlertDialogBuilder(CaptureImageActivity.this)
+                .setTitle("ID Registered")
+                .setMessage("We have extracted the necessary information for verification from the provided ID card. " +
+                        "Your details shall be verified and, if found valid, shall be updated shortly." +
+                        "In case of data inconsistency, mismatch or an invalid ID, we will immediately notify you via e-mail.")
+                        .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(CaptureImageActivity.this, StudentUserProfile.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                        })
+                        .create();
+                textRegistered.show();
+                textRegistered.setCanceledOnTouchOutside(false);
+                textRegistered.setCancelable(false);
+            }
+        })
+    }
 }
 
+/*
 class YourAnalyzer implements ImageAnalysis.Analyzer {
     @Override
     public void analyze(ImageProxy imageProxy) {
@@ -327,3 +361,4 @@ class YourAnalyzer implements ImageAnalysis.Analyzer {
         }
     }
 }
+*/
