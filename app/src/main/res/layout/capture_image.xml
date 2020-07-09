@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     android:background="#FF000000">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <androidx.camera.view.PreviewView
         android:id="@+id/camera"
         android:layout_width="0dp"
@@ -18,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/relativeLayoutCamera"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -38,6 +44,7 @@
             android:id="@+id/capture"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             app:cardBackgroundColor="#ffffff"
             app:cardCornerRadius="18dp">
 
@@ -50,6 +57,6 @@
 
         </androidx.cardview.widget.CardView>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
