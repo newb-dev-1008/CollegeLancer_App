@@ -130,6 +130,20 @@ class CaptureImageActivity extends AppCompatActivity {
                 confirmCancelVerification.show();
             }
         });
+
+        retryCapture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelCapture.setVisibility(View.GONE);
+                retryCapture.setVisibility(View.GONE);
+                submitCapture.setVisibility(View.GONE);
+                capturedImageView.setVisibility(View.GONE);
+
+                cameraView.setVisibility(View.VISIBLE);
+                captureButton.setVisibility(View.VISIBLE);
+                startCamera();
+            }
+        });
     }
 
     private void setFlash(int flashFlag){
