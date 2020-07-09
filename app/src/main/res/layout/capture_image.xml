@@ -14,7 +14,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"/>
+        android:layout_marginEnd="10dp"
+        android:contentDescription="Flash is currently turned on."/>
 
     <ImageView
         android:id="@+id/flash_off"
@@ -25,6 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:contentDescription="Flash is currently turned off."
         android:visibility="gone"/>
 
     <ImageView
@@ -36,6 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:contentDescription="Flash is currently set to auto."
         android:visibility="gone"/>
 
     <androidx.camera.view.PreviewView
