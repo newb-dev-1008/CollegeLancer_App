@@ -45,5 +45,4 @@ dependencies {
     implementation 'androidx.camera:camera-lifecycle:1.0.0-beta06'
     implementation 'androidx.camera:camera-view:1.0.0-alpha13'
     implementation 'androidx.camera:camera-extensions:1.0.0-alpha13'
-    implementation 'com.google.firebase:firebase-ml-vision:24.0.3'
 }
