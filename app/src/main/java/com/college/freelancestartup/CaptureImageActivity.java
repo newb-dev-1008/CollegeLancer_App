@@ -144,6 +144,13 @@ class CaptureImageActivity extends AppCompatActivity {
                 startCamera();
             }
         });
+
+        submitCapture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Finish this
+            }
+        });
     }
 
     private void setFlash(int flashFlag){
