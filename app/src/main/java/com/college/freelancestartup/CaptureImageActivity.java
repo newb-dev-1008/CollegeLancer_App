@@ -74,6 +74,17 @@ class CaptureImageActivity extends AppCompatActivity {
                 setFlash(1);
             }
         });
+
+        flash_on.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flash_on.setVisibility(View.INVISIBLE);
+                flash_auto.setVisibility(View.VISIBLE);
+
+                Toast.makeText(CaptureImageActivity.this, "Flash: AUTO", Toast.LENGTH_SHORT).show();
+                setFlash(2);
+            }
+        });
     }
 
     private String setFlash(int flashFlag){
