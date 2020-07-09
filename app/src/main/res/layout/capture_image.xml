@@ -88,16 +88,48 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:cardBackgroundColor="#ffffff"
-            app:cardCornerRadius="18dp">
+            app:cardCornerRadius="18dp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/captureImg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="Capture Photo"
-                android:src="@drawable/capture_photo" />
+                android:src="@drawable/capture_photo"/>
 
         </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancelCapturedVerification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="Cancel"
+            android:layout_marginTop="20dp"
+            android:layout_weight="0.3"
+            android:textColor="#FFFFFF"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/retryCapturedVerification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="Retry"
+            android:layout_marginTop="20dp"
+            android:background="#00000"
+            android:layout_weight="0.3"
+            android:textColor="#FFFFFF"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/submitCapturedVerification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="Submit"
+            android:layout_marginTop="20dp"
+            android:textColor="#FFFFFF"
+            android:layout_weight="0.3"/>
 
     </LinearLayout>
 

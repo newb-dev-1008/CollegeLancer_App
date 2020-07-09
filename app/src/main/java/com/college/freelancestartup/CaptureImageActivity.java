@@ -199,6 +199,8 @@ class CaptureImageActivity extends AppCompatActivity {
                     public void onCaptureSuccess(@NonNull ImageProxy image) {
                         super.onCaptureSuccess(image);
                         cameraView.setVisibility(View.GONE);
+                        capturedImageView.setVisibility(View.VISIBLE);
+
 
                     }
 
