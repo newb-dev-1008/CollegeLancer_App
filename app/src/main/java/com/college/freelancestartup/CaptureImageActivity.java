@@ -249,7 +249,6 @@ class CaptureImageActivity extends AppCompatActivity {
         captureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 imageCapture.takePicture(executor, new ImageCapture.OnImageCapturedCallback() {
                     @Override
                     public void onCaptureSuccess(@NonNull ImageProxy image) {
@@ -270,6 +269,8 @@ class CaptureImageActivity extends AppCompatActivity {
                                 Image mediaImage = image.getImage();
                                 if (mediaImage != null){
                                     InputImage inputImage = InputImage.fromMediaImage(mediaImage, image.getImageInfo().getRotationDegrees());
+                                    verifyID(inputImage);
+                                    // Still some work left (Handling images from gallery, defining a function to automatically find name)
                                 }
                             }
                         });
@@ -277,8 +278,28 @@ class CaptureImageActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(@NonNull ImageCaptureException exception) {
-                        super.onError(exception);
-                        // Finish this
+                        AlertDialog captureFailed = new MaterialAlertDialogBuilder(CaptureImageActivity.this)
+                                .setTitle("Unable to capture photos")
+                                .setMessage("There seems to be a problem with capturing the photo:\n" + exception.getMessage())
+                                .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        startCamera();
+                                    }
+                                })
+                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Intent intent = new Intent(CaptureImageActivity.this, StudentUserProfile.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .create();
+                        captureFailed.show();
+                        captureFailed.setCanceledOnTouchOutside(false);
+                        captureFailed.setCancelable(false);
                     }
                 });
 
