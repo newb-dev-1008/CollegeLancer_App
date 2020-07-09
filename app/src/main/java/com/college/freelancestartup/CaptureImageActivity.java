@@ -54,7 +54,7 @@ class CaptureImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         cameraView = findViewById(R.id.camera);
-        capturedImageView = findViewById(R.id.capturedImage)
+        capturedImageView = findViewById(R.id.capturedImage);
         captureButton = findViewById(R.id.captureImg);
         flash_on = findViewById(R.id.flash_on);
         flash_off = findViewById(R.id.flash_off);
