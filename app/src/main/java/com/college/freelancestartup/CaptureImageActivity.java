@@ -1,8 +1,10 @@
 package com.college.freelancestartup;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -17,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ExperimentalGetImage;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
@@ -32,6 +35,7 @@ import androidx.lifecycle.LifecycleOwner;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.mlkit.vision.common.InputImage;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -254,8 +258,13 @@ class CaptureImageActivity extends AppCompatActivity {
 
                         submitCapture.setOnClickListener(new View.OnClickListener() {
                             @Override
+                            @ExperimentalGetImage
                             public void onClick(View view) {
                                 // Finish this
+                                Image mediaImage = image.getImage();
+                                if (mediaImage != null){
+                                    InputImage inputImage = InputImage.fromMediaImage(mediaImage, image.getImageInfo().getRotationDegrees());
+                                }
                             }
                         });
                     }
@@ -305,5 +314,16 @@ class CaptureImageActivity extends AppCompatActivity {
         }
 
         return app_folder_path;
+    }
+}
+
+class YourAnalyzer implements ImageAnalysis.Analyzer {
+    @Override
+    public void analyze(ImageProxy imageProxy) {
+        Image mediaImage = imageProxy.getImage();
+        if (mediaImage != null) {
+            InputImage image =
+                    InputImage.fromMediaImage(mediaImage, imageProxy.getImageInfo().getRotationDegrees());
+        }
     }
 }
