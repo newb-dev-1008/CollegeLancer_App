@@ -15,7 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:contentDescription="Flash is currently turned on."/>
+        android:contentDescription="Flash is currently turned on."
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/flash_off"
@@ -26,8 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:contentDescription="Flash is currently turned off."
-        android:visibility="gone"/>
+        android:contentDescription="Flash is currently turned off."/>
 
     <ImageView
         android:id="@+id/flash_auto"

@@ -43,7 +43,7 @@ class CaptureImageActivity extends AppCompatActivity {
     private Executor executor = Executors.newSingleThreadExecutor();
 
     private PreviewView cameraView;
-    private ImageView captureButton;
+    private ImageView captureButton, flash_on, flash_off, flash_auto;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,12 +51,17 @@ class CaptureImageActivity extends AppCompatActivity {
 
         cameraView = findViewById(R.id.camera);
         captureButton = findViewById(R.id.captureImg);
+        flash_on = findViewById(R.id.flash_on);
+        flash_off = findViewById(R.id.flash_off);
+        flash_auto = findViewById(R.id.flash_auto);
 
         if (allPermissionsGranted()) {
             startCamera();
         } else {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
+
+        flash_on.setOnClickListener();
     }
 
     private boolean allPermissionsGranted(){
