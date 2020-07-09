@@ -1,5 +1,6 @@
 package com.college.freelancestartup;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
@@ -28,6 +30,7 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
@@ -37,6 +40,8 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+
+import bolts.Capture;
 
 import static android.hardware.Camera.Parameters.FLASH_MODE_ON;
 
@@ -104,6 +109,27 @@ class CaptureImageActivity extends AppCompatActivity {
             }
         });
 
+        cancelCapture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog confirmCancelVerification = new MaterialAlertDialogBuilder(CaptureImageActivity.this)
+                        .setTitle("Cancel Verification")
+                        .setMessage("Are you sure you want to cancel ID Verification?")
+                        .setPositiveButton("Yes, Cancel Verification", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(CaptureImageActivity.this, StudentUserProfile.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("No, continue with verification", null)
+                        .create();
+                confirmCancelVerification.setCanceledOnTouchOutside(false);
+                confirmCancelVerification.show();
+            }
+        });
     }
 
     private void setFlash(int flashFlag){
@@ -202,11 +228,14 @@ class CaptureImageActivity extends AppCompatActivity {
                 imageCapture.takePicture(executor, new ImageCapture.OnImageCapturedCallback() {
                     @Override
                     public void onCaptureSuccess(@NonNull ImageProxy image) {
-                        super.onCaptureSuccess(image);
+                        // super.onCaptureSuccess(image);
                         cameraView.setVisibility(View.GONE);
+                        captureButton.setVisibility(View.GONE);
+
                         capturedImageView.setVisibility(View.VISIBLE);
-
-
+                        cancelCapture.setVisibility(View.VISIBLE);
+                        retryCapture.setVisibility(View.VISIBLE);
+                        submitCapture.setVisibility(View.VISIBLE);
                     }
 
                     @Override
