@@ -36,6 +36,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import static android.hardware.Camera.Parameters.FLASH_MODE_ON;
+
 class CaptureImageActivity extends AppCompatActivity {
 
     private int REQUEST_CODE_PERMISSIONS = 1001;
@@ -77,7 +79,14 @@ class CaptureImageActivity extends AppCompatActivity {
     private String setFlash(int flashFlag){
         switch (flashFlag){
             case 1:
-
+                flashMode = "FLASH_MODE_ON";
+                break;
+            case 2:
+                flashMode = "FLASH_MODE_AUTO";
+                break;
+            case 3:
+                flashMode = "FLASH_MODE_OFF";
+                break;
         }
     }
 
