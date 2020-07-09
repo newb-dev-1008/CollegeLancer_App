@@ -46,15 +46,15 @@ class CaptureImageActivity extends AppCompatActivity {
     private Executor executor = Executors.newSingleThreadExecutor();
 
     private PreviewView cameraView;
-    private ImageView captureButton, flash_on, flash_off, flash_auto;
+    private ImageView captureButton, flash_on, flash_off, flash_auto, capturedImageView;
     private int flashMode;
-    private int flagFlash;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         cameraView = findViewById(R.id.camera);
+        capturedImageView = findViewById(R.id.capturedImage)
         captureButton = findViewById(R.id.captureImg);
         flash_on = findViewById(R.id.flash_on);
         flash_off = findViewById(R.id.flash_off);
@@ -73,7 +73,6 @@ class CaptureImageActivity extends AppCompatActivity {
                 flash_on.setVisibility(View.VISIBLE);
 
                 Toast.makeText(CaptureImageActivity.this, "Flash: ON", Toast.LENGTH_SHORT).show();
-                flagFlash = 1;
                 setFlash(1);
             }
         });
@@ -85,7 +84,6 @@ class CaptureImageActivity extends AppCompatActivity {
                 flash_auto.setVisibility(View.VISIBLE);
 
                 Toast.makeText(CaptureImageActivity.this, "Flash: AUTO", Toast.LENGTH_SHORT).show();
-                flagFlash = 0;
                 setFlash(0);
             }
         });
@@ -97,7 +95,6 @@ class CaptureImageActivity extends AppCompatActivity {
                 flash_off.setVisibility(View.VISIBLE);
 
                 Toast.makeText(CaptureImageActivity.this, "Flash: OFF", Toast.LENGTH_SHORT).show();
-                flagFlash = 2;
                 setFlash(2);
             }
         });
@@ -201,6 +198,7 @@ class CaptureImageActivity extends AppCompatActivity {
                     @Override
                     public void onCaptureSuccess(@NonNull ImageProxy image) {
                         super.onCaptureSuccess(image);
+                        cameraView.setVisibility(View.GONE);
 
                     }
 
