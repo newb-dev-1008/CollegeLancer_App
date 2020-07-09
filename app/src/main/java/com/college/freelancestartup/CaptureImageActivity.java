@@ -46,7 +46,8 @@ class CaptureImageActivity extends AppCompatActivity {
 
     private PreviewView cameraView;
     private ImageView captureButton, flash_on, flash_off, flash_auto;
-    private String flashMode;
+    private int flashMode;
+    private int flagFlash;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +72,7 @@ class CaptureImageActivity extends AppCompatActivity {
                 flash_on.setVisibility(View.VISIBLE);
 
                 Toast.makeText(CaptureImageActivity.this, "Flash: ON", Toast.LENGTH_SHORT).show();
+                flagFlash = 1;
                 setFlash(1);
             }
         });
@@ -82,7 +84,8 @@ class CaptureImageActivity extends AppCompatActivity {
                 flash_auto.setVisibility(View.VISIBLE);
 
                 Toast.makeText(CaptureImageActivity.this, "Flash: AUTO", Toast.LENGTH_SHORT).show();
-                setFlash(2);
+                flagFlash = 0;
+                setFlash(0);
             }
         });
 
@@ -93,24 +96,23 @@ class CaptureImageActivity extends AppCompatActivity {
                 flash_off.setVisibility(View.VISIBLE);
 
                 Toast.makeText(CaptureImageActivity.this, "Flash: OFF", Toast.LENGTH_SHORT).show();
-                setFlash(3);
+                flagFlash = 2;
+                setFlash(2);
             }
         });
+
     }
 
-    private String setFlash(int flashFlag){
+    private int setFlash(int flashFlag){
         switch (flashFlag){
             case 1:
-                flashMode = "FLASH_MODE_ON";
+                flashMode = 1;
                 break;
-            case 2:
-                flashMode = "FLASH_MODE_AUTO";
-                break;
-            case 3:
-                flashMode = "FLASH_MODE_OFF";
+            case 0:
+                flashMode = 0;
                 break;
             default:
-                flashMode = "FLASH_MODE_OFF";
+                flashMode = 2;
                 break;
         }
         return flashMode;
@@ -182,6 +184,8 @@ class CaptureImageActivity extends AppCompatActivity {
 
         final ImageCapture imageCapture = builder
                 .setTargetRotation(this.getWindowManager().getDefaultDisplay().getRotation())
+                .setFlashMode(Integer.parseInt(setFlash(flagFlash)))
+                .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
                 .build();
         preview.setSurfaceProvider(cameraView.createSurfaceProvider());
         Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, preview, imageAnalysis, imageCapture);
