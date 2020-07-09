@@ -67,7 +67,7 @@ class CaptureImageActivity extends AppCompatActivity {
         flash_off.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                flash_off.setVisibility(View.INVISIBLE);
+                flash_off.setVisibility(View.GONE);
                 flash_on.setVisibility(View.VISIBLE);
 
                 Toast.makeText(CaptureImageActivity.this, "Flash: ON", Toast.LENGTH_SHORT).show();
@@ -78,11 +78,22 @@ class CaptureImageActivity extends AppCompatActivity {
         flash_on.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                flash_on.setVisibility(View.INVISIBLE);
+                flash_on.setVisibility(View.GONE);
                 flash_auto.setVisibility(View.VISIBLE);
 
                 Toast.makeText(CaptureImageActivity.this, "Flash: AUTO", Toast.LENGTH_SHORT).show();
                 setFlash(2);
+            }
+        });
+
+        flash_auto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flash_auto.setVisibility(View.GONE);
+                flash_off.setVisibility(View.VISIBLE);
+
+                Toast.makeText(CaptureImageActivity.this, "Flash: OFF", Toast.LENGTH_SHORT).show();
+                setFlash(3);
             }
         });
     }
@@ -98,7 +109,11 @@ class CaptureImageActivity extends AppCompatActivity {
             case 3:
                 flashMode = "FLASH_MODE_OFF";
                 break;
+            default:
+                flashMode = "FLASH_MODE_OFF";
+                break;
         }
+        return flashMode;
     }
 
     private boolean allPermissionsGranted(){
