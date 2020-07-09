@@ -184,7 +184,7 @@ class CaptureImageActivity extends AppCompatActivity {
 
         final ImageCapture imageCapture = builder
                 .setTargetRotation(this.getWindowManager().getDefaultDisplay().getRotation())
-                .setFlashMode(Integer.parseInt(setFlash(flagFlash)))
+                .setFlashMode(setFlash(flagFlash))
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
                 .build();
         preview.setSurfaceProvider(cameraView.createSurfaceProvider());
