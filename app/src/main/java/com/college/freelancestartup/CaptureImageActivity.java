@@ -27,6 +27,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
@@ -48,6 +49,7 @@ class CaptureImageActivity extends AppCompatActivity {
     private PreviewView cameraView;
     private ImageView captureButton, flash_on, flash_off, flash_auto, capturedImageView;
     private int flashMode;
+    private MaterialButton cancelCapture, submitCapture, retryCapture;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +61,9 @@ class CaptureImageActivity extends AppCompatActivity {
         flash_on = findViewById(R.id.flash_on);
         flash_off = findViewById(R.id.flash_off);
         flash_auto = findViewById(R.id.flash_auto);
+        cancelCapture = findViewById(R.id.cancelCapturedVerification);
+        retryCapture = findViewById(R.id.retryCapturedVerification);
+        submitCapture = findViewById(R.id.submitCapturedVerification);
 
         if (allPermissionsGranted()) {
             startCamera();
