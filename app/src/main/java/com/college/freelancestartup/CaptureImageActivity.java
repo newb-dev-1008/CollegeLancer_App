@@ -32,6 +32,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
@@ -277,6 +278,7 @@ class CaptureImageActivity extends AppCompatActivity {
                     @Override
                     public void onError(@NonNull ImageCaptureException exception) {
                         super.onError(exception);
+                        // Finish this
                     }
                 });
 
@@ -346,7 +348,41 @@ class CaptureImageActivity extends AppCompatActivity {
                 textRegistered.setCanceledOnTouchOutside(false);
                 textRegistered.setCancelable(false);
             }
-        })
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                AlertDialog textRegisteredFailed = new MaterialAlertDialogBuilder(CaptureImageActivity.this)
+                        .setTitle("Failed to register your ID")
+                        .setMessage(e.getMessage() + "\nYour image seems to be out of focus or not clear enough. Please retry with a clearer picture.")
+                        .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                cameraView.setVisibility(View.VISIBLE);
+                                captureButton.setVisibility(View.VISIBLE);
+
+                                capturedImageView.setVisibility(View.GONE);
+                                cancelCapture.setVisibility(View.GONE);
+                                retryCapture.setVisibility(View.GONE);
+                                submitCapture.setVisibility(View.GONE);
+                                startCamera();
+                            }
+                        })
+                        .setNegativeButton("Cancel Verification", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Toast.makeText(CaptureImageActivity.this, "Cancelled Verification.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(CaptureImageActivity.this, StudentUserProfile.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                        })
+                        .create();
+                textRegisteredFailed.show();
+                textRegisteredFailed.setCancelable(false);
+                textRegisteredFailed.setCanceledOnTouchOutside(false);
+            }
+        });
     }
 }
 
