@@ -41,6 +41,19 @@
         android:contentDescription="Flash is currently set to auto."
         android:visibility="gone"/>
 
+    <ImageView
+        android:id="@+id/capturedImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="Captured Image"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayoutCamera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <androidx.camera.view.PreviewView
         android:id="@+id/camera"
         android:layout_width="0dp"
