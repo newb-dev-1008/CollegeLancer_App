@@ -145,12 +145,6 @@ class CaptureImageActivity extends AppCompatActivity {
             }
         });
 
-        submitCapture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Finish this
-            }
-        });
     }
 
     private void setFlash(int flashFlag){
@@ -257,6 +251,13 @@ class CaptureImageActivity extends AppCompatActivity {
                         cancelCapture.setVisibility(View.VISIBLE);
                         retryCapture.setVisibility(View.VISIBLE);
                         submitCapture.setVisibility(View.VISIBLE);
+
+                        submitCapture.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                // Finish this
+                            }
+                        });
                     }
 
                     @Override
