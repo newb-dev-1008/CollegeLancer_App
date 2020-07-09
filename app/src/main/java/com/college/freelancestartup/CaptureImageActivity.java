@@ -44,6 +44,7 @@ class CaptureImageActivity extends AppCompatActivity {
 
     private PreviewView cameraView;
     private ImageView captureButton, flash_on, flash_off, flash_auto;
+    private String flashMode;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,7 +62,23 @@ class CaptureImageActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
 
-        flash_on.setOnClickListener();
+        flash_off.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flash_off.setVisibility(View.INVISIBLE);
+                flash_on.setVisibility(View.VISIBLE);
+
+                Toast.makeText(CaptureImageActivity.this, "Flash: ON", Toast.LENGTH_SHORT).show();
+                setFlash(1);
+            }
+        });
+    }
+
+    private String setFlash(int flashFlag){
+        switch (flashFlag){
+            case 1:
+
+        }
     }
 
     private boolean allPermissionsGranted(){
