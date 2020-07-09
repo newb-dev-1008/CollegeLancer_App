@@ -103,19 +103,21 @@ class CaptureImageActivity extends AppCompatActivity {
 
     }
 
-    private int setFlash(int flashFlag){
+    private void setFlash(int flashFlag){
         switch (flashFlag){
             case 1:
                 flashMode = 1;
+                startCamera();
                 break;
             case 0:
                 flashMode = 0;
+                startCamera();
                 break;
             default:
                 flashMode = 2;
+                startCamera();
                 break;
         }
-        return flashMode;
     }
 
     private boolean allPermissionsGranted(){
@@ -184,7 +186,7 @@ class CaptureImageActivity extends AppCompatActivity {
 
         final ImageCapture imageCapture = builder
                 .setTargetRotation(this.getWindowManager().getDefaultDisplay().getRotation())
-                .setFlashMode(setFlash(flagFlash))
+                .setFlashMode(flashMode)
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
                 .build();
         preview.setSurfaceProvider(cameraView.createSurfaceProvider());
