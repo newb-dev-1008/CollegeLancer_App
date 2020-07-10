@@ -38,7 +38,7 @@ import java.util.Map;
 
 import bolts.Capture;
 
-class StudentUserProfile extends AppCompatActivity {
+public class StudentUserProfile extends AppCompatActivity {
 
     private EditText nameET, phoneNumberET, departmentET, semesterET, emailET, DOBET, universityET, bioET;
     private MaterialButton applyChanges, cancelChanges;

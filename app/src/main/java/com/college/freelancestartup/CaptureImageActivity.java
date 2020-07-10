@@ -55,7 +55,7 @@ import bolts.Capture;
 
 import static android.hardware.Camera.Parameters.FLASH_MODE_ON;
 
-class CaptureImageActivity extends AppCompatActivity {
+public class CaptureImageActivity extends AppCompatActivity {
 
     private int REQUEST_CODE_PERMISSIONS = 1001;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE"};

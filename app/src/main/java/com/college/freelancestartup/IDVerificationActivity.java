@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-class IDVerificationActivity extends AppCompatActivity {
+public class IDVerificationActivity extends AppCompatActivity {
 
     TextView testTextview;
 

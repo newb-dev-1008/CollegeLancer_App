@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 import in.aabhasjindal.otptextview.OTPListener;
 import in.aabhasjindal.otptextview.OtpTextView;
 
-class UpdatePhoneNumberOTP extends AppCompatActivity {
+public class UpdatePhoneNumberOTP extends AppCompatActivity {
 
     private String phoneNumber;
     private Integer realPhoneNo;
