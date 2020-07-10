@@ -284,11 +284,7 @@ class StudentUserProfile extends AppCompatActivity {
                                                 .setNegativeButton("Cancel Verification", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                                        Toast.makeText(CaptureImageActivity.this, "Cancelled Verification.", Toast.LENGTH_SHORT).show();
-                                                        Intent intent = new Intent(CaptureImageActivity.this, StudentUserProfile.class);
-                                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                        startActivity(intent);
+                                                        Toast.makeText(StudentUserProfile.this, "Cancelled Verification.", Toast.LENGTH_SHORT).show();
                                                     }
                                                 })
                                                 .create();
