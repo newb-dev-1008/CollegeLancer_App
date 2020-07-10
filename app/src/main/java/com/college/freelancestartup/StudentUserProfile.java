@@ -28,6 +28,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
 
 import java.util.Map;
 
@@ -182,6 +184,7 @@ class StudentUserProfile extends AppCompatActivity {
                                 idImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
                                 Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
                                 cursor.close();
+
                             }
                         }
                     }
@@ -236,5 +239,11 @@ class StudentUserProfile extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void verifyID(Bitmap bitmapID){
+        TextRecognizer recognizer = TextRecognition.getClient();
+
+
     }
 }
