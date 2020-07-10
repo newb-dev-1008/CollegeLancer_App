@@ -269,7 +269,7 @@ class CaptureImageActivity extends AppCompatActivity {
                                 Image mediaImage = image.getImage();
                                 if (mediaImage != null){
                                     InputImage inputImage = InputImage.fromMediaImage(mediaImage, image.getImageInfo().getRotationDegrees());
-                                    verifyID(inputImage);
+                                    verifyID(inputImage, image);
                                     // Still some work left (Handling images from gallery, defining a function to automatically find name)
                                 }
                             }
@@ -344,7 +344,7 @@ class CaptureImageActivity extends AppCompatActivity {
         return app_folder_path;
     }
 
-    private void verifyID(InputImage IDImage){
+    private void verifyID(InputImage IDImage, ImageProxy proxyImage){
         TextRecognizer recognizer = TextRecognition.getClient();
 
         Task<Text> result = recognizer.process(IDImage).addOnSuccessListener(new OnSuccessListener<Text>() {
@@ -358,6 +358,7 @@ class CaptureImageActivity extends AppCompatActivity {
                         .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                proxyImage.close();
                                 Intent intent = new Intent(CaptureImageActivity.this, StudentUserProfile.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -374,10 +375,11 @@ class CaptureImageActivity extends AppCompatActivity {
             public void onFailure(@NonNull Exception e) {
                 AlertDialog textRegisteredFailed = new MaterialAlertDialogBuilder(CaptureImageActivity.this)
                         .setTitle("Failed to register your ID")
-                        .setMessage(e.getMessage() + "\nYour image seems to be out of focus or not clear enough. Please retry with a clearer picture.")
+                        .setMessage(e.getMessage() + "\nYour image seems to be out of focus and not clear enough. Please retry with a clearer picture.")
                         .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                proxyImage.close();
                                 cameraView.setVisibility(View.VISIBLE);
                                 captureButton.setVisibility(View.VISIBLE);
 
@@ -391,6 +393,7 @@ class CaptureImageActivity extends AppCompatActivity {
                         .setNegativeButton("Cancel Verification", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                proxyImage.close();
                                 Toast.makeText(CaptureImageActivity.this, "Cancelled Verification.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(CaptureImageActivity.this, StudentUserProfile.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
