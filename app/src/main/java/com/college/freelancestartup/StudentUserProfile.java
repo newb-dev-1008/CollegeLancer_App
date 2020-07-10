@@ -278,21 +278,12 @@ class StudentUserProfile extends AppCompatActivity {
                                                 .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                                        proxyImage.close();
-                                                        cameraView.setVisibility(View.VISIBLE);
-                                                        captureButton.setVisibility(View.VISIBLE);
-
-                                                        capturedImageView.setVisibility(View.GONE);
-                                                        cancelCapture.setVisibility(View.GONE);
-                                                        retryCapture.setVisibility(View.GONE);
-                                                        submitCapture.setVisibility(View.GONE);
-                                                        startCamera();
+                                                        selectImageInputMode();
                                                     }
                                                 })
                                                 .setNegativeButton("Cancel Verification", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                                        proxyImage.close();
                                                         Toast.makeText(CaptureImageActivity.this, "Cancelled Verification.", Toast.LENGTH_SHORT).show();
                                                         Intent intent = new Intent(CaptureImageActivity.this, StudentUserProfile.class);
                                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
