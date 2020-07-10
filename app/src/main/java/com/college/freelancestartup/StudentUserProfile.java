@@ -79,7 +79,7 @@ public class StudentUserProfile extends AppCompatActivity {
                         dbPhoneNumber = documentSnapshot.get("phoneNumber").toString();
                         dbDepartment = documentSnapshot.get("department").toString();
                         dbSemester = documentSnapshot.get("studentSemester").toString();
-                        dbEmail = documentSnapshot.get("emailID").toString();
+                        dbEmail = documentSnapshot.get("email").toString();
                         dbDOB = documentSnapshot.get("dateOfBirth").toString();
                         dbUniversity = documentSnapshot.get("university").toString();
                         dbBio = documentSnapshot.get("userBio").toString();
