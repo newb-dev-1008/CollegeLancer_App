@@ -94,27 +94,7 @@ class StudentUserProfile extends AppCompatActivity {
                                         !dbDOB.equals(DOBET.getText().toString()) ||
                                         !dbUniversity.equals(universityET.getText().toString())){
                                     // change the field in Firestore after confirmation with ID
-                                    final CharSequence[] options = {"Take a Photo", "Choose from Gallery", "Cancel"};
-                                    MaterialAlertDialogBuilder confirmEditWithID = new MaterialAlertDialogBuilder(StudentUserProfile.this)
-                                            .setTitle("Please upload an ID Proof for confirmation.")
-                                            .setMessage("You seem to have edited some of your essential background details (Name, Department, Date of Birth or University). Please upload a valid ID proof for verification.")
-                                            .setItems(options, new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    if (options[i].equals("Take a Photo")){
-                                                        Intent takePicture = new Intent(StudentUserProfile.this, CaptureImageActivity.class);
-                                                        startActivity(takePicture);
-                                                    } else if (options[i].equals("Choose from Gallery")){
-                                                        Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                                                        startActivityForResult(pickPhoto, 0);
-                                                    } else if (options[i].equals("Cancel")){
-                                                        dialogInterface.dismiss();
-                                                    }
-                                                }
-                                            });
-                                    confirmEditWithID.setCancelable(false);
-                                    confirmEditWithID.show();
-
+                                    selectImageInputMode();
                                 } else if (!dbSemester.equals(semesterET.getText().toString())) {
                                     // change the field in Firestore
 
@@ -244,6 +224,29 @@ class StudentUserProfile extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void selectImageInputMode(){
+        final CharSequence[] options = {"Take a Photo", "Choose from Gallery", "Cancel"};
+        MaterialAlertDialogBuilder confirmEditWithID = new MaterialAlertDialogBuilder(StudentUserProfile.this)
+                .setTitle("Please upload an ID Proof for confirmation.")
+                .setMessage("You seem to have edited some of your essential background details (Name, Department, Date of Birth or University). Please upload a valid ID proof for verification.")
+                .setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (options[i].equals("Take a Photo")){
+                            Intent takePicture = new Intent(StudentUserProfile.this, CaptureImageActivity.class);
+                            startActivity(takePicture);
+                        } else if (options[i].equals("Choose from Gallery")){
+                            Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            startActivityForResult(pickPhoto, 0);
+                        } else if (options[i].equals("Cancel")){
+                            dialogInterface.dismiss();
+                        }
+                    }
+                });
+        confirmEditWithID.setCancelable(false);
+        confirmEditWithID.show();
+    }
+
     private void verifyID(Bitmap bitmapID){
         TextRecognizer recognizer = TextRecognition.getClient();
 
@@ -266,12 +269,41 @@ class StudentUserProfile extends AppCompatActivity {
                                 textRegistered.setCancelable(false);
                             }
                         })
-                        .addOnFailureListener(
-                                new OnFailureListener() {
+                        .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        // Task failed with an exception
-                                        // ...
+                                        AlertDialog textRegisteredFailed = new MaterialAlertDialogBuilder(StudentUserProfile.this)
+                                                .setTitle("Failed to register your ID")
+                                                .setMessage(e.getMessage() + "\nPlease retry.")
+                                                .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                        proxyImage.close();
+                                                        cameraView.setVisibility(View.VISIBLE);
+                                                        captureButton.setVisibility(View.VISIBLE);
+
+                                                        capturedImageView.setVisibility(View.GONE);
+                                                        cancelCapture.setVisibility(View.GONE);
+                                                        retryCapture.setVisibility(View.GONE);
+                                                        submitCapture.setVisibility(View.GONE);
+                                                        startCamera();
+                                                    }
+                                                })
+                                                .setNegativeButton("Cancel Verification", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                        proxyImage.close();
+                                                        Toast.makeText(CaptureImageActivity.this, "Cancelled Verification.", Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(CaptureImageActivity.this, StudentUserProfile.class);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                        startActivity(intent);
+                                                    }
+                                                })
+                                                .create();
+                                        textRegisteredFailed.show();
+                                        textRegisteredFailed.setCancelable(false);
+                                        textRegisteredFailed.setCanceledOnTouchOutside(false);
                                     }
                                 });
     }
