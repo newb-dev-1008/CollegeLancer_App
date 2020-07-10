@@ -334,7 +334,7 @@ class CaptureImageActivity extends AppCompatActivity {
         });
     }
 
-    public String getBatchDirectoryName() {
+    /*public String getBatchDirectoryName() {
         String app_folder_path = "";
         app_folder_path = Environment.getExternalStorageDirectory().toString() + "/images";
         File dir = new File(app_folder_path);
@@ -344,7 +344,16 @@ class CaptureImageActivity extends AppCompatActivity {
         }
 
         return app_folder_path;
+    }*/
+
+    // To be deleted
+    private void test_text(Text textTask){
+        String textResult = textTask.getText();
+        Intent intent = new Intent(CaptureImageActivity.this, IDVerificationActivity.class);
+        intent.putExtra("test_text", textResult);
+        startActivity(intent);
     }
+
 
     private void verifyID(InputImage IDImage, ImageProxy proxyImage){
         TextRecognizer recognizer = TextRecognition.getClient();
@@ -361,11 +370,13 @@ class CaptureImageActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 proxyImage.close();
-                                Intent intent = new Intent(CaptureImageActivity.this, StudentUserProfile.class);
+                                /*Intent intent = new Intent(CaptureImageActivity.this, StudentUserProfile.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
+                                startActivity(intent);*/
 
+                                // To be deleted
+                                test_text(text);
                             }
                         })
                         .create();
