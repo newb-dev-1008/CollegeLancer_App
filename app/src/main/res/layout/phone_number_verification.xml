@@ -31,7 +31,7 @@
         app:bar_enabled="true"
         app:bar_height="2dp"
         app:length="6"
-        app:otp_box_background_active="#D3D3D3"
+        app:otp_box_background_active="@color/grey"
         app:otp_text_size="24dp"
         app:hide_otp="true"/>
 
