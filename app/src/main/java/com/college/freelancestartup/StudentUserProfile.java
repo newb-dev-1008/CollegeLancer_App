@@ -262,7 +262,12 @@ class StudentUserProfile extends AppCompatActivity {
                                         .setMessage("We have extracted the necessary information for verification from the provided ID card. " +
                                                 "Your details shall be verified and, if found valid, shall be updated shortly." +
                                                 "In case of data inconsistency, mismatch or an invalid ID, we will immediately notify you via e-mail.")
-                                        .setPositiveButton("Okay", null)
+                                        .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                test_text(visionText);      // To be deleted (and replace DialogInterface.OnClickListener with null)
+                                            }
+                                        })
                                         .create();
                                 textRegistered.show();
                                 textRegistered.setCanceledOnTouchOutside(false);
@@ -293,5 +298,13 @@ class StudentUserProfile extends AppCompatActivity {
                                         textRegisteredFailed.setCanceledOnTouchOutside(false);
                                     }
                                 });
+    }
+
+    // To be deleted
+    private void test_text(Text textTask){
+        String textResult = textTask.getText();
+        Intent intent = new Intent(StudentUserProfile.this, IDVerificationActivity.class);
+        intent.putExtra("test_text", textResult);
+        startActivity(intent);
     }
 }
