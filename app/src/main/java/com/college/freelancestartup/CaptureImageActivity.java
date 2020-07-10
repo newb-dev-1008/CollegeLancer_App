@@ -303,6 +303,7 @@ class CaptureImageActivity extends AppCompatActivity {
                     }
                 });
 
+                /*
                 SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
                 String filePath = getBatchDirectoryName() + '/' + mDateFormat.format(new Date())+ ".jpg";
                 File file = new File(filePath);
@@ -328,6 +329,7 @@ class CaptureImageActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+                 */
             }
         });
     }

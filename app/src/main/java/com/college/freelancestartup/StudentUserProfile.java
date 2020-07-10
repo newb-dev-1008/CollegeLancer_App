@@ -180,6 +180,7 @@ class StudentUserProfile extends AppCompatActivity {
                                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                                 String picturePath = cursor.getString(columnIndex);
                                 idImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                                Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
                                 cursor.close();
                             }
                         }
