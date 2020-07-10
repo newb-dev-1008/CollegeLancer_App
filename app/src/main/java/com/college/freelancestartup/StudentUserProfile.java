@@ -45,6 +45,7 @@ public class StudentUserProfile extends AppCompatActivity {
     private Toolbar studentProfileToolbar;
     private ImageView idImage;
     private String KEY_BIO = "userBio";
+    private String dbName, dbPhoneNumber, dbDepartment, dbSemester, dbEmail, dbDOB, dbUniversity, dbBio;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +71,36 @@ public class StudentUserProfile extends AppCompatActivity {
         studentProfileToolbar = findViewById(R.id.student_profileToolbar);
         setSupportActionBar(studentProfileToolbar);
 
+        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        dbName = documentSnapshot.get("name").toString();
+                        dbPhoneNumber = documentSnapshot.get("phoneNumber").toString();
+                        dbDepartment = documentSnapshot.get("department").toString();
+                        dbSemester = documentSnapshot.get("studentSemester").toString();
+                        dbEmail = documentSnapshot.get("emailID").toString();
+                        dbDOB = documentSnapshot.get("dateOfBirth").toString();
+                        dbUniversity = documentSnapshot.get("university").toString();
+                        dbBio = documentSnapshot.get("userBio").toString();
+
+                        nameET.setText(dbName);
+                        phoneNumberET.setText(dbPhoneNumber);
+                        departmentET.setText(dbDepartment);
+                        semesterET.setText(dbSemester);
+                        emailET.setText(dbEmail);
+                        DOBET.setText(dbDOB);
+                        universityET.setText(dbUniversity);
+                        bioET.setText(dbBio);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(StudentUserProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
         applyChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,18 +108,8 @@ public class StudentUserProfile extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                String dbName = documentSnapshot.get("name").toString();
-                                String dbPhoneNumber = documentSnapshot.get("phoneNumber").toString();
-                                String dbDepartment = documentSnapshot.get("department").toString();
-                                String dbSemester = documentSnapshot.get("studentSemester").toString();
-                                String dbEmail = documentSnapshot.get("emailID").toString();
-                                String dbDOB = documentSnapshot.get("dateOfBirth").toString();
-                                String dbUniversity = documentSnapshot.get("university").toString();
-                                String dbBio = documentSnapshot.get("userBio").toString();
-
                                 // Add if statements to first check if the inputs are invalid, and then nest the below ifs within
                                 // the else (when inputs are valid)
-
                                 if (!dbName.equals(nameET.getText().toString()) ||
                                         !dbDepartment.equals(departmentET.getText().toString()) ||
                                         !dbDOB.equals(DOBET.getText().toString()) ||
