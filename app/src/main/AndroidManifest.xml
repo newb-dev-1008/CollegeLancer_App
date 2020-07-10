@@ -44,16 +44,16 @@
             android:theme="@style/AppActionBarTheme"/>
 
         <activity android:name=".StudentUserProfile"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar"/>
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
 
         <activity android:name=".UpdatePhoneNumberOTP"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar"/>
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
 
         <activity android:name=".CaptureImageActivity"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar"/>
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
 
         <activity android:name=".IDVerificationActivity"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar"/>
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
 
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
