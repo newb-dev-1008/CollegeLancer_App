@@ -117,7 +117,7 @@
             android:padding="3dp"
             android:text="Retry"
             android:layout_marginTop="20dp"
-            android:background="#00000"
+            android:backgroundTint="@color/black"
             android:layout_weight="0.3"
             android:textColor="#FFFFFF"
             android:visibility="gone"/>
