@@ -254,7 +254,16 @@ class StudentUserProfile extends AppCompatActivity {
                 recognizer.process(image).addOnSuccessListener(new OnSuccessListener<Text>() {
                             @Override
                             public void onSuccess(Text visionText) {
-
+                                AlertDialog textRegistered = new MaterialAlertDialogBuilder(StudentUserProfile.this)
+                                        .setTitle("ID Registered")
+                                        .setMessage("We have extracted the necessary information for verification from the provided ID card. " +
+                                                "Your details shall be verified and, if found valid, shall be updated shortly." +
+                                                "In case of data inconsistency, mismatch or an invalid ID, we will immediately notify you via e-mail.")
+                                        .setPositiveButton("Okay", null)
+                                        .create();
+                                textRegistered.show();
+                                textRegistered.setCanceledOnTouchOutside(false);
+                                textRegistered.setCancelable(false);
                             }
                         })
                         .addOnFailureListener(
