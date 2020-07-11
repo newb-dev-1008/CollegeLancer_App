@@ -77,6 +77,8 @@ public class StudentUserProfile extends AppCompatActivity {
         editUniversity = findViewById(R.id.editUniversity);
         editBio = findViewById(R.id.editBio);
 
+        ImageView[] editImages = {editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio};
+
         studentProfileToolbar = findViewById(R.id.student_profileToolbar);
         setSupportActionBar(studentProfileToolbar);
 
@@ -113,6 +115,7 @@ public class StudentUserProfile extends AppCompatActivity {
         applyChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).get()
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
