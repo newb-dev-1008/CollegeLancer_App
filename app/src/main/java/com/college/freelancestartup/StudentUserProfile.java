@@ -323,7 +323,8 @@ public class StudentUserProfile extends AppCompatActivity {
         } else if (imageViewObject.equals(editBio)) {
             bioET.setFocusable(true);
             bioET.setClickable(true);
-
+            bioET.setText("");
+            bioET.setHint("Enter a short bio");
         }
     }
 
