@@ -43,7 +43,7 @@ public class StudentUserProfile extends AppCompatActivity {
     private EditText nameET, phoneNumberET, departmentET, semesterET, emailET, DOBET, universityET, bioET;
     private MaterialButton applyChanges, cancelChanges;
     private Toolbar studentProfileToolbar;
-    private ImageView idImage;
+    private ImageView idImage, editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio;
     private String KEY_BIO = "userBio";
     private String dbName, dbPhoneNumber, dbDepartment, dbSemester, dbEmail, dbDOB, dbUniversity, dbBio;
 
@@ -67,6 +67,15 @@ public class StudentUserProfile extends AppCompatActivity {
 
         applyChanges = findViewById(R.id.student_apply_changes);
         cancelChanges = findViewById(R.id.student_cancel_changes);
+
+        editName = findViewById(R.id.editName);
+        editPhoneNumber = findViewById(R.id.editPhoneNumber);
+        editDepartment = findViewById(R.id.editDepartment);
+        editSemester = findViewById(R.id.editSemester);
+        editEmail = findViewById(R.id.editEmail);
+        editDOB = findViewById(R.id.editDOB);
+        editUniversity = findViewById(R.id.editUniversity);
+        editBio = findViewById(R.id.editBio);
 
         studentProfileToolbar = findViewById(R.id.student_profileToolbar);
         setSupportActionBar(studentProfileToolbar);
