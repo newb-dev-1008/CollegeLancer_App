@@ -46,6 +46,7 @@ public class StudentUserProfile extends AppCompatActivity {
     private ImageView idImage, editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio;
     private String KEY_BIO = "userBio";
     private String dbName, dbPhoneNumber, dbDepartment, dbSemester, dbEmail, dbDOB, dbUniversity, dbBio;
+    private ImageView[] editImages;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,7 +78,7 @@ public class StudentUserProfile extends AppCompatActivity {
         editUniversity = findViewById(R.id.editUniversity);
         editBio = findViewById(R.id.editBio);
 
-        ImageView[] editImages = {editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio};
+        editImages = {editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio};
 
         studentProfileToolbar = findViewById(R.id.student_profileToolbar);
         setSupportActionBar(studentProfileToolbar);
@@ -120,7 +121,7 @@ public class StudentUserProfile extends AppCompatActivity {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 // Add if statements to first check if the inputs are invalid, and then nest the below ifs within
-                                // the else (when inputs are valid)
+                                // the else (when inputs are valid), also check if the user entered the same values again
                                 if (!dbName.equals(nameET.getText().toString()) ||
                                         !dbDepartment.equals(departmentET.getText().toString()) ||
                                         !dbDOB.equals(DOBET.getText().toString()) ||
@@ -257,10 +258,68 @@ public class StudentUserProfile extends AppCompatActivity {
             bioET.setClickable(true);
             bioET.setCursorVisible(true);
 
+            selectEditObject();
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void selectEditObject(){
+        editName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideOtherEdits(editName);
+                setSelectedEditable(editName);
+            }
+        });
+    }
+
+    private void hideOtherEdits(ImageView imageViewInstance){
+        for (int i = 0; i < editImages.length; i++){
+            if (!editImages[i].equals(imageViewInstance)){
+                editImages[i].setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private void setSelectedEditable(ImageView imageViewObject){
+        if (imageViewObject.equals(editName)){
+            nameET.setFocusable(true);
+            nameET.setClickable(true);
+            nameET.setText("");
+            nameET.setHint("Enter your new name");
+        } else if (imageViewObject.equals(editPhoneNumber)) {
+            phoneNumberET.setFocusable(true);
+            phoneNumberET.setClickable(true);
+            phoneNumberET.setText("");
+            phoneNumberET.setHint("Enter your new 10 digit phone number");
+        } else if (imageViewObject.equals(editSemester)) {
+            semesterET.setFocusable(true);
+            semesterET.setClickable(true);
+            semesterET.setText("");
+            semesterET.setHint("Enter your current semester");
+        } else if (imageViewObject.equals(editDepartment)) {
+            departmentET.setFocusable(true);
+            departmentET.setClickable(true);
+            departmentET.setText("");
+            departmentET.setHint("Enter your current Department");
+        } else if (imageViewObject.equals(editDOB)) {
+            DOBET.setFocusable(true);
+            DOBET.setClickable(true);
+            DOBET.setText("");
+            DOBET.setHint("Enter your Date of Birth");
+        } else if (imageViewObject.equals(editEmail)) {
+            emailET.setFocusable(true);
+            emailET.setClickable(true);
+        } else if (imageViewObject.equals(editUniversity)) {
+            universityET.setFocusable(true);
+            universityET.setClickable(true);
+        } else if (imageViewObject.equals(editBio)) {
+            bioET.setFocusable(true);
+            bioET.setClickable(true);
+        }
     }
 
     private void selectImageInputMode(){
