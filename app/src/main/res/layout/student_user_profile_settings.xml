@@ -54,6 +54,19 @@
                 android:clickable="false"
                 android:cursorVisible="false"/>
 
+            <ImageView
+                android:id="@+id/editName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/edit"
+                app:layout_constraintStart_toEndOf="@id/student_profileName"
+                app:layout_constraintTop_toTopOf="@id/student_profileName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/student_profileName"
+                app:layout_constraintHorizontal_bias="0.2"
+                android:longClickable="true"
+                android:tooltipText="Edit your name"/>
+
             <TextView
                 android:id="@+id/student_profilePhNoTV"
                 android:layout_marginTop="20dp"
