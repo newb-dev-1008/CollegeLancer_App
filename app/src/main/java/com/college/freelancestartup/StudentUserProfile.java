@@ -34,9 +34,6 @@ import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 
-import java.util.Map;
-
-import bolts.Capture;
 
 public class StudentUserProfile extends AppCompatActivity {
 
@@ -216,6 +213,7 @@ public class StudentUserProfile extends AppCompatActivity {
         if (id == R.id.editProfile) {
             Toast.makeText(StudentUserProfile.this, "Edit your profile. You can now change the contents.", Toast.LENGTH_LONG).show();
 
+            editName.setVisibility(View.VISIBLE);
             editPhoneNumber.setVisibility(View.VISIBLE);
             editDepartment.setVisibility(View.VISIBLE);
             editSemester.setVisibility(View.VISIBLE);
@@ -238,6 +236,55 @@ public class StudentUserProfile extends AppCompatActivity {
             public void onClick(View view) {
                 hideOtherEdits(editName);
                 setSelectedEditable(editName);
+            }
+        });
+        editBio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideOtherEdits(editBio);
+                setSelectedEditable(editBio);
+            }
+        });
+        editUniversity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideOtherEdits(editUniversity);
+                setSelectedEditable(editUniversity);
+            }
+        });
+        editSemester.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideOtherEdits(editSemester);
+                setSelectedEditable(editSemester);
+            }
+        });
+        editDOB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideOtherEdits(editDOB);
+                setSelectedEditable(editDOB);
+            }
+        });
+        editEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideOtherEdits(editEmail);
+                setSelectedEditable(editEmail);
+            }
+        });
+        editDepartment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideOtherEdits(editDepartment);
+                setSelectedEditable(editDepartment);
+            }
+        });
+        editPhoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideOtherEdits(editPhoneNumber);
+                setSelectedEditable(editPhoneNumber);
             }
         });
     }
@@ -292,6 +339,8 @@ public class StudentUserProfile extends AppCompatActivity {
             bioET.setText("");
             bioET.setHint("Enter a short bio");
         }
+        applyChanges.setVisibility(View.VISIBLE);
+        cancelChanges.setVisibility(View.VISIBLE);
     }
 
     private void selectImageInputMode(){
