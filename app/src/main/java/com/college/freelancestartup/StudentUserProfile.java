@@ -217,46 +217,12 @@ public class StudentUserProfile extends AppCompatActivity {
             Toast.makeText(StudentUserProfile.this, "Edit your profile. You can now change the contents.", Toast.LENGTH_LONG).show();
 
             editPhoneNumber.setVisibility(View.VISIBLE);
-            phoneNumberET.setFocusable(true);
-            phoneNumberET.setFocusableInTouchMode(true);
-            phoneNumberET.setClickable(true);
-            phoneNumberET.setCursorVisible(true);
-
             editDepartment.setVisibility(View.VISIBLE);
-            departmentET.setFocusable(true);
-            departmentET.setFocusableInTouchMode(true);
-            departmentET.setClickable(true);
-            departmentET.setCursorVisible(true);
-
             editSemester.setVisibility(View.VISIBLE);
-            semesterET.setFocusable(true);
-            semesterET.setFocusableInTouchMode(true);
-            semesterET.setClickable(true);
-            semesterET.setCursorVisible(true);
-
             editEmail.setVisibility(View.VISIBLE);
-            emailET.setFocusable(true);
-            emailET.setFocusableInTouchMode(true);
-            emailET.setClickable(true);
-            emailET.setCursorVisible(true);
-
             editDOB.setVisibility(View.VISIBLE);
-            DOBET.setFocusable(true);
-            DOBET.setFocusableInTouchMode(true);
-            DOBET.setClickable(true);
-            DOBET.setCursorVisible(true);
-
             editUniversity.setVisibility(View.VISIBLE);
-            universityET.setFocusable(true);
-            universityET.setFocusableInTouchMode(true);
-            universityET.setClickable(true);
-            universityET.setCursorVisible(true);
-
             editBio.setVisibility(View.VISIBLE);
-            bioET.setFocusable(true);
-            bioET.setFocusableInTouchMode(true);
-            bioET.setClickable(true);
-            bioET.setCursorVisible(true);
 
             selectEditObject();
 
@@ -277,9 +243,9 @@ public class StudentUserProfile extends AppCompatActivity {
     }
 
     private void hideOtherEdits(ImageView imageViewInstance){
-        for (int i = 0; i < editImages.length; i++){
-            if (!editImages[i].equals(imageViewInstance)){
-                editImages[i].setVisibility(View.GONE);
+        for (ImageView editImage : editImages) {
+            if (!editImage.equals(imageViewInstance)) {
+                editImage.setVisibility(View.GONE);
             }
         }
     }
