@@ -196,6 +196,7 @@ public class StudentUserProfile extends AppCompatActivity {
                                 String picturePath = cursor.getString(columnIndex);
                                 idImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
                                 Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+                                verifyID(bitmap);
                                 cursor.close();
 
                             }
