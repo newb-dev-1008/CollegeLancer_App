@@ -171,6 +171,19 @@
                 android:text="Your Semester:"
                 android:fontFamily="sans-serif-black"/>
 
+            <ImageView
+                android:id="@+id/editSemester"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/edit"
+                app:layout_constraintStart_toEndOf="@id/student_profileSemester"
+                app:layout_constraintTop_toTopOf="@id/student_profileSemester"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/student_profileSemester"
+                app:layout_constraintHorizontal_bias="0.2"
+                android:longClickable="true"
+                android:tooltipText="Edit your semester"/>
+
             <EditText
                 android:id="@+id/student_profileSemester"
                 android:layout_marginTop="20dp"
@@ -202,6 +215,19 @@
                 android:text="E-mail ID:"
                 android:fontFamily="sans-serif-black"/>
 
+            <ImageView
+                android:id="@+id/editEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/edit"
+                app:layout_constraintStart_toEndOf="@id/student_profileEmail"
+                app:layout_constraintTop_toTopOf="@id/student_profileEmail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/student_profileEmail"
+                app:layout_constraintHorizontal_bias="0.2"
+                android:longClickable="true"
+                android:tooltipText="Edit your Email"/>
+
             <EditText
                 android:id="@+id/student_profileEmail"
                 android:layout_marginTop="20dp"
@@ -232,6 +258,19 @@
                 android:textSize="25sp"
                 android:text="Date of Birth:"
                 android:fontFamily="sans-serif-black"/>
+
+            <ImageView
+                android:id="@+id/editDOB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/edit"
+                app:layout_constraintStart_toEndOf="@id/student_profileDOB"
+                app:layout_constraintTop_toTopOf="@id/student_profileDOB"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/student_profileDOB"
+                app:layout_constraintHorizontal_bias="0.2"
+                android:longClickable="true"
+                android:tooltipText="Edit your department"/>
 
             <EditText
                 android:id="@+id/student_profileDOB"
