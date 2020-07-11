@@ -318,9 +318,12 @@ public class StudentUserProfile extends AppCompatActivity {
         } else if (imageViewObject.equals(editUniversity)) {
             universityET.setFocusable(true);
             universityET.setClickable(true);
+            universityET.setText("");
+            universityET.setHint("Enter your University Name");
         } else if (imageViewObject.equals(editBio)) {
             bioET.setFocusable(true);
             bioET.setClickable(true);
+
         }
     }
 
