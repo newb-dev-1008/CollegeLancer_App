@@ -313,6 +313,8 @@ public class StudentUserProfile extends AppCompatActivity {
         } else if (imageViewObject.equals(editEmail)) {
             emailET.setFocusable(true);
             emailET.setClickable(true);
+            emailET.setText("");
+            emailET.setHint("Enter your new Email ID");
         } else if (imageViewObject.equals(editUniversity)) {
             universityET.setFocusable(true);
             universityET.setClickable(true);
