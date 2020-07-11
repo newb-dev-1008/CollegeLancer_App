@@ -78,7 +78,7 @@ public class StudentUserProfile extends AppCompatActivity {
         editUniversity = findViewById(R.id.editUniversity);
         editBio = findViewById(R.id.editBio);
 
-        editImages = {editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio};
+        editImages = new ImageView[]{editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio};
 
         studentProfileToolbar = findViewById(R.id.student_profileToolbar);
         setSupportActionBar(studentProfileToolbar);
