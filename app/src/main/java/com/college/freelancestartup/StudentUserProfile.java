@@ -345,7 +345,7 @@ public class StudentUserProfile extends AppCompatActivity {
     }
 
     private void selectImageInputMode(){
-        final CharSequence[] options = {"Take a Photo", "Choose from Gallery", "Cancel"};
+        /*final CharSequence[] options = {"Take a Photo", "Choose from Gallery", "Cancel"};
         MaterialAlertDialogBuilder confirmEditWithID = new MaterialAlertDialogBuilder(StudentUserProfile.this)
                 .setTitle("Please upload an ID Proof for confirmation.")
                 .setMessage("You seem to have edited some of your essential background details (Name, Department, Date of Birth or University). Please upload a valid ID proof for verification.")
@@ -364,7 +364,28 @@ public class StudentUserProfile extends AppCompatActivity {
                     }
                 });
         confirmEditWithID.setCancelable(false);
-        confirmEditWithID.show();
+        confirmEditWithID.show();*/
+
+        AlertDialog options = new MaterialAlertDialogBuilder(this)
+                .setTitle("Please upload an ID Proof for verification.")
+                .setMessage("You seem to have edited some of your essential background details (Name, Department, Date of Birth or University). Please upload a valid ID proof for verification.")
+                .setPositiveButton("Click Picture", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent takePicture = new Intent(StudentUserProfile.this, CaptureImageActivity.class);
+                        startActivity(takePicture);
+                    }
+                })
+                .setNegativeButton("Choose from Gallery", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(pickPhoto, 0);
+                    }
+                })
+                .create();
+        options.show();
+        options.setCanceledOnTouchOutside(false);
     }
 
     private void verifyID(Bitmap bitmapID){
