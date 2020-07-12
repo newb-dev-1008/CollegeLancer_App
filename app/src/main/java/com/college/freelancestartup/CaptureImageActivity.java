@@ -51,9 +51,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import bolts.Capture;
-
-import static android.hardware.Camera.Parameters.FLASH_MODE_ON;
 
 public class CaptureImageActivity extends AppCompatActivity {
 
@@ -70,6 +67,7 @@ public class CaptureImageActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.capture_image);
         cameraView = findViewById(R.id.camera);
         capturedImageView = findViewById(R.id.capturedImage);
         captureButton = findViewById(R.id.captureImg);
@@ -157,6 +155,7 @@ public class CaptureImageActivity extends AppCompatActivity {
 
     }
 
+
     private void setFlash(int flashFlag){
         switch (flashFlag){
             case 1:
@@ -173,6 +172,7 @@ public class CaptureImageActivity extends AppCompatActivity {
                 break;
         }
     }
+
 
     private boolean allPermissionsGranted(){
         for(String permission : REQUIRED_PERMISSIONS){
