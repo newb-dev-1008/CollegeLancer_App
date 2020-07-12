@@ -107,20 +107,6 @@ public class CaptureImageActivity extends AppCompatActivity {
             }
         });
 
-        retryCapture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cancelCapture.setVisibility(View.GONE);
-                retryCapture.setVisibility(View.GONE);
-                submitCapture.setVisibility(View.GONE);
-                capturedImageView.setVisibility(View.GONE);
-
-                cameraView.setVisibility(View.VISIBLE);
-                captureButton.setVisibility(View.VISIBLE);
-                startCamera();
-            }
-        });
-
     }
 
 /*
@@ -214,6 +200,20 @@ public class CaptureImageActivity extends AppCompatActivity {
                 .build();
         preview.setSurfaceProvider(cameraView.createSurfaceProvider());
         Camera camera = cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalysis, imageCapture);
+
+        retryCapture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelCapture.setVisibility(View.GONE);
+                retryCapture.setVisibility(View.GONE);
+                submitCapture.setVisibility(View.GONE);
+                capturedImageView.setVisibility(View.GONE);
+
+                cameraView.setVisibility(View.VISIBLE);
+                captureButton.setVisibility(View.VISIBLE);
+                startCamera();
+            }
+        });
 
         flash_off.setOnClickListener(new View.OnClickListener() {
             @Override
