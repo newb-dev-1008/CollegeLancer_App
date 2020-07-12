@@ -61,7 +61,7 @@ public class StudentUserProfile extends AppCompatActivity {
         DOBET = findViewById(R.id.student_profileDOB);
         universityET = findViewById(R.id.student_profileUniversity);
         bioET = findViewById(R.id.student_profileBio);
-        idImage = findViewById(R.id.idVerification);
+        // idImage = findViewById(R.id.idVerification);
 
         applyChanges = findViewById(R.id.student_apply_changes);
         cancelChanges = findViewById(R.id.student_cancel_changes);
