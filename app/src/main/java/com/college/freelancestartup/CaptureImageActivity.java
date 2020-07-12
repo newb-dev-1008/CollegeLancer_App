@@ -84,38 +84,6 @@ public class CaptureImageActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
 
-        flash_off.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                flash_off.setVisibility(View.GONE);
-                flash_on.setVisibility(View.VISIBLE);
-
-                Toast.makeText(CaptureImageActivity.this, "Flash: ON", Toast.LENGTH_SHORT).show();
-                setFlash(1);
-            }
-        });
-
-        flash_on.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                flash_on.setVisibility(View.GONE);
-                flash_auto.setVisibility(View.VISIBLE);
-
-                Toast.makeText(CaptureImageActivity.this, "Flash: AUTO", Toast.LENGTH_SHORT).show();
-                setFlash(0);
-            }
-        });
-
-        flash_auto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                flash_auto.setVisibility(View.GONE);
-                flash_off.setVisibility(View.VISIBLE);
-
-                Toast.makeText(CaptureImageActivity.this, "Flash: OFF", Toast.LENGTH_SHORT).show();
-                setFlash(2);
-            }
-        });
 
         cancelCapture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,7 +123,7 @@ public class CaptureImageActivity extends AppCompatActivity {
 
     }
 
-
+/*
     private void setFlash(int flashFlag){
         switch (flashFlag){
             case 1:
@@ -172,6 +140,7 @@ public class CaptureImageActivity extends AppCompatActivity {
                 break;
         }
     }
+    */
 
 
     private boolean allPermissionsGranted(){
@@ -244,7 +213,43 @@ public class CaptureImageActivity extends AppCompatActivity {
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
                 .build();
         preview.setSurfaceProvider(cameraView.createSurfaceProvider());
-        Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, preview, imageAnalysis, imageCapture);
+        Camera camera = cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalysis, imageCapture);
+
+        flash_off.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flash_off.setVisibility(View.GONE);
+                flash_on.setVisibility(View.VISIBLE);
+
+                imageCapture.setFlashMode(ImageCapture.FLASH_MODE_ON);
+                Toast.makeText(CaptureImageActivity.this, "Flash: ON", Toast.LENGTH_SHORT).show();
+                // setFlash(1);
+            }
+        });
+
+        flash_on.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flash_on.setVisibility(View.GONE);
+                flash_auto.setVisibility(View.VISIBLE);
+
+                imageCapture.setFlashMode(ImageCapture.FLASH_MODE_AUTO);
+                Toast.makeText(CaptureImageActivity.this, "Flash: AUTO", Toast.LENGTH_SHORT).show();
+                // setFlash(0);
+            }
+        });
+
+        flash_auto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flash_auto.setVisibility(View.GONE);
+                flash_off.setVisibility(View.VISIBLE);
+
+                imageCapture.setFlashMode(ImageCapture.FLASH_MODE_OFF);
+                Toast.makeText(CaptureImageActivity.this, "Flash: OFF", Toast.LENGTH_SHORT).show();
+                // setFlash(2);
+            }
+        });
 
         captureButton.setOnClickListener(new View.OnClickListener() {
             @Override
