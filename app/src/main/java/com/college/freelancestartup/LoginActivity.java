@@ -314,7 +314,12 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.get("department") != null) {
+                            if (documentSnapshot.get("department") != null ||
+                            documentSnapshot.get("phoneNumber") != null ||
+                            documentSnapshot.get("name") != null ||
+                            documentSnapshot.get("studentSemester") != null ||
+                            documentSnapshot.get("dateOfBirth") != null ||
+                            documentSnapshot.get("university") != null) {
                                 if (documentSnapshot.get("userType") == "Lecturer/ Professor") {
                                     Intent intent = new Intent(LoginActivity.this, ProfessorMainActivity.class);
                                     finish();
