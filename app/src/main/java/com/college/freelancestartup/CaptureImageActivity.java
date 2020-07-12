@@ -4,7 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -45,6 +48,7 @@ import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 
 import java.io.File;
+import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -260,14 +264,25 @@ public class CaptureImageActivity extends AppCompatActivity {
                         // super.onCaptureSuccess(image);
                         runOnUiThread(new Runnable() {
                             @Override
+                            @ExperimentalGetImage
                             public void run() {
                                 cameraView.setVisibility(View.GONE);
                                 captureButton.setVisibility(View.GONE);
+                                flash_auto.setVisibility(View.GONE);
+                                flash_off.setVisibility(View.GONE);
+                                flash_on.setVisibility(View.GONE);
 
                                 capturedImageView.setVisibility(View.VISIBLE);
                                 cancelCapture.setVisibility(View.VISIBLE);
                                 retryCapture.setVisibility(View.VISIBLE);
                                 submitCapture.setVisibility(View.VISIBLE);
+
+                                Image previewImage = image.getImage();
+                                ByteBuffer previewImageBuffer = previewImage.getPlanes()[0].getBuffer();
+                                byte[] previewImageBytes = new byte[previewImageBuffer.capacity()];
+                                previewImageBuffer.get(previewImageBytes);
+                                Bitmap previewImageBitmap = BitmapFactory.decodeByteArray(previewImageBytes, 0, previewImageBytes.length, null);
+                                capturedImageView.setImageBitmap(previewImageBitmap);
                             }
                         });
 
@@ -363,7 +378,6 @@ public class CaptureImageActivity extends AppCompatActivity {
         intent.putExtra("test_text", textResult);
         startActivity(intent);
     }
-
 
     private void verifyID(InputImage IDImage, ImageProxy proxyImage){
         TextRecognizer recognizer = TextRecognition.getClient();
