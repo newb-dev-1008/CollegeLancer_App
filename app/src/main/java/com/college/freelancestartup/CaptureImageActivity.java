@@ -253,13 +253,18 @@ public class CaptureImageActivity extends AppCompatActivity {
                     @Override
                     public void onCaptureSuccess(@NonNull ImageProxy image) {
                         // super.onCaptureSuccess(image);
-                        cameraView.setVisibility(View.GONE);
-                        captureButton.setVisibility(View.GONE);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                cameraView.setVisibility(View.GONE);
+                                captureButton.setVisibility(View.GONE);
 
-                        capturedImageView.setVisibility(View.VISIBLE);
-                        cancelCapture.setVisibility(View.VISIBLE);
-                        retryCapture.setVisibility(View.VISIBLE);
-                        submitCapture.setVisibility(View.VISIBLE);
+                                capturedImageView.setVisibility(View.VISIBLE);
+                                cancelCapture.setVisibility(View.VISIBLE);
+                                retryCapture.setVisibility(View.VISIBLE);
+                                submitCapture.setVisibility(View.VISIBLE);
+                            }
+                        });
 
                         submitCapture.setOnClickListener(new View.OnClickListener() {
                             @Override
