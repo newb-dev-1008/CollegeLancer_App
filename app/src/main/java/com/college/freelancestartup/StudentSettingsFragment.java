@@ -68,6 +68,7 @@ public class StudentSettingsFragment extends Fragment {
                     case 0:
                         Intent intent = new Intent(getContext(), StudentUserProfile.class);
                         startActivity(intent);
+                        break;
                     case 1:
                         String[] status = {"Available for projects/ research", "Looking for research with professors", "Looking for collaborators", "Paid projects only", "Unavailable for a while"};
                         AlertDialog statusSetting = new MaterialAlertDialogBuilder(getContext())
@@ -121,6 +122,7 @@ public class StudentSettingsFragment extends Fragment {
                                 .create();
                         statusSetting.setCanceledOnTouchOutside(false);
                         statusSetting.show();
+                        break;
                 }
             }
         });
