@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.CameraX;
 import androidx.camera.core.ExperimentalGetImage;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCapture;
@@ -60,7 +61,6 @@ public class CaptureImageActivity extends AppCompatActivity {
 
     private PreviewView cameraView;
     private ImageView captureButton, flash_on, flash_off, flash_auto, capturedImageView;
-    private int flashMode;
     private MaterialButton cancelCapture, submitCapture, retryCapture;
 
     @Override
@@ -195,7 +195,7 @@ public class CaptureImageActivity extends AppCompatActivity {
 
         final ImageCapture imageCapture = builder
                 .setTargetRotation(this.getWindowManager().getDefaultDisplay().getRotation())
-                .setFlashMode(flashMode)
+                .setFlashMode(ImageCapture.FLASH_MODE_OFF)
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
                 .build();
         preview.setSurfaceProvider(cameraView.createSurfaceProvider());
