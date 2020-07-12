@@ -38,6 +38,7 @@ import com.google.mlkit.vision.text.TextRecognizer;
 public class StudentUserProfile extends AppCompatActivity {
 
     private EditText nameET, phoneNumberET, departmentET, semesterET, emailET, DOBET, universityET, bioET;
+    private int flagApplyChangesPressed;
     private MaterialButton applyChanges, cancelChanges;
     private Toolbar studentProfileToolbar;
     private ImageView idImage, editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio;
@@ -113,6 +114,7 @@ public class StudentUserProfile extends AppCompatActivity {
         applyChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
+                flagApplyChangesPressed = 1;
                 db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).get()
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
@@ -148,7 +150,12 @@ public class StudentUserProfile extends AppCompatActivity {
                                                     startActivity(OTPVerificationIntent);
                                                 }
                                             })
-                                            .setNegativeButton("Cancel", null)
+                                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    phoneNumberET.setText(dbPhoneNumber);
+                                                }
+                                            })
                                             .create();
                                     confirmEditPhoneNo.setCanceledOnTouchOutside(false);
                                 }
@@ -338,6 +345,7 @@ public class StudentUserProfile extends AppCompatActivity {
             bioET.setFocusable(true);
             bioET.setClickable(true);
             bioET.setText("");
+            bioET.setEnabled(true);
             bioET.setHint("Enter a short bio");
         }
         applyChanges.setVisibility(View.VISIBLE);
@@ -447,5 +455,20 @@ public class StudentUserProfile extends AppCompatActivity {
         Intent intent = new Intent(StudentUserProfile.this, IDVerificationActivity.class);
         intent.putExtra("test_text", textResult);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (flagApplyChangesPressed == 1){
+            nameET.setText(dbName);
+            phoneNumberET.setText(dbPhoneNumber);
+            departmentET.setText(dbDepartment);
+            semesterET.setText(dbSemester);
+            emailET.setText(dbEmail);
+            DOBET.setText(dbDOB);
+            universityET.setText(dbUniversity);
+            bioET.setText(dbBio);
+        }
     }
 }
