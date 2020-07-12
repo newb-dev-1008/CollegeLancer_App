@@ -71,7 +71,7 @@ public class StudentSettingsFragment extends Fragment {
                         break;
                     case 1:
                         String[] status = {"Available for projects/ research", "Looking for research with professors", "Looking for collaborators", "Paid projects only", "Unavailable for a while"};
-                        AlertDialog statusSetting = new MaterialAlertDialogBuilder(getContext())
+                        AlertDialog.Builder statusSettingBuilder = new MaterialAlertDialogBuilder(getContext())
                                 .setTitle("Set your current status")
                                 .setMessage("Please note that your status determines your availability for providing and receiving projects.")
                                 .setSingleChoiceItems(status, checkedStatus, new DialogInterface.OnClickListener() {
@@ -97,7 +97,8 @@ public class StudentSettingsFragment extends Fragment {
                                                 break;
                                         }
                                     }
-                                }).setPositiveButton("Set Status", new DialogInterface.OnClickListener() {
+                                });
+                        statusSettingBuilder.setPositiveButton("Set Status", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         Map<String, Object> studentStatusMap = new HashMap<>();
@@ -118,10 +119,10 @@ public class StudentSettingsFragment extends Fragment {
                                                 });
 
                                     }
-                                }).setNegativeButton("Go back", null)
-                                .create();
-                        statusSetting.setCanceledOnTouchOutside(false);
-                        statusSetting.show();
+                                }).setNegativeButton("Go back", null);
+                        AlertDialog statusDialog = statusSettingBuilder.create();
+                        statusDialog.setCanceledOnTouchOutside(false);
+                        statusDialog.show();
                         break;
                 }
             }
