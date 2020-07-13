@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -36,8 +37,12 @@ import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
 
 
 public class StudentUserProfile extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
@@ -48,9 +53,9 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
     private Toolbar studentProfileToolbar;
     private ImageView idImage, editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio;
     private String KEY_BIO = "userBio";
-    private String dbName, dbPhoneNumber, dbDepartment, dbSemester, dbEmail, dbDOB, dbUniversity, dbBio;
+    private String dbName, dbPhoneNumber, dbDepartment, dbSemester, dbEmail, dbDOB, dbUniversity, dbBio, DOB;
     private ImageView[] editImages;
-    private Date currentDate;
+    private Date DOBDate, currentDate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -365,6 +370,18 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
         }
         applyChanges.setVisibility(View.VISIBLE);
         cancelChanges.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(YEAR, year);
+        c.set(MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+        DOBDate = c.getTime();
+        DOB = DateFormat.getDateInstance(DateFormat.FULL).format(DOBDate);
+        DOBET.setText(DOB);
     }
 
     private void selectImageInputMode(){
