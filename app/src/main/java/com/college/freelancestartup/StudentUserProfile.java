@@ -41,6 +41,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.college.freelancestartup.GFBDetailsActivity.getCalendar;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
@@ -382,6 +383,17 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
         DOBDate = c.getTime();
         DOB = DateFormat.getDateInstance(DateFormat.FULL).format(DOBDate);
         DOBET.setText(DOB);
+    }
+
+    private int checkDOBValidity(Date cDate, Date bDate){
+        Calendar a = getCalendar(bDate);
+        Calendar b = getCalendar(cDate);
+        int diff = b.get(YEAR) - a.get(YEAR);
+        if (a.get(MONTH) > b.get(MONTH) ||
+                (a.get(MONTH) == b.get(MONTH) && a.get(Calendar.DAY_OF_MONTH) > b.get(Calendar.DAY_OF_MONTH))) {
+            diff--;
+        }
+        return diff;
     }
 
     private void selectImageInputMode(){

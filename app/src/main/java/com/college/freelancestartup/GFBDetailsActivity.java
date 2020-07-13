@@ -237,7 +237,6 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     }
 
     private int checkDOBValidity(Date cDate, Date bDate){
-
         Calendar a = getCalendar(bDate);
         Calendar b = getCalendar(cDate);
         int diff = b.get(YEAR) - a.get(YEAR);
