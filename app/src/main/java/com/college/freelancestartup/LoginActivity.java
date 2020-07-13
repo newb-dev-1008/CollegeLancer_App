@@ -241,7 +241,6 @@ public class LoginActivity extends AppCompatActivity {
             }
             else{
                 Toast.makeText(LoginActivity.this, "Cancelled Google Login.", Toast.LENGTH_SHORT).show();
-                return;
             }
             // Toast.makeText(LoginActivity.this, "Entered onActivityResult's if block.", Toast.LENGTH_SHORT).show();
         }
@@ -321,14 +320,12 @@ public class LoginActivity extends AppCompatActivity {
                             documentSnapshot.get("university") != null) {
                                 if (documentSnapshot.get("userType") == "Lecturer/ Professor") {
                                     Intent intent = new Intent(LoginActivity.this, ProfessorMainActivity.class);
-                                    finish();
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }
                                 else {
                                     Intent intent = new Intent(LoginActivity.this, StudentMainActivity.class);
-                                    finish();
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
@@ -336,7 +333,6 @@ public class LoginActivity extends AppCompatActivity {
                             } else {
                                 Toast.makeText(LoginActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, GFBDetailsActivity.class);
-                                finish();
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
