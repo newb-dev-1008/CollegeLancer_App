@@ -116,6 +116,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+        /*
         userType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -129,6 +130,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
+         */
 
         checkEmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -252,7 +254,6 @@ public class SignUpActivity extends AppCompatActivity {
         }
         else{
             Toast.makeText(SignUpActivity.this, "Cancelled Google Login.", Toast.LENGTH_SHORT).show();
-            return;
         }
         // Toast.makeText(LoginActivity.this, "Entered onActivityResult's if block.", Toast.LENGTH_SHORT).show();
     }
@@ -373,7 +374,13 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.get("department") != null) {
-                                if (documentSnapshot.get("userType") == "Lecturer/ Professor"){
+                                Toast.makeText(SignUpActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SignUpActivity.this, GFBDetailsActivity.class);
+                                finish();
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                /*if (documentSnapshot.get("userType") == "Lecturer/ Professor"){
                                     Intent intent = new Intent(SignUpActivity.this, ProfessorMainActivity.class);
                                     finish();
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -388,16 +395,10 @@ public class SignUpActivity extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                             } else {
-                                Toast.makeText(SignUpActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(SignUpActivity.this, GFBDetailsActivity.class);
-                                finish();
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                            }
+                            }*/
                             //} else {
                             //    Toast.makeText(SignUpActivity.this, "User doesn't seem to have logged in before.", Toast.LENGTH_SHORT).show();
-                            // }
+                            }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
