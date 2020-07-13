@@ -40,6 +40,7 @@ import com.google.mlkit.vision.text.TextRecognizer;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import static com.college.freelancestartup.GFBDetailsActivity.getCalendar;
 import static java.util.Calendar.MONTH;
@@ -394,6 +395,12 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
             diff--;
         }
         return diff;
+    }
+
+    public static Calendar getCalendar(Date date) {
+        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+        cal.setTime(date);
+        return cal;
     }
 
     private void selectImageInputMode(){
