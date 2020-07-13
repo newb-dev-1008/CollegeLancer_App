@@ -83,6 +83,20 @@ public class LoginActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
 //        AppEventsLogger.activateApp(this);
 
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null){
+                    UIDEmailID = user.getEmail();
+                    updateUI(user);
+                }
+                else{
+                    updateUI(null);
+                }
+            }
+        };
+
         firebaseAuth = FirebaseAuth.getInstance();
         fbLoginManager = LoginManager.getInstance();
         signUpBtn = findViewById(R.id.welcomeSignUpButton);
@@ -205,21 +219,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Failed to connect to Facebook. Try again.", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null){
-                    UIDEmailID = user.getEmail();
-                    updateUI(user);
-                }
-                else{
-                    updateUI(null);
-                }
-            }
-        };
 
         accessTokenTracker = new AccessTokenTracker() {
             @Override
