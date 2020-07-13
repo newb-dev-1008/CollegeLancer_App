@@ -34,6 +34,9 @@ import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class StudentUserProfile extends AppCompatActivity {
 
@@ -45,6 +48,7 @@ public class StudentUserProfile extends AppCompatActivity {
     private String KEY_BIO = "userBio";
     private String dbName, dbPhoneNumber, dbDepartment, dbSemester, dbEmail, dbDOB, dbUniversity, dbBio;
     private ImageView[] editImages;
+    private Date currentDate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,6 +79,8 @@ public class StudentUserProfile extends AppCompatActivity {
         editDOB = findViewById(R.id.editDOB);
         editUniversity = findViewById(R.id.editUniversity);
         editBio = findViewById(R.id.editBio);
+
+        currentDate = Calendar.getInstance().getTime();
 
         editImages = new ImageView[]{editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio};
 
