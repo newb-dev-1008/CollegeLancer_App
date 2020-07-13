@@ -184,7 +184,6 @@ public class SignUpActivity extends AppCompatActivity {
                             else{
                                 signUpEmailET.setVisibility(GONE);
                                 checkEmailButton.setVisibility(GONE);
-                                userType.setVisibility(GONE);
                                 signUpNameET.setVisibility(VISIBLE);
                                 signUpPwET.setVisibility(VISIBLE);
                                 signUpConfPwET.setVisibility(VISIBLE);
