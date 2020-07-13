@@ -22,6 +22,8 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.DefaultAudience;
 import com.facebook.login.LoginManager;
@@ -48,6 +50,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
@@ -83,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
 //        AppEventsLogger.activateApp(this);
 
+        //AuthStateListener is in onCreate
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -186,6 +192,38 @@ public class LoginActivity extends AppCompatActivity {
         signInFBBtn.setPermissions("email", "public_profile");
         callbackManager = CallbackManager.Factory.create();
 
+        signInFBBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                try {
+                                    UIDEmailID = object.getString("email");
+                                } catch (JSONException e) {
+                                    Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email,gender, birthday");
+                request.setParameters(parameters);
+                request.executeAsync();
+            }
+
+            @Override
+            public void onCancel() {
+                LoginManager.getInstance().logOut();
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Toast.makeText(LoginActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -242,7 +280,6 @@ public class LoginActivity extends AppCompatActivity {
             else{
                 Toast.makeText(LoginActivity.this, "Cancelled Google Login.", Toast.LENGTH_SHORT).show();
             }
-            // Toast.makeText(LoginActivity.this, "Entered onActivityResult's if block.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -287,8 +324,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(AuthResult authResult) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 Toast.makeText(LoginActivity.this, "Logged in via Facebook.", Toast.LENGTH_SHORT).show();
-                String emailIDFB = token.getUserId();
-                UIDEmailID = emailIDFB;
+                UIDEmailID = token.getUserId();
                 updateUI(user);
             }
         }).addOnFailureListener(LoginActivity.this, new OnFailureListener() {
@@ -312,12 +348,12 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.get("department") != null ||
-                            documentSnapshot.get("phoneNumber") != null ||
-                            documentSnapshot.get("name") != null ||
-                            documentSnapshot.get("studentSemester") != null ||
-                            documentSnapshot.get("dateOfBirth") != null ||
-                            documentSnapshot.get("university") != null) {
+                            if (documentSnapshot.get("department") != null ||       // if any
+                            documentSnapshot.get("phoneNumber") != null ||          // field in
+                            documentSnapshot.get("name") != null ||                 // Firestore is
+                            documentSnapshot.get("studentSemester") != null ||      // non-null then
+                            documentSnapshot.get("dateOfBirth") != null ||          // proceed to
+                            documentSnapshot.get("university") != null) {           // further activities
                                 if (documentSnapshot.get("userType") == "Lecturer/ Professor") {
                                     Intent intent = new Intent(LoginActivity.this, ProfessorMainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

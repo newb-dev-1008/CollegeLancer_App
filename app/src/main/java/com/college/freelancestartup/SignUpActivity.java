@@ -376,7 +376,6 @@ public class SignUpActivity extends AppCompatActivity {
                             if (documentSnapshot.get("department") != null) {
                                 Toast.makeText(SignUpActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SignUpActivity.this, GFBDetailsActivity.class);
-                                finish();
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
