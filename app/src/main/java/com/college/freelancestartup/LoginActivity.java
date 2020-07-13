@@ -324,7 +324,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(AuthResult authResult) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 Toast.makeText(LoginActivity.this, "Logged in via Facebook.", Toast.LENGTH_SHORT).show();
-                UIDEmailID = token.getUserId();
                 updateUI(user);
             }
         }).addOnFailureListener(LoginActivity.this, new OnFailureListener() {
