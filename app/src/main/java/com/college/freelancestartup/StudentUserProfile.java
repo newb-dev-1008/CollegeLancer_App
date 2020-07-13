@@ -1,5 +1,6 @@
 package com.college.freelancestartup;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -20,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,7 +40,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class StudentUserProfile extends AppCompatActivity {
+public class StudentUserProfile extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private EditText nameET, phoneNumberET, departmentET, semesterET, emailET, DOBET, universityET, bioET;
     private int flagApplyChangesPressed;
@@ -340,7 +342,8 @@ public class StudentUserProfile extends AppCompatActivity {
             DOBET.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    DialogFragment datePicker = new DatePickerFragment();
+                    datePicker.show(getSupportFragmentManager(), "DatePicker");
                 }
             });
         } else if (imageViewObject.equals(editEmail)) {
