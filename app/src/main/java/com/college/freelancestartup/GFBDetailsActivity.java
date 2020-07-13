@@ -158,10 +158,10 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
             Toast.makeText(this, "Your age: " + Integer.toString((checkDOBValidity(currentDate, DOBDate))), Toast.LENGTH_SHORT).show();
             dateOfBirthET.setError("You need to be at least 18 years old to join.");
             // Toast.makeText(this, "You need to be at least 18 years old to join.", Toast.LENGTH_SHORT).show();
-        } else if (checkDOBValidity(currentDate, DOBDate) < 0) {
+        } else if (checkDOBValidity(currentDate, DOBDate) <= 0) {
             Toast.makeText(this, "Enter your actual date of birth. You're too young to be able to even to use this app.", Toast.LENGTH_LONG).show();
             dateOfBirthET.setError("Enter your actual date of birth.");
-        } else if (checkDOBValidity(currentDate, DOBDate) > 27){
+        } else if (checkDOBValidity(currentDate, DOBDate) >= 27){
             Toast.makeText(this, "The maximum permissible age for using this app is 26 years. You need to be a college student for signing up with us.", Toast.LENGTH_LONG).show();
             dateOfBirthET.setError("You do not seem to be a college undergraduate.");
         }
