@@ -46,10 +46,9 @@ public class StudentSettingsFragment extends Fragment {
         studentSettingsListView = root.findViewById(R.id.student_settings_listview);
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        UIDEmailID = firebaseAuth.getCurrentUser().getEmail();
 
         statusDB = FirebaseFirestore.getInstance();
-
-        UIDEmailID = firebaseAuth.getCurrentUser().getEmail();
 
         ArrayAdapter<String> studentSettingsAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, studentSettingsArray);
         studentSettingsListView.setAdapter(studentSettingsAdapter);
@@ -71,7 +70,7 @@ public class StudentSettingsFragment extends Fragment {
                         break;
                     case 1:
                         String[] status = {"Available for projects/ research", "Looking for research with professors", "Looking for collaborators", "Paid projects only", "Unavailable for a while"};
-                        AlertDialog.Builder statusSettingBuilder = new MaterialAlertDialogBuilder(getContext())
+                        AlertDialog.Builder statusSettingBuilder = new AlertDialog.Builder(getContext())
                                 .setTitle("Set your current status")
                                 .setMessage("Please note that your status determines your availability for providing and receiving projects.")
                                 .setSingleChoiceItems(status, checkedStatus, new DialogInterface.OnClickListener() {

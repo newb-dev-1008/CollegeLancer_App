@@ -357,11 +357,9 @@ public class SignUpActivity extends AppCompatActivity {
             public void onSuccess(AuthResult authResult) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 Toast.makeText(SignUpActivity.this, "Logged in via Facebook.", Toast.LENGTH_SHORT).show();
-                String emailIDFB = token.getUserId();
-                UIDEmailID = emailIDFB;
                 Map<String, Object> usersMap = new HashMap<>();
                 // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
-                usersMap.put(KEY_EMAIL, emailIDFB);
+                usersMap.put(KEY_EMAIL, UIDEmailID);
 
                 db.collection("Users").document("User " + UIDEmailID).set(usersMap)
                         .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<Void>() {
