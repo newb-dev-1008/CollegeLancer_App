@@ -426,6 +426,8 @@ public class SignUpActivity extends AppCompatActivity {
                             }*/
                             //} else {
                             //    Toast.makeText(SignUpActivity.this, "User doesn't seem to have logged in before.", Toast.LENGTH_SHORT).show();
+                            } else{
+                                Toast.makeText(SignUpActivity.this, "Something is wrong. Check if your email ID is valid.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
