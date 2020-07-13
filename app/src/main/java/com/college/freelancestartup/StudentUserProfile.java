@@ -331,6 +331,12 @@ public class StudentUserProfile extends AppCompatActivity {
             DOBET.setClickable(true);
             DOBET.setText("");
             DOBET.setHint("Enter your Date of Birth");
+            DOBET.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
         } else if (imageViewObject.equals(editEmail)) {
             emailET.setFocusable(true);
             emailET.setClickable(true);
