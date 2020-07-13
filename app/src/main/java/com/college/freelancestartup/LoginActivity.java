@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(enterEmailCheck.getWindowToken(), 0);
                 EmailID = signInEmailET.getText().toString().trim();
                 UIDEmailID = EmailID;
-                if (isEmailValid(EmailID) == true){
+                if (isEmailValid(EmailID)){
                     firebaseAuth.fetchSignInMethodsForEmail(EmailID).addOnCompleteListener(signInMethodsTask -> {
                         if (signInMethodsTask.isSuccessful()) {
                             List<String> signInMethods = signInMethodsTask.getResult().getSignInMethods();

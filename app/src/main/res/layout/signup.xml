@@ -113,58 +113,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="5dp"
-            app:layout_constraintBottom_toTopOf="@id/userType"
-            app:layout_constraintTop_toBottomOf="@+id/signupConfPasswordEditText" />
-
-        <TextView
-            android:id="@+id/userType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:fontFamily="sans-serif-black"
-            android:text="Your User Profile Type:"
-            android:visibility="gone"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@id/userTypeRadioGroup"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:layout_marginTop="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/phoneNumberEditText" />
-
-        <RadioGroup
-            android:id="@+id/userTypeRadioGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/signupButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/userType">
-
-            <RadioButton
-                android:id="@+id/professor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:contentDescription="@string/profDescription"
-                android:padding="5dp"
-                android:text="Lecturer/ Professor"
-                android:textSize="14sp" />
-
-            <RadioButton
-                android:id="@+id/student"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/studentDescription"
-                android:padding="5dp"
-                android:text="Student Developer"
-                android:textSize="14sp" />
-
-        </RadioGroup>
+            app:layout_constraintTop_toBottomOf="@+id/signupConfPasswordEditText" />
 
         <Button
             android:id="@+id/signupButton"
