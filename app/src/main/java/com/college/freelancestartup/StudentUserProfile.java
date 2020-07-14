@@ -234,6 +234,9 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
                                 Toast.makeText(StudentUserProfile.this, "Please select a valid date of birth. You're too young to be able to even use this app.", Toast.LENGTH_LONG).show();
                                 DOBET.setError("Please set your actual date of birth");
                                 DOBET.setText(dbDOB);
+                                DOBET.setClickable(false);
+                                DOBET.setFocusable(false);
+                                allowEdit();
                             } else if (checkDOBValidity(currentDate, DOBDate) >= 27) {
                                 Toast.makeText(StudentUserProfile.this, "", Toast.LENGTH_SHORT).show();
                                 DOBET.setText(dbDOB);
