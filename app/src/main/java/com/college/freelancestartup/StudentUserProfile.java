@@ -214,6 +214,10 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
         selectEditObject();
     }
 
+    private boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
     private void applyChanges(){
         flagApplyChangesPressed = 1;
         // Add if statements to first check if the inputs are invalid, and then nest the below ifs within
@@ -247,11 +251,21 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
             cancelChanges.setVisibility(View.GONE);
             flagApplyChangesPressed = 0;
             allowEdit();
-        } else if (departmentET.getSelectedItem() == "Select your current semester"){
+        } else if (semesterET.getSelectedItem() == "Select your current semester"){
             Toast.makeText(this, "Please select your current semester.", Toast.LENGTH_SHORT).show();
             semesterET.setSelection(((ArrayAdapter)departmentET.getAdapter()).getPosition(dbSemester));
             semesterET.setClickable(false);
             semesterET.setFocusable(false);
+            applyChanges.setVisibility(View.GONE);
+            cancelChanges.setVisibility(View.GONE);
+            flagApplyChangesPressed = 0;
+            allowEdit();
+        } else if (TextUtils.isEmpty(emailET.getText().toString().trim()) || (!isEmailValid(emailET.getText().toString().trim()))){
+            Toast.makeText(this, "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
+            emailET.setError("Enter a valid email ID.");
+            emailET.setText(dbEmail);
+            emailET.setClickable(false);
+            emailET.setFocusable(false);
             applyChanges.setVisibility(View.GONE);
             cancelChanges.setVisibility(View.GONE);
             flagApplyChangesPressed = 0;

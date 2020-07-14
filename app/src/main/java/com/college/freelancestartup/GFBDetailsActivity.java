@@ -253,4 +253,5 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         cal.setTime(date);
         return cal;
     }
+
 }
