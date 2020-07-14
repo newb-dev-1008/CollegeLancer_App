@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -117,8 +118,8 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
 
                         nameET.setText(dbName);
                         phoneNumberET.setText(dbPhoneNumber);
-                        departmentET.setText(dbDepartment);
-                        semesterET.setText(dbSemester);
+                        departmentET.setSelection(((ArrayAdapter)departmentET.getAdapter()).getPosition(dbDepartment));
+                        semesterET.setSelection(((ArrayAdapter)departmentET.getAdapter()).getPosition(dbSemester));
                         emailET.setText(dbEmail);
                         DOBET.setText(dbDOB);
                         universityET.setText(dbUniversity);
