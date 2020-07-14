@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,7 +50,7 @@ import static java.util.Calendar.YEAR;
 
 public class StudentUserProfile extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    private EditText nameET, phoneNumberET, departmentET, semesterET, emailET, DOBET, universityET, bioET;
+    private EditText nameET, phoneNumberET, emailET, DOBET, universityET, bioET;
     private int flagApplyChangesPressed;
     private MaterialButton applyChanges, cancelChanges;
     private Toolbar studentProfileToolbar;
@@ -60,6 +61,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
     private Date DOBDate, currentDate;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore db;
+    private Spinner departmentET, semesterET;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
