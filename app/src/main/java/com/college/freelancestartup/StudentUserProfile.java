@@ -230,20 +230,28 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
             allowEdit();
         } else if (TextUtils.isEmpty(phoneNumberET.getText().toString().trim()) || (phoneNumberET.getText().toString().trim().length() < 10)){
             Toast.makeText(this, "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
-            DOBET.setError("Enter a valid phone number.");
-            nameET.setText(dbDOB);
-            nameET.setClickable(false);
-            nameET.setFocusable(false);
+            phoneNumberET.setError("Enter a valid phone number.");
+            phoneNumberET.setText(dbPhoneNumber);
+            phoneNumberET.setClickable(false);
+            phoneNumberET.setFocusable(false);
             applyChanges.setVisibility(View.GONE);
             cancelChanges.setVisibility(View.GONE);
             flagApplyChangesPressed = 0;
             allowEdit();
-        } else if (TextUtils.isEmpty(nameET.getText().toString())){
-            Toast.makeText(this, "Please enter a name.", Toast.LENGTH_SHORT).show();
-            DOBET.setError("Please set your actual date of birth");
-            nameET.setText(dbDOB);
-            nameET.setClickable(false);
-            nameET.setFocusable(false);
+        } else if (departmentET.getSelectedItem() == "Select your branch of study/ department"){
+            Toast.makeText(this, "Please select your department.", Toast.LENGTH_SHORT).show();
+            departmentET.setSelection(((ArrayAdapter)departmentET.getAdapter()).getPosition(dbDepartment));
+            departmentET.setClickable(false);
+            departmentET.setFocusable(false);
+            applyChanges.setVisibility(View.GONE);
+            cancelChanges.setVisibility(View.GONE);
+            flagApplyChangesPressed = 0;
+            allowEdit();
+        } else if (departmentET.getSelectedItem() == "Select your current semester"){
+            Toast.makeText(this, "Please select your current semester.", Toast.LENGTH_SHORT).show();
+            semesterET.setSelection(((ArrayAdapter)departmentET.getAdapter()).getPosition(dbSemester));
+            semesterET.setClickable(false);
+            semesterET.setFocusable(false);
             applyChanges.setVisibility(View.GONE);
             cancelChanges.setVisibility(View.GONE);
             flagApplyChangesPressed = 0;
