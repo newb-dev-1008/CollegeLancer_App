@@ -43,7 +43,9 @@ import com.google.mlkit.vision.text.TextRecognizer;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import static com.college.freelancestartup.GFBDetailsActivity.getCalendar;
 import static java.util.Calendar.MONTH;
@@ -64,6 +66,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore db;
     private Spinner departmentET, semesterET;
+    private String KEY_EMAIL = "email";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -315,10 +318,73 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
                 }
             } else if (!dbEmail.equals(emailET.getText().toString().trim())) {
                 // Do not change the login credentials. Inform that the email ID will be used only for communication purposes.
+                AlertDialog notifyEmailChangeDialog = new MaterialAlertDialogBuilder(this)
+                        .setTitle("Please note")
+                        .setMessage("Changing your Email ID WILL NOT change the Email ID associated with your login credentials. The Email ID you have set" +
+                                " is merely for communication purposes. Your Email ID for logging in to the app will stay the same as before.\n\n" +
+                                "Are you sure you want to continue?")
+                        .setPositiveButton("Yes, go ahead", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                        .update(KEY_EMAIL, emailET.getText().toString().trim())
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(StudentUserProfile.this, "Updated your Email ID.", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(StudentUserProfile.this, StudentUserProfile.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                startActivity(intent);
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(StudentUserProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(StudentUserProfile.this, StudentUserProfile.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
+                                    }
+                                });
+                            }
+                        }).setNegativeButton("No, cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                emailET.setClickable(false);
+                                emailET.setFocusable(false);
+                                applyChanges.setVisibility(View.GONE);
+                                cancelChanges.setVisibility(View.GONE);
+                                flagApplyChangesPressed = 0;
+                                allowEdit();
+                            }
+                        }).create();
+                notifyEmailChangeDialog.show();
+                notifyEmailChangeDialog.setCanceledOnTouchOutside(false);
+                notifyEmailChangeDialog.setCancelable(false);
             } else if (!dbBio.equals(bioET.getText().toString().trim())) {
                 // change the field in Firestore
                 db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).update(
-                        KEY_BIO, bioET.getText().toString());
+                        KEY_BIO, bioET.getText().toString())
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(StudentUserProfile.this, "Updated your Bio.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(StudentUserProfile.this, StudentUserProfile.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(StudentUserProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(StudentUserProfile.this, StudentUserProfile.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                });
             } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString().trim())) {
                 // change the field in Firestore after sending OTP
                 AlertDialog confirmEditPhoneNo = new MaterialAlertDialogBuilder(StudentUserProfile.this)
@@ -610,8 +676,8 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
         if (flagApplyChangesPressed == 1){
             nameET.setText(dbName);
             phoneNumberET.setText(dbPhoneNumber);
-            departmentET.setText(dbDepartment);
-            semesterET.setText(dbSemester);
+            departmentET.setSelection(((ArrayAdapter)departmentET.getAdapter()).getPosition(dbDepartment));
+            semesterET.setSelection(((ArrayAdapter)semesterET.getAdapter()).getPosition(dbSemester));
             emailET.setText(dbEmail);
             DOBET.setText(dbDOB);
             universityET.setText(dbUniversity);
