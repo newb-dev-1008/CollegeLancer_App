@@ -432,13 +432,11 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
         } else if (imageViewObject.equals(editSemester)) {
             semesterET.setFocusable(true);
             semesterET.setClickable(true);
-            semesterET.setText("");
-            semesterET.setHint("Enter your current semester");
+            semesterET.setSelection(0);
         } else if (imageViewObject.equals(editDepartment)) {
             departmentET.setFocusable(true);
             departmentET.setClickable(true);
-            departmentET.setText("");
-            departmentET.setHint("Enter your current Department");
+            departmentET.setSelection(0);
         } else if (imageViewObject.equals(editDOB)) {
             DOBET.setFocusable(true);
             DOBET.setClickable(true);
