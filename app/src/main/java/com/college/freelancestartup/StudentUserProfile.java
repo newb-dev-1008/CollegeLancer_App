@@ -218,7 +218,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
         flagApplyChangesPressed = 1;
         // Add if statements to first check if the inputs are invalid, and then nest the below ifs within
         // the else (when inputs are valid), also check if the user entered the same values again
-        if (TextUtils.isEmpty(nameET.getText().toString())){
+        if (TextUtils.isEmpty(nameET.getText().toString().trim())){
             Toast.makeText(this, "Please enter a name.", Toast.LENGTH_SHORT).show();
             DOBET.setError("Please set your actual date of birth");
             nameET.setText(dbDOB);
@@ -228,10 +228,20 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
             cancelChanges.setVisibility(View.GONE);
             flagApplyChangesPressed = 0;
             allowEdit();
+        } else if (TextUtils.isEmpty(phoneNumberET.getText().toString().trim()) || ){
+            Toast.makeText(this, "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
+            DOBET.setError("Please set your actual date of birth");
+            nameET.setText(dbDOB);
+            nameET.setClickable(false);
+            nameET.setFocusable(false);
+            applyChanges.setVisibility(View.GONE);
+            cancelChanges.setVisibility(View.GONE);
+            flagApplyChangesPressed = 0;
+            allowEdit();
         }
-        if (!dbName.equals(nameET.getText().toString()) ||
+        if (!dbName.equals(nameET.getText().toString().trim()) ||
                 !dbDepartment.equals(departmentET.getSelectedItem().toString()) ||
-                !dbUniversity.equals(universityET.getText().toString())){
+                !dbUniversity.equals(universityET.getText().toString().trim())){
             // change the field in Firestore after confirmation with ID
             selectImageInputMode();
         } else if (!dbSemester.equals(semesterET.getSelectedItem().toString())) {
@@ -261,13 +271,13 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
                 flagApplyChangesPressed = 0;
                 allowEdit();
             }
-        } else if (!dbEmail.equals(emailET.getText().toString())) {
+        } else if (!dbEmail.equals(emailET.getText().toString().trim())) {
             // Do not change the login credentials. Inform that the email ID will be used only for communication purposes.
-        } else if (!dbBio.equals(bioET.getText().toString())) {
+        } else if (!dbBio.equals(bioET.getText().toString().trim())) {
             // change the field in Firestore
             db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).update(
                     KEY_BIO, bioET.getText().toString());
-        } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString())) {
+        } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString().trim())) {
             // change the field in Firestore after sending OTP
             AlertDialog confirmEditPhoneNo = new MaterialAlertDialogBuilder(StudentUserProfile.this)
                     .setTitle("Confirm your phone number.")
