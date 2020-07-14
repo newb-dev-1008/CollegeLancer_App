@@ -219,11 +219,11 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
         // the else (when inputs are valid), also check if the user entered the same values again
         if (nameET.)
         if (!dbName.equals(nameET.getText().toString()) ||
-                !dbDepartment.equals(departmentET.getText().toString()) ||
+                !dbDepartment.equals(departmentET.getSelectedItem().toString()) ||
                 !dbUniversity.equals(universityET.getText().toString())){
             // change the field in Firestore after confirmation with ID
             selectImageInputMode();
-        } else if (!dbSemester.equals(semesterET.getText().toString())) {
+        } else if (!dbSemester.equals(semesterET.getSelectedItem().toString())) {
             // change the field in Firestore
         } else if (!dbDOB.equals(DOBET.getText().toString())) {
             if (((checkDOBValidity(currentDate, DOBDate) > 0) && (checkDOBValidity(currentDate, DOBDate) < 18))){
