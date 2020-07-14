@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -217,7 +218,17 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
         flagApplyChangesPressed = 1;
         // Add if statements to first check if the inputs are invalid, and then nest the below ifs within
         // the else (when inputs are valid), also check if the user entered the same values again
-        if (nameET.)
+        if (TextUtils.isEmpty(nameET.getText().toString())){
+            Toast.makeText(this, "Please enter a name.", Toast.LENGTH_SHORT).show();
+            DOBET.setError("Please set your actual date of birth");
+            nameET.setText(dbDOB);
+            nameET.setClickable(false);
+            nameET.setFocusable(false);
+            applyChanges.setVisibility(View.GONE);
+            cancelChanges.setVisibility(View.GONE);
+            flagApplyChangesPressed = 0;
+            allowEdit();
+        }
         if (!dbName.equals(nameET.getText().toString()) ||
                 !dbDepartment.equals(departmentET.getSelectedItem().toString()) ||
                 !dbUniversity.equals(universityET.getText().toString())){
