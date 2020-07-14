@@ -212,81 +212,76 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
 
     private void applyChanges(){
         flagApplyChangesPressed = 1;
-        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        // Add if statements to first check if the inputs are invalid, and then nest the below ifs within
-                        // the else (when inputs are valid), also check if the user entered the same values again
-                        if (!dbName.equals(nameET.getText().toString()) ||
-                                !dbDepartment.equals(departmentET.getText().toString()) ||
-                                !dbUniversity.equals(universityET.getText().toString())){
-                            // change the field in Firestore after confirmation with ID
-                            selectImageInputMode();
-                        } else if (!dbSemester.equals(semesterET.getText().toString())) {
-                            // change the field in Firestore
-
-                        } else if (!dbDOB.equals(DOBET.getText().toString())) {
-                            if (((checkDOBValidity(currentDate, DOBDate) > 0) && (checkDOBValidity(currentDate, DOBDate) < 18))){
-                                // This is proper
-                                selectImageInputMode();
-                            } else if (checkDOBValidity(currentDate, DOBDate) <= 0) {
-                                Toast.makeText(StudentUserProfile.this, "Please select a valid date of birth. You're too young to be able to even use this app.", Toast.LENGTH_LONG).show();
-                                DOBET.setError("Please set your actual date of birth");
-                                DOBET.setText(dbDOB);
-                                DOBET.setClickable(false);
-                                DOBET.setFocusable(false);
-                                applyChanges.setVisibility(View.GONE);
-                                cancelChanges.setVisibility(View.GONE);
-                                flagApplyChangesPressed = 0;
-                                allowEdit();
-                            } else if (checkDOBValidity(currentDate, DOBDate) >= 27) {
-                                Toast.makeText(StudentUserProfile.this, "The maximum permissible age for using this app is 26 years. You need to be a college student for signing up with us.", Toast.LENGTH_LONG).show();
-                                DOBET.setError("You do not seem to be a college undergraduate.");
-                                DOBET.setText(dbDOB);
-                                DOBET.setClickable(false);
-                                DOBET.setFocusable(false);
-                                applyChanges.setVisibility(View.GONE);
-                                cancelChanges.setVisibility(View.GONE);
-                                flagApplyChangesPressed = 0;
-                                allowEdit();
-                            }
-                        } else if (!dbEmail.equals(emailET.getText().toString())) {
-                            // Do not change the login credentials. Inform that the email ID will be used only for communication purposes.
-                        } else if (!dbBio.equals(bioET.getText().toString())) {
-                            // change the field in Firestore
-                            db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).update(
-                                    KEY_BIO, bioET.getText().toString());
-                        } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString())) {
-                            // change the field in Firestore after sending OTP
-                            AlertDialog confirmEditPhoneNo = new MaterialAlertDialogBuilder(StudentUserProfile.this)
-                                    .setTitle("Confirm your phone number.")
-                                    .setMessage("We'll send an OTP to your phone number for confirmation.")
-                                    .setPositiveButton("Send OTP", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            // Add Firebase OTP Verification
-                                            Intent OTPVerificationIntent = new Intent(StudentUserProfile.this, UpdatePhoneNumberOTP.class);
-                                            OTPVerificationIntent.putExtra("phoneNo", phoneNumberET.getText());
-                                            startActivity(OTPVerificationIntent);
-                                        }
-                                    })
-                                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            phoneNumberET.setText(dbPhoneNumber);
-                                        }
-                                    })
-                                    .create();
-                            confirmEditPhoneNo.setCanceledOnTouchOutside(false);
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(StudentUserProfile.this, e.getMessage() + "Please try again.", Toast.LENGTH_SHORT).show();
+        // Add if statements to first check if the inputs are invalid, and then nest the below ifs within
+        // the else (when inputs are valid), also check if the user entered the same values again
+        if (nameET.)
+        if (!dbName.equals(nameET.getText().toString()) ||
+                !dbDepartment.equals(departmentET.getText().toString()) ||
+                !dbUniversity.equals(universityET.getText().toString())){
+            // change the field in Firestore after confirmation with ID
+            selectImageInputMode();
+        } else if (!dbSemester.equals(semesterET.getText().toString())) {
+            // change the field in Firestore
+        } else if (!dbDOB.equals(DOBET.getText().toString())) {
+            if (((checkDOBValidity(currentDate, DOBDate) > 0) && (checkDOBValidity(currentDate, DOBDate) < 18))){
+                // This is proper
+                selectImageInputMode();
+            } else if (checkDOBValidity(currentDate, DOBDate) <= 0) {
+                Toast.makeText(StudentUserProfile.this, "Please select a valid date of birth. You're too young to be able to even use this app.", Toast.LENGTH_LONG).show();
+                DOBET.setError("Please set your actual date of birth");
+                DOBET.setText(dbDOB);
+                DOBET.setClickable(false);
+                DOBET.setFocusable(false);
+                applyChanges.setVisibility(View.GONE);
+                cancelChanges.setVisibility(View.GONE);
+                flagApplyChangesPressed = 0;
+                allowEdit();
+            } else if (checkDOBValidity(currentDate, DOBDate) >= 27) {
+                Toast.makeText(StudentUserProfile.this, "The maximum permissible age for using this app is 26 years. You need to be a college student for signing up with us.", Toast.LENGTH_LONG).show();
+                DOBET.setError("You do not seem to be a college undergraduate.");
+                DOBET.setText(dbDOB);
+                DOBET.setClickable(false);
+                DOBET.setFocusable(false);
+                applyChanges.setVisibility(View.GONE);
+                cancelChanges.setVisibility(View.GONE);
+                flagApplyChangesPressed = 0;
+                allowEdit();
             }
-        });
+        } else if (!dbEmail.equals(emailET.getText().toString())) {
+            // Do not change the login credentials. Inform that the email ID will be used only for communication purposes.
+        } else if (!dbBio.equals(bioET.getText().toString())) {
+            // change the field in Firestore
+            db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).update(
+                    KEY_BIO, bioET.getText().toString());
+        } else if (!dbPhoneNumber.equals(phoneNumberET.getText().toString())) {
+            // change the field in Firestore after sending OTP
+            AlertDialog confirmEditPhoneNo = new MaterialAlertDialogBuilder(StudentUserProfile.this)
+                    .setTitle("Confirm your phone number.")
+                    .setMessage("We'll send an OTP to your phone number for confirmation.")
+                    .setPositiveButton("Send OTP", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            // Add Firebase OTP Verification
+                            Intent OTPVerificationIntent = new Intent(StudentUserProfile.this, UpdatePhoneNumberOTP.class);
+                            OTPVerificationIntent.putExtra("phoneNo", phoneNumberET.getText());
+                            startActivity(OTPVerificationIntent);
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            phoneNumberET.setText(dbPhoneNumber);
+                            phoneNumberET.setClickable(false);
+                            phoneNumberET.setFocusable(false);
+                            applyChanges.setVisibility(View.GONE);
+                            cancelChanges.setVisibility(View.GONE);
+                            flagApplyChangesPressed = 0;
+                            allowEdit();
+                        }
+                    })
+                    .create();
+            confirmEditPhoneNo.setCanceledOnTouchOutside(false);
+        }
     }
 
     private void selectEditObject(){
