@@ -140,8 +140,8 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         final String university = universityET.getText().toString().trim();
         final String bio = bioET.getText().toString().trim();
         // Checking if the fields are empty
-        if (TextUtils.isEmpty(phoneNumber)) {
-            phoneNumberET.setError("You've not entered your phone number.");
+        if (TextUtils.isEmpty(phoneNumber) || (phoneNumber.length() < 10)) {
+            phoneNumberET.setError("You've not entered a valid phone number.");
         } else if (TextUtils.isEmpty(name)) {
             nameET.setError("You need to enter your full name.");
         } else if (TextUtils.isEmpty(university)) {

@@ -228,8 +228,18 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
             cancelChanges.setVisibility(View.GONE);
             flagApplyChangesPressed = 0;
             allowEdit();
-        } else if (TextUtils.isEmpty(phoneNumberET.getText().toString().trim()) || ){
+        } else if (TextUtils.isEmpty(phoneNumberET.getText().toString().trim()) || (phoneNumberET.getText().toString().trim().length() < 10)){
             Toast.makeText(this, "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
+            DOBET.setError("Enter a valid phone number.");
+            nameET.setText(dbDOB);
+            nameET.setClickable(false);
+            nameET.setFocusable(false);
+            applyChanges.setVisibility(View.GONE);
+            cancelChanges.setVisibility(View.GONE);
+            flagApplyChangesPressed = 0;
+            allowEdit();
+        } else if (TextUtils.isEmpty(nameET.getText().toString())){
+            Toast.makeText(this, "Please enter a name.", Toast.LENGTH_SHORT).show();
             DOBET.setError("Please set your actual date of birth");
             nameET.setText(dbDOB);
             nameET.setClickable(false);
