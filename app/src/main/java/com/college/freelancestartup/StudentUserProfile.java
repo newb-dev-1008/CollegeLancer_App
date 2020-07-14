@@ -147,7 +147,11 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
                                 } else if (!dbDOB.equals(DOBET.getText().toString())) {
                                     if (((checkDOBValidity(currentDate, DOBDate) > 0) && (checkDOBValidity(currentDate, DOBDate) < 18))){
                                         // This is proper
-                                    } else if () {}
+                                    } else if (checkDOBValidity(currentDate, DOBDate) <= 0) {
+
+                                    } else if () {
+
+                                    }
                                 } else if (!dbEmail.equals(emailET.getText().toString())) {
                                     // Do not change the login credentials. Inform that the email ID will be used only for communication purposes.
                                 } else if (!dbBio.equals(bioET.getText().toString())) {
