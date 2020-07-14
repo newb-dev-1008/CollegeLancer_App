@@ -53,7 +53,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
     private int flagApplyChangesPressed;
     private MaterialButton applyChanges, cancelChanges;
     private Toolbar studentProfileToolbar;
-    private ImageView idImage, editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio;
+    private ImageView idImage, editProf, editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio;
     private String KEY_BIO = "userBio";
     private String dbName, dbPhoneNumber, dbDepartment, dbSemester, dbEmail, dbDOB, dbUniversity, dbBio, DOB;
     private ImageView[] editImages;
@@ -81,6 +81,8 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
 
         applyChanges = findViewById(R.id.student_apply_changes);
         cancelChanges = findViewById(R.id.student_cancel_changes);
+
+        editProf = findViewById(R.id.editProfile);
 
         editName = findViewById(R.id.editName);
         editPhoneNumber = findViewById(R.id.editPhoneNumber);
@@ -131,7 +133,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
         applyChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-
+                applyChanges();
             }
         });
 
@@ -186,22 +188,26 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
 
         if (id == R.id.editProfile) {
             Toast.makeText(StudentUserProfile.this, "Edit your profile. You can now change the contents.", Toast.LENGTH_LONG).show();
-
-            editName.setVisibility(View.VISIBLE);
-            editPhoneNumber.setVisibility(View.VISIBLE);
-            editDepartment.setVisibility(View.VISIBLE);
-            editSemester.setVisibility(View.VISIBLE);
-            editEmail.setVisibility(View.VISIBLE);
-            editDOB.setVisibility(View.VISIBLE);
-            editUniversity.setVisibility(View.VISIBLE);
-            editBio.setVisibility(View.VISIBLE);
-
-            selectEditObject();
+            allowEdit();
 
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void allowEdit(){
+        editProf.setVisibility(View.GONE);
+        editName.setVisibility(View.VISIBLE);
+        editPhoneNumber.setVisibility(View.VISIBLE);
+        editDepartment.setVisibility(View.VISIBLE);
+        editSemester.setVisibility(View.VISIBLE);
+        editEmail.setVisibility(View.VISIBLE);
+        editDOB.setVisibility(View.VISIBLE);
+        editUniversity.setVisibility(View.VISIBLE);
+        editBio.setVisibility(View.VISIBLE);
+
+        selectEditObject();
     }
 
     private void applyChanges(){
@@ -223,12 +229,14 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
                         } else if (!dbDOB.equals(DOBET.getText().toString())) {
                             if (((checkDOBValidity(currentDate, DOBDate) > 0) && (checkDOBValidity(currentDate, DOBDate) < 18))){
                                 // This is proper
+                                selectImageInputMode();
                             } else if (checkDOBValidity(currentDate, DOBDate) <= 0) {
                                 Toast.makeText(StudentUserProfile.this, "Please select a valid date of birth. You're too young to be able to even use this app.", Toast.LENGTH_LONG).show();
                                 DOBET.setError("Please set your actual date of birth");
                                 DOBET.setText(dbDOB);
                             } else if (checkDOBValidity(currentDate, DOBDate) >= 27) {
                                 Toast.makeText(StudentUserProfile.this, "", Toast.LENGTH_SHORT).show();
+                                DOBET.setText(dbDOB);
                             }
                         } else if (!dbEmail.equals(emailET.getText().toString())) {
                             // Do not change the login credentials. Inform that the email ID will be used only for communication purposes.
