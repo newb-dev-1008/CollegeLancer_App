@@ -138,13 +138,16 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
                                 // the else (when inputs are valid), also check if the user entered the same values again
                                 if (!dbName.equals(nameET.getText().toString()) ||
                                         !dbDepartment.equals(departmentET.getText().toString()) ||
-                                        !dbDOB.equals(DOBET.getText().toString()) ||
                                         !dbUniversity.equals(universityET.getText().toString())){
                                     // change the field in Firestore after confirmation with ID
                                     selectImageInputMode();
                                 } else if (!dbSemester.equals(semesterET.getText().toString())) {
                                     // change the field in Firestore
 
+                                } else if (!dbDOB.equals(DOBET.getText().toString())) {
+                                    if (((checkDOBValidity(currentDate, DOBDate) > 0) && (checkDOBValidity(currentDate, DOBDate) < 18))){
+                                        // This is proper
+                                    } else if () {}
                                 } else if (!dbEmail.equals(emailET.getText().toString())) {
                                     // Do not change the login credentials. Inform that the email ID will be used only for communication purposes.
                                 } else if (!dbBio.equals(bioET.getText().toString())) {
@@ -391,8 +394,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
         Calendar b = getCalendar(cDate);
         int diff = b.get(YEAR) - a.get(YEAR);
         if (a.get(MONTH) > b.get(MONTH) ||
-                (a.get(MONTH) == b.get(MONTH) && a.get(Calendar.DAY_OF_MONTH) > b.get(Calendar.DAY_OF_MONTH)) ||
-                (a.get(MONTH) == b.get(MONTH) && a.get(Calendar.DAY_OF_MONTH) == b.get(Calendar.DAY_OF_MONTH))) {
+                (a.get(MONTH) == b.get(MONTH) && a.get(Calendar.DAY_OF_MONTH) > b.get(Calendar.DAY_OF_MONTH))) {
             diff--;
         }
         return diff;
