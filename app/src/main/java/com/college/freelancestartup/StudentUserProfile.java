@@ -236,10 +236,20 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
                                 DOBET.setText(dbDOB);
                                 DOBET.setClickable(false);
                                 DOBET.setFocusable(false);
+                                applyChanges.setVisibility(View.GONE);
+                                cancelChanges.setVisibility(View.GONE);
+                                flagApplyChangesPressed = 0;
                                 allowEdit();
                             } else if (checkDOBValidity(currentDate, DOBDate) >= 27) {
-                                Toast.makeText(StudentUserProfile.this, "", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(StudentUserProfile.this, "The maximum permissible age for using this app is 26 years. You need to be a college student for signing up with us.", Toast.LENGTH_LONG).show();
+                                DOBET.setError("You do not seem to be a college undergraduate.");
                                 DOBET.setText(dbDOB);
+                                DOBET.setClickable(false);
+                                DOBET.setFocusable(false);
+                                applyChanges.setVisibility(View.GONE);
+                                cancelChanges.setVisibility(View.GONE);
+                                flagApplyChangesPressed = 0;
+                                allowEdit();
                             }
                         } else if (!dbEmail.equals(emailET.getText().toString())) {
                             // Do not change the login credentials. Inform that the email ID will be used only for communication purposes.
