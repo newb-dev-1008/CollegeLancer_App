@@ -89,7 +89,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
         applyChanges = findViewById(R.id.student_apply_changes);
         cancelChanges = findViewById(R.id.student_cancel_changes);
 
-        editProf = findViewById(R.id.editProfile);
+        // editProf = findViewById(R.id.editProfile);
 
         editName = findViewById(R.id.editName);
         editPhoneNumber = findViewById(R.id.editPhoneNumber);
