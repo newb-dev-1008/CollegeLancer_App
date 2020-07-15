@@ -140,6 +140,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         final String phoneNumber = phoneNumberET.getText().toString().trim();
         final String university = universityET.getText().toString().trim();
         final String bio = bioET.getText().toString().trim();
+        final String status = "Available for projects/ research";
         // Checking if the fields are empty
         if (TextUtils.isEmpty(phoneNumber) || (phoneNumber.length() < 10)) {
             phoneNumberET.setError("You've not entered a valid phone number.");
@@ -188,6 +189,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
                             userDetails.put(KEY_DEPT, deptEngg.getSelectedItem());
                             userDetails.put(KEY_STUD_SEM, studentSem.getSelectedItem());
                             userDetails.put(KEY_BIO, bio);
+                            userDetails.put(KEY_STUDSTATUS, status);
 
                             db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).set(userDetails, SetOptions.merge())
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
