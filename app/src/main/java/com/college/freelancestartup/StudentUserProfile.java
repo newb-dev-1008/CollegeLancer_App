@@ -43,9 +43,7 @@ import com.google.mlkit.vision.text.TextRecognizer;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 import static com.college.freelancestartup.GFBDetailsActivity.getCalendar;
 import static java.util.Calendar.MONTH;
