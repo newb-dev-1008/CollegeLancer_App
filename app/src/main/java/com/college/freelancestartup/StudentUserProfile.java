@@ -58,7 +58,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
     private int flagApplyChangesPressed;
     private MaterialButton applyChanges, cancelChanges;
     private Toolbar studentProfileToolbar;
-    private ImageView idImage, editProf, editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio;
+    private ImageView idImage, editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio;
     private String KEY_BIO = "userBio";
     private String dbName, dbPhoneNumber, dbDepartment, dbSemester, dbEmail, dbDOB, dbUniversity, dbBio, DOB;
     private ImageView[] editImages;
@@ -204,7 +204,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
     }
 
     private void allowEdit(){
-        editProf.setVisibility(View.GONE);
+        // editProf.setVisibility(View.GONE);
         editName.setVisibility(View.VISIBLE);
         editPhoneNumber.setVisibility(View.VISIBLE);
         editDepartment.setVisibility(View.VISIBLE);
