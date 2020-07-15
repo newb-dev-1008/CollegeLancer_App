@@ -74,6 +74,33 @@ public class StudentSettingsFragment extends DialogFragment {
                     case 1:
                         String[] status = {"Available for projects/ research", "Looking for research with professors", "Looking for collaborators", "Paid projects only", "Unavailable for a while"};
 
+                        new MaterialAlertDialogBuilder(getContext())
+                                .setTitle("Set your current status")
+                                .setMessage("Please note that your status determines your availability for providing and receiving projects.")
+                                .setSingleChoiceItems(status, checkedStatus, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        checkedStatus = statusNo;
+                                        studentStatus = status[checkedStatus];
+                                        switch (checkedStatus) {
+                                            case 0:
+                                                Toast.makeText(getContext(), "Setting status. Your colleagues will now see you're available for projects and research work.", Toast.LENGTH_LONG).show();
+                                                break;
+                                            case 1:
+                                                Toast.makeText(getContext(), "Setting status. Professors will now see you're up for research.", Toast.LENGTH_LONG).show();
+                                                break;
+                                            case 2:
+                                                Toast.makeText(getContext(), "Setting status. Your fellow freelancers will now be able to contact you for project collaboration.", Toast.LENGTH_LONG).show();
+                                                break;
+                                            case 3:
+                                                Toast.makeText(getContext(), "Setting status. You will be made available only to organizations and premium clients.", Toast.LENGTH_LONG).show();
+                                                break;
+                                            case 4:
+                                                Toast.makeText(getContext(), "Setting status. You will not be contacted for projects or research until you change your status.", Toast.LENGTH_LONG).show();
+                                                break;
+                                        }
+                                    }
+                                }).setPositiveButton("Set Status")
                         AlertDialog.Builder statusSettingBuilder = new AlertDialog.Builder(getContext())
                                 .setTitle("Set your current status")
                                 .setMessage("Please note that your status determines your availability for providing and receiving projects.")
