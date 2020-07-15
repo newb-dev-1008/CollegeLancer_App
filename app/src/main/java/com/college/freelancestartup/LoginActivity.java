@@ -88,22 +88,23 @@ public class LoginActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
 //        AppEventsLogger.activateApp(this);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         //AuthStateListener is in onCreate
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null){
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth1) {
+                FirebaseUser user = firebaseAuth1.getCurrentUser();
+                if (user != null) {
                     UIDEmailID = user.getEmail();
                     updateUI(user);
-                }
-                else{
+                } /*
+                else {
                     updateUI(null);
-                }
+                } */
             }
         };
 
-        firebaseAuth = FirebaseAuth.getInstance();
         fbLoginManager = LoginManager.getInstance();
         signUpBtn = findViewById(R.id.welcomeSignUpButton);
         signInBtn = findViewById(R.id.welcomeSignInButton);
@@ -341,13 +342,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user){
         // Update UI after login
-        if (user != null) {
-            Toast.makeText(LoginActivity.this, "User " + UIDEmailID, Toast.LENGTH_LONG).show();
-            db.collection("Users").document("User " + UIDEmailID).get()
-                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.get("department") != null ||       // if any
+        Toast.makeText(this, user.toString(), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(LoginActivity.this, "User " + UIDEmailID, Toast.LENGTH_LONG).show();
+        db.collection("Users").document("User " + UIDEmailID).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.get("department") != null ||       // if any
                             documentSnapshot.get("phoneNumber") != null ||          // field in
                             documentSnapshot.get("name") != null ||                 // Firestore is
                             documentSnapshot.get("studentSemester") != null ||      // non-null then
@@ -382,7 +383,6 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
-        }
 
     }
 

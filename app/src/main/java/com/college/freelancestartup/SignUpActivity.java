@@ -402,7 +402,7 @@ public class SignUpActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.get("department") != null) {
+                            if (documentSnapshot.get("department") == null) {
                                 Toast.makeText(SignUpActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SignUpActivity.this, GFBDetailsActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -427,7 +427,8 @@ public class SignUpActivity extends AppCompatActivity {
                             //} else {
                             //    Toast.makeText(SignUpActivity.this, "User doesn't seem to have logged in before.", Toast.LENGTH_SHORT).show();
                             } else{
-                                Toast.makeText(SignUpActivity.this, "Something is wrong. Check if your email ID is valid.", Toast.LENGTH_SHORT).show();
+                                // The code should never enter this block
+                                Toast.makeText(SignUpActivity.this, "Something is wrong. This shouldn't be possible. Report a bug and mention this.", Toast.LENGTH_LONG).show();
                             }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
