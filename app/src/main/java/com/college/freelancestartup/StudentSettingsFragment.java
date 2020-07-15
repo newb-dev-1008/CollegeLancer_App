@@ -100,7 +100,27 @@ public class StudentSettingsFragment extends DialogFragment {
                                                 break;
                                         }
                                     }
-                                }).setPositiveButton("Set Status")
+                                }).setPositiveButton("Set Status", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Map<String, Object> studentStatusMap = new HashMap<>();
+                                studentStatusMap.put(KEY_STUDSTATUS, studentStatus);
+
+                                statusDB.collection("Users").document("User " + UIDEmailID).set(studentStatusMap)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(getContext(), "Your status has been updated.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
+                        }).setNegativeButton("Go Back", null)
                         AlertDialog.Builder statusSettingBuilder = new AlertDialog.Builder(getContext())
                                 .setTitle("Set your current status")
                                 .setMessage("Please note that your status determines your availability for providing and receiving projects.")
