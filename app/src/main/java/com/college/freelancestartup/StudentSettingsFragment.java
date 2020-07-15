@@ -83,7 +83,7 @@ public class StudentSettingsFragment extends Fragment {
                                         checkedStatus = statusNo;
                                         studentStatus = status[checkedStatus];
                                         switch (checkedStatus) {
-                                            case 0:
+                                            default:
                                                 Toast.makeText(getContext(), "Setting status. Your colleagues will now see you're available for projects and research work.", Toast.LENGTH_LONG).show();
                                                 break;
                                             case 1:
