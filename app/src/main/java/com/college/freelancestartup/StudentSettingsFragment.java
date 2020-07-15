@@ -28,7 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StudentSettingsFragment extends DialogFragment {
+public class StudentSettingsFragment extends Fragment {
 
     private String[] studentSettingsArray;
     private ListView studentSettingsListView;
@@ -79,7 +79,7 @@ public class StudentSettingsFragment extends DialogFragment {
                                 .setMessage("Please note that your status determines your availability for providing and receiving projects.")
                                 .setSingleChoiceItems(status, checkedStatus, new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                    public void onClick(DialogInterface dialogInterface, int statusNo) {
                                         checkedStatus = statusNo;
                                         studentStatus = status[checkedStatus];
                                         switch (checkedStatus) {
@@ -121,6 +121,10 @@ public class StudentSettingsFragment extends DialogFragment {
                                         });
                             }
                         }).setNegativeButton("Go Back", null)
+                        .setCancelable(false)
+                        .show();
+
+                        /*
                         AlertDialog.Builder statusSettingBuilder = new AlertDialog.Builder(getContext())
                                 .setTitle("Set your current status")
                                 .setMessage("Please note that your status determines your availability for providing and receiving projects.")
@@ -174,6 +178,7 @@ public class StudentSettingsFragment extends DialogFragment {
                         statusDialog.setCanceledOnTouchOutside(false);
                         statusDialog.show();
                         break;
+                        */
                 }
             }
         });
