@@ -44,7 +44,7 @@
             android:theme="@style/AppActionBarTheme"/>
 
         <activity android:name=".StudentUserProfile"
-            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+            android:theme="@style/AppActionBarTheme"/>
 
         <activity android:name=".UpdatePhoneNumberOTP"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>

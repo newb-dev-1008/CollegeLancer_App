@@ -28,7 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StudentSettingsFragment extends Fragment {
+public class StudentSettingsFragment extends DialogFragment {
 
     private String[] studentSettingsArray;
     private ListView studentSettingsListView;

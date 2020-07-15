@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_height="wrap_content"
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -12,8 +12,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+        app:layout_constraintBottom_toTopOf="@id/editProfileScrollView"
+        android:elevation="4dp" />
 
     <ScrollView android:layout_height="wrap_content"
         android:id="@+id/editProfileScrollView"
@@ -21,11 +21,12 @@
         app:layout_constraintTop_toBottomOf="@id/student_profileToolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/student_apply_changes">
+        app:layout_constraintBottom_toTopOf="@id/student_apply_changes"
+        android:layout_marginBottom="30dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/student_profilePic"
@@ -388,7 +389,6 @@
         android:layout_height="wrap_content"
         android:text="Apply Changes"
         android:gravity="center_horizontal"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/student_cancel_changes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -404,7 +404,6 @@
         android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
