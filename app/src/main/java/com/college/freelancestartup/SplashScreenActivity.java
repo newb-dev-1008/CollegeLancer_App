@@ -13,6 +13,7 @@ class SplashScreenActivity extends AppCompatActivity {
 
     private FirebaseAuth.AuthStateListener authStateListener;
     private String UIDEmailID;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -20,15 +21,30 @@ class SplashScreenActivity extends AppCompatActivity {
 
         setContentView(R.layout.splash_screen);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth1) {
                 FirebaseUser user = firebaseAuth1.getCurrentUser();
-                if (user != null) {
-                    UIDEmailID = user.getEmail();
-                    updateUI(user);
-                }
+                UIDEmailID = user.getEmail();
+                updateUI(user);
             }
         };
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseAuth.addAuthStateListener(authStateListener);
+        updateUI(firebaseAuth.getCurrentUser());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (authStateListener != null){
+            firebaseAuth.removeAuthStateListener(authStateListener);
+        }
     }
 }
