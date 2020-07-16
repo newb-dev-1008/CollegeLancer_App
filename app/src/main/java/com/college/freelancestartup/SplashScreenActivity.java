@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-class SplashScreenActivity extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity {
 
     private FirebaseAuth.AuthStateListener authStateListener;
     private String UIDEmailID;
