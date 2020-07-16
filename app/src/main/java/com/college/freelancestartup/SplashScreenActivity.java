@@ -9,12 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 class SplashScreenActivity extends AppCompatActivity {
 
     private FirebaseAuth.AuthStateListener authStateListener;
     private String UIDEmailID;
     private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.splash_screen);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
