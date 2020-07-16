@@ -1,5 +1,6 @@
 package com.college.freelancestartup;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -45,6 +46,18 @@ class SplashScreenActivity extends AppCompatActivity {
         super.onStop();
         if (authStateListener != null){
             firebaseAuth.removeAuthStateListener(authStateListener);
+        }
+    }
+
+    private void updateUI(FirebaseUser firebaseUser){
+        if (firebaseUser != null){
+
+        }
+        else{
+            Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
     }
 }
