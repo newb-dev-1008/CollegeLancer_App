@@ -88,6 +88,7 @@ public class SignUpActivity extends AppCompatActivity {
     public String userTypeDB;
     private String EmailID;
     private String UIDEmailID;
+    private String emailIDfromLogin;
 
     private static final String KEY_NAME = "name";
     private static final String KEY_EMAIL = "email";
@@ -113,6 +114,9 @@ public class SignUpActivity extends AppCompatActivity {
 
         signUpFB.setPermissions("email", "public_profile");
         callbackManager = CallbackManager.Factory.create();
+
+        emailIDfromLogin = getIntent().getExtras().getString("EmailID");
+        signUpEmailET.setText(emailIDfromLogin);
 
         signUpFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
