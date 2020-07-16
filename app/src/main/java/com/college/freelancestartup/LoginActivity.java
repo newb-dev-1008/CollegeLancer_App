@@ -90,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        /*
         //AuthStateListener is in onCreate
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -98,12 +99,13 @@ public class LoginActivity extends AppCompatActivity {
                 if (user != null) {
                     UIDEmailID = user.getEmail();
                     updateUI(user);
-                } /*
+                }
                 else {
                     updateUI(null);
-                } */
+                }
             }
         };
+        */
 
         fbLoginManager = LoginManager.getInstance();
         signUpBtn = findViewById(R.id.welcomeSignUpButton);
@@ -344,18 +346,18 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user){
         // Update UI after login
-        Toast.makeText(this, user.toString(), Toast.LENGTH_SHORT).show();
-        // Toast.makeText(LoginActivity.this, "User " + UIDEmailID, Toast.LENGTH_LONG).show();
-        db.collection("Users").document("User " + UIDEmailID).get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.get("department") != null ||       // if any
-                            documentSnapshot.get("phoneNumber") != null ||          // field in
-                            documentSnapshot.get("name") != null ||                 // Firestore is
-                            documentSnapshot.get("studentSemester") != null ||      // non-null then
-                            documentSnapshot.get("dateOfBirth") != null ||          // proceed to
-                            documentSnapshot.get("university") != null) {           // further activities
+        if (user != null){
+            Toast.makeText(LoginActivity.this, "User " + UIDEmailID, Toast.LENGTH_LONG).show();
+            db.collection("Users").document("User " + UIDEmailID).get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.get("department") != null ||       // if any
+                                    documentSnapshot.get("phoneNumber") != null ||          // field in
+                                    documentSnapshot.get("name") != null ||                 // Firestore is
+                                    documentSnapshot.get("studentSemester") != null ||      // non-null then
+                                    documentSnapshot.get("dateOfBirth") != null ||          // proceed to
+                                    documentSnapshot.get("university") != null) {           // further activities
                                 if (documentSnapshot.get("userType") == "Lecturer/ Professor") {
                                     Intent intent = new Intent(LoginActivity.this, ProfessorMainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -380,30 +382,13 @@ public class LoginActivity extends AppCompatActivity {
                             // }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-    }
-
-    // Checking if a user is currently signed in
-    @Override
-    protected void onStart(){
-        super.onStart();
-        firebaseAuth.addAuthStateListener(authStateListener);
-        if (firebaseAuth.getCurrentUser() != null){
-            updateUI(firebaseAuth.getCurrentUser());
-        }
-        // FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-    }
-
-    @Override
-    protected void onStop(){
-        super.onStop();
-        if (authStateListener != null){
-            firebaseAuth.removeAuthStateListener(authStateListener);
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            return;
         }
     }
 
