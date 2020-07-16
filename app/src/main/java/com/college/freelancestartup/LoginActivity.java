@@ -177,8 +177,10 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                             else{
+                                String emailIDtoLogin = signInEmailET.getText().toString();
                                 Toast.makeText(LoginActivity.this, "You haven't registered with us. Sign up now!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                                intent.putExtra("EmailID", emailIDtoLogin);
                                 startActivity(intent);
                             }
                         }
