@@ -115,8 +115,12 @@ public class SignUpActivity extends AppCompatActivity {
         signUpFB.setPermissions("email", "public_profile");
         callbackManager = CallbackManager.Factory.create();
 
-        emailIDfromLogin = getIntent().getExtras().getString("EmailID");
-        signUpEmailET.setText(emailIDfromLogin);
+        try {
+            emailIDfromLogin = getIntent().getExtras().getString("EmailID");
+            signUpEmailET.setText(emailIDfromLogin);
+        } catch (NullPointerException e){
+            signUpEmailET.setText("");
+        }
 
         signUpFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
