@@ -38,7 +38,6 @@ public class StudentSettingsFragment extends DialogFragment {
     private String studentStatus;
     private String UIDEmailID;
 
-    private static final String KEY_STUDSTATUS = "studentStatus";
 
     @Nullable
     @Override
@@ -103,10 +102,8 @@ public class StudentSettingsFragment extends DialogFragment {
                                 }).setPositiveButton("Set Status", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Map<String, Object> studentStatusMap = new HashMap<>();
-                                studentStatusMap.put(KEY_STUDSTATUS, studentStatus);
-
-                                statusDB.collection("Users").document("User " + UIDEmailID).set(studentStatusMap)
+                                statusDB.collection("Users").document("User " + UIDEmailID).update(
+                                        "studentStatus", (status[i]))
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
