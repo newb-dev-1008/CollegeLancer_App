@@ -2,11 +2,13 @@ package com.college.freelancestartup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -73,10 +75,20 @@ class SplashScreenActivity extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                             } else {
-
+                                Toast.makeText(SplashScreenActivity.this, "We need some additional details before we go ahead.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SplashScreenActivity.this, GFBDetailsActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
                             }
                         }
-                    })
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(SplashScreenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
         }
         else{
             Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
