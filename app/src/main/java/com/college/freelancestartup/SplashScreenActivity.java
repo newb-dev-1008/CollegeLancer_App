@@ -7,8 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 class SplashScreenActivity extends AppCompatActivity {
@@ -54,7 +56,27 @@ class SplashScreenActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser firebaseUser){
         if (firebaseUser != null){
+            db.collection("Users").document("User " + UIDEmailID).get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.get("department") != null){
+                                if (documentSnapshot.get("userType").equals("Lecturer/ Professor")){
+                                    Intent intent = new Intent(SplashScreenActivity.this, ProfessorMainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                } else {
+                                    Intent intent = new Intent(SplashScreenActivity.this, StudentMainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                }
+                            } else {
 
+                            }
+                        }
+                    })
         }
         else{
             Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
