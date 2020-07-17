@@ -76,12 +76,6 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-    }
-
-    @Override
     protected void onStop() {
         super.onStop();
         if (authStateListener != null) {

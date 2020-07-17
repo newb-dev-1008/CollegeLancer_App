@@ -138,6 +138,7 @@ public class StudentMainActivity extends AppCompatActivity {
             getFragmentManager().popBackStackImmediate();
         } else {
             super.onBackPressed();
+            finish();
         }
     }
 
