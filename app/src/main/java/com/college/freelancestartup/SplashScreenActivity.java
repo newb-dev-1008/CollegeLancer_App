@@ -6,10 +6,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -70,16 +72,25 @@ public class SplashScreenActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            // System.out.println(documentSnapshot);
+                            AlertDialog test = new MaterialAlertDialogBuilder(SplashScreenActivity.this)
+                                    .setTitle("Testing")
+                                    .setMessage(documentSnapshot.toString())
+                                    .setPositiveButton("Okay", null)
+                                    .create();
+                            test.show();
                             if (documentSnapshot.get("department") != null){
                                 if (documentSnapshot.get("userType").equals("Lecturer/ Professor")){
                                     Intent intent = new Intent(SplashScreenActivity.this, ProfessorMainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    finish();
                                     startActivity(intent);
                                 } else {
                                     Intent intent = new Intent(SplashScreenActivity.this, StudentMainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    finish();
                                     startActivity(intent);
                                 }
                             } else {
@@ -87,6 +98,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                                 Intent intent = new Intent(SplashScreenActivity.this, GFBDetailsActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                finish();
                                 startActivity(intent);
                             }
                         }

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.AccessToken;
@@ -40,6 +41,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -352,6 +354,13 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            System.out.println(documentSnapshot);
+                            AlertDialog test = new MaterialAlertDialogBuilder(LoginActivity.this)
+                                    .setTitle("Testing")
+                                    .setMessage(documentSnapshot.toString())
+                                    .setPositiveButton("Okay", null)
+                                    .create();
+                            test.show();
                             if (documentSnapshot.get("department") != null ||               // if any
                                     documentSnapshot.get("phoneNumber") != null ||          // field in
                                     documentSnapshot.get("name") != null ||                 // Firestore is
