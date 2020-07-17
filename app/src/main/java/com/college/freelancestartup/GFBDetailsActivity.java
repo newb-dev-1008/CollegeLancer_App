@@ -77,9 +77,11 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.extradetails);
-
-        running = savedInstanceState.getBoolean("running");
-        wasrunning = savedInstanceState.getBoolean("wasrunning");
+        running = true;
+        if (savedInstanceState != null){
+            running = savedInstanceState.getBoolean("running");
+            wasrunning = savedInstanceState.getBoolean("wasrunning");
+        }
 
         signupButton = findViewById(R.id.signupButtonGFB);
         phoneNumberET = findViewById(R.id.phoneNumberEditText);
@@ -265,10 +267,21 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     @Override
     protected void onPause() {
         super.onPause();
+        wasrunning = running;
+        running = false;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        if (wasrunning){
+            running = true;
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // check if this is necessary
     }
 }
