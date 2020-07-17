@@ -28,7 +28,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        running = true;
         if (savedInstanceState != null){
             running = savedInstanceState.getBoolean("running");
             wasrunning = savedInstanceState.getBoolean("wasrunning");
@@ -82,9 +82,18 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        wasrunning = running;
+        running = false;
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
-
+        if (wasrunning){
+            running = true;
+        }
     }
 
     @Override

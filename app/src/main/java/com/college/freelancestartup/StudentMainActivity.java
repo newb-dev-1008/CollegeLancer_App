@@ -37,7 +37,7 @@ public class StudentMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
-
+        running = true;
         if (savedInstanceState != null){
             running = savedInstanceState.getBoolean("running");
             wasrunning = savedInstanceState.getBoolean("wasrunning");
