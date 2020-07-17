@@ -1,5 +1,7 @@
 package com.college.freelancestartup;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -11,9 +13,11 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -69,6 +73,29 @@ public class ComplaintsFragment extends Fragment {
             public void onClick(View view) {
                 db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                         .collection("Complaints").document(complaintET.getText().toString())
+            }
+        });
+
+        writeComplaintEmailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog writeEmailComplaint = new MaterialAlertDialogBuilder(getContext())
+                        .setTitle("Redirecting to Email")
+                        .setMessage("You will now be redirected to your Email service.\n" +
+                                "For a faster response, kindly keep the auto-generated subject unchanged.")
+                        .setPositiveButton("Okay, Proceed", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(Intent.ACTION_SEND);
+                                intent.setType("text");
+                                intent.putExtra(Intent.EXTRA_EMAIL, "collegelancer9669@gmail.com");
+                                intent.putExtra(Intent.EXTRA_SUBJECT, "Complaint: " + firebaseAuth.getCurrentUser().getDisplayName());
+                            }
+                        }).setNegativeButton("Cancel", null)
+                        .create();
+                writeEmailComplaint.show();
+                writeEmailComplaint.setCancelable(true);
+                writeEmailComplaint.setCanceledOnTouchOutside(false);
             }
         });
 
