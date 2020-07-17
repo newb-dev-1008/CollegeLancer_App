@@ -23,10 +23,16 @@ public class SplashScreenActivity extends AppCompatActivity {
     private String UIDEmailID;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore db;
+    private boolean running, wasrunning;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null){
+            running = savedInstanceState.getBoolean("running");
+            wasrunning = savedInstanceState.getBoolean("wasrunning");
+        }
 
         setContentView(R.layout.splash_screen);
 
@@ -73,6 +79,12 @@ public class SplashScreenActivity extends AppCompatActivity {
                 }
             }
         };
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
     @Override
