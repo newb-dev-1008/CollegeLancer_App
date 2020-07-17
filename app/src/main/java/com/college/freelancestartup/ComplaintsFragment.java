@@ -22,8 +22,11 @@ public class ComplaintsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.help_complaints_frag, container, false);
-        return super.onCreateView(inflater, container, savedInstanceState);
 
         lodgeComplaintButton = root.findViewById(R.id.lodgeComplaintButton);
+        writeComplaintEmailButton = root.findViewById(R.id.writeToUsButton);
+        complaintET = root.findViewById(R.id.complaintsET);
+
+        return root;
     }
 }
