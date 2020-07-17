@@ -1,122 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <TextView
-        android:id="@+id/complaintsTitleTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Complaints?"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:fontFamily="sans-serif-black"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        android:layout_marginTop="30dp"/>
-
-    <TextView
-        android:id="@+id/lodgeComplaintTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/complaintsTitleTV"
-        android:textSize="15sp"
-        android:layout_marginTop="45dp"
-        app:layout_constraintHorizontal_bias="0"
-        android:layout_marginStart="25dp"
-        android:fontFamily="sans-serif-black"
-        android:textColor="#000000"
-        android:text="Lodge a complaint below, or write to us."/>
-
-    <EditText
-        android:id="@+id/complaintsET"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter your complaints here"
-        app:layout_constraintTop_toBottomOf="@id/lodgeComplaintTV"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintHorizontal_bias="0"/>
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/lodgeComplaintButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lodge Complaint"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/complaintsET"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"/>
+        <TextView
+            android:id="@+id/complaintsTitleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Complaints?"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="sans-serif-black"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:layout_marginTop="30dp"/>
 
-    <View
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="@color/grey"
-        app:layout_constraintTop_toBottomOf="@id/lodgeComplaintButton"
-        android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"/>
+        <TextView
+            android:id="@+id/lodgeComplaintTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/complaintsTitleTV"
+            android:textSize="15sp"
+            android:layout_marginTop="45dp"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginStart="25dp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="#000000"
+            android:text="Lodge a complaint below, or write to us."/>
 
-    <TextView
-        android:id="@+id/writeToUsTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Write to us, we'll get back to you soon."
-        android:textSize="15sp"
-        android:fontFamily="sans-serif-black"
-        android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line"
-        android:layout_marginTop="30dp"
-        app:layout_constraintHorizontal_bias="0"
-        android:layout_marginStart="25dp"/>
+        <EditText
+            android:id="@+id/complaintsET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your complaints here"
+            app:layout_constraintTop_toBottomOf="@id/lodgeComplaintTV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintHorizontal_bias="0"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/writeToUsButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Write to us"
-        app:layout_constraintTop_toBottomOf="@id/writeToUsTV"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        app:icon="@drawable/email_white"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/lodgeComplaintButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lodge Complaint"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/complaintsET"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"/>
 
-    <View
-        android:id="@+id/line2"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="@color/grey"
-        app:layout_constraintTop_toBottomOf="@id/writeToUsButton"
-        android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"/>
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/grey"
+            app:layout_constraintTop_toBottomOf="@id/lodgeComplaintButton"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
 
-    <TextView
-        android:id="@+id/FAQTitleTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="General FAQs"
-        app:layout_constraintTop_toBottomOf="@id/line2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:fontFamily="sans-serif-black"
-        android:textColor="#000000"
-        android:textSize="22sp"
-        android:layout_marginTop="30dp"/>
+        <TextView
+            android:id="@+id/writeToUsTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Write to us, we'll get back to you soon."
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="#000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            android:layout_marginTop="30dp"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginStart="25dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/writeToUsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Write to us"
+            app:layout_constraintTop_toBottomOf="@id/writeToUsTV"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            app:icon="@drawable/email_white"/>
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/grey"
+            app:layout_constraintTop_toBottomOf="@id/writeToUsButton"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
+
+        <TextView
+            android:id="@+id/FAQTitleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="General FAQs"
+            app:layout_constraintTop_toBottomOf="@id/line2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="sans-serif-black"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            android:layout_marginTop="30dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
