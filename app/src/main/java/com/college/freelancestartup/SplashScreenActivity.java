@@ -90,12 +90,12 @@ public class SplashScreenActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             // System.out.println(documentSnapshot);
-                            AlertDialog test = new MaterialAlertDialogBuilder(SplashScreenActivity.this)
+                            /*AlertDialog test = new MaterialAlertDialogBuilder(SplashScreenActivity.this)
                                     .setTitle("Testing")
                                     .setMessage(documentSnapshot.toString())
                                     .setPositiveButton("Okay", null)
                                     .create();
-                            test.show();
+                            test.show();*/
                             if (documentSnapshot.get("department") != null){
                                 if (documentSnapshot.get("userType").equals("Lecturer/ Professor")){
                                     Intent intent = new Intent(SplashScreenActivity.this, ProfessorMainActivity.class);

@@ -257,4 +257,8 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         return cal;
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 }
