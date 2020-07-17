@@ -11,12 +11,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ComplaintsFragment extends Fragment {
 
     private View root;
     private MaterialButton lodgeComplaintButton, writeComplaintEmailButton;
     private EditText complaintET;
+    private FirebaseAuth firebaseAuth;
 
     @Nullable
     @Override
@@ -26,6 +28,7 @@ public class ComplaintsFragment extends Fragment {
         lodgeComplaintButton = root.findViewById(R.id.lodgeComplaintButton);
         writeComplaintEmailButton = root.findViewById(R.id.writeToUsButton);
         complaintET = root.findViewById(R.id.complaintsET);
+
 
         return root;
     }
