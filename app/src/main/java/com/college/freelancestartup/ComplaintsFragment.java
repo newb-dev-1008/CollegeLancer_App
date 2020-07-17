@@ -64,6 +64,14 @@ public class ComplaintsFragment extends Fragment {
             }
         });
 
+        lodgeComplaintButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                        .collection("Complaints").document(complaintET.getText().toString())
+            }
+        });
+
         return root;
     }
 }
