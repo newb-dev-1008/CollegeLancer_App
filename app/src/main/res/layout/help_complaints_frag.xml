@@ -106,5 +106,17 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"/>
 
+    <TextView
+        android:id="@+id/FAQTitleTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="General FAQs"
+        app:layout_constraintTop_toBottomOf="@id/line2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="sans-serif-black"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:layout_marginTop="30dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
