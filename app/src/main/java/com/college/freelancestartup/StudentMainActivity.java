@@ -31,11 +31,17 @@ public class StudentMainActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private FirebaseAuth firebaseAuth;
     private LoginManager fbLoggedIn;
+    private boolean running, wasrunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
+
+        if (savedInstanceState != null){
+            running = savedInstanceState.getBoolean("running");
+            wasrunning = savedInstanceState.getBoolean("wasrunning");
+        }
 
         Toolbar studentToolbar = findViewById(R.id.studentToolbar);
         setSupportActionBar(studentToolbar);
@@ -142,4 +148,18 @@ public class StudentMainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        wasrunning = running;
+        running = false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (wasrunning){
+            running = true;
+        }
+    }
 }
