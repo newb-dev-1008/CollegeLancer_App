@@ -71,10 +71,15 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     private String DOB;
     private Date DOBDate, currentDate;
 
+    private boolean running, wasrunning;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.extradetails);
+
+        running = savedInstanceState.getBoolean("running");
+        wasrunning = savedInstanceState.getBoolean("wasrunning");
 
         signupButton = findViewById(R.id.signupButtonGFB);
         phoneNumberET = findViewById(R.id.phoneNumberEditText);
@@ -260,5 +265,10 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }
