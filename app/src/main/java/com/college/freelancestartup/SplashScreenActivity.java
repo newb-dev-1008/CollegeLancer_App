@@ -51,7 +51,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         firebaseAuth.addAuthStateListener(authStateListener);
-        if (firebaseAuth.getCurrentUser() != null){
+        if (firebaseAuth.getCurrentUser() != null) {
             updateUI(firebaseAuth.getCurrentUser());
         } else {
             updateUI(null);
@@ -59,9 +59,26 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth1) {
+                FirebaseUser user = firebaseAuth1.getCurrentUser();
+                if (user != null) {
+                    UIDEmailID = user.getEmail();
+                    updateUI(user);
+                } else {
+                    updateUI(null);
+                }
+            }
+        };
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
-        if (authStateListener != null){
+        if (authStateListener != null) {
             firebaseAuth.removeAuthStateListener(authStateListener);
         }
     }
