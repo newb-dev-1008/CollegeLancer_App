@@ -352,7 +352,7 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.get("department") != null ||       // if any
+                            if (documentSnapshot.get("department") != null ||               // if any
                                     documentSnapshot.get("phoneNumber") != null ||          // field in
                                     documentSnapshot.get("name") != null ||                 // Firestore is
                                     documentSnapshot.get("studentSemester") != null ||      // non-null then
