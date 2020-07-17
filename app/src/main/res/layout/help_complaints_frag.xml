@@ -50,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Lodge Complaint"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/complaintsET"
         android:layout_marginTop="10dp"
         android:layout_marginStart="25dp"
@@ -68,6 +69,7 @@
         android:layout_marginEnd="15dp"/>
 
     <TextView
+        android:id="@+id/writeToUsTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Write to us, we'll get back to you soon."
@@ -80,6 +82,29 @@
         android:layout_marginTop="30dp"
         app:layout_constraintHorizontal_bias="0"
         android:layout_marginStart="25dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/writeToUsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Write to us"
+        app:layout_constraintTop_toBottomOf="@id/writeToUsTV"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        app:icon="@drawable/email_white"/>
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/grey"
+        app:layout_constraintTop_toBottomOf="@id/writeToUsButton"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
