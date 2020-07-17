@@ -176,6 +176,9 @@ public class StudentSettingsFragment extends DialogFragment {
                         statusDialog.show();
                         break;
                         */
+                        break;
+                    case 5:
+
                 }
             }
         });
