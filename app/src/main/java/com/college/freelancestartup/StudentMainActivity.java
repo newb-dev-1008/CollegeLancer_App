@@ -162,4 +162,10 @@ public class StudentMainActivity extends AppCompatActivity {
             running = true;
         }
     }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // check if this is necessary
+    }
 }
