@@ -72,7 +72,7 @@ public class ComplaintsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                        .collection("Complaints").document(complaintET.getText().toString())
+                        .collection("Complaints").document(complaintET.getText().toString());
             }
         });
 

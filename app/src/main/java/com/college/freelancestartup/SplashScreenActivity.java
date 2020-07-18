@@ -58,6 +58,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onStart();
         firebaseAuth.addAuthStateListener(authStateListener);
         if (firebaseAuth.getCurrentUser() != null) {
+            UIDEmailID = firebaseAuth.getCurrentUser().getEmail();
             updateUI(firebaseAuth.getCurrentUser());
         } else {
             updateUI(null);
@@ -106,18 +107,19 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser firebaseUser){
         if (firebaseUser != null){
+            Toast.makeText(this, "User " + firebaseUser.getEmail(), Toast.LENGTH_SHORT).show();
             db.collection("Users").document("User " + UIDEmailID).get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             // System.out.println(documentSnapshot);
-                            /*AlertDialog test = new MaterialAlertDialogBuilder(SplashScreenActivity.this)
+                            AlertDialog test = new MaterialAlertDialogBuilder(SplashScreenActivity.this)
                                     .setTitle("Testing")
                                     .setMessage(documentSnapshot.toString())
                                     .setPositiveButton("Okay", null)
                                     .create();
-                            test.show();*/
-                            if (documentSnapshot.get("department") != null){
+                            test.show();
+                            if (documentSnapshot.get("department") != null) {
                                 if (documentSnapshot.get("userType").equals("Lecturer/ Professor")){
                                     Intent intent = new Intent(SplashScreenActivity.this, ProfessorMainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
