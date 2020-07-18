@@ -68,6 +68,7 @@ public class ComplaintsFragment extends Fragment {
             }
         });
 
+        /*
         lodgeComplaintButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,6 +76,7 @@ public class ComplaintsFragment extends Fragment {
                         .collection("Complaints").document(complaintET.getText().toString());
             }
         });
+         */
 
         writeComplaintEmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
