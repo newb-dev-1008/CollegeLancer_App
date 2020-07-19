@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -33,11 +34,12 @@ public class StudentSettingsFragment extends DialogFragment {
     private String[] studentSettingsArray;
     private ListView studentSettingsListView;
     private View root;
+    private int checked;
     private FirebaseFirestore statusDB;
-    private int checkedStatus = 1;
+    private int checkedStatus;
     private String studentStatus;
     private String UIDEmailID;
-
+    private String[] status = new String[]{"Available for projects/ research", "Looking for research with professors", "Looking for collaborators", "Paid projects only", "Unavailable for a while"};
 
     @Nullable
     @Override
@@ -58,6 +60,29 @@ public class StudentSettingsFragment extends DialogFragment {
         return root;
     }
 
+    protected int getCheckedStatus(){
+        statusDB.collection("Users").document("User " + UIDEmailID).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        final String prevStatus = documentSnapshot.get("studentStatus").toString();
+                        for (int i = 0; i < status.length; i++){
+                            if (status[i].equals(prevStatus)){
+                                checked = i;
+                                break;
+                            }
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                checked = -1;
+                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        return checked;
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -71,8 +96,10 @@ public class StudentSettingsFragment extends DialogFragment {
                         startActivity(intent);
                         break;
                     case 1:
-                        String[] status = new String[]{"Available for projects/ research", "Looking for research with professors", "Looking for collaborators", "Paid projects only", "Unavailable for a while"};
+                        checkedStatus = getCheckedStatus();
+                        if (checkedStatus == 1){
 
+                        }
                         AlertDialog statusDialog = new MaterialAlertDialogBuilder(getContext())
                                 .setTitle("Set your current status")
                                 .setMessage("Please note that your status determines your availability for providing and receiving projects.")
