@@ -26,7 +26,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class ComplaintsFragment extends Fragment {
 
     private View root;
-    private TextView complaintsTitleTV;
+    private TextView complaintsTitleTV, lodgeComplaintTV, writeTV, faqTV;
+    private View line, line2;
     private MaterialButton lodgeComplaintButton, writeComplaintEmailButton;
     private EditText complaintET;
     private FirebaseAuth firebaseAuth;
@@ -41,6 +42,13 @@ public class ComplaintsFragment extends Fragment {
         lodgeComplaintButton = root.findViewById(R.id.lodgeComplaintButton);
         writeComplaintEmailButton = root.findViewById(R.id.writeToUsButton);
         complaintET = root.findViewById(R.id.complaintsET);
+
+        complaintsTitleTV = root.findViewById(R.id.complaintsTitleTV);
+        lodgeComplaintTV = root.findViewById(R.id.lodgeComplaintTV);
+        writeTV = root.findViewById(R.id.writeToUsTV);
+        line = root.findViewById(R.id.line);
+        line2 = root.findViewById(R.id.line2);
+        faqTV = root.findViewById(R.id.FAQTitleTV);
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -127,6 +135,13 @@ public class ComplaintsFragment extends Fragment {
     }
 
     private void registerNewComplaint(){
-
+        complaintsTitleTV.setVisibility(View.VISIBLE);
+        faqTV.setVisibility(View.VISIBLE);
+        writeTV.setVisibility(View.VISIBLE);
+        writeComplaintEmailButton.setVisibility(View.VISIBLE);
+        line.setVisibility(View.VISIBLE);
+        complaintET.setVisibility(View.VISIBLE);
+        line2.setVisibility(View.VISIBLE);
+        lodgeComplaintTV.setVisibility(View.VISIBLE);
     }
 }
