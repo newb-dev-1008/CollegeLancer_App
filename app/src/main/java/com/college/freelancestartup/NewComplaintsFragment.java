@@ -23,7 +23,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-class NewComplaintsFragment extends Fragment {
+public class NewComplaintsFragment extends Fragment {
 
     private View root;
     private TextView complaintsTitleTV, lodgeComplaintTV, writeTV, faqTV;

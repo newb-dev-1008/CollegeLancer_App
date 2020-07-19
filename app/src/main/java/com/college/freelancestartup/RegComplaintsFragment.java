@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-class RegComplaintsFragment extends Fragment {
+public class RegComplaintsFragment extends Fragment {
 
     private View root;
 
