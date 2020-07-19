@@ -16,9 +16,9 @@ public class ComplaintsViewPagerAdapter extends FragmentPagerAdapter {
         switch (position)
         {
             case 0:
-                return new NewComplaintsFragment(); //ChildFragment1 at position 0
+                return new NewComplaintsFragment();
             case 1:
-                return new RegComplaintsFragment(); //ChildFragment2 at position 1
+                return new RegComplaintsFragment();
         }
         return null; //does not happen
     }
