@@ -9,13 +9,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -119,7 +122,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                                     .setPositiveButton("Okay", null)
                                     .create();
                             test.show();
-                            if (documentSnapshot.get("department") != null) {
+                            if (documentSnapshot.get("userType") != null) {
                                 if (documentSnapshot.get("userType").equals("Lecturer/ Professor")){
                                     Intent intent = new Intent(SplashScreenActivity.this, ProfessorMainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
