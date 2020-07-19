@@ -178,7 +178,9 @@ public class StudentSettingsFragment extends DialogFragment {
                         */
                         break;
                     case 5:
-
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.student_fragment_container, new ComplaintsFragment())
+                                .commit();
                 }
             }
         });
