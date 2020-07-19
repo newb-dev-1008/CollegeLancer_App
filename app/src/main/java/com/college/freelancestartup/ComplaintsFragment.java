@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class ComplaintsFragment extends Fragment {
 
     private View root;
+    private TextView complaintsTitleTV;
     private MaterialButton lodgeComplaintButton, writeComplaintEmailButton;
     private EditText complaintET;
     private FirebaseAuth firebaseAuth;
@@ -122,5 +124,9 @@ public class ComplaintsFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    private void registerNewComplaint(){
+
     }
 }
