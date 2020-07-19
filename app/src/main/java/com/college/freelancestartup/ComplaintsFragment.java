@@ -144,4 +144,15 @@ public class ComplaintsFragment extends Fragment {
         line2.setVisibility(View.VISIBLE);
         lodgeComplaintTV.setVisibility(View.VISIBLE);
     }
+
+    private void showRegisteredComplaints(){
+        complaintsTitleTV.setVisibility(View.VISIBLE);
+        faqTV.setVisibility(View.VISIBLE);
+        writeTV.setVisibility(View.VISIBLE);
+        writeComplaintEmailButton.setVisibility(View.VISIBLE);
+        line.setVisibility(View.VISIBLE);
+        complaintET.setVisibility(View.VISIBLE);
+        line2.setVisibility(View.VISIBLE);
+        lodgeComplaintTV.setVisibility(View.VISIBLE);
+    }
 }
