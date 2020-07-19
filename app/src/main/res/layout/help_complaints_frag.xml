@@ -12,11 +12,13 @@
         app:tabMode="auto">
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/new_tab"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="New Complaints"/>
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/registered_tab"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Registered Complaints"/>
