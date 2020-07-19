@@ -104,7 +104,11 @@ public class ComplaintsFragment extends Fragment {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.equals())
+                if (tab.equals(R.id.new_tab)){
+                    registerNewComplaint();
+                } else {
+                    showRegisteredComplaints();
+                }
             }
 
             @Override
