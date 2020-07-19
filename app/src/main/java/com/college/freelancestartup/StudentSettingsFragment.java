@@ -73,7 +73,7 @@ public class StudentSettingsFragment extends DialogFragment {
                     case 1:
                         String[] status = new String[]{"Available for projects/ research", "Looking for research with professors", "Looking for collaborators", "Paid projects only", "Unavailable for a while"};
 
-                        AlertDialog statusDialogBuilder = new MaterialAlertDialogBuilder(getContext())
+                        AlertDialog statusDialog = new MaterialAlertDialogBuilder(getContext())
                                 .setTitle("Set your current status")
                                 .setMessage("Please note that your status determines your availability for providing and receiving projects.")
                                 .setSingleChoiceItems(status, checkedStatus, new DialogInterface.OnClickListener() {
@@ -118,7 +118,9 @@ public class StudentSettingsFragment extends DialogFragment {
                                         });
                             }
                         }).setNegativeButton("Go Back", null).create();
-
+                        statusDialog.show();
+                        statusDialog.setCancelable(true);
+                        statusDialog.setCanceledOnTouchOutside(true);
 
                         /*
                         AlertDialog.Builder statusSettingBuilder = new AlertDialog.Builder(getContext())
