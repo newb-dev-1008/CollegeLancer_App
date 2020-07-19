@@ -97,57 +97,60 @@ public class StudentSettingsFragment extends DialogFragment {
                         break;
                     case 1:
                         checkedStatus = getCheckedStatus();
-                        if (checkedStatus == 1){
-
-                        }
-                        AlertDialog statusDialog = new MaterialAlertDialogBuilder(getContext())
-                                .setTitle("Set your current status")
-                                .setMessage("Please note that your status determines your availability for providing and receiving projects.")
-                                .setSingleChoiceItems(status, checkedStatus, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int statusNo) {
-                                        checkedStatus = statusNo;
-                                        studentStatus = status[checkedStatus];
-                                        switch (checkedStatus) {
-                                            default:
-                                                Toast.makeText(getContext(), "Setting status. Your colleagues will now see you're available for projects and research work.", Toast.LENGTH_LONG).show();
-                                                break;
-                                            case 1:
-                                                Toast.makeText(getContext(), "Setting status. Professors will now see you're up for research.", Toast.LENGTH_LONG).show();
-                                                break;
-                                            case 2:
-                                                Toast.makeText(getContext(), "Setting status. Your fellow freelancers will now be able to contact you for project collaboration.", Toast.LENGTH_LONG).show();
-                                                break;
-                                            case 3:
-                                                Toast.makeText(getContext(), "Setting status. You will be made available only to organizations and premium clients.", Toast.LENGTH_LONG).show();
-                                                break;
-                                            case 4:
-                                                Toast.makeText(getContext(), "Setting status. You will not be contacted for projects or research until you change your status.", Toast.LENGTH_LONG).show();
-                                                break;
+                        if (checkedStatus == -1){
+                            return;
+                        } else {
+                            AlertDialog statusDialog = new MaterialAlertDialogBuilder(getContext())
+                                    .setTitle("Set your current status")
+                                    .setMessage("Please note that your status determines your availability for providing and receiving projects.")
+                                    .setSingleChoiceItems(status, checkedStatus, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int statusNo) {
+                                            checkedStatus = statusNo;
+                                            studentStatus = status[checkedStatus];
+                                            switch (checkedStatus) {
+                                                default:
+                                                    Toast.makeText(getContext(), "Setting status. Your colleagues will now see you're available for projects and research work.", Toast.LENGTH_LONG).show();
+                                                    break;
+                                                case 1:
+                                                    Toast.makeText(getContext(), "Setting status. Professors will now see you're up for research.", Toast.LENGTH_LONG).show();
+                                                    break;
+                                                case 2:
+                                                    Toast.makeText(getContext(), "Setting status. Your fellow freelancers will now be able to contact you for project collaboration.", Toast.LENGTH_LONG).show();
+                                                    break;
+                                                case 3:
+                                                    Toast.makeText(getContext(), "Setting status. You will be made available only to organizations and premium clients.", Toast.LENGTH_LONG).show();
+                                                    break;
+                                                case 4:
+                                                    Toast.makeText(getContext(), "Setting status. You will not be contacted for projects or research until you change your status.", Toast.LENGTH_LONG).show();
+                                                    break;
+                                            }
                                         }
-                                    }
-                                }).setPositiveButton("Set Status", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                statusDB.collection("Users").document("User " + UIDEmailID).update(
-                                        "studentStatus", (status[i]))
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                Toast.makeText(getContext(), "Your status has been updated.", Toast.LENGTH_SHORT).show();
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                            }
-                        }).setNegativeButton("Go Back", null).create();
-                        statusDialog.show();
-                        statusDialog.setCancelable(true);
-                        statusDialog.setCanceledOnTouchOutside(true);
+                                    }).setPositiveButton("Set Status", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            statusDB.collection("Users").document("User " + UIDEmailID).update(
+                                                    "studentStatus", (status[i]))
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void aVoid) {
+                                                            Toast.makeText(getContext(), "Your status has been updated.", Toast.LENGTH_SHORT).show();
+                                                            dialogInterface.dismiss();
+                                                        }
+                                                    })
+                                                    .addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                            dialogInterface.dismiss();
+                                                        }
+                                                    });
+                                        }
+                                    }).setNegativeButton("Go Back", null).create();
+                            statusDialog.show();
+                            statusDialog.setCancelable(true);
+                            statusDialog.setCanceledOnTouchOutside(true);
+                        }
 
                         /*
                         AlertDialog.Builder statusSettingBuilder = new AlertDialog.Builder(getContext())
