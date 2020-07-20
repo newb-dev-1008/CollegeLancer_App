@@ -255,7 +255,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
             allowEdit();
         } else if (semesterET.getSelectedItem() == "Select your current semester"){
             Toast.makeText(this, "Please select your current semester.", Toast.LENGTH_SHORT).show();
-            semesterET.setSelection(((ArrayAdapter)departmentET.getAdapter()).getPosition(dbSemester));
+            semesterET.setSelection(((ArrayAdapter)semesterET.getAdapter()).getPosition(dbSemester));
             semesterET.setClickable(false);
             semesterET.setFocusable(false);
             applyChanges.setVisibility(View.GONE);
