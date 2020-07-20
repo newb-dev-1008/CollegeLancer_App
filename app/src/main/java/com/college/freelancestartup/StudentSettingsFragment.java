@@ -110,11 +110,12 @@ public class StudentSettingsFragment extends DialogFragment {
                                     View contextView = getView();
                                     switch (checkedStatus) {
                                         default:
-                                            Snackbar.make(contextView, R.string.firstStatus, Snackbar.LENGTH_LONG).show();
+                                            Snackbar.make(contextView, R.string.firstStatusStudent, Snackbar.LENGTH_LONG).show();
                                             // Toast.makeText(getContext(), "Setting status. Your colleagues will now see you're available for projects and research work.", Toast.LENGTH_LONG).show();
                                             break;
                                         case 1:
-                                            Toast.makeText(getContext(), "Setting status. Professors will now see you're up for research.", Toast.LENGTH_LONG).show();
+                                            Snackbar.make(contextView, R.string.secondStatusStudent, Snackbar.LENGTH_LONG).show();
+                                            // Toast.makeText(getContext(), "Setting status. Professors will now see you're up for research.", Toast.LENGTH_LONG).show();
                                             break;
                                         case 2:
                                             Toast.makeText(getContext(), "Setting status. Your fellow freelancers will now be able to contact you for project collaboration.", Toast.LENGTH_LONG).show();
