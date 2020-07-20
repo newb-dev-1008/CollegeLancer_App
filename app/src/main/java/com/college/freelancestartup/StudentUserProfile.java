@@ -148,6 +148,21 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
             @Override
             public void onClick(View view) {
                 // Write this stuff
+                AlertDialog confirmCancelEdit = new MaterialAlertDialogBuilder(StudentUserProfile.this)
+                        .setTitle("Confirm")
+                        .setMessage("Are you sure you want to cancel changes?")
+                        .setPositiveButton("Yes, Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(StudentUserProfile.this, StudentUserProfile.class);
+                                finish();
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            }
+                        }).setNegativeButton("Go Back", null)
+                        .create();
+                confirmCancelEdit.show();
             }
         });
     }
