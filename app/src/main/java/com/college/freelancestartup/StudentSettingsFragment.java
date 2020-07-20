@@ -126,6 +126,7 @@ public class StudentSettingsFragment extends DialogFragment {
                                             // Toast.makeText(getContext(), "Setting status. You will be made available only to organizations and premium clients.", Toast.LENGTH_LONG).show();
                                             break;
                                         case 4:
+                                            Snackbar.make(contextView, R.string.fifthStatusStudent, Snackbar.LENGTH_LONG).show();
                                             // Toast.makeText(getContext(), "Setting status. You will not be contacted for projects or research until you change your status.", Toast.LENGTH_LONG).show();
                                             break;
                                     }
@@ -135,7 +136,7 @@ public class StudentSettingsFragment extends DialogFragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     statusDB.collection("Users").document("User " + UIDEmailID).update(
-                                            "studentStatus", (status[i]))
+                                            "studentStatus", (status[checkedStatus]))
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
