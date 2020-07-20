@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -106,9 +107,11 @@ public class StudentSettingsFragment extends DialogFragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     studentStatus = status[i];
+                                    View contextView = getView();
                                     switch (checkedStatus) {
                                         default:
-                                            Toast.makeText(getContext(), "Setting status. Your colleagues will now see you're available for projects and research work.", Toast.LENGTH_LONG).show();
+                                            Snackbar.make(contextView, R.string.firstStatus, Snackbar.LENGTH_LONG).show();
+                                            // Toast.makeText(getContext(), "Setting status. Your colleagues will now see you're available for projects and research work.", Toast.LENGTH_LONG).show();
                                             break;
                                         case 1:
                                             Toast.makeText(getContext(), "Setting status. Professors will now see you're up for research.", Toast.LENGTH_LONG).show();

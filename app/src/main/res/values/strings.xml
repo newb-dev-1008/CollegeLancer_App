@@ -65,4 +65,9 @@
         <item>Help/ Complaints</item>
         <item>Notification Settings</item>
     </string-array>
+
+    <!-- Text resources for Snackbars -->
+
+    <string name="firstStatus">Setting status. Your colleagues will now see you\'re available for projects and research work.</string>
+    <string name="secondStatus">Setting status. Professors will now see you\'re up for research.</string>
 </resources>
