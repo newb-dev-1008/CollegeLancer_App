@@ -106,7 +106,7 @@ public class StudentSettingsFragment extends DialogFragment {
                             statusDialogBuilder.setSingleChoiceItems(status, checkedStatus, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    studentStatus = status[i];
+                                    studentStatus = status[checkedStatus];
                                     View contextView = getView();
                                     switch (checkedStatus) {
                                         default:
@@ -136,7 +136,7 @@ public class StudentSettingsFragment extends DialogFragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     statusDB.collection("Users").document("User " + UIDEmailID).update(
-                                            "studentStatus", (status[checkedStatus]))
+                                            "studentStatus", (studentStatus))
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
