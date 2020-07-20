@@ -484,8 +484,9 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
 
     private void setSelectedEditable(ImageView imageViewObject){
         if (imageViewObject.equals(editName)){
-            nameET.setFocusable(true);
+            nameET.setFocusableInTouchMode(true);
             nameET.setClickable(true);
+            nameET.setCursorVisible(true);
             nameET.setText("");
             nameET.setHint("Enter your new name");
         } else if (imageViewObject.equals(editPhoneNumber)) {
