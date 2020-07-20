@@ -141,7 +141,7 @@ public class StudentSettingsFragment extends DialogFragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     statusDB.collection("Users").document("User " + UIDEmailID).update(
-                                            "studentStatus", (studentStatus))
+                                            "studentStatus", studentStatus)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {

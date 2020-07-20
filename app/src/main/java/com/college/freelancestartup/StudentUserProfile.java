@@ -33,6 +33,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -298,6 +299,19 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
                 selectImageInputMode();
             } else if (!dbSemester.equals(semesterET.getSelectedItem().toString())) {
                 // change the field in Firestore
+                db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                        .update("studentSemester", semesterET.getSelectedItem().toString())
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(StudentUserProfile.this, "Semester details updated.", Toast.LENGTH_SHORT).show();
+                                finish();
+                                Intent intent = new Intent(StudentUserProfile.this, StudentUserProfile.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            }
+                        })
             } else if (!dbDOB.equals(DOBET.getText().toString())) {
                 if (((checkDOBValidity(currentDate, DOBDate) > 0) && (checkDOBValidity(currentDate, DOBDate) < 18))) {
                     // This is proper
