@@ -488,13 +488,13 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
             nameET.setFocusableInTouchMode(true);
             nameET.setClickable(true);
             nameET.setCursorVisible(true);
-            nameET.setBackgroundColor(Color.BLACK);
+            nameET.setBackgroundColor(Color.WHITE);
             nameET.setText("");
             nameET.setHint("Enter your new name");
         } else if (imageViewObject.equals(editPhoneNumber)) {
             phoneNumberET.setFocusableInTouchMode(true);
             phoneNumberET.setClickable(true);
-            phoneNumberET.setBackgroundColor(Color.BLACK);
+            phoneNumberET.setBackgroundColor(Color.WHITE);
             phoneNumberET.setCursorVisible(true);
             phoneNumberET.setText("");
             phoneNumberET.setHint("Enter your new 10 digit phone number");
@@ -507,11 +507,12 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
             departmentET.setClickable(true);
             departmentET.setSelection(0);
         } else if (imageViewObject.equals(editDOB)) {
-            DOBET.setFocusableInTouchMode(true);
-            DOBET.setBackgroundColor(Color.BLACK);
-            DOBET.setCursorVisible(true);
+            // DOBET.setFocusableInTouchMode(true);
+            DOBET.setBackgroundColor(Color.WHITE);
+            DOBET.setClickable(true);
+            // DOBET.setCursorVisible(true);
             DOBET.setText("");
-            DOBET.setHint("Enter your Date of Birth");
+            DOBET.setHint("Click here to select your Date of Birth");
             DOBET.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -522,21 +523,21 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
         } else if (imageViewObject.equals(editEmail)) {
             emailET.setFocusableInTouchMode(true);
             emailET.setClickable(true);
-            emailET.setBackgroundColor(Color.BLACK);
+            emailET.setBackgroundColor(Color.WHITE);
             emailET.setCursorVisible(true);
             emailET.setText("");
             emailET.setHint("Enter your new Email ID");
         } else if (imageViewObject.equals(editUniversity)) {
             universityET.setFocusableInTouchMode(true);
             universityET.setClickable(true);
-            universityET.setBackgroundColor(Color.BLACK);
+            universityET.setBackgroundColor(Color.WHITE);
             universityET.setCursorVisible(true);
             universityET.setText("");
             universityET.setHint("Enter your University Name");
         } else if (imageViewObject.equals(editBio)) {
             bioET.setFocusableInTouchMode(true);
             bioET.setClickable(true);
-            bioET.setBackgroundColor(Color.BLACK);
+            bioET.setBackgroundColor(Color.WHITE);
             bioET.setCursorVisible(true);
             bioET.setText("");
             bioET.setEnabled(true);
