@@ -311,7 +311,18 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             }
-                        })
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        semesterET.setFocusable(false);
+                        semesterET.setClickable(false);
+                        semesterET.setSelection(((ArrayAdapter)semesterET.getAdapter()).getPosition(dbSemester));
+                        applyChanges.setVisibility(View.GONE);
+                        cancelChanges.setVisibility(View.GONE);
+                        flagApplyChangesPressed = 0;
+                        allowEdit();
+                    }
+                });
             } else if (!dbDOB.equals(DOBET.getText().toString())) {
                 if (((checkDOBValidity(currentDate, DOBDate) > 0) && (checkDOBValidity(currentDate, DOBDate) < 18))) {
                     // This is proper
