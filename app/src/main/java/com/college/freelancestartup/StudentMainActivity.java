@@ -56,7 +56,7 @@ public class StudentMainActivity extends AppCompatActivity {
         BottomNavigationView studentNavBottom = findViewById(R.id.studentBottomNav);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                new StudentHomeFragment(), "StudentHomeFragment").addToBackStack("StudentHomeFragment").commit();
+                new StudentHomeFragment()).addToBackStack(null).commit();
 
 
         studentNavBottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -135,7 +135,7 @@ public class StudentMainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                    new StudentHomeFragment(), "StudentHomeFragment1").addToBackStack("StudentHomeFragment1").commit();
+                    new StudentHomeFragment()).addToBackStack(null).commit();
         }
 
     }
