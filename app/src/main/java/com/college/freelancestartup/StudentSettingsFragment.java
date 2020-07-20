@@ -122,10 +122,11 @@ public class StudentSettingsFragment extends DialogFragment {
                                             // Toast.makeText(getContext(), "Setting status. Your fellow freelancers will now be able to contact you for project collaboration.", Toast.LENGTH_LONG).show();
                                             break;
                                         case 3:
-                                            Toast.makeText(getContext(), "Setting status. You will be made available only to organizations and premium clients.", Toast.LENGTH_LONG).show();
+                                            Snackbar.make(contextView, R.string.fourthStatusStudent, Snackbar.LENGTH_LONG).show();
+                                            // Toast.makeText(getContext(), "Setting status. You will be made available only to organizations and premium clients.", Toast.LENGTH_LONG).show();
                                             break;
                                         case 4:
-                                            Toast.makeText(getContext(), "Setting status. You will not be contacted for projects or research until you change your status.", Toast.LENGTH_LONG).show();
+                                            // Toast.makeText(getContext(), "Setting status. You will not be contacted for projects or research until you change your status.", Toast.LENGTH_LONG).show();
                                             break;
                                     }
                                 }
