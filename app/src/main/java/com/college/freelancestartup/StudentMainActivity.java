@@ -65,15 +65,15 @@ public class StudentMainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.studentHome:
                         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                                new StudentHomeFragment()).commit();
+                                new StudentHomeFragment(), "StudentHomeFrag").addToBackStack("StudentHomeFrag").commit();
                         break;
                     case R.id.studentAddProj:
                         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                                new StudentAddProjFragment()).commit();
+                                new StudentAddProjFragment(), "StudentAddProjFragment").addToBackStack("StudentAddProjFragment").commit();
                         break;
                     case R.id.studentOrgs:
                         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                                new StudentOrgsFragment()).commit();
+                                new StudentOrgsFragment(), "StudentOrgsFrag").addToBackStack("StudentOrgsFrag").commit();
                         break;
                     case R.id.studentProf:
                         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
