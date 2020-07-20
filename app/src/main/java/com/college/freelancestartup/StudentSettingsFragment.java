@@ -105,28 +105,33 @@ public class StudentSettingsFragment extends DialogFragment {
                             statusDialogBuilder.setTitle("Set your current status");
                             statusDialogBuilder.setSingleChoiceItems(status, checkedStatus, new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
+                                public void onClick(DialogInterface dialogInterface, int item) {
                                     studentStatus = status[checkedStatus];
                                     View contextView = getView();
                                     switch (checkedStatus) {
-                                        default:
+                                        case 0:
                                             Snackbar.make(contextView, R.string.firstStatusStudent, Snackbar.LENGTH_LONG).show();
+                                            studentStatus = status[item];
                                             // Toast.makeText(getContext(), "Setting status. Your colleagues will now see you're available for projects and research work.", Toast.LENGTH_LONG).show();
                                             break;
                                         case 1:
                                             Snackbar.make(contextView, R.string.secondStatusStudent, Snackbar.LENGTH_LONG).show();
+                                            studentStatus = status[item];
                                             // Toast.makeText(getContext(), "Setting status. Professors will now see you're up for research.", Toast.LENGTH_LONG).show();
                                             break;
                                         case 2:
                                             Snackbar.make(contextView, R.string.thirdStatusStudent, Snackbar.LENGTH_LONG).show();
+                                            studentStatus = status[item];
                                             // Toast.makeText(getContext(), "Setting status. Your fellow freelancers will now be able to contact you for project collaboration.", Toast.LENGTH_LONG).show();
                                             break;
                                         case 3:
                                             Snackbar.make(contextView, R.string.fourthStatusStudent, Snackbar.LENGTH_LONG).show();
+                                            studentStatus = status[item];
                                             // Toast.makeText(getContext(), "Setting status. You will be made available only to organizations and premium clients.", Toast.LENGTH_LONG).show();
                                             break;
                                         case 4:
                                             Snackbar.make(contextView, R.string.fifthStatusStudent, Snackbar.LENGTH_LONG).show();
+                                            studentStatus = status[item];
                                             // Toast.makeText(getContext(), "Setting status. You will not be contacted for projects or research until you change your status.", Toast.LENGTH_LONG).show();
                                             break;
                                     }
