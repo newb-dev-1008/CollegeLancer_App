@@ -122,7 +122,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
                         nameET.setText(dbName);
                         phoneNumberET.setText(dbPhoneNumber);
                         departmentET.setSelection(((ArrayAdapter)departmentET.getAdapter()).getPosition(dbDepartment));
-                        semesterET.setSelection(((ArrayAdapter)departmentET.getAdapter()).getPosition(dbSemester));
+                        semesterET.setSelection(((ArrayAdapter)semesterET.getAdapter()).getPosition(dbSemester));
                         emailET.setText(dbEmail);
                         DOBET.setText(dbDOB);
                         universityET.setText(dbUniversity);
