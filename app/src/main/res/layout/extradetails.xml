@@ -165,7 +165,7 @@
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/deptEnggSpinner"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:entries="@array/departmentsEngg"
@@ -196,7 +196,7 @@
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/studentSemSpinner"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:entries="@array/studentSem"
