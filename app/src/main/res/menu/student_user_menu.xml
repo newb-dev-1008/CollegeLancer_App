@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:title="Menu"
+        android:title="Edit Profile"
         android:id="@+id/editProfile"
         android:icon="@drawable/edit"
         android:tooltipText="Edit Profile"

@@ -154,6 +154,7 @@
                         app:layout_constraintBottom_toTopOf="@id/student_profileSemesterTV"
                         android:spinnerMode="dialog"
                         android:clickable="false"
+                        android:focusable="false"
                         android:textAlignment="center"/>
 
                     <TextView
@@ -197,7 +198,8 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/student_profileSemesterTV"
                         app:layout_constraintBottom_toTopOf="@id/student_profileEmailTV"
-                        android:clickable="false"/>
+                        android:clickable="false"
+                        android:focusable="false" />
 
                     <TextView
                         android:id="@+id/student_profileEmailTV"
