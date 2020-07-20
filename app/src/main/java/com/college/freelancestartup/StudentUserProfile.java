@@ -231,6 +231,8 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
             nameET.setClickable(false);
             nameET.setFocusable(false);
             applyChanges.setVisibility(View.GONE);
+            nameET.setCursorVisible(false);
+            nameET.setBackgroundColor(Color.TRANSPARENT);
             cancelChanges.setVisibility(View.GONE);
             flagApplyChangesPressed = 0;
             allowEdit();
@@ -240,6 +242,8 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
             phoneNumberET.setText(dbPhoneNumber);
             phoneNumberET.setClickable(false);
             phoneNumberET.setFocusable(false);
+            phoneNumberET.setCursorVisible(false);
+            phoneNumberET.setBackgroundColor(Color.TRANSPARENT);
             applyChanges.setVisibility(View.GONE);
             cancelChanges.setVisibility(View.GONE);
             flagApplyChangesPressed = 0;
@@ -268,6 +272,8 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
             emailET.setText(dbEmail);
             emailET.setClickable(false);
             emailET.setFocusable(false);
+            emailET.setCursorVisible(false);
+            emailET.setBackgroundColor(Color.TRANSPARENT);
             applyChanges.setVisibility(View.GONE);
             cancelChanges.setVisibility(View.GONE);
             flagApplyChangesPressed = 0;
@@ -278,6 +284,8 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
             universityET.setText(dbUniversity);
             universityET.setClickable(false);
             universityET.setFocusable(false);
+            universityET.setCursorVisible(false);
+            universityET.setBackgroundColor(Color.TRANSPARENT);
             applyChanges.setVisibility(View.GONE);
             cancelChanges.setVisibility(View.GONE);
             flagApplyChangesPressed = 0;
