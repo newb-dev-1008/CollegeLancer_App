@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -52,18 +53,52 @@ public class StudentMainActivity extends AppCompatActivity {
         drawer = findViewById(R.id.student_drawer_layout);
         NavigationView studentNavigationView = findViewById(R.id.student_navigation_drawer);
 
+        BottomNavigationView studentNavBottom = findViewById(R.id.studentBottomNav);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                new StudentHomeFragment()).commit();
+
+        studentNavBottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.studentHome:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                                new StudentHomeFragment()).commit();
+                        break;
+                    case R.id.studentAddProj:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                                new StudentAddProjFragment()).commit();
+                        break;
+                    case R.id.studentOrgs:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                                new StudentOrgsFragment()).commit();
+                        break;
+                    case R.id.studentProf:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                                new StudentProfFragment()).commit();
+                        break;
+                }
+
+                return true;
+            }
+        });
+
         studentNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.studentFindCollabs:
+                        studentNavBottom.setVisibility(View.GONE);
                         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
                                 new StudentFindCollabsFragment()).commit();
                     case R.id.studentSettings:
+                        studentNavBottom.setVisibility(View.GONE);
                         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
                                 new StudentSettingsFragment()).commit();
                         break;
                     case R.id.studentReportBug:
+                        studentNavBottom.setVisibility(View.GONE);
                         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
                                 new ReportBugFragment()).commit();
                         break;
@@ -102,37 +137,6 @@ public class StudentMainActivity extends AppCompatActivity {
                     new StudentHomeFragment()).commit();
         }
 
-        BottomNavigationView studentNavBottom = findViewById(R.id.studentBottomNav);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                new StudentHomeFragment()).commit();
-
-        studentNavBottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch (item.getItemId()){
-                    case R.id.studentHome:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                                new StudentHomeFragment()).commit();
-                        break;
-                    case R.id.studentAddProj:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                                new StudentAddProjFragment()).commit();
-                        break;
-                    case R.id.studentOrgs:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                                new StudentOrgsFragment()).commit();
-                        break;
-                    case R.id.studentProf:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                                new StudentProfFragment()).commit();
-                        break;
-                }
-
-                return true;
-            }
-        });
     }
 
 
