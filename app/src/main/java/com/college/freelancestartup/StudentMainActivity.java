@@ -77,7 +77,7 @@ public class StudentMainActivity extends AppCompatActivity {
                         break;
                     case R.id.studentProf:
                         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                                new StudentProfFragment()).commit();
+                                new StudentProfFragment(), "StudentProfFragment").addToBackStack("StudentProfFragment").commit();
                         break;
                 }
 
@@ -92,16 +92,16 @@ public class StudentMainActivity extends AppCompatActivity {
                     case R.id.studentFindCollabs:
                         studentNavBottom.setVisibility(View.GONE);
                         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                                new StudentFindCollabsFragment()).commit();
+                                new StudentFindCollabsFragment(), "StudentFindCollabsFrag").addToBackStack("StudentFindCollabsFrag").commit();
                     case R.id.studentSettings:
                         studentNavBottom.setVisibility(View.GONE);
                         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                                new StudentSettingsFragment()).commit();
+                                new StudentSettingsFragment(), "StudentSettingsFrag").addToBackStack("StudentSettingsFrag").commit();
                         break;
                     case R.id.studentReportBug:
                         studentNavBottom.setVisibility(View.GONE);
                         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                                new ReportBugFragment()).commit();
+                                new ReportBugFragment(), "StudentReportBugFrag").addToBackStack("StudentReportBugFrag").commit();
                         break;
                     case R.id.studentLogOut:
                         AlertDialog studentLogOutConfirm = new MaterialAlertDialogBuilder(StudentMainActivity.this)
@@ -135,7 +135,7 @@ public class StudentMainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                    new StudentHomeFragment()).commit();
+                    new StudentHomeFragment(), "StudentHomeFragment1").addToBackStack("StudentHomeFragment1").commit();
         }
 
     }
