@@ -108,7 +108,7 @@ public class StudentSettingsFragment extends DialogFragment {
                                 public void onClick(DialogInterface dialogInterface, int item) {
                                     studentStatus = status[checkedStatus];
                                     View contextView = getView();
-                                    switch (checkedStatus) {
+                                    switch (item) {
                                         case 0:
                                             Snackbar.make(contextView, R.string.firstStatusStudent, Snackbar.LENGTH_LONG).show();
                                             studentStatus = status[item];

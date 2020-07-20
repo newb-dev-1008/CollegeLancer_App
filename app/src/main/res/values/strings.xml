@@ -68,9 +68,9 @@
 
     <!-- Text resources for Snackbars -->
 
-    <string name="firstStatusStudent">Setting status. Your colleagues will now see you\'re available for projects and research work.</string>
-    <string name="secondStatusStudent">Setting status. Professors will now see you\'re up for research.</string>
-    <string name="thirdStatusStudent">Setting status. Your fellow freelancers will now be able to contact you for project collaboration.</string>
-    <string name="fourthStatusStudent">Setting status. You will be made available only to organizations and premium clients.</string>
-    <string name="fifthStatusStudent">Setting status. You will not be contacted for projects or research until you change your status.</string>
+    <string name="firstStatusStudent">Your colleagues will now see you\'re available for projects and research work.</string>
+    <string name="secondStatusStudent">Professors will now see you\'re up for research.</string>
+    <string name="thirdStatusStudent">Your fellow freelancers will now be able to contact you for project collaboration.</string>
+    <string name="fourthStatusStudent">You will be made available only to organizations and premium clients.</string>
+    <string name="fifthStatusStudent">You will not be contacted for projects or research until you change your status.</string>
 </resources>
