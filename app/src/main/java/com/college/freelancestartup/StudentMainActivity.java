@@ -56,7 +56,8 @@ public class StudentMainActivity extends AppCompatActivity {
         BottomNavigationView studentNavBottom = findViewById(R.id.studentBottomNav);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                new StudentHomeFragment()).commit();
+                new StudentHomeFragment(), "StudentHomeFragment").addToBackStack("StudentHomeFragment").commit();
+
 
         studentNavBottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
