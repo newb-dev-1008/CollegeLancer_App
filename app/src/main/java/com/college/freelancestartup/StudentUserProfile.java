@@ -220,8 +220,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
     }
 
     private void allowEdit(){
-        // editProf.setVisibility(View.GONE);
-        editProf.setVisible(false);
+        // editProf.setVisible(false);
         editName.setVisibility(View.VISIBLE);
         editPhoneNumber.setVisibility(View.VISIBLE);
         editDepartment.setVisibility(View.VISIBLE);
