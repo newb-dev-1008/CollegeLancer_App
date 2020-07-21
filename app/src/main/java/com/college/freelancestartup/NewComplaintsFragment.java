@@ -45,6 +45,7 @@ public class NewComplaintsFragment extends Fragment {
         lodgeComplaintButton = root.findViewById(R.id.lodgeComplaintButton);
         writeComplaintEmailButton = root.findViewById(R.id.writeToUsButton);
         complaintET = root.findViewById(R.id.complaintsET);
+        complaintTitleET = root.findViewById(R.id.complaintsTitleET);
 
         complaintsTitleTV = root.findViewById(R.id.complaintsTitleTV);
         lodgeComplaintTV = root.findViewById(R.id.lodgeComplaintTV);
