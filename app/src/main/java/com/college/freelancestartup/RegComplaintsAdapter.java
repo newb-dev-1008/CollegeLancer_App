@@ -15,10 +15,10 @@ public class RegComplaintsAdapter extends RecyclerView.Adapter<RegComplaintsAdap
 
     public static class RegComplaintsViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView regComplaintsTV, regComplaintsDate, regComplaintsStatus;
+        public TextView regComplaintsTitle, regComplaintsDate, regComplaintsStatus;
         public RegComplaintsViewHolder(@NonNull View itemView) {
             super(itemView);
-            regComplaintsTV = itemView.findViewById(R.id.reg_complaintName);
+            regComplaintsTitle = itemView.findViewById(R.id.reg_complaintName);
             regComplaintsDate = itemView.findViewById(R.id.reg_complaintdate);
             regComplaintsStatus = itemView.findViewById(R.id.reg_complaintstatus);
         }
@@ -38,11 +38,15 @@ public class RegComplaintsAdapter extends RecyclerView.Adapter<RegComplaintsAdap
 
     @Override
     public void onBindViewHolder(@NonNull RegComplaintsViewHolder holder, int position) {
+        RegisteredComplaints currentComplaint = RegisteredComplaintsList.get(position);
 
+        holder.regComplaintsTitle.setText(currentComplaint.getComplaintTitle());
+        holder.regComplaintsDate.setText(currentComplaint.getComplaintDate());
+        holder.regComplaintsStatus.setText(currentComplaint.getComplaintStatus());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return RegisteredComplaintsList.size();
     }
 }
