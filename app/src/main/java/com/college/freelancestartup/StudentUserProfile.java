@@ -210,7 +210,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
 
         if (id == R.id.editProfile) {
             Toast.makeText(StudentUserProfile.this, "Edit your profile. You can now change the contents.", Toast.LENGTH_LONG).show();
-            editProf.setVisible(true);
+            editProf.setVisible(false);
             allowEdit();
 
             return true;
