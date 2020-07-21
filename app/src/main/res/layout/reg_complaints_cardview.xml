@@ -35,7 +35,14 @@
             android:layout_marginStart="4dp"
             android:text="21st July, 2020"/>
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/reg_complaintstatus"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:textSize="18sp"
+            android:layout_centerVertical="true" />
     </RelativeLayout>
 
 
