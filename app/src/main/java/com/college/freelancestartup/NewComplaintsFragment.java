@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,13 +24,15 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
+
 public class NewComplaintsFragment extends Fragment {
 
     private View root;
     private TextView complaintsTitleTV, lodgeComplaintTV, writeTV, faqTV;
     private View line, line2;
     private MaterialButton lodgeComplaintButton, writeComplaintEmailButton;
-    private EditText complaintET;
+    private EditText complaintET, complaintTitleET;
     private FirebaseAuth firebaseAuth;
     private TabLayout tabLayout;
     private FirebaseFirestore db;
@@ -108,6 +111,20 @@ public class NewComplaintsFragment extends Fragment {
                 writeEmailComplaint.show();
                 writeEmailComplaint.setCancelable(true);
                 writeEmailComplaint.setCanceledOnTouchOutside(false);
+            }
+        });
+
+        lodgeComplaintButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (TextUtils.isEmpty(complaintsTitleTV.getText().toString())){
+                    Toast.makeText(getContext(), "Enter your complaint title.", Toast.LENGTH_SHORT).show();
+                } else {
+                    String complaintDate = Calendar.getInstance().getTime().toString();
+                    String complaintTitle =
+                    db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                            .collection("Complaints").document()
+                }
             }
         });
 
