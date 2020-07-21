@@ -16,8 +16,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.provider.FontsContractCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
@@ -25,6 +28,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class NewComplaintsFragment extends Fragment {
 
@@ -36,6 +41,7 @@ public class NewComplaintsFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private TabLayout tabLayout;
     private FirebaseFirestore db;
+    private String KEY_COMPLAINTTITLE, KEY_COMPLAINT, KEY_COMPLAINTDATE, KEY_COMPLAINTSTATUS;
 
     @Nullable
     @Override
@@ -46,6 +52,11 @@ public class NewComplaintsFragment extends Fragment {
         writeComplaintEmailButton = root.findViewById(R.id.writeToUsButton);
         complaintET = root.findViewById(R.id.complaintsET);
         complaintTitleET = root.findViewById(R.id.complaintsTitleET);
+
+        KEY_COMPLAINTTITLE = "complaintTitle";
+        KEY_COMPLAINTDATE = "complaintDate";
+        KEY_COMPLAINT = "complaint";
+        KEY_COMPLAINTSTATUS = "complaintStatus";
 
         complaintsTitleTV = root.findViewById(R.id.complaintsTitleTV);
         lodgeComplaintTV = root.findViewById(R.id.lodgeComplaintTV);
@@ -122,9 +133,29 @@ public class NewComplaintsFragment extends Fragment {
                     Toast.makeText(getContext(), "Enter your complaint title.", Toast.LENGTH_SHORT).show();
                 } else {
                     String complaintDate = Calendar.getInstance().getTime().toString();
-                    String complaintTitle =
+                    String complaintTitle = complaintTitleET.getText().toString().trim();
+                    String complaint = complaintET.getText().toString().trim();
+                    String complaintStatus = "Pending";
+
+                    Map<String, Object> complaintMap = new HashMap<>();
+                    complaintMap.put(KEY_COMPLAINT, complaint);
+                    complaintMap.put(KEY_COMPLAINTDATE, complaintDate);
+                    complaintMap.put(KEY_COMPLAINTSTATUS, complaintStatus);
+                    complaintMap.put(KEY_COMPLAINTTITLE, complaintTitle);
+
                     db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                            .collection("Complaints").document()
+                            .collection("Complaints").document(complaintDate).set(complaintMap)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(getContext(), "Registered your complaint. Expect an e-mail soon.", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });
