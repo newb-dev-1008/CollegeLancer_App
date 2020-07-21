@@ -1,11 +1,13 @@
 package com.college.freelancestartup;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -42,7 +44,13 @@ public class RegComplaintsAdapter extends RecyclerView.Adapter<RegComplaintsAdap
 
         holder.regComplaintsTitle.setText(currentComplaint.getComplaintTitle());
         holder.regComplaintsDate.setText(currentComplaint.getComplaintDate());
-        holder.regComplaintsStatus.setText(currentComplaint.getComplaintStatus());
+        if (currentComplaint.getComplaintStatus().equals("Pending")){
+            holder.regComplaintsStatus.setText(currentComplaint.getComplaintStatus());
+            holder.regComplaintsStatus.setTextColor(Color.parseColor("#800000"));
+        } else {
+            holder.regComplaintsStatus.setText(currentComplaint.getComplaintStatus());
+            holder.regComplaintsStatus.setTextColor(Color.parseColor("#228B22"));
+        }
     }
 
     @Override
