@@ -28,6 +28,8 @@ public class RegComplaintsFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private RecyclerView regComplaintsRecyclerView;
     private TextView emptyRegComplaintsTV;
+    private RecyclerView.Adapter regComplaintsAdapter;
+    private RecyclerView.LayoutManager regComplaintsLayoutManager;
 
     @Nullable
     @Override
