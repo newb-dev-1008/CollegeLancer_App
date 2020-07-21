@@ -48,10 +48,9 @@ public class RegComplaintsFragment extends Fragment {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (queryDocumentSnapshots.size() > 0){
-                    // Retrieving complaints from Firestore and passing to RegisteredComplaints() is left
                     // Also, figure out how opening the card will work
                     ArrayList<RegisteredComplaints> registeredComplaints = new ArrayList<>();
-                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                         String complaintTitle1 = documentSnapshot.get("complaintTitle").toString();
                         String complaintDate1 = documentSnapshot.get("complaintDate").toString();
                         String complaintStatus1 = documentSnapshot.get("complaintStatus").toString();
