@@ -129,7 +129,7 @@ public class NewComplaintsFragment extends Fragment {
         lodgeComplaintButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(complaintsTitleTV.getText().toString())){
+                if (TextUtils.isEmpty(complaintTitleET.getText().toString())){
                     Toast.makeText(getContext(), "Enter your complaint title.", Toast.LENGTH_SHORT).show();
                 } else {
                     String complaintDate = Calendar.getInstance().getTime().toString();
