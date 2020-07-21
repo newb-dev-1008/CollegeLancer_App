@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -49,6 +50,12 @@ public class RegComplaintsFragment extends Fragment {
                     emptyRegComplaintsTV.setVisibility(View.GONE);
                     regComplaintsRecyclerView.setVisibility(View.VISIBLE);
                     ArrayList<RegisteredComplaints> registeredComplaints = new ArrayList<>();
+
+                    regComplaintsLayoutManager = new LinearLayoutManager(getContext());
+                    regComplaintsAdapter = new RegComplaintsAdapter(registeredComplaints);
+                    regComplaintsRecyclerView.setHasFixedSize(true);
+                    regComplaintsRecyclerView.setLayoutManager(regComplaintsLayoutManager);
+                    regComplaintsRecyclerView.setAdapter(regComplaintsAdapter);
                 } else {
                     emptyRegComplaintsTV.setVisibility(View.VISIBLE);
                 }
