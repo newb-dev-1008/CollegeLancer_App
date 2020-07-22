@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,6 +33,7 @@ public class RegComplaintsFragment extends Fragment {
     private TextView emptyRegComplaintsTV, swipeRefreshTV, complaintIDTV, complaintDescTV, complaintID, complaintDesc;
     private RecyclerView.Adapter regComplaintsAdapter;
     private RecyclerView.LayoutManager regComplaintsLayoutManager;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -40,6 +42,7 @@ public class RegComplaintsFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
+        swipeRefreshLayout = root.findViewById(R.id.swipeRefreshLayout);
         regComplaintsRecyclerView = root.findViewById(R.id.reg_complaints_recyclerView);
         emptyRegComplaintsTV = root.findViewById(R.id.noComplaintsTV);
         swipeRefreshTV = root.findViewById(R.id.swipeRefreshTV);
@@ -48,6 +51,20 @@ public class RegComplaintsFragment extends Fragment {
         complaintDesc = root.findViewById(R.id.complaint);
         complaintID = root.findViewById(R.id.complaintID);
 
+        checkRegisteredComplaints();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                checkRegisteredComplaints();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        return root;
+    }
+
+    private void checkRegisteredComplaints() {
         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                 .collection("Complaints").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -83,6 +100,5 @@ public class RegComplaintsFragment extends Fragment {
                 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-        return root;
     }
 }
