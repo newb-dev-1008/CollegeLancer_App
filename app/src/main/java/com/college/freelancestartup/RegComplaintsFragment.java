@@ -59,8 +59,8 @@ public class RegComplaintsFragment extends Fragment {
                         String complaintTitle1 = documentSnapshot.get("complaintTitle").toString();
                         String complaintDate1 = documentSnapshot.get("complaintDate").toString();
                         String complaintStatus1 = documentSnapshot.get("complaintStatus").toString();
-                        String complaint1 = documentSnapshot.get
-                        registeredComplaints.add(new RegisteredComplaints(complaintTitle1, complaintDate1, complaintStatus1));
+                        String complaint1 = documentSnapshot.get("complaint").toString();
+                        registeredComplaints.add(new RegisteredComplaints(complaintTitle1, complaintDate1, complaintStatus1, complaint1));
                     }
                     emptyRegComplaintsTV.setVisibility(View.GONE);
                     regComplaintsRecyclerView.setVisibility(View.VISIBLE);

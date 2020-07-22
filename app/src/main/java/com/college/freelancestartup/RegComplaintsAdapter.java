@@ -17,12 +17,13 @@ public class RegComplaintsAdapter extends RecyclerView.Adapter<RegComplaintsAdap
 
     public static class RegComplaintsViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView regComplaintsTitle, regComplaintsDate, regComplaintsStatus;
+        public TextView regComplaintsTitle, regComplaintsDate, regComplaintsStatus, regComplaintsComplaint;
         public RegComplaintsViewHolder(@NonNull View itemView) {
             super(itemView);
             regComplaintsTitle = itemView.findViewById(R.id.reg_complaintName);
             regComplaintsDate = itemView.findViewById(R.id.reg_complaintdate);
             regComplaintsStatus = itemView.findViewById(R.id.reg_complaintstatus);
+            regComplaintsComplaint = itemView.findViewById(R.id.complaint);
         }
     }
 
@@ -44,6 +45,7 @@ public class RegComplaintsAdapter extends RecyclerView.Adapter<RegComplaintsAdap
 
         holder.regComplaintsTitle.setText(currentComplaint.getComplaintTitle());
         holder.regComplaintsDate.setText(currentComplaint.getComplaintDate());
+        holder.regComplaintsComplaint.setText(currentComplaint.getComplaint());
         if (currentComplaint.getComplaintStatus().equals("Pending")){
             holder.regComplaintsStatus.setText(currentComplaint.getComplaintStatus());
             holder.regComplaintsStatus.setTextColor(Color.parseColor("#800000"));
