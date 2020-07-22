@@ -29,7 +29,7 @@ public class RegComplaintsFragment extends Fragment {
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private RecyclerView regComplaintsRecyclerView;
-    private TextView emptyRegComplaintsTV, swipeRefreshTV;
+    private TextView emptyRegComplaintsTV, swipeRefreshTV, complaintIDTV, complaintDescTV, complaintID, complaintDesc;
     private RecyclerView.Adapter regComplaintsAdapter;
     private RecyclerView.LayoutManager regComplaintsLayoutManager;
 
@@ -43,6 +43,10 @@ public class RegComplaintsFragment extends Fragment {
         regComplaintsRecyclerView = root.findViewById(R.id.reg_complaints_recyclerView);
         emptyRegComplaintsTV = root.findViewById(R.id.noComplaintsTV);
         swipeRefreshTV = root.findViewById(R.id.swipeRefreshTV);
+        complaintIDTV = root.findViewById(R.id.complaintIDTV);
+        complaintDescTV = root.findViewById(R.id.complaintDescTV);
+        complaintDesc = root.findViewById(R.id.complaint);
+        complaintID = root.findViewById(R.id.complaintID);
 
         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                 .collection("Complaints").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
