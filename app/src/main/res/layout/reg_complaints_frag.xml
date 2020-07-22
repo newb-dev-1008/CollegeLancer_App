@@ -14,23 +14,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="You have not registered any complaints."/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="4dp"
-        android:id="@+id/reg_complaints_recyclerView"
-        android:scrollbars="vertical"
-        android:background="@color/grey"
-        android:visibility="gone"/>
-
-    <TextView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/swipeRefreshTV"
-        app:layout_constraintTop_toBottomOf="@id/reg_complaints_recyclerView"
+        android:layout_height="match_parent"
+        android:id="@+id/swipeRefreshLayout"
+        app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"
-        android:text="Can't find your recent complaint? Swipe down to refresh."/>
+        android:background="@color/transparent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:id="@+id/reg_complaints_recyclerView"
+            android:scrollbars="vertical"
+            android:background="@color/grey"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/swipeRefreshTV"
+            app:layout_constraintTop_toBottomOf="@id/reg_complaints_recyclerView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
+            android:text="Can't find your recent complaint? Swipe down to refresh."/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
