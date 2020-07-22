@@ -64,10 +64,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/complaintIDTV"
             android:id="@+id/complaintID"
-            android:layout_below="@id/reg_complaintdate"
+            android:layout_alignParentStart="true"
             android:visibility="gone"
+            android:layout_toLeftOf="@id/reg_complaintstatus"
+            android:layout_below="@id/complaintIDTV"
             android:layout_marginTop="10dp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="45dp"/>
@@ -75,11 +76,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/complaintIDTV"
+            android:layout_below="@id/complaintID"
+            android:visibility="gone"
             android:text="Description: "
             android:layout_marginTop="10dp"
             android:layout_marginStart="4dp"
-            android:visibility="gone"
             android:textColor="@color/black"
             android:id="@+id/complaintDescTV"/>
 
@@ -87,12 +88,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/complaintDescTV"
-            android:visibility="gone"
             android:layout_marginTop="10dp"
+            android:visibility="gone"
             android:id="@+id/complaint"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@id/reg_complaintstatus"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="45dp"/>
+            android:layout_marginEnd="15dp"/>
     </RelativeLayout>
 
 
