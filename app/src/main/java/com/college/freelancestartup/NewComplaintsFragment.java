@@ -41,7 +41,7 @@ public class NewComplaintsFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private TabLayout tabLayout;
     private FirebaseFirestore db;
-    private String KEY_COMPLAINTTITLE, KEY_COMPLAINT, KEY_COMPLAINTDATE, KEY_COMPLAINTSTATUS;
+    private String KEY_COMPLAINTTITLE, KEY_COMPLAINT, KEY_COMPLAINTDATE, KEY_COMPLAINTSTATUS, KEY_COMPLAINTID;
 
     @Nullable
     @Override
@@ -57,6 +57,7 @@ public class NewComplaintsFragment extends Fragment {
         KEY_COMPLAINTDATE = "complaintDate";
         KEY_COMPLAINT = "complaint";
         KEY_COMPLAINTSTATUS = "complaintStatus";
+        KEY_COMPLAINTID = "complaintID";
 
         complaintsTitleTV = root.findViewById(R.id.complaintsTitleTV);
         lodgeComplaintTV = root.findViewById(R.id.lodgeComplaintTV);
@@ -142,6 +143,7 @@ public class NewComplaintsFragment extends Fragment {
                     complaintMap.put(KEY_COMPLAINTDATE, complaintDate);
                     complaintMap.put(KEY_COMPLAINTSTATUS, complaintStatus);
                     complaintMap.put(KEY_COMPLAINTTITLE, complaintTitle);
+                    complaintMap.put(KEY_COMPLAINTID, complaintID);
 
                     db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                             .collection("Complaints").document(complaintDate).set(complaintMap)
