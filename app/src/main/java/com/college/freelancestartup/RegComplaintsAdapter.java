@@ -17,13 +17,23 @@ public class RegComplaintsAdapter extends RecyclerView.Adapter<RegComplaintsAdap
 
     public static class RegComplaintsViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView regComplaintsTitle, regComplaintsDate, regComplaintsStatus, regComplaintsComplaint;
+        public TextView regComplaintsTitle, regComplaintsDate, regComplaintsStatus, regComplaintsComplaint, complaintIDTV, complaintDescTV, complaintID;
         public RegComplaintsViewHolder(@NonNull View itemView) {
             super(itemView);
             regComplaintsTitle = itemView.findViewById(R.id.reg_complaintName);
             regComplaintsDate = itemView.findViewById(R.id.reg_complaintdate);
             regComplaintsStatus = itemView.findViewById(R.id.reg_complaintstatus);
             regComplaintsComplaint = itemView.findViewById(R.id.complaint);
+            complaintDescTV = itemView.findViewById(R.id.complaintDescTV);
+            complaintIDTV = itemView.findViewById(R.id.complaintIDTV);
+            complaintID = itemView.findViewById(R.id.complaintID);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
         }
     }
 
