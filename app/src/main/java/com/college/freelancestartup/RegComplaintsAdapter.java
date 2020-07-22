@@ -56,6 +56,7 @@ public class RegComplaintsAdapter extends RecyclerView.Adapter<RegComplaintsAdap
         holder.regComplaintsTitle.setText(currentComplaint.getComplaintTitle());
         holder.regComplaintsDate.setText(currentComplaint.getComplaintDate());
         holder.regComplaintsComplaint.setText(currentComplaint.getComplaint());
+        holder.regComplaintsID.setText(currentComplaint.getComplaintID());
         if (currentComplaint.getComplaintStatus().equals("Pending")){
             holder.regComplaintsStatus.setText(currentComplaint.getComplaintStatus());
             holder.regComplaintsStatus.setTextColor(Color.parseColor("#800000"));
