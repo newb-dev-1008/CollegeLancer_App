@@ -30,4 +30,8 @@ class RegisteredComplaints {
     public String getComplaintStatus() {
         return complaintStatus;
     }
+
+    public String getComplaintID() {
+        return complaintID;
+    }
 }
