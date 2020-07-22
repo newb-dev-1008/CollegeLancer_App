@@ -143,7 +143,7 @@ public class NewComplaintsFragment extends Fragment {
                     complaintMap.put(KEY_COMPLAINTDATE, complaintDate);
                     complaintMap.put(KEY_COMPLAINTSTATUS, complaintStatus);
                     complaintMap.put(KEY_COMPLAINTTITLE, complaintTitle);
-                    complaintMap.put(KEY_COMPLAINTID, complaintID);
+                    complaintMap.put(KEY_COMPLAINTID, complaintDate);
 
                     db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                             .collection("Complaints").document(complaintDate).set(complaintMap)
