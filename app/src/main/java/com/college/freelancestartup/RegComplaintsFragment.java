@@ -65,6 +65,7 @@ public class RegComplaintsFragment extends Fragment {
                     }
                     emptyRegComplaintsTV.setVisibility(View.GONE);
                     regComplaintsRecyclerView.setVisibility(View.VISIBLE);
+                    swipeRefreshTV.setVisibility(View.VISIBLE);
 
                     regComplaintsLayoutManager = new LinearLayoutManager(getContext());
                     regComplaintsAdapter = new RegComplaintsAdapter(registeredComplaints);

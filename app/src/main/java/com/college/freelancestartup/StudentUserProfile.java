@@ -57,7 +57,6 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
     private EditText nameET, phoneNumberET, emailET, DOBET, universityET, bioET;
     private int flagApplyChangesPressed;
     private MaterialButton applyChanges, cancelChanges;
-    private MenuItem editProf;
     private Toolbar studentProfileToolbar;
     private ImageView idImage, editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio;
     private String KEY_BIO = "userBio";
@@ -169,7 +168,6 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        editProf = menu.findItem(R.id.editProfile);
         getMenuInflater().inflate(R.menu.student_user_menu, menu);
         return true;
     }
@@ -210,7 +208,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
 
         if (id == R.id.editProfile) {
             Toast.makeText(StudentUserProfile.this, "Edit your profile. You can now change the contents.", Toast.LENGTH_LONG).show();
-            editProf.setVisible(false);
+
             allowEdit();
 
             return true;
