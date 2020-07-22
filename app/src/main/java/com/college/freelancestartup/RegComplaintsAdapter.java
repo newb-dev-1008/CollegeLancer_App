@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.AutoTransition;
+import androidx.transition.TransitionManager;
 
 import java.util.ArrayList;
 
@@ -31,7 +33,19 @@ public class RegComplaintsAdapter extends RecyclerView.Adapter<RegComplaintsAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    if (regComplaintsComplaint.getVisibility() == View.GONE){
+                        TransitionManager.beginDelayedTransition(, new AutoTransition());
+                        complaintIDTV.setVisibility(View.VISIBLE);
+                        complaintID.setVisibility(View.VISIBLE);
+                        complaintDescTV.setVisibility(View.VISIBLE);
+                        regComplaintsComplaint.setVisibility(View.VISIBLE);
+                    } else {
+                        TransitionManager.beginDelayedTransition(, new AutoTransition());
+                        complaintIDTV.setVisibility(View.GONE);
+                        complaintID.setVisibility(View.GONE);
+                        complaintDescTV.setVisibility(View.GONE);
+                        regComplaintsComplaint.setVisibility(View.GONE);
+                    }
                 }
             });
         }
@@ -56,7 +70,7 @@ public class RegComplaintsAdapter extends RecyclerView.Adapter<RegComplaintsAdap
         holder.regComplaintsTitle.setText(currentComplaint.getComplaintTitle());
         holder.regComplaintsDate.setText(currentComplaint.getComplaintDate());
         holder.regComplaintsComplaint.setText(currentComplaint.getComplaint());
-        holder.regComplaintsID.setText(currentComplaint.getComplaintID());
+        holder.complaintID.setText(currentComplaint.getComplaintID());
         if (currentComplaint.getComplaintStatus().equals("Pending")){
             holder.regComplaintsStatus.setText(currentComplaint.getComplaintStatus());
             holder.regComplaintsStatus.setTextColor(Color.parseColor("#800000"));
