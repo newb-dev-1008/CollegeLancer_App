@@ -138,6 +138,9 @@ public class NewComplaintsFragment extends Fragment {
                     String complaint = complaintET.getText().toString().trim();
                     String complaintStatus = "Pending";
 
+                    complaintTitleET.setText("");
+                    complaintET.setText("");
+
                     Map<String, Object> complaintMap = new HashMap<>();
                     complaintMap.put(KEY_COMPLAINT, complaint);
                     complaintMap.put(KEY_COMPLAINTDATE, complaintDate);
