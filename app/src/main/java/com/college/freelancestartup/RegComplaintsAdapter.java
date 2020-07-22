@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
@@ -34,13 +33,13 @@ public class RegComplaintsAdapter extends RecyclerView.Adapter<RegComplaintsAdap
                 @Override
                 public void onClick(View view) {
                     if (regComplaintsComplaint.getVisibility() == View.GONE){
-                        TransitionManager.beginDelayedTransition(, new AutoTransition());
+                        TransitionManager.beginDelayedTransition((ViewGroup) itemView, new AutoTransition());
                         complaintIDTV.setVisibility(View.VISIBLE);
                         complaintID.setVisibility(View.VISIBLE);
                         complaintDescTV.setVisibility(View.VISIBLE);
                         regComplaintsComplaint.setVisibility(View.VISIBLE);
                     } else {
-                        TransitionManager.beginDelayedTransition(, new AutoTransition());
+                        TransitionManager.beginDelayedTransition((ViewGroup) itemView, new AutoTransition());
                         complaintIDTV.setVisibility(View.GONE);
                         complaintID.setVisibility(View.GONE);
                         complaintDescTV.setVisibility(View.GONE);
