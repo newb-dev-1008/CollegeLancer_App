@@ -8,20 +8,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:tabTextColor="@color/black"
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabMode="auto">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/new_tab"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="New Complaints"/>
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/registered_tab"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Registered Complaints"/>
     </com.google.android.material.tabs.TabLayout>
