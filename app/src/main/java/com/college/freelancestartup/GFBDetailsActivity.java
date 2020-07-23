@@ -70,6 +70,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
 
     private String DOB;
     private Date DOBDate, currentDate;
+    private Calendar selectedDate;
 
     private boolean running, wasrunning;
 
@@ -95,6 +96,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         bioET = findViewById(R.id.student_profileBio);
 
         currentDate = Calendar.getInstance().getTime();
+        selectedDate = Calendar.getInstance();
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -242,6 +244,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         DOBDate = c.getTime();
+        selectedDate.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
         DOB = DateFormat.getDateInstance(DateFormat.FULL).format(DOBDate);
         dateOfBirthET.setText(DOB);
     }
