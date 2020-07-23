@@ -63,6 +63,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
     private String dbName, dbPhoneNumber, dbDepartment, dbSemester, dbEmail, dbDOB, dbUniversity, dbBio, DOB;
     private ImageView[] editImages;
     private Date DOBDate, currentDate;
+    private Calendar selectedDate;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore db;
     private Spinner departmentET, semesterET;
@@ -99,6 +100,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
         editBio = findViewById(R.id.editBio);
 
         currentDate = Calendar.getInstance().getTime();
+        selectedDate = Calendar.getInstance();
 
         editImages = new ImageView[]{editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio};
 
@@ -602,6 +604,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         DOBDate = c.getTime();
+        selectedDate.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
         DOB = DateFormat.getDateInstance(DateFormat.FULL).format(DOBDate);
         DOBET.setText(DOB);
     }
