@@ -1,5 +1,6 @@
 package com.college.freelancestartup;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -130,6 +132,8 @@ public class NewComplaintsFragment extends Fragment {
         lodgeComplaintButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(lodgeComplaintButton.getWindowToken(), 0);
                 if (TextUtils.isEmpty(complaintTitleET.getText().toString())){
                     Toast.makeText(getContext(), "Enter your complaint title.", Toast.LENGTH_SHORT).show();
                 } else {
