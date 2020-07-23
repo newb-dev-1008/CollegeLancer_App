@@ -13,6 +13,8 @@ import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment {
 
+    private int pickedYear, pickedDay, pickedMonth;
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
