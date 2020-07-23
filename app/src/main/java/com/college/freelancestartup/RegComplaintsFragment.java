@@ -30,7 +30,7 @@ public class RegComplaintsFragment extends Fragment {
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private RecyclerView regComplaintsRecyclerView;
-    private TextView emptyRegComplaintsTV, swipeRefreshTV, complaintIDTV, complaintDescTV, complaintID, complaintDesc;
+    private TextView complaintIDTV, complaintDescTV, complaintID, complaintDesc;
     private RecyclerView.Adapter regComplaintsAdapter;
     private RecyclerView.LayoutManager regComplaintsLayoutManager;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -44,8 +44,6 @@ public class RegComplaintsFragment extends Fragment {
 
         swipeRefreshLayout = root.findViewById(R.id.swipeRefreshLayout);
         regComplaintsRecyclerView = root.findViewById(R.id.reg_complaints_recyclerView);
-        emptyRegComplaintsTV = root.findViewById(R.id.noComplaintsTV);
-        swipeRefreshTV = root.findViewById(R.id.swipeRefreshTV);
         complaintIDTV = root.findViewById(R.id.complaintIDTV);
         complaintDescTV = root.findViewById(R.id.complaintDescTV);
         complaintDesc = root.findViewById(R.id.complaint);
@@ -80,18 +78,13 @@ public class RegComplaintsFragment extends Fragment {
                         String complaintID1 = documentSnapshot.get("complaintID").toString();
                         registeredComplaints.add(new RegisteredComplaints(complaintTitle1, complaintDate1, complaintStatus1, complaint1, complaintID1));
                     }
-                    emptyRegComplaintsTV.setVisibility(View.GONE);
                     regComplaintsRecyclerView.setVisibility(View.VISIBLE);
-                    swipeRefreshTV.setVisibility(View.VISIBLE);
 
                     regComplaintsLayoutManager = new LinearLayoutManager(getContext());
                     regComplaintsAdapter = new RegComplaintsAdapter(registeredComplaints);
                     regComplaintsRecyclerView.setHasFixedSize(true);
                     regComplaintsRecyclerView.setLayoutManager(regComplaintsLayoutManager);
                     regComplaintsRecyclerView.setAdapter(regComplaintsAdapter);
-                    swipeRefreshTV.setVisibility(View.VISIBLE);
-                } else {
-                    emptyRegComplaintsTV.setVisibility(View.VISIBLE);
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
