@@ -1,5 +1,6 @@
 package com.college.freelancestartup;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -41,6 +42,8 @@ class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapter.AllCo
     @NonNull
     @Override
     public AllColabsOneViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.find_collab1_cardview, parent, false);
+        AllColabsOneAdapter.AllColabsOneViewHolder allColabsOneViewHolder = new AllColabsOneAdapter.AllColabsOneViewHolder(v);
+        return allColabsOneViewHolder;
     }
 }
