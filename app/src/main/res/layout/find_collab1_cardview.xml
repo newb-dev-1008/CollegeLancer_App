@@ -47,7 +47,6 @@
             android:layout_below="@id/collab1_projectTitle"
             android:text="Project Description:"
             android:layout_marginTop="10dp"
-            android:visibility="gone"
             android:textColor="@color/black"
             android:layout_marginStart="4dp"
             android:id="@+id/collab1_projectDescTV"/>
@@ -57,7 +56,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/collab1_projectDesc"
             android:layout_alignParentStart="true"
-            android:visibility="gone"
             android:layout_below="@id/collab1_projectDescTV"
             android:layout_marginTop="10dp"
             android:layout_marginStart="4dp"
@@ -67,7 +65,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/collab1_projectDesc"
-            android:visibility="gone"
             android:text="Skills Required: "
             android:layout_marginTop="10dp"
             android:layout_marginStart="4dp"
@@ -79,8 +76,29 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/collab1_skillsTV"
             android:layout_marginTop="10dp"
-            android:visibility="gone"
             android:id="@+id/collab1_skills"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/collab1_skills"
+            android:text="Open For: "
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/black"
+            android:id="@+id/collab1_openForTV"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/collab1_skillsTV"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:id="@+id/collab1_openFor"
             android:layout_alignParentStart="true"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="8dp"
