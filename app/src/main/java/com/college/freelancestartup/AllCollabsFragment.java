@@ -58,6 +58,9 @@ public class AllCollabsFragment extends Fragment {
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (queryDocumentSnapshots.size() > 0){
                     emptyTV.setVisibility(View.GONE);
+                } else {
+                    collab1RecyclerView.setVisibility(View.GONE);
+                    swipeDownRefreshTV.setVisibility(View.GONE);
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -65,7 +68,7 @@ public class AllCollabsFragment extends Fragment {
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        })
+        });
     }
 }
 
