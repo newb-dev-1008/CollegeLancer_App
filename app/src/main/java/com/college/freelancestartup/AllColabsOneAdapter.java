@@ -9,16 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapter.AllColabsOneViewHolder> {
-
     private ArrayList<AllColabsOne> AllColabsList;
-
     public static class AllColabsOneViewHolder extends RecyclerView.ViewHolder {
-
         public TextView posterName1, projectTitle1, postedDate1, projectDesc1, openFor1, skills1;
 
         public AllColabsOneViewHolder(@NonNull View itemView) {
+            super(itemView);
             posterName1 = itemView.findViewById(R.id.collab1_name);
             projectTitle1 = itemView.findViewById(R.id.collab1_projectTitle);
             postedDate1 = itemView.findViewById(R.id.collab1_date);
@@ -45,5 +44,22 @@ class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapter.AllCo
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.find_collab1_cardview, parent, false);
         AllColabsOneAdapter.AllColabsOneViewHolder allColabsOneViewHolder = new AllColabsOneAdapter.AllColabsOneViewHolder(v);
         return allColabsOneViewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull AllColabsOneViewHolder holder, int position) {
+        AllColabsOne allColabsOne = AllColabsList.get(position);
+
+        holder.posterName1.setText(allColabsOne.getPosterTitle());
+        holder.projectTitle1.setText(allColabsOne.getProjectTitle());
+        holder.projectDesc1.setText(allColabsOne.getProjectDesc());
+        holder.skills1.setText(allColabsOne.getSkills());
+        holder.openFor1.setText(allColabsOne.getOpenFor());
+        holder.postedDate1.setText(allColabsOne.getCollabDate());
+    }
+
+    @Override
+    public int getItemCount() {
+        return AllColabsList.size();
     }
 }
