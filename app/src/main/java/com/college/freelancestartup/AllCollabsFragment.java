@@ -10,17 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-class AllCollabsFragment extends Fragment {
+public class AllCollabsFragment extends Fragment {
 
     private View root;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private RecyclerView collab1RecyclerView;
     private TextView swipeDownRefreshTV, emptyTV;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -34,7 +36,20 @@ class AllCollabsFragment extends Fragment {
         swipeDownRefreshTV = root.findViewById(R.id.swipeRefreshTVCollab1);
         emptyTV = root.findViewById(R.id.find_collab1_emptyTV);
 
+        showAllCollabs();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                showAllCollabs();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         return root;
+    }
+
+    public void showAllCollabs(){
+
     }
 }
 
