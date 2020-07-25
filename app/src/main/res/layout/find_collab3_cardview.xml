@@ -53,7 +53,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
             android:textSize="18sp"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"/>
 
     </RelativeLayout>
 
