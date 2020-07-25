@@ -44,15 +44,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/projDescription"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
-            android:textSize="18sp"
-            android:layout_centerVertical="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_below="@id/reg_complaintdate"
             android:text="Complaint ID: "
             android:layout_marginTop="10dp"
