@@ -27,7 +27,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="35dp"
             android:layout_marginStart="4dp"
-            android:text="Collaborator Name"/>
+            android:text="Project Issuer Name"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,11 +55,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/complaintID"
+            android:id="@+id/collab1_projectDesc"
             android:layout_alignParentStart="true"
             android:visibility="gone"
-            android:layout_toLeftOf="@id/reg_complaintstatus"
-            android:layout_below="@id/complaintIDTV"
+            android:layout_below="@id/collab1_projectDescTV"
             android:layout_marginTop="10dp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="45dp"/>
@@ -67,23 +66,22 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/complaintID"
+            android:layout_below="@id/collab1_projectDesc"
             android:visibility="gone"
-            android:text="Description: "
+            android:text="Skills Required: "
             android:layout_marginTop="10dp"
             android:layout_marginStart="4dp"
             android:textColor="@color/black"
-            android:id="@+id/complaintDescTV"/>
+            android:id="@+id/collab1_skillsTV"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/complaintDescTV"
+            android:layout_below="@id/collab1_skillsTV"
             android:layout_marginTop="10dp"
             android:visibility="gone"
-            android:id="@+id/complaint"
+            android:id="@+id/collab1_skills"
             android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@id/reg_complaintstatus"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="15dp"/>
