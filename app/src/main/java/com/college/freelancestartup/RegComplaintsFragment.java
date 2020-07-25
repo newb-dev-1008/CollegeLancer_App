@@ -68,7 +68,6 @@ public class RegComplaintsFragment extends Fragment {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (queryDocumentSnapshots.size() > 0){
-                    // Also, figure out how opening the card will work
                     ArrayList<RegisteredComplaints> registeredComplaints = new ArrayList<>();
                     for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                         String complaintTitle1 = documentSnapshot.get("complaintTitle").toString();

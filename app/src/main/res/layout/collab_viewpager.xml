@@ -37,6 +37,13 @@
             android:layout_height="match_parent"
             android:text="My Posts"
             android:id="@+id/collab4_tab"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Available"
+            android:id="@+id/collab5_available"/>
+
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
