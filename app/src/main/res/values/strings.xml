@@ -73,4 +73,8 @@
     <string name="thirdStatusStudent">Your fellow freelancers will now be able to contact you for project collaboration.</string>
     <string name="fourthStatusStudent">You will be made available only to organizations and premium clients.</string>
     <string name="fifthStatusStudent">You will not be contacted for projects or research until you change your status.</string>
+
+    <!-- String for Transition Animations -->
+
+    <string name="transitionAnimation">Transition Animation</string>
 </resources>
