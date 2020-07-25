@@ -136,7 +136,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:id="@+id/collab3_noApplicants"
-        app:layout_constraintTop_toBottomOf="@id/collab4_visibleSwitch"
+        app:layout_constraintTop_toTopOf="@id/collab4_noApplicantsTV"
+        app:layout_constraintBottom_toBottomOf="@id/collab4_noApplicantsTV"
         app:layout_constraintStart_toEndOf="@id/collab4_noApplicantsTV"
         app:layout_constraintEnd_toStartOf="@id/collab4_status"
         app:layout_constraintHorizontal_bias="0"
@@ -171,6 +172,21 @@
         android:text="Number of accepted applicants: "
         app:layout_constraintHorizontal_bias="0"
         android:layout_marginStart="4dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/collab3_noAcceptedApplicants"
+        app:layout_constraintTop_toTopOf="@id/collab4_noAcceptedApplicantsTV"
+        app:layout_constraintStart_toEndOf="@id/collab4_noAcceptedApplicantsTV"
+        app:layout_constraintEnd_toStartOf="@id/collab4_status"
+        app:layout_constraintBottom_toBottomOf="@id/collab4_noAcceptedApplicantsTV"
+        app:layout_constraintHorizontal_bias="0"
+        android:textColor="@color/black"
+        android:layout_marginStart="5dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="15dp"/>
 
