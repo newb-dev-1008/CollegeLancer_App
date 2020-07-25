@@ -82,36 +82,11 @@
         app:layout_constraintTop_toBottomOf="@id/collab3_dateTV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/collab3_status"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0"
         android:layout_marginStart="4dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="15dp"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/collab3_messageBtn"
-        app:layout_constraintTop_toBottomOf="@id/collab3_date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/collab3_applyBtn"
-        app:layout_constraintHorizontal_bias="0"
-        android:text="Message"
-        android:padding="4dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="25dp"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/collab3_applyBtn"
-        app:layout_constraintTop_toBottomOf="@id/collab3_date"
-        app:layout_constraintStart_toEndOf="@id/collab3_messageBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        android:text="Apply"
-        android:padding="4dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="25dp"/>
 
     <TextView
         android:layout_width="wrap_content"
