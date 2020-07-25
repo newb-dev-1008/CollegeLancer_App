@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapter.AllColabsOneViewHolder> {
     private ArrayList<AllColabsOne> AllColabsList;
@@ -28,7 +27,7 @@ class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapter.AllCo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    // Intents here
                 }
             });
         }

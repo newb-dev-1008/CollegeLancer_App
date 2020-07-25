@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -16,8 +17,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class AllCollabsFragment extends Fragment {
 
@@ -58,6 +62,16 @@ public class AllCollabsFragment extends Fragment {
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (queryDocumentSnapshots.size() > 0){
                     emptyTV.setVisibility(View.GONE);
+                    ArrayList<AllColabsOne> allColabs = new ArrayList<>();
+                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        String posterTitle = documentSnapshot.get("posterTitle").toString();
+                        String projectTitle = documentSnapshot.get("projectTitle").toString();
+                        String posterDate = documentSnapshot.get("postDate").toString();
+                        String projectSkills = documentSnapshot.get("projectSkills").toString();
+                        String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
+                        String projectDesc = documentSnapshot.get("projectDesc").toString();
+                        allColabs.add(new AllColabsOne(posterTitle, projectTitle, projectDesc, posterDate, projectSkills, projectOpenFor));
+                    }
                 } else {
                     collab1RecyclerView.setVisibility(View.GONE);
                     swipeDownRefreshTV.setVisibility(View.GONE);
