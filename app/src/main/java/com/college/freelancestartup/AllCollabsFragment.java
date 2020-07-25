@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -27,7 +26,6 @@ public class AllCollabsFragment extends Fragment {
 
     private View root;
     private FirebaseFirestore db;
-    private FirebaseAuth firebaseAuth;
     private RecyclerView collab1RecyclerView;
     private TextView swipeDownRefreshTV, emptyTV;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -38,11 +36,11 @@ public class AllCollabsFragment extends Fragment {
         root = inflater.inflate(R.layout.student_find_collabs_frag, container, false);
 
         db = FirebaseFirestore.getInstance();
-        firebaseAuth = FirebaseAuth.getInstance();
 
         collab1RecyclerView = root.findViewById(R.id.find_collabs_recyclerView);
         swipeDownRefreshTV = root.findViewById(R.id.swipeRefreshTVCollab1);
         emptyTV = root.findViewById(R.id.find_collab1_emptyTV);
+        swipeRefreshLayout = root.findViewById(R.id.swipeRefreshLayoutCollab1);
 
         showCollab1();
 
