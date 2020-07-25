@@ -1,6 +1,7 @@
 package com.college.freelancestartup;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,5 +34,13 @@ class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapter.AllCo
         }
     }
 
+    public AllColabsOneAdapter(ArrayList<AllColabsOne> allColabsExampleList){
+        AllColabsList = allColabsExampleList;
+    }
 
+    @NonNull
+    @Override
+    public AllColabsOneViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return null;
+    }
 }
