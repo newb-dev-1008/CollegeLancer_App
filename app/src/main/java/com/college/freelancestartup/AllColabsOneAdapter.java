@@ -1,5 +1,6 @@
 package com.college.freelancestartup;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,10 @@ class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapter.AllCo
                 @Override
                 public void onClick(View view) {
                     // Intents here
+                    Intent intent = new Intent(view.getContext(), AllColabsOneOpenActivity.class);
+                    String transitionName = view.getResources().getString(R.string.transitionAnimation);
+                    View viewStart = view.findViewById(R.id.find_collab1_cardview);
+
                 }
             });
         }
