@@ -50,5 +50,24 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
         return HistoryCollabThreeViewHolder;
     }
 
+    @Override
+    public void onBindViewHolder(@NonNull HistoryCollabThreeAdapter.HistoryCollabThreeViewHolder holder, int position) {
+        HistoryCollabsThree historyCollabsThree = HistoryCollabsList.get(position);
 
+        posterName = historyCollabsThree.getPosterTitle();
+        projectTitle = historyCollabsThree.getProjectTitle();
+        projectDesc = historyCollabsThree.getProjectDesc();
+        skills = historyCollabsThree.getSkills();
+        openFor = historyCollabsThree.getOpenFor();
+        collabDate = historyCollabsThree.getCollabDate();
+        collabStatus = historyCollabsThree.getCollabStatus();
+
+        holder.posterName1.setText(posterName);
+        holder.projectTitle1.setText(projectTitle);
+        holder.projectDesc1.setText(projectDesc);
+        holder.skills1.setText(skills);
+        holder.openFor1.setText(openFor);
+        holder.postedDate1.setText(postedDate);
+
+    }
 }
