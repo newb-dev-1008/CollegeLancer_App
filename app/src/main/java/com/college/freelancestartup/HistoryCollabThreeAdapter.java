@@ -29,16 +29,17 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), RequestCollabTwoOpenActivity.class);
+                Intent intent = new Intent(view.getContext(), HistoryCollabThreeOpenActivity.class);
                 String transitionName = view.getResources().getString(R.string.transitionAnimation);
-                View viewStart = view.findViewById(R.id.find_collab1_cardview);
+                View viewStart = view.findViewById(R.id.find_collab3_cardview);
 
                 intent.putExtra(posterName, "posterName1");
                 intent.putExtra(projectTitle, "projectTitle1");
                 intent.putExtra(projectDesc, "projectDesc1");
                 intent.putExtra(openFor, "openFor1");
                 intent.putExtra(skills, "skills1");
-                intent.putExtra(postedDate, "postedDate1");
+                intent.putExtra(collabDate, "collabDate1");
+                intent.putExtra(collabStatus, "collabStatus1");
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
@@ -46,6 +47,8 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
                 ActivityCompat.startActivity(view.getContext(), intent, options.toBundle());
             }
         });
-        return requestCollabTwoViewHolder;
+        return HistoryCollabThreeViewHolder;
     }
+
+
 }
