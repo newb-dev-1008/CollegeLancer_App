@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeAdapter.HistoryCollabsThreeViewHolder> {
     private ArrayList<HistoryCollabsThree> HistoryCollabsList;
-    private String posterName, projectTitle, projectDesc, skills, openFor, collabDate, collabStatus;
+    private String posterName, projectTitle, projectDesc, collabDate, collabStatus;
 
     public HistoryCollabThreeAdapter(ArrayList<HistoryCollabsThree> historyCollabsExampleList){
         HistoryCollabsList = historyCollabsExampleList;
@@ -37,8 +37,6 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
                 intent.putExtra(posterName, "posterName1");
                 intent.putExtra(projectTitle, "projectTitle1");
                 intent.putExtra(projectDesc, "projectDesc1");
-                intent.putExtra(openFor, "openFor1");
-                intent.putExtra(skills, "skills1");
                 intent.putExtra(collabDate, "collabDate1");
                 intent.putExtra(collabStatus, "collabStatus1");
 
@@ -48,7 +46,7 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
                 ActivityCompat.startActivity(view.getContext(), intent, options.toBundle());
             }
         });
-        return HistoryCollabsThreeViewHolder;
+        return historyCollabThreeViewHolder;
     }
 
     @Override
@@ -58,16 +56,12 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
         posterName = historyCollabsThree.getPosterTitle();
         projectTitle = historyCollabsThree.getProjectTitle();
         projectDesc = historyCollabsThree.getProjectDesc();
-        skills = historyCollabsThree.getSkills();
-        openFor = historyCollabsThree.getOpenFor();
         collabDate = historyCollabsThree.getCollabDate();
         collabStatus = historyCollabsThree.getCollabStatus();
 
         holder.posterName1.setText(posterName);
         holder.projectTitle1.setText(projectTitle);
         holder.projectDesc1.setText(projectDesc);
-        holder.skills1.setText(skills);
-        holder.openFor1.setText(openFor);
         holder.postedDate1.setText(collabDate);
         holder.collabStatus1.setText(collabStatus);
 
@@ -82,8 +76,6 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
             projectTitle1 = itemView.findViewById(R.id.collab1_projectTitle);
             postedDate1 = itemView.findViewById(R.id.collab1_date);
             projectDesc1 = itemView.findViewById(R.id.collab1_projectDesc);
-            openFor1 = itemView.findViewById(R.id.collab1_openFor);
-            skills1 = itemView.findViewById(R.id.collab1_skills);
             collabStatus1 = itemView.findViewById(R.id.collab3_status);
         }
     }
