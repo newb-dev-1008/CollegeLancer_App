@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeAdapter.HistoryCollabThreeViewHolder> {
+class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeAdapter.HistoryCollabsThreeViewHolder> {
     private ArrayList<HistoryCollabsThree> HistoryCollabsList;
     private String posterName, projectTitle, projectDesc, skills, openFor, collabDate, collabStatus;
 
@@ -23,9 +24,9 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
 
     @NonNull
     @Override
-    public HistoryCollabThreeAdapter.HistoryCollabThreeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HistoryCollabThreeAdapter.HistoryCollabsThreeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.find_collab3_cardview, parent, false);
-        HistoryCollabThreeAdapter.HistoryCollabThreeViewHolder historyCollabThreeViewHolder = new HistoryCollabThreeAdapter.HistoryCollabThreeViewHolder(v);
+        HistoryCollabThreeAdapter.HistoryCollabsThreeViewHolder historyCollabThreeViewHolder = new HistoryCollabThreeAdapter.HistoryCollabsThreeViewHolder(v);
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,11 +48,11 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
                 ActivityCompat.startActivity(view.getContext(), intent, options.toBundle());
             }
         });
-        return HistoryCollabThreeViewHolder;
+        return HistoryCollabsThreeViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HistoryCollabThreeAdapter.HistoryCollabThreeViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HistoryCollabThreeAdapter.HistoryCollabsThreeViewHolder holder, int position) {
         HistoryCollabsThree historyCollabsThree = HistoryCollabsList.get(position);
 
         posterName = historyCollabsThree.getPosterTitle();
@@ -67,7 +68,28 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
         holder.projectDesc1.setText(projectDesc);
         holder.skills1.setText(skills);
         holder.openFor1.setText(openFor);
-        holder.postedDate1.setText(postedDate);
+        holder.postedDate1.setText(collabDate);
+        holder.collabStatus1.setText(collabStatus);
 
+    }
+
+    public static class HistoryCollabsThreeViewHolder extends RecyclerView.ViewHolder {
+        public TextView posterName1, projectTitle1, postedDate1, projectDesc1, openFor1, skills1, collabStatus1;
+
+        public HistoryCollabsThreeViewHolder(@NonNull View itemView) {
+            super(itemView);
+            posterName1 = itemView.findViewById(R.id.collab1_name);
+            projectTitle1 = itemView.findViewById(R.id.collab1_projectTitle);
+            postedDate1 = itemView.findViewById(R.id.collab1_date);
+            projectDesc1 = itemView.findViewById(R.id.collab1_projectDesc);
+            openFor1 = itemView.findViewById(R.id.collab1_openFor);
+            skills1 = itemView.findViewById(R.id.collab1_skills);
+            collabStatus1 = itemView.findViewById(R.id.collab3_status);
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return HistoryCollabsList.size();
     }
 }
