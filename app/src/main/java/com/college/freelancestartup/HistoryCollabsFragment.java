@@ -56,7 +56,7 @@ public class HistoryCollabsFragment extends Fragment {
                 .collection("PreviousCollabs").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if (queryDocumentSnapshots.size() > 0){
+                if (queryDocumentSnapshots.size() > 0) {
                     emptyTV.setVisibility(View.GONE);
                     ArrayList<HistoryCollabsThree> historyCollabs = new ArrayList<>();
                     for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
