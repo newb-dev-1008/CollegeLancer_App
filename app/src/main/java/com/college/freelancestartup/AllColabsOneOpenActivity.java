@@ -23,6 +23,10 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
         skills1 = findViewById(R.id.collab1_skills);
 
         posterName1.setText(getIntent().getExtras().get("posterName1").toString());
-
+        projectTitle1.setText(getIntent().getExtras().get("projectTitle1").toString());
+        postedDate1.setText(getIntent().getExtras().get("postedDate1").toString());
+        projectDesc1.setText(getIntent().getExtras().get("projectDesc1").toString());
+        openFor1.setText(getIntent().getExtras().get("openFor1").toString());
+        skills1.setText(getIntent().getExtras().get("skills1").toString());
     }
 }
