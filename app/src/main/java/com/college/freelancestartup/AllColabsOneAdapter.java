@@ -1,5 +1,7 @@
 package com.college.freelancestartup;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -33,6 +37,10 @@ class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapter.AllCo
                     String transitionName = view.getResources().getString(R.string.transitionAnimation);
                     View viewStart = view.findViewById(R.id.find_collab1_cardview);
 
+                    ActivityOptionsCompat options =
+                            ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
+
+                    ActivityCompat.startActivity(view.getContext(), intent, options.toBundle());
                 }
             });
         }
