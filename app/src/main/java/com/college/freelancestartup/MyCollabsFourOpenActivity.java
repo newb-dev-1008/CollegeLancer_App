@@ -11,7 +11,7 @@ import com.google.android.material.button.MaterialButton;
 
 class MyCollabsFourOpenActivity extends AppCompatActivity {
 
-    private TextView posterName1, projectTitle1, collabDate1, collabStatus1, projectDesc1, numApplicants, numSelectedApplicants;
+    private TextView posterName, projectTitle, postedDate, collabStatus, projectDesc, numApplicants, numSelectedApplicants;
     private MaterialButton applicantsLogButton;
     private Switch collab4VisibleSwitch;
 
@@ -20,22 +20,22 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_collab4_opencard);
 
-        posterName1 = findViewById(R.id.collab3_name);
-        projectTitle1 = findViewById(R.id.collab3_projectTitle);
-        collabDate1 = findViewById(R.id.collab3_date);
-        projectDesc1 = findViewById(R.id.collab3_projectDesc);
-        collabStatus1 = findViewById(R.id.collab3_status);
+        posterName = findViewById(R.id.collab3_name);
+        projectTitle = findViewById(R.id.collab3_projectTitle);
+        postedDate = findViewById(R.id.collab3_date);
+        projectDesc = findViewById(R.id.collab3_projectDesc);
+        collabStatus = findViewById(R.id.collab3_status);
         numApplicants = findViewById(R.id.collab4_noApplicants);
         numSelectedApplicants = findViewById(R.id.collab3_noAcceptedApplicants);
         applicantsLogButton = findViewById(R.id.collab4_noApplicantsBtn);
         collab4VisibleSwitch = findViewById(R.id.collab4_visibleSwitch);
 
-        posterName1.setText(getIntent().getExtras().get("posterName").toString());
-        projectTitle1.setText(getIntent().getExtras().get("projectTitle").toString());
-        collabDate1.setText(getIntent().getExtras().get("collabDate").toString());
-        projectDesc1.setText(getIntent().getExtras().get("projectDesc").toString());
-        collabStatus1.setText(getIntent().getExtras().get("collabStatus").toString());
-        numApplicants.setText(getIntent().getExtras().get("numApplicants").toString();
-        numSelectedApplicants.setText(getIntent().getExtras().get("numSelectedApplicants").toString();
+        posterName.setText(getIntent().getExtras().get("posterName").toString());
+        projectTitle.setText(getIntent().getExtras().get("projectTitle").toString());
+        postedDate.setText(getIntent().getExtras().get("postedDate").toString());
+        projectDesc.setText(getIntent().getExtras().get("projectDesc").toString());
+        collabStatus.setText(getIntent().getExtras().get("collabStatus").toString());
+        numApplicants.setText(getIntent().getExtras().get("numApplicants").toString());
+        numSelectedApplicants.setText(getIntent().getExtras().get("numSelectedApplicants").toString());
     }
 }
