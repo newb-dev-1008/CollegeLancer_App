@@ -43,7 +43,7 @@ public class RequestsCollabsFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
-        collab2RecyclerView = root.findViewById(R.id.request_collabs_recyclerView);
+        collab2RecyclerView = root.findViewById(R.id.request_collabs_recyclerView2);
         swipeDownRefreshTV = root.findViewById(R.id.swipeRefreshTVCollab2);
         swipeRefreshLayout = root.findViewById(R.id.swipeRefreshLayoutCollab2);
 
