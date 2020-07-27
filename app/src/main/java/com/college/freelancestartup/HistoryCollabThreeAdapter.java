@@ -72,10 +72,10 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
 
         public HistoryCollabsThreeViewHolder(@NonNull View itemView) {
             super(itemView);
-            posterName1 = itemView.findViewById(R.id.collab1_name);
-            projectTitle1 = itemView.findViewById(R.id.collab1_projectTitle);
-            postedDate1 = itemView.findViewById(R.id.collab1_date);
-            projectDesc1 = itemView.findViewById(R.id.collab1_projectDesc);
+            posterName1 = itemView.findViewById(R.id.collab3_name);
+            projectTitle1 = itemView.findViewById(R.id.collab3_projectTitle);
+            postedDate1 = itemView.findViewById(R.id.collab3_name);
+            projectDesc1 = itemView.findViewById(R.id.collab3_projectDesc);
             collabStatus1 = itemView.findViewById(R.id.collab3_status);
         }
     }

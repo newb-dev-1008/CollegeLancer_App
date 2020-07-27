@@ -34,7 +34,7 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
         projectTitle.setText(getIntent().getExtras().get("projectTitle").toString());
         postedDate.setText(getIntent().getExtras().get("postedDate").toString());
         projectDesc.setText(getIntent().getExtras().get("projectDesc").toString());
-        collabStatus.setText(getIntent().getExtras().get("collabStatus").toString());
+        collabStatus.setText(getIntent().getExtras().get("projectStatus").toString());
         numApplicants.setText(getIntent().getExtras().get("numApplicants").toString());
         numSelectedApplicants.setText(getIntent().getExtras().get("numSelectedApplicants").toString());
     }
