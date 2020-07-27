@@ -115,35 +115,49 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/collab5_date"
+        app:layout_constraintTop_toBottomOf="@id/collab5_projectsCompletedTV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
-        android:text="Projects completed: "
+        android:text="Collaborations completed: "
         android:layout_marginTop="10dp"
         android:layout_marginStart="4dp"
         android:textColor="@color/black"
-        android:id="@+id/collab5_projectsCompletedTV"/>
+        android:id="@+id/collab5_collaborationsTV"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:id="@+id/collab5_projectsCompleted"
-        app:layout_constraintTop_toTopOf="@id/collab5_projectsCompletedTV"
-        app:layout_constraintBottom_toBottomOf="@id/collab5_projectsCompletedTV"
-        app:layout_constraintStart_toEndOf="@id/collab5_projectsCompletedTV"
+        android:id="@+id/collab5_collaborations"
+        app:layout_constraintTop_toTopOf="@id/collab5_collaborationsTV"
+        app:layout_constraintBottom_toBottomOf="@id/collab5_collaborationsTV"
+        app:layout_constraintStart_toEndOf="@id/collab5_collaborationsTV"
         android:layout_marginStart="4dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="15dp"/>
 
     <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/collab5_seeCollabsButton"
+        app:layout_constraintTop_toBottomOf="@id/collab5_collaborationsTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:text="Check Previous Collaborations"
+        android:padding="4dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"/>
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/collab1_messageBtn"
-        app:layout_constraintTop_toBottomOf=""
+        android:id="@+id/collab5_messageBtn"
+        app:layout_constraintTop_toBottomOf="@id/collab5_seeCollabsButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/collab1_applyBtn"
+        app:layout_constraintEnd_toStartOf="@id/collab5_applyBtn"
         app:layout_constraintHorizontal_bias="0"
         android:text="Message"
         android:padding="4dp"
@@ -153,9 +167,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/collab1_applyBtn"
-        app:layout_constraintTop_toBottomOf="@id/collab1_date"
-        app:layout_constraintStart_toEndOf="@id/collab1_messageBtn"
+        android:id="@+id/collab5_applyBtn"
+        app:layout_constraintTop_toBottomOf="@id/collab5_seeCollabsButton"
+        app:layout_constraintStart_toEndOf="@id/collab5_messageBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         android:text="Apply"
