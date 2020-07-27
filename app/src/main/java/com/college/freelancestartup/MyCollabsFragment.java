@@ -78,7 +78,7 @@ class MyCollabsFragment extends Fragment {
                         myCollabs.add(new MyCollabsFour(posterTitle, projectTitle, projectDesc, postedDate, collabStatus, projectVisible, numberApplicants, numberSelectedApplicants));
 
                         myCollabs4LayoutManager = new LinearLayoutManager(getContext());
-                        myCollabs4Adapter = new MyCollabsFourAdapter(myCollabs);
+                        myCollabs4Adapter = new MyCollabFourAdapter(myCollabs);
                         collab4RecyclerView.setHasFixedSize(true);
                         collab4RecyclerView.setLayoutManager(myCollabs4LayoutManager);
                         collab4RecyclerView.setAdapter(myCollabs4Adapter);
