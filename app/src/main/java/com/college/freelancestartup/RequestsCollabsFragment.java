@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -30,6 +31,9 @@ public class RequestsCollabsFragment extends Fragment {
     private RecyclerView collab2RecyclerView;
     private TextView swipeDownRefreshTV, emptyTV;
     private SwipeRefreshLayout swipeRefreshLayout;
+
+    private RecyclerView.LayoutManager requestCollab2LayoutManager;
+    private RecyclerView.Adapter requestCollab2Adapter;
 
     @Nullable
     @Override
@@ -71,6 +75,12 @@ public class RequestsCollabsFragment extends Fragment {
                         String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
                         String projectDesc = documentSnapshot.get("projectDesc").toString();
                         requestCollab.add(new RequestCollabTwo(posterTitle, projectTitle, projectDesc, posterDate, projectSkills, projectOpenFor));
+
+                        requestCollab2LayoutManager = new LinearLayoutManager(getContext());
+                        requestCollab2Adapter = new RequestCollabTwoAdapter(requestCollab);
+                        collab2RecyclerView.setHasFixedSize(true);
+                        collab2RecyclerView.setLayoutManager(requestCollab2LayoutManager);
+                        collab2RecyclerView.setAdapter(requestCollab2Adapter);
                     }
                 } else {
                     collab2RecyclerView.setVisibility(View.GONE);
