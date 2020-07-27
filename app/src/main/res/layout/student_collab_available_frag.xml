@@ -57,7 +57,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="You have not collaborated with anyone.\nThink this is a mistake?\nSwipe down to refresh."
+        android:text="There seems to be no one available.\nThink this is a mistake?\nSwipe down to refresh."
         android:gravity="center_horizontal"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
