@@ -136,7 +136,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:id="@+id/collab3_noApplicants"
+        android:id="@+id/collab4_noApplicants"
         app:layout_constraintTop_toTopOf="@id/collab4_noApplicantsTV"
         app:layout_constraintBottom_toBottomOf="@id/collab4_noApplicantsTV"
         app:layout_constraintStart_toEndOf="@id/collab4_noApplicantsTV"
@@ -147,7 +147,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="15dp"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
