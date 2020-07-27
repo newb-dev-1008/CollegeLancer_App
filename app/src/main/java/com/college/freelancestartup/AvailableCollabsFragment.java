@@ -57,12 +57,14 @@ class AvailableCollabsFragment extends Fragment {
 
     private void showCollabs5(){
         // Work on the Querying part for picking Users with their set status
-        db.collection("Users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
-            }
-        })
+        db.collection("Users").whereEqualTo("studentStatus", "Looking for collaborators").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        emptyTV.setVisibility(View.GONE);
+                        ArrayList<AvailableCollabsFive> availableCollabs = new ArrayList<>();
+                    }
+                })
 
                 document("User " + firebaseAuth.getCurrentUser().getEmail())
                 .collection("PreviousCollabs").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
