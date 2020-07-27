@@ -7,7 +7,7 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/swipeRefreshLayoutCollab3"
+        android:id="@+id/swipeRefreshLayoutCollab4"
         app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +26,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
-                    android:id="@+id/log_collabs_recyclerView"
+                    android:id="@+id/mycollabs_collabs4_recyclerView"
                     android:background="@color/grey"/>
 
                 <TextView
@@ -41,7 +41,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="10dp"
-                    android:id="@+id/swipeRefreshTVCollab3"/>
+                    android:id="@+id/swipeRefreshTVCollab4"/>
 
             </LinearLayout>
         </ScrollView>
@@ -51,7 +51,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/log_collab3_emptyTV"
+        android:id="@+id/log_collab4_emptyTV"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
