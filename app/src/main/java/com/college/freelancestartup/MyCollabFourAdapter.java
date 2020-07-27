@@ -87,5 +87,8 @@ class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapter.MyCol
         }
     }
 
-
+    @Override
+    public int getItemCount() {
+        return MyCollabsList.size();
+    }
 }
