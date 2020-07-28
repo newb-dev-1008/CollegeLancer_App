@@ -66,6 +66,8 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     private String KEY_USER_TYPE = "userType";
     private String KEY_BIO = "userBio";
     private String KEY_STUDSTATUS = "studentStatus";
+    private String KEY_NOCOLLABS = "numberCollabs";
+    private String KEY_NOPROJECTS = "numberProjects";
     private DatePickerDialog.OnDateSetListener dateSetListener;
 
     private String DOB;
@@ -199,6 +201,8 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
                             userDetails.put(KEY_STUD_SEM, studentSem.getSelectedItem());
                             userDetails.put(KEY_BIO, bio);
                             userDetails.put(KEY_STUDSTATUS, status);
+                            userDetails.put(KEY_NOCOLLABS, 0);
+                            userDetails.put(KEY_NOPROJECTS, 0);
 
                             db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).set(userDetails, SetOptions.merge())
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
