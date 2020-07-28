@@ -76,36 +76,11 @@ class AvailableCollabsFragment extends Fragment {
                         collab5RecyclerView.setVisibility(View.GONE);
                         swipeDownRefreshTV.setVisibility(View.GONE);
                     }
-                })
-
-                document("User " + firebaseAuth.getCurrentUser().getEmail())
-                .collection("PreviousCollabs").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if (queryDocumentSnapshots.size() > 0) {
-                    emptyTV.setVisibility(View.GONE);
-                    ArrayList<HistoryCollabsThree> historyCollabs = new ArrayList<>();
-                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        String posterTitle = documentSnapshot.get("posterTitle").toString();
-                        String projectTitle = documentSnapshot.get("projectTitle").toString();
-                        String collabDate = documentSnapshot.get("collabDate").toString();
-                        String projectSkills = documentSnapshot.get("projectSkills").toString();
-                        String collabStatus = documentSnapshot.get("collabStatus").toString();
-                        String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
-                        String projectDesc = documentSnapshot.get("projectDesc").toString();
-                        historyCollabs.add(new HistoryCollabsThree(posterTitle, projectTitle, projectDesc, collabDate, projectSkills, projectOpenFor, collabStatus));
-                    }
-                } else {
-                    collab3RecyclerView.setVisibility(View.GONE);
-                    swipeDownRefreshTV.setVisibility(View.GONE);
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
     }
 }
