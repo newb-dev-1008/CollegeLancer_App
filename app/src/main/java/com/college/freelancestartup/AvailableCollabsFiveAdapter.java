@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -46,7 +47,40 @@ class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsF
                 ActivityCompat.startActivity(view.getContext(), intent, options.toBundle());
             }
         });
-        return allColabsOneViewHolder;
+        return availableCollabsFiveViewHolder;
     }
 
+    @Override
+    public void onBindViewHolder(@NonNull AvailableCollabsFiveAdapter.AvailableCollabsFiveViewHolder holder, int position) {
+        AvailableCollabsFive availableCollabsFive = AvailableCollabsList.get(position);
+
+        name = availableCollabsFive.getName();
+        semester = availableCollabsFive.getSemester();
+        department = availableCollabsFive.getDepartment();
+        skills = availableCollabsFive.getSkills();
+        noProjects = availableCollabsFive.getNoProjects();
+        noCollabs = availableCollabsFive.getNoCollabs();
+
+        holder.name1.setText(name);
+        holder.semester1.setText(semester);
+        holder.department1.setText(department);
+        holder.skills1.setText(skills);
+        holder.noProjects1.setText(noProjects);
+        holder.noCollabs1.setText(noCollabs);
+
+    }
+
+    public static class AllColabsOneViewHolder extends RecyclerView.ViewHolder {
+        public TextView name1, semester1, department1, skills1, noProjects1, noCollabs1;
+
+        public AllColabsOneViewHolder(@NonNull View itemView) {
+            super(itemView);
+            name1 = itemView.findViewById(R.id.collab5_name);
+            semester1 = itemView.findViewById(R.id.collab5_personSemester);
+            department1 = itemView.findViewById(R.id.collab5_personDepartment);
+            skills1 = itemView.findViewById(R.id.collab5_skills);
+            noProjects1 = itemView.findViewById(R.id.collab5_projectsCompleted);
+            noCollabs1 = itemView.findViewById(R.id.collab5_collaborations);
+        }
+    }
 }
