@@ -78,7 +78,7 @@ class AvailableCollabsFragment extends Fragment {
                                 availableCollabs.add(new AvailableCollabsFive(name, department, skills, previousCollabs, previousProjects, semester));
 
                                 availableCollab5LayoutManager = new LinearLayoutManager(getContext());
-                                availableCollab5Adapter = new HistoryCollabThreeAdapter(availableCollabs);
+                                availableCollab5Adapter = new AvailableCollabsFiveAdapter(availableCollabs);
                                 collab5RecyclerView.setHasFixedSize(true);
                                 collab5RecyclerView.setLayoutManager(availableCollab5LayoutManager);
                                 collab5RecyclerView.setAdapter(availableCollab5Adapter);
