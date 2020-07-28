@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -73,6 +74,12 @@ public class HistoryCollabsFragment extends Fragment {
                         String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
                         String projectDesc = documentSnapshot.get("projectDesc").toString();
                         historyCollabs.add(new HistoryCollabsThree(posterTitle, projectTitle, projectDesc, collabDate, projectSkills, projectOpenFor, collabStatus));
+
+                        historyCollab3LayoutManager = new LinearLayoutManager(getContext());
+                        historyCollab3Adapter = new HistoryCollabThreeAdapter(historyCollabs);
+                        collab3RecyclerView.setHasFixedSize(true);
+                        collab3RecyclerView.setLayoutManager(historyCollab3LayoutManager);
+                        collab3RecyclerView.setAdapter(historyCollab3Adapter);
                     }
                 } else {
                     collab3RecyclerView.setVisibility(View.GONE);

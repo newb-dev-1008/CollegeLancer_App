@@ -41,7 +41,7 @@ public class AllCollabsFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
 
-        collab1RecyclerView = root.findViewById(R.id.find_collabs_recyclerView);
+        collab1RecyclerView = root.findViewById(R.id.find_collabs_recyclerView1);
         swipeDownRefreshTV = root.findViewById(R.id.swipeRefreshTVCollab1);
         emptyTV = root.findViewById(R.id.find_collab1_emptyTV);
         swipeRefreshLayout = root.findViewById(R.id.swipeRefreshLayoutCollab1);
