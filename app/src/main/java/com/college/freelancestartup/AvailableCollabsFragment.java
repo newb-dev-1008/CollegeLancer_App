@@ -28,7 +28,7 @@ class AvailableCollabsFragment extends Fragment {
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView collab4RecyclerView;
+    private RecyclerView collab5RecyclerView;
     private TextView swipeDownRefreshTV, emptyTV;
 
     @Nullable
@@ -41,7 +41,7 @@ class AvailableCollabsFragment extends Fragment {
         swipeRefreshLayout = root.findViewById(R.id.swipeRefreshLayoutCollab5);
         swipeDownRefreshTV = root.findViewById(R.id.swipeRefreshTVCollab5);
         emptyTV = root.findViewById(R.id.log_collab5_emptyTV);
-        collab4RecyclerView = root.findViewById(R.id.log_collabs_recyclerView5);
+        collab5RecyclerView = root.findViewById(R.id.log_collabs_recyclerView5);
 
         showCollabs5();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -63,6 +63,18 @@ class AvailableCollabsFragment extends Fragment {
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         emptyTV.setVisibility(View.GONE);
                         ArrayList<AvailableCollabsFive> availableCollabs = new ArrayList<>();
+                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            String name = documentSnapshot.get("name").toString();
+                            String semester = documentSnapshot.get("studentSemester").toString();
+                            String skills = documentSnapshot.get("studentSkills").toString();
+                            String department = documentSnapshot.get("department").toString();
+                            String previousCollabs = documentSnapshot.get("previousCollabs").toString();
+                            String previousProjects = documentSnapshot.get("previousProjects").toString();
+                            availableCollabs.add(new AvailableCollabsFive(name, semester, skills, department, previousCollabs, previousProjects));
+                        }
+                    } else {
+                        collab5RecyclerView.setVisibility(View.GONE);
+                        swipeDownRefreshTV.setVisibility(View.GONE);
                     }
                 })
 
