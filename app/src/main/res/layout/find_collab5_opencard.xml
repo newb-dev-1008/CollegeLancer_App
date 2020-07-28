@@ -145,24 +145,32 @@
         android:id="@+id/collab5_messageBtn"
         app:layout_constraintTop_toBottomOf="@id/collab5_seeCollabsButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/collab5_applyBtn"
+        app:layout_constraintEnd_toStartOf="@id/collab5_viewProfileBtn"
         app:layout_constraintHorizontal_bias="0"
         android:text="Message"
         android:padding="4dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="25dp"/>
+        android:layout_marginTop="20dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/collab5_applyBtn"
+        android:id="@+id/collab5_selectBtn"
+        app:layout_constraintTop_toBottomOf="@id/collab5_seeCollabsButton"
+        app:layout_constraintStart_toEndOf="@id/collab5_viewProfileBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Select"
+        android:padding="4dp"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/collab5_viewProfileBtn"
         app:layout_constraintTop_toBottomOf="@id/collab5_seeCollabsButton"
         app:layout_constraintStart_toEndOf="@id/collab5_messageBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        android:text="Apply"
+        app:layout_constraintEnd_toStartOf="@id/collab5_selectBtn"
+        android:text="View Profile"
         android:padding="4dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="25dp"/>
+        android:layout_marginTop="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
