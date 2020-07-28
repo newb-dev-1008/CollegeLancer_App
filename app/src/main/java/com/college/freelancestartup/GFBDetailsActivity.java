@@ -68,6 +68,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     private String KEY_STUDSTATUS = "studentStatus";
     private String KEY_NOCOLLABS = "numberCollabs";
     private String KEY_NOPROJECTS = "numberProjects";
+    private String KEY_STUDENTSKILLS = "studentSkills";
     private DatePickerDialog.OnDateSetListener dateSetListener;
 
     private String DOB;

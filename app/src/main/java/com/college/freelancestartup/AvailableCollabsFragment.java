@@ -73,8 +73,8 @@ class AvailableCollabsFragment extends Fragment {
                                 String semester = documentSnapshot.get("studentSemester").toString();
                                 String skills = documentSnapshot.get("studentSkills").toString();
                                 String department = documentSnapshot.get("department").toString();
-                                String previousCollabs = documentSnapshot.get("previousCollabs").toString();
-                                String previousProjects = documentSnapshot.get("previousProjects").toString();
+                                String previousCollabs = documentSnapshot.get("numberCollabs").toString();
+                                String previousProjects = documentSnapshot.get("numberProjects").toString();
                                 availableCollabs.add(new AvailableCollabsFive(name, department, skills, previousCollabs, previousProjects, semester));
 
                                 availableCollab5LayoutManager = new LinearLayoutManager(getContext());
