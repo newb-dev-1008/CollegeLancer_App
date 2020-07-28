@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -30,6 +31,9 @@ class AvailableCollabsFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView collab5RecyclerView;
     private TextView swipeDownRefreshTV, emptyTV;
+
+    private RecyclerView.LayoutManager availableCollab5LayoutManager;
+    private RecyclerView.Adapter availableCollab5Adapter;
 
     @Nullable
     @Override
@@ -72,6 +76,12 @@ class AvailableCollabsFragment extends Fragment {
                                 String previousCollabs = documentSnapshot.get("previousCollabs").toString();
                                 String previousProjects = documentSnapshot.get("previousProjects").toString();
                                 availableCollabs.add(new AvailableCollabsFive(name, department, skills, previousCollabs, previousProjects, semester));
+
+                                availableCollab5LayoutManager = new LinearLayoutManager(getContext());
+                                availableCollab5Adapter = new HistoryCollabThreeAdapter(availableCollabs);
+                                collab5RecyclerView.setHasFixedSize(true);
+                                collab5RecyclerView.setLayoutManager(availableCollab5LayoutManager);
+                                collab5RecyclerView.setAdapter(availableCollab5Adapter);
                             }
                         } else {
                             collab5RecyclerView.setVisibility(View.GONE);
