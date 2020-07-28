@@ -70,10 +70,10 @@ class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsF
 
     }
 
-    public static class AllColabsOneViewHolder extends RecyclerView.ViewHolder {
+    public static class AvailableCollabsFiveViewHolder extends RecyclerView.ViewHolder {
         public TextView name1, semester1, department1, skills1, noProjects1, noCollabs1;
 
-        public AllColabsOneViewHolder(@NonNull View itemView) {
+        public AvailableCollabsFiveViewHolder(@NonNull View itemView) {
             super(itemView);
             name1 = itemView.findViewById(R.id.collab5_name);
             semester1 = itemView.findViewById(R.id.collab5_personSemester);
@@ -82,5 +82,10 @@ class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsF
             noProjects1 = itemView.findViewById(R.id.collab5_projectsCompleted);
             noCollabs1 = itemView.findViewById(R.id.collab5_collaborations);
         }
+    }
+
+    @Override
+    public int getItemCount() {
+        return AvailableCollabsList.size();
     }
 }
