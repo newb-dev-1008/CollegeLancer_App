@@ -61,20 +61,22 @@ class AvailableCollabsFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        emptyTV.setVisibility(View.GONE);
-                        ArrayList<AvailableCollabsFive> availableCollabs = new ArrayList<>();
-                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            String name = documentSnapshot.get("name").toString();
-                            String semester = documentSnapshot.get("studentSemester").toString();
-                            String skills = documentSnapshot.get("studentSkills").toString();
-                            String department = documentSnapshot.get("department").toString();
-                            String previousCollabs = documentSnapshot.get("previousCollabs").toString();
-                            String previousProjects = documentSnapshot.get("previousProjects").toString();
-                            availableCollabs.add(new AvailableCollabsFive(name, semester, skills, department, previousCollabs, previousProjects));
+                        if (queryDocumentSnapshots.size() > 0) {
+                            emptyTV.setVisibility(View.GONE);
+                            ArrayList<AvailableCollabsFive> availableCollabs = new ArrayList<>();
+                            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                String name = documentSnapshot.get("name").toString();
+                                String semester = documentSnapshot.get("studentSemester").toString();
+                                String skills = documentSnapshot.get("studentSkills").toString();
+                                String department = documentSnapshot.get("department").toString();
+                                String previousCollabs = documentSnapshot.get("previousCollabs").toString();
+                                String previousProjects = documentSnapshot.get("previousProjects").toString();
+                                availableCollabs.add(new AvailableCollabsFive(name, semester, skills, department, previousCollabs, previousProjects));
+                            }
+                        } else {
+                            collab5RecyclerView.setVisibility(View.GONE);
+                            swipeDownRefreshTV.setVisibility(View.GONE);
                         }
-                    } else {
-                        collab5RecyclerView.setVisibility(View.GONE);
-                        swipeDownRefreshTV.setVisibility(View.GONE);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
