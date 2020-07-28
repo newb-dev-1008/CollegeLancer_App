@@ -71,7 +71,7 @@ class AvailableCollabsFragment extends Fragment {
                                 String department = documentSnapshot.get("department").toString();
                                 String previousCollabs = documentSnapshot.get("previousCollabs").toString();
                                 String previousProjects = documentSnapshot.get("previousProjects").toString();
-                                availableCollabs.add(new AvailableCollabsFive(name, semester, skills, department, previousCollabs, previousProjects));
+                                availableCollabs.add(new AvailableCollabsFive(name, department, skills, previousCollabs, previousProjects, semester));
                             }
                         } else {
                             collab5RecyclerView.setVisibility(View.GONE);
