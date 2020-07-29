@@ -316,6 +316,7 @@
         <item>ES8 JavaScript</item>
         <item>Essay Writing</item>
         <item>ETL</item>
+        <item>Ethical Hacking</item>
         <item>Excel</item>
         <item>ExpressJS</item>
         <item>Ext JS</item>
@@ -484,6 +485,60 @@
         <item>PostgreSQL Programming</item>
         <item>Power Amplifier RF</item>
         <item>Power BI</item>
+        <item>Power Converters</item>
+        <item>Power Generations</item>
+        <item>Power Redesign</item>
+        <item>Power Supply</item>
+        <item>Prototype Design</item>
+        <item>Protractor JavaScript</item>
+        <item>PSD to HTML</item>
+        <item>PSD2CMS</item>
+        <item>Python</item>
+        <item>PyTorch</item>
+        <item>Qi</item>
+        <item>Qlik</item>
+        <item>QlikView</item>
+        <item>Quality and Reliability Testing</item>
+        <item>Quantum</item>
+        <item>QuarkXPress</item>
+        <item>QuickBase</item>
+        <item>R Programming Language</item>
+        <item>RADAR/LIDAR</item>
+        <item>Radio Frequency (RF) Engineering</item>
+        <item>Rapid Prototyping</item>
+        <item>Raspberry Pi</item>
+        <item>React Native</item>
+        <item>React.js</item>
+        <item>React.js Framework</item>
+        <item>Redshift</item>
+        <item>Redux.js</item>
+        <item>Remote Sensing</item>
+        <item>Relational Databases</item>
+        <item>Research Writing</item>
+        <item>REST APIs</item>
+        <item>Revit Architecture</item>
+        <item>RFID (Radio-frequency identification)</item>
+        <item>Robotic Process Automation</item>
+        <item>Robotics</item>
+        <item>Robotics and Cognitive Automation</item>
+        <item>Ruby</item>
+        <item>Ruby on Rails</item>
+        <item>RUST Programming</item>
+        <item>Sails.js</item>
+        <item>SAS</item>
+        <item>Scala</item>
+        <item>Swift</item>
+        <item>Scikit-Learn</item>
+        <item>SciPy</item>
+        <item>Scripting</item>
+        <item>Selenium</item>
+        <item>Selenium Webdriver</item>
+        <item>Semiconductors</item>
+        <item>SEO</item>
+        <item>Serial Peripheral Interface (SPI)</item>
+        <item>Shell Scripting</item>
+        <item>Signal Processing</item>
+        <item>Simulation</item>
         <item>
     </string-array>
 
