@@ -420,7 +420,8 @@
         <item>Microsoft Access</item>
         <item>Microsoft Azure</item>
         <item>Microsoft Exchange</item>
-
+        <item>Microsoft SQL Server</item>
+        <item>Microsoft Visio</item>
     </string-array>
 
 </resources>
