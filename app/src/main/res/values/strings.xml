@@ -77,4 +77,32 @@
     <!-- String for Transition Animations -->
 
     <string name="transitionAnimation">Transition Animation</string>
+
+    <!-- String Array for Skills -->
+
+    <string-array name="skills">
+        <item>.NET</item>
+        <item>.NET Core</item>
+        <item>2D Animation</item>
+        <item>3D Animation</item>
+        <item>3D Design</item>
+        <item>3D Model Maker</item>
+        <item>802.11</item>
+        <item>Augmented Reality</item>
+        <item>A/B Testing</item>
+        <item>A/R Management</item>
+        <item>A/V Engineering</item>
+        <item>A/V Editing</item>
+        <item>Academic Research</item>
+        <item>Academic Writing</item>
+        <item>Accounting</item>
+        <item>ActionScript</item>
+        <item>Administrative Support</item>
+        <item>Adobe Air</item>
+        <item>Adobe Dreamweaver</item>
+        <item>Adobe Captivate</item>
+        <item>Adobe Fireworks</item>
+        <item>Adobe Flash</item>
+    </string-array>
+
 </resources>
