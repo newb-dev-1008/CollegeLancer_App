@@ -422,6 +422,35 @@
         <item>Microsoft Exchange</item>
         <item>Microsoft SQL Server</item>
         <item>Microsoft Visio</item>
+        <item>Mining Engineering</item>
+        <item>Mobile App Development</item>
+        <item>Mobile App Testing</item>
+        <item>Mobile Development</item>
+        <item>Mobile Welding</item>
+        <item>MonetDB</item>
+        <item>MongoDB</item>
+        <item>Motion Graphics</item>
+        <item>MPSoC Design</item>
+        <item>MQL4</item>
+        <item>MQTT</item>
+        <item>MySQL</item>
+        <item>Nanotechnology</item>
+        <item>Natural Language Processing</item>
+        <item>Near Field Communication (NFC)</item>
+        <item>Neo4j</item>
+        <item>Network Administration</item>
+        <item>Network Engineering</item>
+        <item>Network Security</item>
+        <item>Neural Networks</item>
+        <item>Node.js</item>
+        <item>NoSQL</item>
+        <item>NoSQL Couch and Mongo</item>
+        <item>NumPy</item>
+        <item>Object Oriented Programming (OOP)</item>
+        <item>Objective C</item>
+        <item>Oculus Mobile SDK</item>
+        <item>Office 365</item>
+        <item>Online Writing</item>
     </string-array>
 
 </resources>
