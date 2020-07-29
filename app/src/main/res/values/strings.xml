@@ -539,7 +539,79 @@
         <item>Shell Scripting</item>
         <item>Signal Processing</item>
         <item>Simulation</item>
-        <item>
+        <item>Social Media Marketing</item>
+        <item>Socket IO</item>
+        <item>Software Architecture</item>
+        <item>Software Development</item>
+        <item>Software Testing</item>
+        <item>Soldering</item>
+        <item>Solar</item>
+        <item>SolidWorks</item>
+        <item>Solutions Architecture</item>
+        <item>Sound Design</item>
+        <item>Sound Engineering</item>
+        <item>Spark</item>
+        <item>Sphinx</item>
+        <item>SQLite</item>
+        <item>SSIS (SQL Server Integration Services)</item>
+        <item>Statistical Analysis</item>
+        <item>Statistical Modelling</item>
+        <item>Steam API</item>
+        <item>Storage Area Networks</item>
+        <item>Structural Engineering</item>
+        <item>Swift Package Manager</item>
+        <item>Swing (Java)</item>
+        <item>Symbian</item>
+        <item>Systems Engineering</item>
+        <item>T-SQL</item>
+        <item>Tableau</item>
+        <item>Telecommunications Engineering</item>
+        <item>Telecoms Engineering</item>
+        <item>TensorFlow</item>
+        <item>Test Automation</item>
+        <item>Testing/ QA</item>
+        <item>Thermal and Environmental Testing</item>
+        <item>Thermal Analysis</item>
+        <item>Three.js</item>
+        <item>Twitter API</item>
+        <item>TypeScript</item>
+        <item>Typography</item>
+        <item>UML Design</item>
+        <item>Underscore.js</item>
+        <item>Unity 3D</item>
+        <item>UNIX</item>
+        <item>Unreal Engine</item>
+        <item>User Experience (UX) Design</item>
+        <item>User Interface (UI) Design</item>
+        <item>VB.NET</item>
+        <item>VBScript</item>
+        <item>Vector Calculus</item>
+        <item>Verilog/ VHDL</item>
+        <item>Version Control</item>
+        <item>Very-large-scale integration (VLSI)</item>
+        <item>Video Editing</item>
+        <item>Video Post-Editing</item>
+        <item>Video Processing</item>
+        <item>Virtual Assistant Bots</item>
+        <item>Virtual Reality</item>
+        <item>Visual Basic</item>
+        <item>Visual FoxPro</item>
+        <item>VMWare</item>
+        <item>VoiceXML</item>
+        <item>VoIP</item>
+        <item>Vue.js</item>
+        <item>Water Treatment</item>
+        <item>Web API</item>
+        <item>Web Crawling</item>
+        <item>Web Hosting</item>
+        <item>Web Scraping</item>
+        <item>Website Design</item>
+        <item>Website Management</item>
+        <item>Website Optimization</item>
+        <item>WiFi Module</item>
+        <item>Windows API</item>
+        <item>Windows Server</item>
+
     </string-array>
 
 </resources>
