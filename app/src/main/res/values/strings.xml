@@ -451,6 +451,40 @@
         <item>Oculus Mobile SDK</item>
         <item>Office 365</item>
         <item>Online Writing</item>
+        <item>OpenBravo</item>
+        <item>OpenBSD</item>
+        <item>OpenCL</item>
+        <item>OpenCV</item>
+        <item>OpenVPN</item>
+        <item>OpenVZ</item>
+        <item>Operations Research</item>
+        <item>Operating System</item>
+        <item>P2P Networks</item>
+        <item>Package Design</item>
+        <item>PASCAL</item>
+        <item>Pattern Matching</item>
+        <item>Pattern Recognition</item>
+        <item>PC Programming</item>
+        <item>PCB Design and Layout</item>
+        <item>Penetration testing</item>
+        <item>Photo Editing</item>
+        <item>Photo Restoration</item>
+        <item>Photo Retouching</item>
+        <item>Photography</item>
+        <item>Photoshop</item>
+        <item>Photoshop Coding</item>
+        <item>Photoshop Design</item>
+        <item>PHP</item>
+        <item>PHP Slim</item>
+        <item>Physics</item>
+        <item>PICK Multivalue DB</item>
+        <item>Poetry</item>
+        <item>PostgreSQL</item>
+        <item>PostgreSQL Administration</item>
+        <item>PostgreSQL Programming</item>
+        <item>Power Amplifier RF</item>
+        <item>Power BI</item>
+        <item>
     </string-array>
 
 </resources>
