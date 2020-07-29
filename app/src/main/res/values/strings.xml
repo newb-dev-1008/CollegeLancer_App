@@ -611,7 +611,23 @@
         <item>WiFi Module</item>
         <item>Windows API</item>
         <item>Windows Server</item>
-
+        <item>WinJS</item>
+        <item>Wireless Systems</item>
+        <item>Wireless Radio Frequency Engineering</item>
+        <item>Wireless Sensors and Gateways</item>
+        <item>Word Processing</item>
+        <item>x86/ x64 Assembler</item>
+        <item>Xamarin</item>
+        <item>XAML</item>
+        <item>Xara</item>
+        <item>Xcodebuild</item>
+        <item>XHTML</item>
+        <item>XML</item>
+        <item>XQuery</item>
+        <item>XSS (Cross-site Scripting)</item>
+        <item>Zendesk</item>
+        <item>Zigbee</item>
+        <item>Zwave</item>
     </string-array>
 
 </resources>
