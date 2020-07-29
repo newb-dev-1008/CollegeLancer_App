@@ -176,6 +176,170 @@
         <item>Banner Design</item>
         <item>Bare Metal</item>
         <item>Bash Scripting</item>
+        <item>BeautifulSoup</item>
+        <item>Big Data Analytics</item>
+        <item>Biometrics</item>
+        <item>Bitcoin</item>
+        <item>Blender</item>
+        <item>Blogging</item>
+        <item>Bluetooth Low Energy</item>
+        <item>Bluetooth Module</item>
+        <item>Bootstrap</item>
+        <item>Brand Management</item>
+        <item>Brand Marketing</item>
+        <item>Building Architecture</item>
+        <item>Building Design</item>
+        <item>Bulk Marketing</item>
+        <item>Business Analytics</item>
+        <item>Business Intelligence</item>
+        <item>Business Writing</item>
+        <item>C Programming</item>
+        <item>C# Programming</item>
+        <item>C++ Programming</item>
+        <item>CAD/CAM</item>
+        <item>Calculus</item>
+        <item>CasperJS</item>
+        <item>Caspio</item>
+        <item>Cassandra</item>
+        <item>Casting</item>
+        <item>Catalan</item>
+        <item>CATIA</item>
+        <item>Cellular Design</item>
+        <item>Cellular Modules</item>
+        <item>Cellular Service</item>
+        <item>Certified Public Accountant</item>
+        <item>Cisco Certified Network Associate</item>
+        <item>CGI</item>
+        <item>Chemical Engineering</item>
+        <item>Civil Engineering</item>
+        <item>Cloud Computing</item>
+        <item>Cloud Networking</item>
+        <item>Cloud Security</item>
+        <item>CMS</item>
+        <item>CNC Programming</item>
+        <item>COBOL</item>
+        <item>Cocoa</item>
+        <item>Cocoa Touch</item>
+        <item>CocoaPods</item>
+        <item>CoffeeScript</item>
+        <item>Combinatorial Problem Solving</item>
+        <item>Communication Systems</item>
+        <item>Compliance and Safety Training</item>
+        <item>Computational Analysis</item>
+        <item>Computational Fluid Dynamics</item>
+        <item>Computational Linguistics</item>
+        <item>Computer Aided Manufacturing</item>
+        <item>Computer Graphics</item>
+        <item>Computer Vision</item>
+        <item>Concept Art</item>
+        <item>Concept Design</item>
+        <item>Concreting</item>
+        <item>Content Marketing</item>
+        <item>Content Writing</item>
+        <item>Continuous Integration</item>
+        <item>Control Engineering</item>
+        <item>Control Systems Design</item>
+        <item>Conversion Rate Optimization</item>
+        <item>Core Systems Transformation</item>
+        <item>CorelDraw</item>
+        <item>Cryptography</item>
+        <item>Cryptocurrency</item>
+        <item>CS-Cart</item>
+        <item>CSS</item>
+        <item>CSS3</item>
+        <item>CUDA</item>
+        <item>cURL</item>
+        <item>CV Library</item>
+        <item>cxf</item>
+        <item>D0-178 Certification</item>
+        <item>D0-254 Certification</item>
+        <item>D3.js</item>
+        <item>Damp Proofing</item>
+        <item>Dart</item>
+        <item>Data Analytics</item>
+        <item>Data Architecture</item>
+        <item>Data Entry</item>
+        <item>Data Extraction</item>
+        <item>Data Science</item>
+        <item>Data Mining</item>
+        <item>Data Processing</item>
+        <item>Data Scraping</item>
+        <item>Data Warehousing</item>
+        <item>Database Administration</item>
+        <item>Database Design</item>
+        <item>Database Development</item>
+        <item>Database Programming</item>
+        <item>DataLife Engine</item>
+        <item>DDR3 (PCIe, Board Design/FPGA)</item>
+        <item>DDS</item>
+        <item>Debian</item>
+        <item>Deep Learning</item>
+        <item>Delphi</item>
+        <item>Development Operations</item>
+        <item>Digital Design</item>
+        <item>Digital Electronics</item>
+        <item>Digital Forensics</item>
+        <item>Digital Marketing</item>
+        <item>Digital Networking</item>
+        <item>Digital Signal Processing</item>
+        <item>Django</item>
+        <item>DOS</item>
+        <item>Drones</item>
+        <item>Dropbox API</item>
+        <item>Drupal</item>
+        <item>DSL/MODEMs</item>
+        <item>Dthreejs</item>
+        <item>Dynamic 365</item>
+        <item>Eclipse</item>
+        <item>eCommerce</item>
+        <item>Economics</item>
+        <item>Edge Computing</item>
+        <item>Editing</item>
+        <item>Editorial Writing</item>
+        <item>eLearning Designer</item>
+        <item>Electric Repair</item>
+        <item>Electric Engineering</item>
+        <item>Electronic Design</item>
+        <item>Electronics</item>
+        <item>Email Developer</item>
+        <item>Email Handling</item>
+        <item>Embedded Software</item>
+        <item>Embedded Systems</item>
+        <item>Ember.js</item>
+        <item>Encryption</item>
+        <item>Engineering</item>
+        <item>Engineering Drawing</item>
+        <item>Engineering Mathematics</item>
+        <item>Enterprise Architecture</item>
+        <item>Enterprise Sales Management</item>
+        <item>ERP Software</item>
+        <item>ES8 JavaScript</item>
+        <item>Essay Writing</item>
+        <item>ETL</item>
+        <item>Excel</item>
+        <item>ExpressJS</item>
+        <item>Ext JS</item>
+        <item>Face Recognition</item>
+        <item>Facebook API</item>
+        <item>Facebook Development</item>
+        <item>Facebook SDK</item>
+        <item>Firebase</item>
+        <item>FL Studio</item>
+        <item>Flash 3D</item>
+        <item>Flash Animation</item>
+        <item>Flask</item>
+        <item>Flutter</item>
+        <item>Fortran</item>
+        <item>FPGA</item>
+        <item>FPGA Coding</item>
+        <item>Fraud Detection</item>
+        <item>Frontend Development</item>
+        <item>Full Stack Development</item>
+        <item>Game Design</item>
+        <item>Game Development</item>
+        <item>GarageBand</item>
+        <item>Genetic Algorithms</item>
+        <item>Geolocation</item>
 
     </string-array>
 
