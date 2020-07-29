@@ -103,6 +103,33 @@
         <item>Adobe Captivate</item>
         <item>Adobe Fireworks</item>
         <item>Adobe Flash</item>
+        <item>Adobe FrameMaker</item>
+        <item>Adobe Freehand</item>
+        <item>Adobe InDesign</item>
+        <item>Adobe Lightroom</item>
+        <item>Adobe Pagemaker</item>
+        <item>Adobe Premiere Pro</item>
+        <item>Advertisement Design</item>
+        <item>Advertising</item>
+        <item>Aeronautical Engineering</item>
+        <item>Aerospace Engineering</item>
+        <item>After Effects</item>
+        <item>Agile Development</item>
+        <item>Agile Project Management</item>
+        <item>Artificial Intelligence (HW/ SW)</item>
+        <item>Artificial Intelligence (RPA development)</item>
+        <item>AIX Administration</item>
+        <item>AJAX</item>
+        <item>AJAX Frameworks</item>
+        <item>AJAX Toolkit</item>
+        <item>Ajax4JSF</item>
+        <item>Algorithm Analysis</item>
+        <item>Amazon Web Services (AWS)</item>
+        <item>Analog/ Mixed Signal/ Digital</item>
+        <item>Analog Electronics</item>
+        <item>Analytics</item>
+        <item>Android App Development</item>
+        <item>Android Wear SDK</item>
     </string-array>
 
 </resources>
