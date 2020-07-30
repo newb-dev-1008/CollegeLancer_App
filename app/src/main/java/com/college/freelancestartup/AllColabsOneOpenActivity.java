@@ -81,7 +81,11 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
                                     completeApplicationCollab1();
                                 }
                             }
-                        })
+                        }).setNegativeButton("Cancel", null)
+                        .create();
+                applyCollab1.show();
+                applyCollab1.setCancelable(false);
+                applyCollab1.setCanceledOnTouchOutside(false);
             }
         });
     }
@@ -102,6 +106,6 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(AllColabsOneOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        })
+        });
     }
 }
