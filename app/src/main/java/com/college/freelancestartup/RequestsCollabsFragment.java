@@ -74,7 +74,8 @@ public class RequestsCollabsFragment extends Fragment {
                         String projectSkills = documentSnapshot.get("projectSkills").toString();
                         String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
                         String projectDesc = documentSnapshot.get("projectDesc").toString();
-                        requestCollab.add(new RequestCollabTwo(posterTitle, projectTitle, projectDesc, posterDate, projectSkills, projectOpenFor));
+                        String projectStatus = documentSnapshot.get("projectStatus").toString();
+                        requestCollab.add(new RequestCollabTwo(posterTitle, projectTitle, projectDesc, posterDate, projectSkills, projectOpenFor, projectStatus));
 
                         requestCollab2LayoutManager = new LinearLayoutManager(getContext());
                         requestCollab2Adapter = new RequestCollabTwoAdapter(requestCollab);
