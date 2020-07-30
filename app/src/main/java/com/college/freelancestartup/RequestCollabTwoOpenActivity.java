@@ -17,7 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RequestCollabTwoOpenActivity extends AppCompatActivity {
 
-    private TextView posterName1, projectTitle1, postedDate1, projectDesc1, openFor1, skills1;
+    private TextView posterName1, projectTitle1, postedDate1, projectDesc1, openFor1, skills1, projectStatus1;
     private MaterialButton messageButton, applyButton;
     private EditText applyEditText;
     private String projectID;
@@ -36,6 +36,7 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
         projectDesc1 = findViewById(R.id.collab2_projectDesc);
         openFor1 = findViewById(R.id.collab2_openFor);
         skills1 = findViewById(R.id.collab2_skills);
+        projectStatus1 = findViewById(R.id.collab2_projectStatus);
 
         posterName1.setText(getIntent().getExtras().get("posterName1").toString());
         projectTitle1.setText(getIntent().getExtras().get("projectTitle1").toString());
@@ -43,6 +44,7 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
         projectDesc1.setText(getIntent().getExtras().get("projectDesc1").toString());
         openFor1.setText(getIntent().getExtras().get("openFor1").toString());
         skills1.setText(getIntent().getExtras().get("skills1").toString());
+        projectStatus1.setText(getIntent().getExtras().get("projectStatus1").toString());
 
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override

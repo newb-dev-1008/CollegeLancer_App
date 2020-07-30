@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class RequestCollabTwoAdapter extends RecyclerView.Adapter<RequestCollabTwoAdapter.RequestCollabTwoViewHolder> {
     private ArrayList<RequestCollabTwo> RequestCollabsList;
-    private String posterName, projectTitle, projectDesc, skills, openFor, postedDate;
+    private String posterName, projectTitle, projectDesc, skills, openFor, postedDate, projectStatus;
 
     public RequestCollabTwoAdapter(ArrayList<RequestCollabTwo> requestCollabsExampleList){
         RequestCollabsList = requestCollabsExampleList;
@@ -32,7 +32,7 @@ public class RequestCollabTwoAdapter extends RecyclerView.Adapter<RequestCollabT
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), RequestCollabTwoOpenActivity.class);
                 String transitionName = view.getResources().getString(R.string.transitionAnimation);
-                View viewStart = view.findViewById(R.id.find_collab1_cardview);
+                View viewStart = view.findViewById(R.id.find_collab2_cardview);
 
                 intent.putExtra(posterName, "posterName1");
                 intent.putExtra(projectTitle, "projectTitle1");
@@ -40,6 +40,7 @@ public class RequestCollabTwoAdapter extends RecyclerView.Adapter<RequestCollabT
                 intent.putExtra(openFor, "openFor1");
                 intent.putExtra(skills, "skills1");
                 intent.putExtra(postedDate, "postedDate1");
+                intent.putExtra(projectStatus, "projectStatus1")
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
