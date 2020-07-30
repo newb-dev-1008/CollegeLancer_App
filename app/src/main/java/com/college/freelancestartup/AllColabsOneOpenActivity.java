@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -34,6 +35,7 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
     private String projectID;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
+    private int numberApps;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,6 +93,7 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
     }
 
     private void completeApplicationCollab1(){
+        String personPicked;
         Map<String, Object> userMap = new HashMap<>();
         userMap.put("emailID", firebaseAuth.getCurrentUser().getEmail());
         userMap.put("picked", null);
@@ -107,5 +110,26 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
                 Toast.makeText(AllColabsOneOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        db.collection("CollabProjects").document(projectID).collection("Collaborators")
+                .document("General").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                numberApps = Integer.parseInt(documentSnapshot.get("numberApps").toString());
+                numberApps = numberApps + 1;
+                db.collection("CollabProjects").document(projectID).collection("Collaborators")
+                        .document("General").update("numberApps", numberApps).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AllColabsOneOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(AllColabsOneOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        })
     }
 }
