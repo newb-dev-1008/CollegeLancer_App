@@ -73,7 +73,8 @@ public class HistoryCollabsFragment extends Fragment {
                         String collabStatus = documentSnapshot.get("collabStatus").toString();
                         String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
                         String projectDesc = documentSnapshot.get("projectDesc").toString();
-                        historyCollabs.add(new HistoryCollabsThree(posterTitle, projectTitle, projectDesc, collabDate, projectSkills, projectOpenFor, collabStatus));
+                        String projectID = documentSnapshot.get("projectID").toString();
+                        historyCollabs.add(new HistoryCollabsThree(posterTitle, projectTitle, projectDesc, collabDate, projectSkills, projectOpenFor, collabStatus, projectID));
 
                         historyCollab3LayoutManager = new LinearLayoutManager(getContext());
                         historyCollab3Adapter = new HistoryCollabThreeAdapter(historyCollabs);

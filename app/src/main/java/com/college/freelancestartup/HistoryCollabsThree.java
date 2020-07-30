@@ -8,8 +8,9 @@ class HistoryCollabsThree {
     private String skills;
     private String openFor;
     private String collabStatus;
+    private String projectID;
 
-    public HistoryCollabsThree(String posterTitle, String projectTitle, String projectDesc, String collabDate, String skills, String openFor, String collabStatus) {
+    public HistoryCollabsThree(String posterTitle, String projectTitle, String projectDesc, String collabDate, String skills, String openFor, String collabStatus, String projectID) {
         this.posterTitle = posterTitle;
         this.projectTitle = projectTitle;
         this.projectDesc = projectDesc;
@@ -17,6 +18,11 @@ class HistoryCollabsThree {
         this.skills = skills;
         this.openFor = openFor;
         this.collabStatus = collabStatus;
+        this.projectID = projectID;
+    }
+
+    public String getProjectID() {
+        return projectID;
     }
 
     public String getPosterTitle() {

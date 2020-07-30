@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 class HistoryCollabThreeOpenActivity extends AppCompatActivity {
 
     private TextView posterName1, projectTitle1, collabDate1, projectDesc1, collabStatus1;
+    private String projectID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,5 +27,7 @@ class HistoryCollabThreeOpenActivity extends AppCompatActivity {
         collabDate1.setText(getIntent().getExtras().get("collabDate1").toString());
         projectDesc1.setText(getIntent().getExtras().get("projectDesc1").toString());
         collabStatus1.setText(getIntent().getExtras().get("collabStatus1").toString());
+
+        projectID = getIntent().getExtras().get("projectID").toString();
     }
 }
