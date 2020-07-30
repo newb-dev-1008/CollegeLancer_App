@@ -9,12 +9,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 class AllColabsOneOpenActivity extends AppCompatActivity {
 
@@ -23,11 +32,16 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
     private View view;
     private EditText applyEditText;
     private String projectID;
+    private FirebaseFirestore db;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_collab1_opencard);
+
+        db = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         LayoutInflater inflater = getLayoutInflater();
         view = inflater.inflate(R.layout.apply_collab1_dialogedittext, null);
@@ -61,14 +75,33 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
                         .setPositiveButton("Apply", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                if (TextUtils.isEmpty(applyEditText.getText().toString()) {
+                                if (TextUtils.isEmpty(applyEditText.getText().toString())) {
                                     Toast.makeText(AllColabsOneOpenActivity.this, "Please enter a short description.", Toast.LENGTH_SHORT).show();
                                 } else {
-
+                                    completeApplicationCollab1();
                                 }
                             }
                         })
             }
         });
+    }
+
+    private void completeApplicationCollab1(){
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put("emailID", firebaseAuth.getCurrentUser().getEmail());
+        userMap.put("picked", null);
+        db.collection("CollabProjects").document(projectID).collection("Collaborators")
+                .document("User " + firebaseAuth.getCurrentUser()).set(userMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(AllColabsOneOpenActivity.this, "Get excited! The project head has received your application and will review it soon.", Toast.LENGTH_LONG).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(AllColabsOneOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        })
     }
 }
