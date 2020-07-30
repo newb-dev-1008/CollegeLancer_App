@@ -83,6 +83,32 @@
         app:layout_constraintTop_toBottomOf="@id/collab3_dateTV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/collab3_status"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/collab3_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/collab3_status"
+        app:layout_constraintHorizontal_bias="0"
+        android:text="Fellow Collaborators: "
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/black"
+        android:id="@+id/collab3_fellowCollabsTV"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/collab3_fellowCollabs"
+        app:layout_constraintTop_toBottomOf="@id/collab3_fellowCollabsTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/collab3_status"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0"
         android:layout_marginStart="4dp"
