@@ -28,6 +28,6 @@ class HistoryCollabThreeOpenActivity extends AppCompatActivity {
         projectDesc1.setText(getIntent().getExtras().get("projectDesc1").toString());
         collabStatus1.setText(getIntent().getExtras().get("collabStatus1").toString());
 
-        projectID = getIntent().getExtras().get("projectID").toString();
+        projectID = getIntent().getExtras().get("projectID1").toString();
     }
 }

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeAdapter.HistoryCollabsThreeViewHolder> {
     private ArrayList<HistoryCollabsThree> HistoryCollabsList;
-    private String posterName, projectTitle, projectDesc, collabDate, collabStatus;
+    private String posterName, projectTitle, projectDesc, collabDate, collabStatus, projectID;
 
     public HistoryCollabThreeAdapter(ArrayList<HistoryCollabsThree> historyCollabsExampleList){
         HistoryCollabsList = historyCollabsExampleList;
@@ -39,6 +39,7 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
                 intent.putExtra(projectDesc, "projectDesc1");
                 intent.putExtra(collabDate, "collabDate1");
                 intent.putExtra(collabStatus, "collabStatus1");
+                intent.putExtra(projectID, "projectID1");
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
@@ -58,6 +59,7 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
         projectDesc = historyCollabsThree.getProjectDesc();
         collabDate = historyCollabsThree.getCollabDate();
         collabStatus = historyCollabsThree.getCollabStatus();
+        projectID = historyCollabsThree.getProjectID();
 
         holder.posterName1.setText(posterName);
         holder.projectTitle1.setText(projectTitle);
