@@ -130,6 +130,6 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(AllColabsOneOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        })
+        });
     }
 }
