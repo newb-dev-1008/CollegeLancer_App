@@ -72,7 +72,8 @@ public class AllCollabsFragment extends Fragment {
                         String projectSkills = documentSnapshot.get("projectSkills").toString();
                         String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
                         String projectDesc = documentSnapshot.get("projectDesc").toString();
-                        allColabs.add(new AllColabsOne(posterTitle, projectTitle, projectDesc, posterDate, projectSkills, projectOpenFor));
+                        String projectID = documentSnapshot.get("projectID").toString();
+                        allColabs.add(new AllColabsOne(posterTitle, projectTitle, projectDesc, posterDate, projectSkills, projectOpenFor, projectID));
 
                         allCollab1LayoutManager = new LinearLayoutManager(getContext());
                         allCollab1Adapter = new AllColabsOneAdapter(allColabs);

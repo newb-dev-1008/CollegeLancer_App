@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapter.AllColabsOneViewHolder> {
     private ArrayList<AllColabsOne> AllColabsList;
-    private String posterName, projectTitle, projectDesc, skills, openFor, postedDate;
+    private String posterName, projectTitle, projectDesc, skills, openFor, postedDate, projectID;
 
     public AllColabsOneAdapter(ArrayList<AllColabsOne> allColabsExampleList){
         AllColabsList = allColabsExampleList;
@@ -41,6 +41,7 @@ public class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapte
                 intent.putExtra(openFor, "openFor1");
                 intent.putExtra(skills, "skills1");
                 intent.putExtra(postedDate, "postedDate1");
+                intent.putExtra(projectID, "projectID");
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
@@ -61,6 +62,7 @@ public class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapte
         skills = allColabsOne.getSkills();
         openFor = allColabsOne.getOpenFor();
         postedDate = allColabsOne.getCollabDate();
+        projectID = allColabsOne.getProjectID();
 
         holder.posterName1.setText(posterName);
         holder.projectTitle1.setText(projectTitle);
