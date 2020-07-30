@@ -20,9 +20,10 @@ import java.util.ArrayList;
 
 class HistoryCollabThreeOpenActivity extends AppCompatActivity {
 
-    private TextView posterName1, projectTitle1, collabDate1, projectDesc1, collabStatus1, fellowCollabs;
+    private TextView posterName1, projectTitle1, collabDate1, projectDesc1, collabStatus1, fellowCollabsTV;
     private String projectID;
     private FirebaseFirestore db;
+    private String fellowCollabNames;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ class HistoryCollabThreeOpenActivity extends AppCompatActivity {
         collabDate1 = findViewById(R.id.collab3_date);
         projectDesc1 = findViewById(R.id.collab3_projectDesc);
         collabStatus1 = findViewById(R.id.collab3_status);
-        fellowCollabs = findViewById(R.id.collab3_fellowCollabs);
+        fellowCollabsTV = findViewById(R.id.collab3_fellowCollabs);
 
         db = FirebaseFirestore.getInstance();
 
@@ -43,6 +44,8 @@ class HistoryCollabThreeOpenActivity extends AppCompatActivity {
         collabDate1.setText(getIntent().getExtras().get("collabDate1").toString());
         projectDesc1.setText(getIntent().getExtras().get("projectDesc1").toString());
         collabStatus1.setText(getIntent().getExtras().get("collabStatus1").toString());
+
+        fellowCollabNames = "";
 
         projectID = getIntent().getExtras().get("projectID1").toString();
 
@@ -53,7 +56,7 @@ class HistoryCollabThreeOpenActivity extends AppCompatActivity {
         }
 
         ArrayList<String> fellowCollabsEmail = new ArrayList<>();
-        ArrayList<String> fellowCollabs = new ArrayList<>();
+        // ArrayList<String> fellowCollabs = new ArrayList<>();
         db.collection("CollabProjects").document(projectID).collection("Collaborators")
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -65,8 +68,26 @@ class HistoryCollabThreeOpenActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(HistoryCollabThreeOpenActivity.this, "Fellow Collab Email not loading." + e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(HistoryCollabThreeOpenActivity.this, "Fellow Collab Email not loading. " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
-        })
+        });
+
+        for (String email : fellowCollabsEmail) {
+            db.collection("Users").document("User " + email).get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            // fellowCollabs.add(documentSnapshot.get("name").toString());
+                            fellowCollabNames = fellowCollabNames + documentSnapshot.get("name").toString() + "\n";
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(HistoryCollabThreeOpenActivity.this, "Fellow Collab Names not loading. " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        fellowCollabsTV.setText(fellowCollabNames);
     }
 }
