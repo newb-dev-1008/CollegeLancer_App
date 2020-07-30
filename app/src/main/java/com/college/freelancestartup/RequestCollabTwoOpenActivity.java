@@ -1,21 +1,29 @@
 package com.college.freelancestartup;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.dialog.MaterialDialogs;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RequestCollabTwoOpenActivity extends AppCompatActivity {
 
@@ -26,7 +34,6 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
     private String projectID;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
-    private int numberApps;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +47,9 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
         openFor1 = findViewById(R.id.collab2_openFor);
         skills1 = findViewById(R.id.collab2_skills);
         projectStatus1 = findViewById(R.id.collab2_projectStatus);
+
+        db = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         applyButton = findViewById(R.id.collab2_applyBtn);
         messageButton = findViewById(R.id.collab2_messageBtn);
@@ -107,10 +117,42 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
     }
 
     private void applyButtonPressed() {
-        // finish this
+        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                .collection("CollabRequests").document("projectID").update("projectStatus", "Accepted");
+        projectStatus1.setText("Accepted");
+        projectStatus1.setTextColor(Color.parseColor("#228B22"));
+        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                .collection("CollabRequests").document("projectID").delete();
+
+        Map<String, Object> userReqPicked = new HashMap<>();
+        userReqPicked.put("emailID", firebaseAuth.getCurrentUser().getEmail());
+        userReqPicked.put("picked", "Selected, currently collaborating");
+
+        db.collection("CollabProjects").document(projectID).collection("Collaborators")
+                .document("User " + firebaseAuth.getCurrentUser().getEmail()).set(userReqPicked)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(RequestCollabTwoOpenActivity.this, "Get excited! The project head has received your application and will review it soon.", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(RequestCollabTwoOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        db.collection("CollabProjects").document(projectID)
     }
 
     private void rejectButtonPressed() {
-        db.collection("CollabProjects")
+        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                .collection("CollabRequests").document("projectID").update("projectStatus", "Rejected");
+
+        projectStatus1.setText("Rejected");
+        projectStatus1.setTextColor(Color.parseColor("#800000"));
+        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                .collection("CollabRequests").document("projectID").delete();
+        // Send notification to project poster about the guy rejecting
     }
 }

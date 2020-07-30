@@ -93,7 +93,6 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
     }
 
     private void completeApplicationCollab1(){
-        String personPicked;
         Map<String, Object> userMap = new HashMap<>();
         userMap.put("emailID", firebaseAuth.getCurrentUser().getEmail());
         userMap.put("picked", null);
