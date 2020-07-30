@@ -2,6 +2,7 @@ package com.college.freelancestartup;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,11 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
         holder.postedDate1.setText(collabDate);
         holder.collabStatus1.setText(collabStatus);
 
+        if (collabStatus.equals("Completed")) {
+            holder.collabStatus1.setTextColor(Color.parseColor("#228B22"));
+        } else {
+            holder.collabStatus1.setTextColor(Color.parseColor("#800000"));
+        }
     }
 
     public static class HistoryCollabsThreeViewHolder extends RecyclerView.ViewHolder {
