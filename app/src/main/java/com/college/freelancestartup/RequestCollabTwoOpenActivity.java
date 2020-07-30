@@ -28,14 +28,14 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.find_collab1_opencard);
+        setContentView(R.layout.find_collab2_opencard);
 
-        posterName1 = findViewById(R.id.collab1_name);
-        projectTitle1 = findViewById(R.id.collab1_projectTitle);
-        postedDate1 = findViewById(R.id.collab1_date);
-        projectDesc1 = findViewById(R.id.collab1_projectDesc);
-        openFor1 = findViewById(R.id.collab1_openFor);
-        skills1 = findViewById(R.id.collab1_skills);
+        posterName1 = findViewById(R.id.collab2_name);
+        projectTitle1 = findViewById(R.id.collab2_projectTitle);
+        postedDate1 = findViewById(R.id.collab2_date);
+        projectDesc1 = findViewById(R.id.collab2_projectDesc);
+        openFor1 = findViewById(R.id.collab2_openFor);
+        skills1 = findViewById(R.id.collab2_skills);
 
         posterName1.setText(getIntent().getExtras().get("posterName1").toString());
         projectTitle1.setText(getIntent().getExtras().get("projectTitle1").toString());
@@ -70,5 +70,9 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
 
     private void applyButtonPressed() {
         // finish this
+    }
+
+    private void rejectButtonPressed() {
+
     }
 }

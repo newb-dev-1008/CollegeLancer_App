@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/collab1_name"
+        android:id="@+id/collab2_name"
         android:textSize="22sp"
         android:textColor="@color/black"
         android:fontFamily="sans-serif-black"
@@ -25,8 +25,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/collab1_projectTitle"
-        app:layout_constraintTop_toBottomOf="@id/collab1_name"
+        android:id="@+id/collab2_projectTitle"
+        app:layout_constraintTop_toBottomOf="@id/collab2_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -39,7 +39,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/collab1_projectTitle"
+        app:layout_constraintTop_toBottomOf="@id/collab2_projectTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -47,13 +47,13 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:layout_marginStart="4dp"
-        android:id="@+id/collab1_projectDescTV"/>
+        android:id="@+id/collab2_projectDescTV"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/collab1_projectDesc"
-        app:layout_constraintTop_toBottomOf="@id/collab1_projectDescTV"
+        android:id="@+id/collab2_projectDesc"
+        app:layout_constraintTop_toBottomOf="@id/collab2_projectDescTV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -64,7 +64,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/collab1_projectDesc"
+        app:layout_constraintTop_toBottomOf="@id/collab2_projectDesc"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -72,17 +72,17 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="4dp"
         android:textColor="@color/black"
-        android:id="@+id/collab1_skillsTV"/>
+        android:id="@+id/collab2_skillsTV"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/collab1_skillsTV"
+        app:layout_constraintTop_toBottomOf="@id/collab2_skillsTV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         android:layout_marginTop="10dp"
-        android:id="@+id/collab1_skills"
+        android:id="@+id/collab2_skills"
         android:layout_marginStart="4dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="15dp"/>
@@ -90,7 +90,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/collab1_skills"
+        app:layout_constraintTop_toBottomOf="@id/collab2_skills"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -98,14 +98,14 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="4dp"
         android:textColor="@color/black"
-        android:id="@+id/collab1_openForTV"/>
+        android:id="@+id/collab2_openForTV"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:id="@+id/collab1_openFor"
-        app:layout_constraintTop_toBottomOf="@id/collab1_openForTV"
+        android:id="@+id/collab2_openFor"
+        app:layout_constraintTop_toBottomOf="@id/collab2_openForTV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -116,7 +116,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/collab1_openFor"
+        app:layout_constraintTop_toBottomOf="@id/collab2_openFor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -124,14 +124,14 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="4dp"
         android:textColor="@color/black"
-        android:id="@+id/collab1_dateTV"/>
+        android:id="@+id/collab2_dateTV"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:id="@+id/collab1_date"
-        app:layout_constraintTop_toBottomOf="@id/collab1_dateTV"
+        android:id="@+id/collab2_date"
+        app:layout_constraintTop_toBottomOf="@id/collab2_dateTV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -142,10 +142,10 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/collab1_messageBtn"
-        app:layout_constraintTop_toBottomOf="@id/collab1_date"
+        android:id="@+id/collab2_messageBtn"
+        app:layout_constraintTop_toBottomOf="@id/collab2_date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/collab1_rejectBtn"
+        app:layout_constraintEnd_toStartOf="@id/collab2_rejectBtn"
         android:text="Message"
         android:padding="4dp"
         android:layout_marginTop="20dp"/>
@@ -153,10 +153,10 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/collab1_rejectBtn"
-        app:layout_constraintTop_toBottomOf="@id/collab1_date"
-        app:layout_constraintStart_toEndOf="@id/collab1_messageBtn"
-        app:layout_constraintEnd_toStartOf="@id/collab1_applyBtn"
+        android:id="@+id/collab2_rejectBtn"
+        app:layout_constraintTop_toBottomOf="@id/collab2_date"
+        app:layout_constraintStart_toEndOf="@id/collab2_messageBtn"
+        app:layout_constraintEnd_toStartOf="@id/collab2_applyBtn"
         android:text="Reject"
         android:padding="4dp"
         android:layout_marginTop="20dp"/>
@@ -164,9 +164,9 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/collab1_applyBtn"
-        app:layout_constraintTop_toBottomOf="@id/collab1_date"
-        app:layout_constraintStart_toEndOf="@id/collab1_rejectBtn"
+        android:id="@+id/collab2_applyBtn"
+        app:layout_constraintTop_toBottomOf="@id/collab2_date"
+        app:layout_constraintStart_toEndOf="@id/collab2_rejectBtn"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Apply"
         android:padding="4dp"
