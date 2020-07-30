@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 class AllColabsOneOpenActivity extends AppCompatActivity {
 
     private TextView posterName1, projectTitle1, postedDate1, projectDesc1, openFor1, skills1;
+    private
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
