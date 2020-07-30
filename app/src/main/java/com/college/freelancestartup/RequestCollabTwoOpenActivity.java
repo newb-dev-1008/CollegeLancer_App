@@ -20,6 +20,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.dialog.MaterialDialogs;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -34,6 +35,7 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
     private String projectID;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
+    private int numberApps, numberPicked;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -117,6 +119,8 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
     }
 
     private void applyButtonPressed() {
+        // Notification to project poster
+
         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                 .collection("CollabRequests").document("projectID").update("projectStatus", "Accepted");
         projectStatus1.setText("Accepted");
@@ -142,7 +146,28 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
             }
         });
 
-        db.collection("CollabProjects").document(projectID)
+        db.collection("CollabProjects").document(projectID).collection("Collaborators")
+                .document("General").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                numberApps = Integer.parseInt(documentSnapshot.get("numberApps").toString());
+                numberPicked = Integer.parseInt(documentSnapshot.get("numberPicked").toString());
+
+                numberPicked = numberPicked + 1;
+                db.collection("CollabProjects").document(projectID).collection("Collaborators")
+                        .document("General").update("numberPicked", numberPicked).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(RequestCollabTwoOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(RequestCollabTwoOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void rejectButtonPressed() {
