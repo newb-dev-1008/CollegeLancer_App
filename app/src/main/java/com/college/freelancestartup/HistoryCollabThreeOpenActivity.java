@@ -1,5 +1,7 @@
 package com.college.freelancestartup;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -29,5 +31,11 @@ class HistoryCollabThreeOpenActivity extends AppCompatActivity {
         collabStatus1.setText(getIntent().getExtras().get("collabStatus1").toString());
 
         projectID = getIntent().getExtras().get("projectID1").toString();
+
+        if (collabStatus1.getText().toString().equals("Completed")) {
+            collabStatus1.setTextColor(Color.parseColor("#228B22"));
+        } else {
+            collabStatus1.setTextColor(Color.parseColor("#800000"));
+        }
     }
 }
