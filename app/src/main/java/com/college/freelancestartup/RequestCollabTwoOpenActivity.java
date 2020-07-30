@@ -2,6 +2,7 @@ package com.college.freelancestartup;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,14 +13,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.dialog.MaterialDialogs;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RequestCollabTwoOpenActivity extends AppCompatActivity {
 
     private TextView posterName1, projectTitle1, postedDate1, projectDesc1, openFor1, skills1, projectStatus1;
-    private MaterialButton messageButton, applyButton;
-    private EditText applyEditText;
+    private MaterialButton messageButton, applyButton, rejectButton;
+    private EditText rejectEditText;
+    private View view;
     private String projectID;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
@@ -38,6 +41,16 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
         skills1 = findViewById(R.id.collab2_skills);
         projectStatus1 = findViewById(R.id.collab2_projectStatus);
 
+        applyButton = findViewById(R.id.collab2_applyBtn);
+        messageButton = findViewById(R.id.collab2_messageBtn);
+        rejectButton = findViewById(R.id.collab2_rejectBtn);
+
+        LayoutInflater inflater = getLayoutInflater();
+        view = inflater.inflate(R.layout.apply_collab1_dialogedittext, null);
+
+        rejectEditText = view.findViewById(R.id.applyEditText);
+        rejectEditText.setHint("Let them know why you cannot collaborate. (Optional)");
+
         posterName1.setText(getIntent().getExtras().get("posterName1").toString());
         projectTitle1.setText(getIntent().getExtras().get("projectTitle1").toString());
         postedDate1.setText(getIntent().getExtras().get("postedDate1").toString());
@@ -45,6 +58,8 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
         openFor1.setText(getIntent().getExtras().get("openFor1").toString());
         skills1.setText(getIntent().getExtras().get("skills1").toString());
         projectStatus1.setText(getIntent().getExtras().get("projectStatus1").toString());
+
+        projectID = getIntent().getExtras().get("projectID1").toString();
 
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +83,27 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
                 applyCollab2.setCanceledOnTouchOutside(false);
             }
         });
+
+        rejectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog rejectCollab2 = new MaterialAlertDialogBuilder(RequestCollabTwoOpenActivity.this)
+                        .setView(view)
+                        .setTitle("Are you sure you want to reject this offer?")
+                        .setMessage("The Project Head will be notified about your inability to contribute.\n" +
+                                "However, he can send you a request again.")
+                        .setPositiveButton("Reject", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                rejectButtonPressed();
+                            }
+                        }).setNegativeButton("Cancel", null)
+                        .create();
+                rejectCollab2.show();
+                rejectCollab2.setCancelable(true);
+                rejectCollab2.setCanceledOnTouchOutside(true);
+            }
+        });
     }
 
     private void applyButtonPressed() {
@@ -75,6 +111,6 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
     }
 
     private void rejectButtonPressed() {
-
+        db.collection("CollabProjects")
     }
 }

@@ -8,8 +8,9 @@ class RequestCollabTwo {
     private String skills;
     private String openFor;
     private String projectStatus;
+    private String projectID;
 
-    public RequestCollabTwo(String posterTitle, String projectTitle, String projectDesc, String collabDate, String skills, String openFor, String projectStatus) {
+    public RequestCollabTwo(String posterTitle, String projectTitle, String projectDesc, String collabDate, String skills, String openFor, String projectStatus, String projectID) {
         this.posterTitle = posterTitle;
         this.projectTitle = projectTitle;
         this.projectDesc = projectDesc;
@@ -17,6 +18,11 @@ class RequestCollabTwo {
         this.skills = skills;
         this.openFor = openFor;
         this.projectStatus = projectStatus;
+        this.projectID = projectID;
+    }
+
+    public String getProjectID() {
+        return projectID;
     }
 
     public String getProjectStatus() {

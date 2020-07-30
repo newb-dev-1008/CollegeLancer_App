@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class RequestCollabTwoAdapter extends RecyclerView.Adapter<RequestCollabTwoAdapter.RequestCollabTwoViewHolder> {
     private ArrayList<RequestCollabTwo> RequestCollabsList;
-    private String posterName, projectTitle, projectDesc, skills, openFor, postedDate, projectStatus;
+    private String posterName, projectTitle, projectDesc, skills, openFor, postedDate, projectStatus, projectID;
 
     public RequestCollabTwoAdapter(ArrayList<RequestCollabTwo> requestCollabsExampleList){
         RequestCollabsList = requestCollabsExampleList;
@@ -41,6 +41,7 @@ public class RequestCollabTwoAdapter extends RecyclerView.Adapter<RequestCollabT
                 intent.putExtra(skills, "skills1");
                 intent.putExtra(postedDate, "postedDate1");
                 intent.putExtra(projectStatus, "projectStatus1");
+                intent.putExtra(projectID, "projectID1");
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
@@ -62,6 +63,7 @@ public class RequestCollabTwoAdapter extends RecyclerView.Adapter<RequestCollabT
         openFor = requestCollabTwo.getOpenFor();
         postedDate = requestCollabTwo.getCollabDate();
         projectStatus = requestCollabTwo.getProjectStatus();
+        projectID = requestCollabTwo.getProjectID();
 
         holder.posterName1.setText(posterName);
         holder.projectTitle1.setText(projectTitle);
