@@ -7,14 +7,20 @@ class RequestCollabTwo {
     private String collabDate;
     private String skills;
     private String openFor;
+    private String projectStatus;
 
-    public RequestCollabTwo(String posterTitle, String projectTitle, String projectDesc, String collabDate, String skills, String openFor) {
+    public RequestCollabTwo(String posterTitle, String projectTitle, String projectDesc, String collabDate, String skills, String openFor, String projectStatus) {
         this.posterTitle = posterTitle;
         this.projectTitle = projectTitle;
         this.projectDesc = projectDesc;
         this.collabDate = collabDate;
         this.skills = skills;
         this.openFor = openFor;
+        this.projectStatus = projectStatus;
+    }
+
+    public String getProjectStatus() {
+        return projectStatus;
     }
 
     public String getPosterTitle() {

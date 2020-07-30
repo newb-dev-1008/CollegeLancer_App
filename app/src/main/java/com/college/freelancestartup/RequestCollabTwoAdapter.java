@@ -40,7 +40,7 @@ public class RequestCollabTwoAdapter extends RecyclerView.Adapter<RequestCollabT
                 intent.putExtra(openFor, "openFor1");
                 intent.putExtra(skills, "skills1");
                 intent.putExtra(postedDate, "postedDate1");
-                intent.putExtra(projectStatus, "projectStatus1")
+                intent.putExtra(projectStatus, "projectStatus1");
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
@@ -61,6 +61,7 @@ public class RequestCollabTwoAdapter extends RecyclerView.Adapter<RequestCollabT
         skills = requestCollabTwo.getSkills();
         openFor = requestCollabTwo.getOpenFor();
         postedDate = requestCollabTwo.getCollabDate();
+        projectStatus = requestCollabTwo.getProjectStatus();
 
         holder.posterName1.setText(posterName);
         holder.projectTitle1.setText(projectTitle);
@@ -68,11 +69,12 @@ public class RequestCollabTwoAdapter extends RecyclerView.Adapter<RequestCollabT
         holder.skills1.setText(skills);
         holder.openFor1.setText(openFor);
         holder.postedDate1.setText(postedDate);
+        holder.projectStatus1.setText(projectStatus);
 
     }
 
     public static class RequestCollabTwoViewHolder extends RecyclerView.ViewHolder {
-        public TextView posterName1, projectTitle1, postedDate1, projectDesc1, openFor1, skills1;
+        public TextView posterName1, projectTitle1, postedDate1, projectDesc1, openFor1, skills1, projectStatus1;
 
         public RequestCollabTwoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,6 +84,7 @@ public class RequestCollabTwoAdapter extends RecyclerView.Adapter<RequestCollabT
             projectDesc1 = itemView.findViewById(R.id.collab1_projectDesc);
             openFor1 = itemView.findViewById(R.id.collab1_openFor);
             skills1 = itemView.findViewById(R.id.collab1_skills);
+            projectStatus1 = itemView.findViewById(R.id.collab2_projectStatus);
         }
     }
 
