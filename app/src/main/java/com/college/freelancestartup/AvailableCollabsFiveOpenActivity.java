@@ -22,6 +22,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
 
@@ -29,7 +32,9 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private int internalReqFlag, checkedItem;
-    private String userEmail, projectID;
+    private String userEmail, posterName;
+    private String projectID;
+    private Calendar cObj;
     private MaterialButton previousCollabsButton, messageButton, viewProfileButton, requestButton;
 
     @Override
@@ -40,12 +45,27 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
+        cObj = Calendar.getInstance();
+
         name1 = findViewById(R.id.collab5_name);
         personDepartment1 = findViewById(R.id.collab5_personDepartment);
         personSemester1 = findViewById(R.id.collab5_personSemester);
         numberCollabs1 = findViewById(R.id.collab5_collaborations);
         numberProjects1 = findViewById(R.id.collab5_projectsCompleted);
         skills1 = findViewById(R.id.collab5_skills);
+
+        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                posterName = documentSnapshot.get("name").toString();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(AvailableCollabsFiveOpenActivity.this, "The Firestore Database isn't responding.\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         previousCollabsButton = findViewById(R.id.collab5_seeCollabsButton);
         viewProfileButton = findViewById(R.id.collab5_viewProfileBtn);
@@ -142,14 +162,39 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                     if (checkedItem == -1) {
                                         Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Please select a project first.", Toast.LENGTH_SHORT).show();
                                     } else {
+                                        Map<String, Object> sendRequestCollab5 = new HashMap<>();
                                         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                                                 .collection("Projects").document(projectIDs.get(checkedItem)).get()
                                                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                     @Override
                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-
+                                                        sendRequestCollab5.put("posterTitle", posterName);
+                                                        sendRequestCollab5.put("projectTitle", documentSnapshot.get("projectTitle").toString());
+                                                        sendRequestCollab5.put("postDate", cObj.getTime().toString());
+                                                        sendRequestCollab5.put("projectSkills", documentSnapshot.get("skills").toString());
+                                                        sendRequestCollab5.put("projectOpenFor", documentSnapshot.get("projectOpenFor").toString());
+                                                        sendRequestCollab5.put("projectDesc", documentSnapshot.get("projectDesc").toString());
+                                                        sendRequestCollab5.put("projectID", documentSnapshot.get("projectID").toString());
+                                                        db.collection("User").document("User " + userEmail)
+                                                                .collection("CollabRequests").document(documentSnapshot.get("projectID").toString())
+                                                                .set(sendRequestCollab5).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void aVoid) {
+                                                                Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Request sent. Expect a response soon!", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        });
                                                     }
-                                                })
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
                                     }
                                 }
                             })
