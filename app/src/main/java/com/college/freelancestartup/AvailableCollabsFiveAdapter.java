@@ -61,6 +61,7 @@ class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsF
         skills = availableCollabsFive.getSkills();
         noProjects = availableCollabsFive.getNoProjects();
         noCollabs = availableCollabsFive.getNoCollabs();
+        userEmail = availableCollabsFive.getUserEmail();
 
         holder.name1.setText(name);
         holder.semester1.setText(semester);
