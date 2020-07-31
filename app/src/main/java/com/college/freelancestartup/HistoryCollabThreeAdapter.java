@@ -35,12 +35,12 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
                 String transitionName = view.getResources().getString(R.string.transitionAnimation);
                 View viewStart = view.findViewById(R.id.find_collab3_cardview);
 
-                intent.putExtra(posterName, "posterName1");
-                intent.putExtra(projectTitle, "projectTitle1");
-                intent.putExtra(projectDesc, "projectDesc1");
-                intent.putExtra(collabDate, "collabDate1");
-                intent.putExtra(collabStatus, "collabStatus1");
-                intent.putExtra(projectID, "projectID1");
+                intent.putExtra("posterName1", posterName);
+                intent.putExtra("projectTitle1", projectTitle);
+                intent.putExtra("projectDesc1", projectDesc);
+                intent.putExtra("collabDate1", collabDate);
+                intent.putExtra("collabStatus1", collabStatus);
+                intent.putExtra("projectID1", projectID);
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
