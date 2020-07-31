@@ -1,5 +1,6 @@
 package com.college.freelancestartup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -68,6 +69,8 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     }
 
     private void previousCollabsPressed() {
-
+        Intent intent = new Intent(AvailableCollabsFiveOpenActivity.this, PreviousCollabsCollabFiveActivity.class);
+        intent.putExtra("userEmail", userEmail);
+        startActivity(intent);
     }
 }

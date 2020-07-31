@@ -8,8 +8,9 @@ class AllColabsOne {
     private String skills;
     private String openFor;
     private String projectID;
+    private int flag;
 
-    public AllColabsOne(String posterTitle, String projectTitle, String projectDesc, String collabDate, String skills, String openFor, String projectID) {
+    public AllColabsOne(String posterTitle, String projectTitle, String projectDesc, String collabDate, String skills, String openFor, String projectID, int flag) {
         this.posterTitle = posterTitle;
         this.projectTitle = projectTitle;
         this.projectDesc = projectDesc;
@@ -17,6 +18,7 @@ class AllColabsOne {
         this.skills = skills;
         this.openFor = openFor;
         this.projectID = projectID;
+        this.flag = flag;
     }
 
     public String getPosterTitle() {
@@ -45,5 +47,9 @@ class AllColabsOne {
 
     public String getProjectID() {
         return projectID;
+    }
+
+    public int getFlag() {
+        return flag;
     }
 }
