@@ -35,7 +35,7 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
     private String projectID;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
-    private int numberApps;
+    private int numberApps, flag;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,6 +66,15 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
         openFor1.setText(getIntent().getExtras().get("openFor1").toString());
         skills1.setText(getIntent().getExtras().get("skills1").toString());
         projectID = getIntent().getExtras().get("projectID1").toString();
+        flag = Integer.parseInt(getIntent().getExtras().get("flag").toString());
+
+        if (flag == 0) {
+            applyButton.setVisibility(View.VISIBLE);
+            messageButton.setVisibility(View.VISIBLE);
+        } else {
+            applyButton.setVisibility(View.GONE);
+            messageButton.setVisibility(View.GONE);
+        }
 
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -65,6 +65,7 @@ public class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapte
         openFor = allColabsOne.getOpenFor();
         postedDate = allColabsOne.getCollabDate();
         projectID = allColabsOne.getProjectID();
+        flag = allColabsOne.getFlag();
 
         holder.posterName1.setText(posterName);
         holder.projectTitle1.setText(projectTitle);
