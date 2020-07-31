@@ -34,14 +34,14 @@ public class RequestCollabTwoAdapter extends RecyclerView.Adapter<RequestCollabT
                 String transitionName = view.getResources().getString(R.string.transitionAnimation);
                 View viewStart = view.findViewById(R.id.find_collab2_cardview);
 
-                intent.putExtra(posterName, "posterName1");
-                intent.putExtra(projectTitle, "projectTitle1");
-                intent.putExtra(projectDesc, "projectDesc1");
-                intent.putExtra(openFor, "openFor1");
-                intent.putExtra(skills, "skills1");
-                intent.putExtra(postedDate, "postedDate1");
-                intent.putExtra(projectStatus, "projectStatus1");
-                intent.putExtra(projectID, "projectID1");
+                intent.putExtra("posterName1", posterName);
+                intent.putExtra("projectTitle1", projectTitle);
+                intent.putExtra("projectDesc1", projectDesc);
+                intent.putExtra("openFor1", openFor);
+                intent.putExtra("skills1", skills);
+                intent.putExtra("postedDate1", postedDate);
+                intent.putExtra("projectStatus1", projectStatus);
+                intent.putExtra("projectID1", projectID);
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
