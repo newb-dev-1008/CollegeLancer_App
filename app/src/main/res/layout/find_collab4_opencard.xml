@@ -232,7 +232,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:id="@+id/collab3_noAcceptedApplicants"
+        android:id="@+id/collab4_noAcceptedApplicants"
         app:layout_constraintTop_toTopOf="@id/collab4_noAcceptedApplicantsTV"
         app:layout_constraintStart_toEndOf="@id/collab4_noAcceptedApplicantsTV"
         app:layout_constraintEnd_toStartOf="@id/collab4_status"

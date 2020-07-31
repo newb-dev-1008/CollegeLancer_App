@@ -62,6 +62,9 @@ class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapter.MyCol
         numApplicants = myCollabsFour.getNumberApplicants();
         numSelectedApplicants = myCollabsFour.getNumberSelectedApplicants();
         projectStatus = myCollabsFour.getProjectStatus();
+        projectSkills = myCollabsFour.getProjectSkills();
+        projectOpenFor = myCollabsFour.getProjectOpenFor();
+        projectID = myCollabsFour.getProjectID();
 
         holder.posterName.setText(posterName);
         holder.projectTitle.setText(projectTitle);
@@ -73,7 +76,7 @@ class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapter.MyCol
     }
 
     public static class MyCollabsFourViewHolder extends RecyclerView.ViewHolder {
-        public TextView posterName, projectTitle, postedDate, projectDesc, projectStatus, numApplicants, numSelectedApplicants;
+        public TextView posterName, projectTitle, postedDate, projectDesc, projectStatus, numApplicants, numSelectedApplicants, projectSkills, projectOpenFor, projectID;
 
         public MyCollabsFourViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,7 +86,8 @@ class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapter.MyCol
             projectDesc = itemView.findViewById(R.id.collab4_projectDesc);
             projectStatus = itemView.findViewById(R.id.collab4_status);
             numApplicants = itemView.findViewById(R.id.collab4_noApplicants);
-            numSelectedApplicants = itemView.findViewById(R.id.collab3_noAcceptedApplicants);
+            numSelectedApplicants = itemView.findViewById(R.id.collab4_noAcceptedApplicants);
+            projectSkills = itemView.findViewById(R.id.collab4_skills);
         }
     }
 

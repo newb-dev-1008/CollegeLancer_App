@@ -7,17 +7,20 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 class MyCollabsFourOpenActivity extends AppCompatActivity {
 
-    private TextView posterName, projectTitle, postedDate, collabStatus, projectDesc, numApplicants, numSelectedApplicants;
+    private TextView posterName, projectTitle, postedDate, collabStatus, projectDesc, numApplicants, numSelectedApplicants, skills, openFor;
     private MaterialButton applicantsLogButton;
     private Switch collab4VisibleSwitch;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
+    private String projectID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
         numSelectedApplicants = findViewById(R.id.collab3_noAcceptedApplicants);
         applicantsLogButton = findViewById(R.id.collab4_noApplicantsBtn);
         collab4VisibleSwitch = findViewById(R.id.collab4_visibleSwitch);
+        skills = findViewById(R.id.collab4_skills);
+        openFor = findViewById(R.id.collab4_openFor);
 
         posterName.setText(getIntent().getExtras().get("posterName").toString());
         projectTitle.setText(getIntent().getExtras().get("projectTitle").toString());
@@ -41,12 +46,14 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
         collabStatus.setText(getIntent().getExtras().get("projectStatus").toString());
         numApplicants.setText(getIntent().getExtras().get("numApplicants").toString());
         numSelectedApplicants.setText(getIntent().getExtras().get("numSelectedApplicants").toString());
-
+        skills.setText(getIntent().getExtras().get("projectSkills").toString());
+        openFor.setText(getIntent().getExtras().get("projectOpenFor").toString());
+        projectID = getIntent().getExtras().get("projectID").toString();
 
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
-        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).collection("MyCollabs")
-                .get()
+        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                .collection("MyCollabs").whereEqualTo()
     }
 }
