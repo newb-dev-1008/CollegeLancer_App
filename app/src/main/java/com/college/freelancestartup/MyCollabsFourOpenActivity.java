@@ -63,6 +63,12 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
+        if (collabStatus.getText().toString().equals("Open")) {
+            collab4VisibleSwitch.setChecked(true);
+        } else {
+            collab4VisibleSwitch.setChecked(false);
+        }
+
         collab4VisibleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -137,12 +143,5 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
             }
         });
 
-        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                .collection("MyCollabs").document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-
-            }
-        })
     }
 }
