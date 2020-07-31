@@ -34,13 +34,13 @@ class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsF
                 String transitionName = view.getResources().getString(R.string.transitionAnimation);
                 View viewStart = view.findViewById(R.id.find_collab5_cardview);
 
-                intent.putExtra(name, "name");
-                intent.putExtra(department, "department");
-                intent.putExtra(skills, "skills");
-                intent.putExtra(semester, "semester");
-                intent.putExtra(noCollabs, "numberCollabs");
-                intent.putExtra(noProjects, "numberProjects");
-                intent.putExtra(userEmail, "userEmail");
+                intent.putExtra("name", name);
+                intent.putExtra("department", department);
+                intent.putExtra("skills", skills);
+                intent.putExtra("semester", semester);
+                intent.putExtra("numberCollabs", noCollabs);
+                intent.putExtra("numberProjects", noProjects);
+                intent.putExtra("userEmail", userEmail);
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
