@@ -34,7 +34,7 @@ class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapter.MyCol
                 String transitionName = view.getResources().getString(R.string.transitionAnimation);
                 View viewStart = view.findViewById(R.id.find_collab3_cardview);
 
-                intent.putExtra(projectID, "projectID");
+                intent.putExtra("projectID", projectID);
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
