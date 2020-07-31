@@ -186,6 +186,7 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                                             @Override
                                                             public void onFailure(@NonNull Exception e) {
                                                                 Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                dialogInterface.dismiss();
                                                             }
                                                         });
                                                     }
@@ -193,11 +194,14 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                dialogInterface.dismiss();
                                             }
                                         });
                                     }
                                 }
-                            })
+                            }).setNegativeButton("Cancel", null);
+                            chooseProjectBuilder.show();
+                            chooseProjectBuilder.
 
                         } else {
                             Toast.makeText(AvailableCollabsFiveOpenActivity.this, "You don't have any projects to collaborate on.", Toast.LENGTH_SHORT).show();
