@@ -1,6 +1,7 @@
 package com.college.freelancestartup;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +58,16 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        previousCollabsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                previousCollabsPressed();
+            }
+        });
+    }
+
+    private void previousCollabsPressed() {
 
     }
 }
