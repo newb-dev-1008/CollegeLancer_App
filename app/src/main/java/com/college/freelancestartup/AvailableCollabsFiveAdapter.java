@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsFiveAdapter.AvailableCollabsFiveViewHolder> {
     private ArrayList<AvailableCollabsFive> AvailableCollabsList;
-    private String name, semester, department, skills, noCollabs, noProjects;
+    private String name, semester, department, skills, noCollabs, noProjects, userEmail;
 
     public AvailableCollabsFiveAdapter(ArrayList<AvailableCollabsFive> availableCollabsExampleList){
         AvailableCollabsList = availableCollabsExampleList;
@@ -40,6 +40,7 @@ class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsF
                 intent.putExtra(semester, "semester");
                 intent.putExtra(noCollabs, "numberCollabs");
                 intent.putExtra(noProjects, "numberProjects");
+                intent.putExtra(userEmail, "userEmail");
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
