@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,11 +21,14 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private String userEmail;
+    private MaterialButton previousCollabsButton, messageButton, viewProfileButton, requestButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_collab5_opencard);
+
+        db = FirebaseFirestore.getInstance();
 
         name1 = findViewById(R.id.collab5_name);
         personDepartment1 = findViewById(R.id.collab5_personDepartment);
@@ -32,13 +36,6 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         numberCollabs1 = findViewById(R.id.collab5_collaborations);
         numberProjects1 = findViewById(R.id.collab5_projectsCompleted);
         skills1 = findViewById(R.id.collab5_skills);
-
-        name1.setText(getIntent().getExtras().get("name").toString());
-        personDepartment1.setText(getIntent().getExtras().get("department").toString());
-        personSemester1.setText(getIntent().getExtras().get("semester").toString());
-        numberCollabs1.setText(getIntent().getExtras().get("numberCollabs").toString());
-        numberProjects1.setText(getIntent().getExtras().get("numberProjects").toString());
-        skills1.setText(getIntent().getExtras().get("skills").toString());
 
         userEmail = getIntent().getExtras().get("userEmail").toString();
 
@@ -59,6 +56,7 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                 Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 finish();
             }
-        })
+        });
+
     }
 }
