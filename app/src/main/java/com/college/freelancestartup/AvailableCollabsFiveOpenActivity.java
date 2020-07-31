@@ -33,7 +33,7 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private int internalReqFlag, checkedItem;
     private String userEmail, posterName;
-    private String projectID;
+    // private String projectID;
     private Calendar cObj;
     private MaterialButton previousCollabsButton, messageButton, viewProfileButton, requestButton;
 
