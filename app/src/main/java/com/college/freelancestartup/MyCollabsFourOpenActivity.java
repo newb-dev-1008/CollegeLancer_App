@@ -49,23 +49,32 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
         skills = findViewById(R.id.collab4_skills);
         openFor = findViewById(R.id.collab4_openFor);
 
-        posterName.setText(getIntent().getExtras().get("posterName").toString());
-        projectTitle.setText(getIntent().getExtras().get("projectTitle").toString());
-        postedDate.setText(getIntent().getExtras().get("postedDate").toString());
-        projectDesc.setText(getIntent().getExtras().get("projectDesc").toString());
-        collabStatus.setText(getIntent().getExtras().get("projectStatus").toString());
-        numApplicants.setText(getIntent().getExtras().get("numApplicants").toString());
-        numSelectedApplicants.setText(getIntent().getExtras().get("numSelectedApplicants").toString());
-        skills.setText(getIntent().getExtras().get("projectSkills").toString());
-        openFor.setText(getIntent().getExtras().get("projectOpenFor").toString());
         projectID = getIntent().getExtras().get("projectID").toString();
 
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
+        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                .collection("MyCollabs").document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                posterName.setText(documentSnapshot.get("posterTitle").toString());
+                projectTitle.setText(documentSnapshot.get("projectTitle").toString());
+                postedDate.setText(documentSnapshot.get("postDate").toString());
+                projectDesc.setText(documentSnapshot.get("projectDesc").toString());
+                collabStatus.setText(documentSnapshot.get("collabStatus").toString());
+                numApplicants.setText(documentSnapshot.get("numApplicants").toString());
+                numSelectedApplicants.setText(documentSnapshot.get("numSelectedApplicants").toString());
+                skills.setText(documentSnapshot.get("projectSkills").toString());
+                openFor.setText(documentSnapshot.get("projectOpenFor").toString());
+            }
+        });
+
         if (collabStatus.getText().toString().equals("Open")) {
+            collabStatus.setTextColor(Color.parseColor("#228B22"));
             collab4VisibleSwitch.setChecked(true);
         } else {
+            collabStatus.setTextColor(Color.parseColor("#800000"));
             collab4VisibleSwitch.setChecked(false);
         }
 

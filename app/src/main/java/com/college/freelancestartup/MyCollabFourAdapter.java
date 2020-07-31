@@ -34,15 +34,6 @@ class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapter.MyCol
                 String transitionName = view.getResources().getString(R.string.transitionAnimation);
                 View viewStart = view.findViewById(R.id.find_collab3_cardview);
 
-                intent.putExtra(posterName, "posterName");
-                intent.putExtra(projectTitle, "projectTitle");
-                intent.putExtra(projectDesc, "projectDesc");
-                intent.putExtra(postedDate, "postedDate");
-                intent.putExtra(projectStatus, "projectStatus");
-                intent.putExtra(numApplicants, "numApplicants");
-                intent.putExtra(numSelectedApplicants, "numSelectedApplicants");
-                intent.putExtra(projectSkills, "projectSkills");
-                intent.putExtra(projectOpenFor, "projectOpenFor");
                 intent.putExtra(projectID, "projectID");
 
                 ActivityOptionsCompat options =
