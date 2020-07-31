@@ -2,13 +2,24 @@ package com.college.freelancestartup;
 
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
 
     private TextView name1, personDepartment1, personSemester1, numberCollabs1, numberProjects1, skills1;
+    private FirebaseFirestore db;
+    private FirebaseAuth firebaseAuth;
+    private String userEmail;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,5 +39,26 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         numberCollabs1.setText(getIntent().getExtras().get("numberCollabs").toString());
         numberProjects1.setText(getIntent().getExtras().get("numberProjects").toString());
         skills1.setText(getIntent().getExtras().get("skills").toString());
+
+        userEmail = getIntent().getExtras().get("userEmail").toString();
+
+        db.collection("Users").document("User " + userEmail).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        name1.setText(documentSnapshot.get("name").toString());
+                        personDepartment1.setText(documentSnapshot.get("department").toString());
+                        personSemester1.setText(documentSnapshot.get("studentSemester").toString());
+                        numberCollabs1.setText(documentSnapshot.get("numberCollabs").toString());
+                        numberProjects1.setText(documentSnapshot.get("numberProjects").toString());
+                        skills1.setText(documentSnapshot.get("studentSkills").toString());
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        })
     }
 }
