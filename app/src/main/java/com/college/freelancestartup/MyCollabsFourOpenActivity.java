@@ -8,12 +8,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 class MyCollabsFourOpenActivity extends AppCompatActivity {
 
     private TextView posterName, projectTitle, postedDate, collabStatus, projectDesc, numApplicants, numSelectedApplicants;
     private MaterialButton applicantsLogButton;
     private Switch collab4VisibleSwitch;
+    private FirebaseFirestore db;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,5 +41,12 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
         collabStatus.setText(getIntent().getExtras().get("projectStatus").toString());
         numApplicants.setText(getIntent().getExtras().get("numApplicants").toString());
         numSelectedApplicants.setText(getIntent().getExtras().get("numSelectedApplicants").toString());
+
+
+        db = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).collection("MyCollabs")
+                .get()
     }
 }
