@@ -1,5 +1,6 @@
 package com.college.freelancestartup;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,21 +9,27 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
 
     private TextView name1, personDepartment1, personSemester1, numberCollabs1, numberProjects1, skills1;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
-    private String userEmail;
+    private int internalReqFlag, checkedItem;
+    private String userEmail, projectID;
     private MaterialButton previousCollabsButton, messageButton, viewProfileButton, requestButton;
 
     @Override
@@ -31,6 +38,7 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         setContentView(R.layout.find_collab5_opencard);
 
         db = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         name1 = findViewById(R.id.collab5_name);
         personDepartment1 = findViewById(R.id.collab5_personDepartment);
@@ -38,6 +46,13 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         numberCollabs1 = findViewById(R.id.collab5_collaborations);
         numberProjects1 = findViewById(R.id.collab5_projectsCompleted);
         skills1 = findViewById(R.id.collab5_skills);
+
+        previousCollabsButton = findViewById(R.id.collab5_seeCollabsButton);
+        viewProfileButton = findViewById(R.id.collab5_viewProfileBtn);
+        messageButton = findViewById(R.id.collab5_messageBtn);
+        requestButton = findViewById(R.id.collab5_selectBtn);
+        internalReqFlag = 0;
+        checkedItem = 0;
 
         userEmail = getIntent().getExtras().get("userEmail").toString();
 
@@ -66,11 +81,75 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                 previousCollabsPressed();
             }
         });
+
+        requestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestCollabsPressed();
+            }
+        });
     }
 
     private void previousCollabsPressed() {
         Intent intent = new Intent(AvailableCollabsFiveOpenActivity.this, PreviousCollabsCollabFiveActivity.class);
         intent.putExtra("userEmail", userEmail);
         startActivity(intent);
+    }
+
+    private void requestCollabsPressed() {
+        ArrayList<String> projectNames = new ArrayList<>();
+        AlertDialog requestFor = new MaterialAlertDialogBuilder(AvailableCollabsFiveOpenActivity.this)
+                .setTitle("Are you sure you want to send a collaboration request?")
+                .setMessage("The user will be notified. Please note that this does not seal the deal.\n" +
+                        "The final decision to contribute to your project lies with the user, about which you will be informed shortly.")
+                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                .collection("Projects").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                if (queryDocumentSnapshots.size() > 0) {
+                                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                        if (!documentSnapshot.get("projectStatus").toString().equals("Completed")) {
+                                            projectNames.add(documentSnapshot.get("projectTitle").toString());
+                                        }
+                                    }
+                                    if (projectNames.size() == 0) {
+                                        internalReqFlag = 1;
+                                    }
+                                } else {
+                                    internalReqFlag = 1;
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                internalReqFlag = 1;
+                            }
+                        });
+
+                        if (internalReqFlag != 1) {
+                            AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(AvailableCollabsFiveOpenActivity.this);
+                            chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
+                            chooseProjectBuilder.setSingleChoiceItems((CharSequence[]) projectNames.toArray(), checkedItem, null);
+                            chooseProjectBuilder.setPositiveButton("Select", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    if (checkedItem == -1) {
+                                        Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Please select a project first.", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        String selectedProject = projectNames.get(checkedItem);
+                                        db.collection("Users").document("User " + firebaseAuth)
+                                    }
+                                }
+                            })
+
+                        } else {
+                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, "You don't have any projects to collaborate on.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
     }
 }
