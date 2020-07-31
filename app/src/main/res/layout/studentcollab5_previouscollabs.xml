@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/collab1frag_titleTV"
+        android:id="@+id/collab51frag_titleTV"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,23 +18,23 @@
         android:fontFamily="sans-serif-black"
         android:textSize="18sp"
         android:layout_marginTop="2dp"
-        app:layout_constraintBottom_toTopOf="@id/swipeRefreshLayoutCollab1"
+        app:layout_constraintBottom_toTopOf="@id/swipeRefreshLayoutCollab51"
         android:text="Collaboration History"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@color/grey"
-        android:id="@+id/collab1_line"
-        app:layout_constraintTop_toBottomOf="@id/collab1frag_titleTV"
+        android:id="@+id/collab51_line"
+        app:layout_constraintTop_toBottomOf="@id/collab51frag_titleTV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/swipeRefreshLayoutCollab1"
-        app:layout_constraintTop_toBottomOf="@id/collab1_line"
+        android:id="@+id/swipeRefreshLayoutCollab51"
+        app:layout_constraintTop_toBottomOf="@id/collab51_line"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/transparent">
@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
-                    android:id="@+id/find_collabs_recyclerView1"
+                    android:id="@+id/find_collabs_recyclerView51"
                     android:background="@color/grey"/>
 
                 <TextView
@@ -67,7 +67,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="10dp"
-                    android:id="@+id/swipeRefreshTVCollab1"/>
+                    android:id="@+id/swipeRefreshTVCollab51"/>
 
             </LinearLayout>
         </ScrollView>
@@ -77,7 +77,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/find_collab1_emptyTV"
+        android:id="@+id/find_collab51_emptyTV"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
