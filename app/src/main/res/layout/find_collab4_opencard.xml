@@ -83,7 +83,58 @@
         app:layout_constraintTop_toBottomOf="@id/collab4_dateTV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/collab4_status"
-        app:layout_constraintBottom_toTopOf="@id/collab4_visibleSwitch"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/collab4_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:text="Skills Required: "
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/black"
+        android:id="@+id/collab4_skillsTV"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/collab4_skillsTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginTop="10dp"
+        android:id="@+id/collab4_skills"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/collab4_skills"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:text="Open For: "
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/black"
+        android:id="@+id/collab4_openForTV"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/collab4_openFor"
+        app:layout_constraintTop_toBottomOf="@id/collab4_openForTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         android:layout_marginStart="4dp"
         android:layout_marginBottom="8dp"
@@ -106,8 +157,8 @@
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Visible to collaborators: "
-        app:layout_constraintTop_toBottomOf="@id/collab4_date"
+        android:text="Actively up for collaboration: "
+        app:layout_constraintTop_toBottomOf="@id/collab4_openFor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -169,6 +220,7 @@
         app:layout_constraintTop_toBottomOf="@id/collab4_noApplicantsBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/collab4_status"
+        app:layout_constraintBottom_toTopOf="@id/collab4_saveChangesBtn"
         android:textColor="@color/black"
         android:text="Number of accepted applicants: "
         app:layout_constraintHorizontal_bias="0"
@@ -191,13 +243,14 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="15dp"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/collab4_saveChangesBtn"
         android:text="Save Changes"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/collab4_noAcceptedApplicantsTV"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
