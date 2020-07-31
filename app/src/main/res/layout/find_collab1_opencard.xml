@@ -134,9 +134,10 @@
         app:layout_constraintTop_toBottomOf="@id/collab1_dateTV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/collab1_messageBtn"
         app:layout_constraintHorizontal_bias="0"
         android:layout_marginStart="4dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginEnd="15dp"/>
 
     <com.google.android.material.button.MaterialButton
@@ -146,6 +147,7 @@
         app:layout_constraintTop_toBottomOf="@id/collab1_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/collab1_applyBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0"
         android:text="Message"
         android:padding="4dp"
@@ -159,6 +161,7 @@
         app:layout_constraintTop_toBottomOf="@id/collab1_date"
         app:layout_constraintStart_toEndOf="@id/collab1_messageBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0"
         android:text="Apply"
         android:padding="4dp"
