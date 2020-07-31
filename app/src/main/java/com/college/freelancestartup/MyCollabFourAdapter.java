@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapter.MyCollabsFourViewHolder> {
     private ArrayList<MyCollabsFour> MyCollabsList;
-    private String posterName, projectTitle, projectDesc, postedDate, projectStatus, numApplicants, numSelectedApplicants;
+    private String posterName, projectTitle, projectDesc, postedDate, projectStatus, numApplicants, numSelectedApplicants, projectSkills, projectOpenFor, projectID;
 
     public MyCollabFourAdapter(ArrayList<MyCollabsFour> myCollabsExampleList){
         MyCollabsList = myCollabsExampleList;
@@ -41,6 +41,9 @@ class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapter.MyCol
                 intent.putExtra(projectStatus, "projectStatus");
                 intent.putExtra(numApplicants, "numApplicants");
                 intent.putExtra(numSelectedApplicants, "numSelectedApplicants");
+                intent.putExtra(projectSkills, "projectSkills");
+                intent.putExtra(projectOpenFor, "projectOpenFor");
+                intent.putExtra(projectID, "projectID");
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
@@ -73,6 +76,8 @@ class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapter.MyCol
         holder.projectStatus.setText(projectStatus);
         holder.numApplicants.setText(numApplicants);
         holder.numSelectedApplicants.setText(numSelectedApplicants);
+        holder.projectSkills.setText(projectSkills);
+        holder.projectOpenFor.setText(projectOpenFor);
     }
 
     public static class MyCollabsFourViewHolder extends RecyclerView.ViewHolder {
@@ -88,6 +93,7 @@ class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapter.MyCol
             numApplicants = itemView.findViewById(R.id.collab4_noApplicants);
             numSelectedApplicants = itemView.findViewById(R.id.collab4_noAcceptedApplicants);
             projectSkills = itemView.findViewById(R.id.collab4_skills);
+            projectOpenFor = itemView.findViewById(R.id.collab4_openFor);
         }
     }
 
