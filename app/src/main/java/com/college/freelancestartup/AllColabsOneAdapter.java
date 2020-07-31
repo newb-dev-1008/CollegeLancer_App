@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapter.AllColabsOneViewHolder> {
     private ArrayList<AllColabsOne> AllColabsList;
     private String posterName, projectTitle, projectDesc, skills, openFor, postedDate, projectID;
+    private int flag;
 
     public AllColabsOneAdapter(ArrayList<AllColabsOne> allColabsExampleList){
         AllColabsList = allColabsExampleList;
@@ -35,13 +36,14 @@ public class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapte
                 String transitionName = view.getResources().getString(R.string.transitionAnimation);
                 View viewStart = view.findViewById(R.id.find_collab1_cardview);
 
-                intent.putExtra(posterName, "posterName1");
-                intent.putExtra(projectTitle, "projectTitle1");
-                intent.putExtra(projectDesc, "projectDesc1");
-                intent.putExtra(openFor, "openFor1");
-                intent.putExtra(skills, "skills1");
-                intent.putExtra(postedDate, "postedDate1");
-                intent.putExtra(projectID, "projectID");
+                intent.putExtra("posterName1", posterName);
+                intent.putExtra("projectTitle1", projectTitle);
+                intent.putExtra("projectDesc1", projectDesc);
+                intent.putExtra("openFor1", openFor);
+                intent.putExtra("skills1", skills);
+                intent.putExtra("postedDate1", postedDate);
+                intent.putExtra("projectID", projectID);
+                intent.putExtra("flag", flag);
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
