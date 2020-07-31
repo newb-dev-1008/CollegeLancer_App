@@ -201,12 +201,16 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                 }
                             }).setNegativeButton("Cancel", null);
                             chooseProjectBuilder.show();
-                            chooseProjectBuilder.
+                            chooseProjectBuilder.setCancelable(false);
 
                         } else {
                             Toast.makeText(AvailableCollabsFiveOpenActivity.this, "You don't have any projects to collaborate on.", Toast.LENGTH_SHORT).show();
                         }
                     }
-                })
+                }).setNegativeButton("Cancel", null)
+                .create();
+        requestFor.show();
+        requestFor.setCancelable(false);
+        requestFor.setCanceledOnTouchOutside(false);
     }
 }
