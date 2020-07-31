@@ -98,6 +98,7 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
 
     private void requestCollabsPressed() {
         ArrayList<String> projectNames = new ArrayList<>();
+        ArrayList<String> projectIDs = new ArrayList<>();
         AlertDialog requestFor = new MaterialAlertDialogBuilder(AvailableCollabsFiveOpenActivity.this)
                 .setTitle("Are you sure you want to send a collaboration request?")
                 .setMessage("The user will be notified. Please note that this does not seal the deal.\n" +
@@ -113,6 +114,7 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                     for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                         if (!documentSnapshot.get("projectStatus").toString().equals("Completed")) {
                                             projectNames.add(documentSnapshot.get("projectTitle").toString());
+                                            projectIDs.add(documentSnapshot.get("projectID").toString());
                                         }
                                     }
                                     if (projectNames.size() == 0) {
@@ -140,8 +142,14 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                     if (checkedItem == -1) {
                                         Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Please select a project first.", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        String selectedProject = projectNames.get(checkedItem);
-                                        db.collection("Users").document("User " + firebaseAuth)
+                                        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                                .collection("Projects").document(projectIDs.get(checkedItem)).get()
+                                                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                    }
+                                                })
                                     }
                                 }
                             })
