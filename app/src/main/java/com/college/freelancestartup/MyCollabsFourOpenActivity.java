@@ -3,7 +3,6 @@ package com.college.freelancestartup;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -21,12 +20,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 class MyCollabsFourOpenActivity extends AppCompatActivity {
 
     private TextView posterName, projectTitle, postedDate, collabStatus, projectDesc, numApplicants, numSelectedApplicants, skills, openFor;
-    private MaterialButton applicantsLogButton;
+    private MaterialButton applicantsLogButton, ;
     private Switch collab4VisibleSwitch;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
