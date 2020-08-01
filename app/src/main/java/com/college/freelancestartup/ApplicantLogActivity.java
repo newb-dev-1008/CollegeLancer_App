@@ -30,7 +30,9 @@ class ApplicantLogActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private int flag;
-    private String projectID;
+    private String projectID, name, semester, skills, department, previousCollabs, previousProjects;
+    private RecyclerView.LayoutManager availableCollab5LayoutManager;
+    private RecyclerView.Adapter availableCollab5Adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,7 +62,7 @@ class ApplicantLogActivity extends AppCompatActivity {
     }
 
     private void applicantLog() {
-        db.collection("Users").whereEqualTo("studentStatus", "Looking for collaborators").get()
+        db.collection("Users").document(projectID).collection("Collaborators").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -68,30 +70,36 @@ class ApplicantLogActivity extends AppCompatActivity {
                             emptyTV.setVisibility(View.GONE);
                             ArrayList<AvailableCollabsFive> availableCollabs = new ArrayList<>();
                             for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                String name = documentSnapshot.get("name").toString();
-                                String semester = documentSnapshot.get("studentSemester").toString();
-                                String skills = documentSnapshot.get("studentSkills").toString();
-                                String department = documentSnapshot.get("department").toString();
-                                String previousCollabs = documentSnapshot.get("numberCollabs").toString();
-                                String previousProjects = documentSnapshot.get("numberProjects").toString();
                                 String userEmail = documentSnapshot.get("email").toString();
+                                db.collection("Users").document("User " + userEmail).get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                name = documentSnapshot.get("name").toString();
+                                                semester = documentSnapshot.get("studentSemester").toString();
+                                                skills = documentSnapshot.get("studentSkills").toString();
+                                                department = documentSnapshot.get("department").toString();
+                                                previousCollabs = documentSnapshot.get("numberCollabs").toString();
+                                                previousProjects = documentSnapshot.get("numberProjects").toString();
+                                            }
+                                        });
                                 availableCollabs.add(new AvailableCollabsFive(name, department, skills, previousCollabs, previousProjects, semester, userEmail, flag, projectID));
 
-                                availableCollab5LayoutManager = new LinearLayoutManager(getContext());
+                                availableCollab5LayoutManager = new LinearLayoutManager(ApplicantLogActivity.this);
                                 availableCollab5Adapter = new AvailableCollabsFiveAdapter(availableCollabs);
-                                collab5RecyclerView.setHasFixedSize(true);
-                                collab5RecyclerView.setLayoutManager(availableCollab5LayoutManager);
-                                collab5RecyclerView.setAdapter(availableCollab5Adapter);
+                                recyclerView.setHasFixedSize(true);
+                                recyclerView.setLayoutManager(availableCollab5LayoutManager);
+                                recyclerView.setAdapter(availableCollab5Adapter);
                             }
                         } else {
-                            collab5RecyclerView.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.GONE);
                             swipeDownRefreshTV.setVisibility(View.GONE);
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ApplicantLogActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
