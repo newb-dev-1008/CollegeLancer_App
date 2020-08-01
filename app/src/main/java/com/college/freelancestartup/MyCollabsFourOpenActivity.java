@@ -1,6 +1,7 @@
 package com.college.freelancestartup;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -161,6 +162,8 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
     }
 
     private void applicantsLog() {
-
+        Intent intent = new Intent(MyCollabsFourOpenActivity.this, ApplicantLogActivity.class);
+        intent.putExtra("projectID", projectID);
+        startActivity(intent);
     }
 }

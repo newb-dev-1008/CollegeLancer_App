@@ -35,7 +35,7 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     private String userEmail, posterName;
     // private String projectID;
     private Calendar cObj;
-    private MaterialButton previousCollabsButton, messageButton, viewProfileButton, requestButton;
+    private MaterialButton previousCollabsButton, messageButton, requestButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
