@@ -48,4 +48,7 @@ class AvailableCollabsFive {
         return flag;
     }
 
+    public String getProjectID() {
+        return projectID;
+    }
 }

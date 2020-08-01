@@ -2,6 +2,7 @@ package com.college.freelancestartup;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 
 class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsFiveAdapter.AvailableCollabsFiveViewHolder> {
     private ArrayList<AvailableCollabsFive> AvailableCollabsList;
-    private String name, semester, department, skills, noCollabs, noProjects, userEmail;
+    private String name, semester, department, skills, noCollabs, noProjects, userEmail, projectID, pickedStatusT;
     private int flag;
 
     public AvailableCollabsFiveAdapter(ArrayList<AvailableCollabsFive> availableCollabsExampleList){
@@ -65,6 +70,7 @@ class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsF
         noCollabs = availableCollabsFive.getNoCollabs();
         userEmail = availableCollabsFive.getUserEmail();
         flag = availableCollabsFive.getFlag();
+        projectID = availableCollabsFive.getProjectID();
 
         holder.name1.setText(name);
         holder.semester1.setText(semester);
@@ -75,7 +81,21 @@ class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsF
 
         if (flag == 1) {
             holder.pickedStatus.setVisibility(View.VISIBLE);
-
+            FirebaseFirestore.getInstance().collection("CollabProjects").document(projectID)
+                    .collection("Collaborators").document("User " + userEmail).get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            pickedStatusT = documentSnapshot.get("picked").toString();
+                        }
+                    });
+            if (pickedStatusT.equals("Selected")) {
+                holder.pickedStatus.setText(pickedStatusT);
+                holder.pickedStatus.setTextColor(Color.parseColor("#228B22"));
+            } else {
+                holder.pickedStatus.setText(pickedStatusT);
+                holder.pickedStatus.setTextColor(Color.parseColor("#800000"));
+            }
         }
     }
 
@@ -91,6 +111,7 @@ class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsF
             noProjects1 = itemView.findViewById(R.id.collab5_projectsCompleted);
             noCollabs1 = itemView.findViewById(R.id.collab5_collaborations);
             pickedStatus = itemView.findViewById(R.id.collab5_personPickedStatusClosed);
+
         }
     }
 
