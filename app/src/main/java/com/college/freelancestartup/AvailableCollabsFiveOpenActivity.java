@@ -31,7 +31,7 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     private TextView name1, personDepartment1, personSemester1, numberCollabs1, numberProjects1, skills1, personPhone1;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
-    private int internalReqFlag, checkedItem;
+    private int internalReqFlag, checkedItem, flagLog;
     private String userEmail, posterName;
     // private String projectID;
     private Calendar cObj;
@@ -75,6 +75,7 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         checkedItem = 0;
 
         userEmail = getIntent().getExtras().get("userEmail").toString();
+        flagLog = Integer.parseInt(getIntent().getExtras().get("flagLog").toString());
 
         db.collection("Users").document("User " + userEmail).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

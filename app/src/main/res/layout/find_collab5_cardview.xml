@@ -48,7 +48,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/collab5_personPickedStatus"
+            android:id="@+id/collab5_personPickedStatusClosed"
             android:textSize="18sp"
             android:layout_centerVertical="true"
             android:textColor="@color/maroon"

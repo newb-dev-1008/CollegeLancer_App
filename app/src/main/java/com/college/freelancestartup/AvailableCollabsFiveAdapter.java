@@ -73,10 +73,14 @@ class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsF
         holder.noProjects1.setText(noProjects);
         holder.noCollabs1.setText(noCollabs);
 
+        if (flag == 1) {
+            holder.pickedStatus.setVisibility(View.VISIBLE);
+
+        }
     }
 
     public static class AvailableCollabsFiveViewHolder extends RecyclerView.ViewHolder {
-        public TextView name1, semester1, department1, skills1, noProjects1, noCollabs1;
+        public TextView name1, semester1, department1, skills1, noProjects1, noCollabs1, pickedStatus;
 
         public AvailableCollabsFiveViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -86,6 +90,7 @@ class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsF
             skills1 = itemView.findViewById(R.id.collab5_skills);
             noProjects1 = itemView.findViewById(R.id.collab5_projectsCompleted);
             noCollabs1 = itemView.findViewById(R.id.collab5_collaborations);
+            pickedStatus = itemView.findViewById(R.id.collab5_personPickedStatusClosed);
         }
     }
 
