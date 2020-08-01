@@ -115,7 +115,7 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(AllColabsOneOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AllColabsOneOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

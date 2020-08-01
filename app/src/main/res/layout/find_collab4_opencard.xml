@@ -250,9 +250,22 @@
         android:text="Save Changes"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/collab4_noAcceptedApplicantsTV"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/collab4_finishProjectBtn"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/collab4_finishProjectBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@color/maroon"
+        android:text="End Project"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/collab4_saveChangesBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
