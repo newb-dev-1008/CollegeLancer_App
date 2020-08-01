@@ -28,7 +28,7 @@ import java.util.Map;
 
 class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
 
-    private TextView name1, personDepartment1, personSemester1, numberCollabs1, numberProjects1, skills1;
+    private TextView name1, personDepartment1, personSemester1, numberCollabs1, numberProjects1, skills1, personPhone1;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private int internalReqFlag, checkedItem;
@@ -50,6 +50,7 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         name1 = findViewById(R.id.collab5_name);
         personDepartment1 = findViewById(R.id.collab5_personDepartment);
         personSemester1 = findViewById(R.id.collab5_personSemester);
+        personPhone1 = findViewById(R.id.collab5_personPhoneNo);
         numberCollabs1 = findViewById(R.id.collab5_collaborations);
         numberProjects1 = findViewById(R.id.collab5_projectsCompleted);
         skills1 = findViewById(R.id.collab5_skills);
@@ -68,7 +69,6 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         });
 
         previousCollabsButton = findViewById(R.id.collab5_seeCollabsButton);
-        viewProfileButton = findViewById(R.id.collab5_viewProfileBtn);
         messageButton = findViewById(R.id.collab5_messageBtn);
         requestButton = findViewById(R.id.collab5_selectBtn);
         internalReqFlag = 0;
@@ -85,6 +85,7 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                         personSemester1.setText(documentSnapshot.get("studentSemester").toString());
                         numberCollabs1.setText(documentSnapshot.get("numberCollabs").toString());
                         numberProjects1.setText(documentSnapshot.get("numberProjects").toString());
+                        personPhone1.setText(documentSnapshot.get("phoneNumber").toString());
                         skills1.setText(documentSnapshot.get("studentSkills").toString());
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -108,16 +109,6 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                 requestCollabsPressed();
             }
         });
-
-        viewProfileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                viewProfilePressed();
-            }
-        });
-    }
-
-    private void viewProfilePressed() {
 
     }
 
