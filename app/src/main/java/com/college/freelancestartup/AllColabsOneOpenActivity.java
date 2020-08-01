@@ -60,7 +60,6 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
         messageButton = findViewById(R.id.collab1_messageBtn);
 
         posterName1.setText(getIntent().getExtras().get("posterName1").toString());
-        posterEmail = getIntent().getExtras().get("posterEmail").toString();
         projectTitle1.setText(getIntent().getExtras().get("projectTitle1").toString());
         postedDate1.setText(getIntent().getExtras().get("postedDate1").toString());
         projectDesc1.setText(getIntent().getExtras().get("projectDesc1").toString());
@@ -76,6 +75,18 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
             applyButton.setVisibility(View.GONE);
             messageButton.setVisibility(View.GONE);
         }
+
+        db.collection("CollabProjects").document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                posterEmail = documentSnapshot.get("posterEmail").toString();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(AllColabsOneOpenActivity.this, "Error: Couldn't access database.\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +145,8 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
                         Toast.makeText(AllColabsOneOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-                db.collection("Users").document("User ")
+                db.collection("Users").document("User " + posterEmail).collection("MyCollabs")
+                        .document(projectID).update("numberApps", numberApps);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

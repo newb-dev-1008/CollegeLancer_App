@@ -73,6 +73,7 @@ public class AllCollabsFragment extends Fragment {
                         String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
                         String projectDesc = documentSnapshot.get("projectDesc").toString();
                         String projectID = documentSnapshot.get("projectID").toString();
+
                         int flag = 0;
                         allColabs.add(new AllColabsOne(posterTitle, projectTitle, projectDesc, posterDate, projectSkills, projectOpenFor, projectID, flag));
 
