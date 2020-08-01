@@ -108,6 +108,17 @@ class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                 requestCollabsPressed();
             }
         });
+
+        viewProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewProfilePressed();
+            }
+        });
+    }
+
+    private void viewProfilePressed() {
+
     }
 
     private void previousCollabsPressed() {
