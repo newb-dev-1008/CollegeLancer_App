@@ -3,6 +3,7 @@ package com.college.freelancestartup;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -24,7 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 class MyCollabsFourOpenActivity extends AppCompatActivity {
 
     private TextView posterName, projectTitle, postedDate, collabStatus, projectDesc, numApplicants, numSelectedApplicants, skills, openFor;
-    private MaterialButton applicantsLogButton, ;
+    private MaterialButton applicantsLogButton, finishProjectButton;
     private Switch collab4VisibleSwitch;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
@@ -43,6 +44,7 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
         numApplicants = findViewById(R.id.collab4_noApplicants);
         numSelectedApplicants = findViewById(R.id.collab4_noAcceptedApplicants);
         applicantsLogButton = findViewById(R.id.collab4_noApplicantsBtn);
+        finishProjectButton = findViewById(R.id.collab4_finishProjectBtn);
         collab4VisibleSwitch = findViewById(R.id.collab4_visibleSwitch);
         skills = findViewById(R.id.collab4_skills);
         openFor = findViewById(R.id.collab4_openFor);
@@ -149,6 +151,16 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
                 }
             }
         });
+
+        applicantsLogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                applicantsLog();
+            }
+        });
+    }
+
+    private void applicantsLog() {
 
     }
 }
