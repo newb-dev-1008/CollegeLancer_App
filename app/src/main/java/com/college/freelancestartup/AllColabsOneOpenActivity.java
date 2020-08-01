@@ -32,7 +32,7 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
     private MaterialButton messageButton, applyButton;
     private View view;
     private EditText applyEditText;
-    private String projectID;
+    private String projectID, posterEmail;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private int numberApps, flag;
@@ -60,6 +60,7 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
         messageButton = findViewById(R.id.collab1_messageBtn);
 
         posterName1.setText(getIntent().getExtras().get("posterName1").toString());
+        posterEmail = getIntent().getExtras().get("posterEmail").toString();
         projectTitle1.setText(getIntent().getExtras().get("projectTitle1").toString());
         postedDate1.setText(getIntent().getExtras().get("postedDate1").toString());
         projectDesc1.setText(getIntent().getExtras().get("projectDesc1").toString());
@@ -104,6 +105,7 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
     private void completeApplicationCollab1(){
         Map<String, Object> userMap = new HashMap<>();
         userMap.put("emailID", firebaseAuth.getCurrentUser().getEmail());
+        userMap.put("applicationArticle", applyEditText.getText().toString());
         userMap.put("picked", null);
         db.collection("CollabProjects").document(projectID).collection("Collaborators")
                 .document("User " + firebaseAuth.getCurrentUser()).set(userMap)
@@ -132,6 +134,7 @@ class AllColabsOneOpenActivity extends AppCompatActivity {
                         Toast.makeText(AllColabsOneOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+                db.collection("Users").document("User ")
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
