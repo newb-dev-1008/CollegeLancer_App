@@ -14,6 +14,7 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 
 class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsFiveAdapter.AvailableCollabsFiveViewHolder> {
     private ArrayList<AvailableCollabsFive> AvailableCollabsList;
-    private String name, semester, department, skills, noCollabs, noProjects, userEmail, projectID, pickedStatusT;
+    private String name, semester, department, skills, noCollabs, noProjects, userEmail, projectID, pickedStatusT, applicationArticle;
     private int flag;
 
     public AvailableCollabsFiveAdapter(ArrayList<AvailableCollabsFive> availableCollabsExampleList){
@@ -81,12 +82,16 @@ class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsF
 
         if (flag == 1) {
             holder.pickedStatus.setVisibility(View.VISIBLE);
+            holder.applicationArticleTV.setVisibility(View.VISIBLE);
+            holder.selectButton.setText("Select");
+
             FirebaseFirestore.getInstance().collection("CollabProjects").document(projectID)
                     .collection("Collaborators").document("User " + userEmail).get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             pickedStatusT = documentSnapshot.get("picked").toString();
+                            applicationArticle = documentSnapshot.get("appArticle").toString();
                         }
                     });
             if (pickedStatusT.equals("Selected")) {
@@ -100,7 +105,8 @@ class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsF
     }
 
     public static class AvailableCollabsFiveViewHolder extends RecyclerView.ViewHolder {
-        public TextView name1, semester1, department1, skills1, noProjects1, noCollabs1, pickedStatus;
+        public TextView name1, semester1, department1, skills1, noProjects1, noCollabs1, pickedStatus, applicationArticleTV;
+        private MaterialButton selectButton;
 
         public AvailableCollabsFiveViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -111,6 +117,8 @@ class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsF
             noProjects1 = itemView.findViewById(R.id.collab5_projectsCompleted);
             noCollabs1 = itemView.findViewById(R.id.collab5_collaborations);
             pickedStatus = itemView.findViewById(R.id.collab5_personPickedStatusClosed);
+            applicationArticleTV = itemView.findViewById(R.id.collab5_applicationArticle);
+            selectButton = itemView.findViewById(R.id.collab5_selectBtn);
 
         }
     }
