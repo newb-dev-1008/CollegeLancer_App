@@ -131,6 +131,7 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
         Map<String, Object> userReqPicked = new HashMap<>();
         userReqPicked.put("emailID", firebaseAuth.getCurrentUser().getEmail());
         userReqPicked.put("picked", "Selected, currently collaborating");
+        userReqPicked.put("applicationArticle", "I was requested to work on this project.");
 
         db.collection("CollabProjects").document(projectID).collection("Collaborators")
                 .document("User " + firebaseAuth.getCurrentUser().getEmail()).set(userReqPicked)
