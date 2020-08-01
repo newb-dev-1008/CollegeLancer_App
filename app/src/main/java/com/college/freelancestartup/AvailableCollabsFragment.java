@@ -34,6 +34,7 @@ class AvailableCollabsFragment extends Fragment {
 
     private RecyclerView.LayoutManager availableCollab5LayoutManager;
     private RecyclerView.Adapter availableCollab5Adapter;
+    private int flag;
 
     @Nullable
     @Override
@@ -42,6 +43,7 @@ class AvailableCollabsFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        flag = 0;
         swipeRefreshLayout = root.findViewById(R.id.swipeRefreshLayoutCollab5);
         swipeDownRefreshTV = root.findViewById(R.id.swipeRefreshTVCollab5);
         emptyTV = root.findViewById(R.id.log_collab5_emptyTV);
@@ -76,7 +78,7 @@ class AvailableCollabsFragment extends Fragment {
                                 String previousCollabs = documentSnapshot.get("numberCollabs").toString();
                                 String previousProjects = documentSnapshot.get("numberProjects").toString();
                                 String userEmail = documentSnapshot.get("email").toString();
-                                availableCollabs.add(new AvailableCollabsFive(name, department, skills, previousCollabs, previousProjects, semester, userEmail));
+                                availableCollabs.add(new AvailableCollabsFive(name, department, skills, previousCollabs, previousProjects, semester, userEmail, flag));
 
                                 availableCollab5LayoutManager = new LinearLayoutManager(getContext());
                                 availableCollab5Adapter = new AvailableCollabsFiveAdapter(availableCollabs);
