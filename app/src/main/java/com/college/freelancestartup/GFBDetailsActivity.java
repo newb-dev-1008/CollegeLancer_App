@@ -8,7 +8,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -151,6 +153,27 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
                 } else {
                     return false;
                 }
+            }
+        });
+
+        skills.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.charAt(charSequence.length() - 1) == ',' || charSequence.charAt(charSequence.length() - 1) == ',') {
+                    String skillName = charSequence.subSequence(0, charSequence.length()-1).toString();
+                    addSkills(skillName);
+                    skills.setText(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Do nothing
             }
         });
 
