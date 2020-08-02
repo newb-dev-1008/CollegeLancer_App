@@ -1,5 +1,6 @@
 package com.college.freelancestartup;
 
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,10 +12,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -122,19 +125,39 @@ class HistoryCollabThreeOpenActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    int nVotes = Integer.parseInt(noVotes.getText().toString());
-                    nVotes++;
-                    String vote = nVotes + " / " + noPicked;
-                    noVotes.setText(vote);
-
-                    db.collection("CollabProjects").document(projectID).collection("Collaborators")
-                            .document("General").update("endVotes", noVotes.getText().toString())
-                            .addOnFailureListener(new OnFailureListener() {
+                    AlertDialog endVoteCheck = new MaterialAlertDialogBuilder(HistoryCollabThreeOpenActivity.this)
+                            .setTitle("Are you sure you want to end the project?")
+                            .setMessage("The project will end only after all collaborates have voted for finishing the project.\n" +
+                                    "Please note that all due credits will be provided automatically after the project has been officially finished.")
+                            .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(HistoryCollabThreeOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    int nVotes = Integer.parseInt(noVotes.getText().toString());
+                                    nVotes++;
+                                    String vote = nVotes + " / " + noPicked;
+                                    noVotes.setText(vote);
+
+                                    db.collection("CollabProjects").document(projectID).collection("Collaborators")
+                                            .document("General").update("endVotes", noVotes.getText().toString())
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(HistoryCollabThreeOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                    dialogInterface.dismiss();
                                 }
-                            });
+                            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    addVote.setChecked(false);
+                                    dialogInterface.dismiss();
+                                }
+                            }).create();
+                    endVoteCheck.show();
+                    endVoteCheck.setCancelable(false);
+                    endVoteCheck.setCanceledOnTouchOutside(false);
+
                 }
             }
         });
