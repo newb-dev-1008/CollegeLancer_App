@@ -171,6 +171,73 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
                 finishButtonPressed();
             }
         });
+
+        endProjectSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (!b) {
+                    AlertDialog endEndProjectDialog = new MaterialAlertDialogBuilder(MyCollabsFourOpenActivity.this)
+                            .setTitle("Are you sure you want to continue with the project?")
+                            .setMessage("All your peer's votes to end the project will be set to zero and the project will continue like before.")
+                            .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    numberVotes = 0;
+                                    endProjectSwitch.setVisibility(View.GONE);
+                                    finishProjectButton.setVisibility(View.VISIBLE);
+                                    noVotes.setVisibility(View.GONE);
+                                    noVotesTV.setVisibility(View.GONE);
+
+                                    db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                            .collection("MyCollabs").document(projectID).update("collabStatus", "Ongoing")
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+
+                                    db.collection("CollabProjects").document(projectID).collection("Collaborators")
+                                            .document("General").update("endVotes", numberVotes)
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+
+                                    db.collection("CollabProjects").document(projectID).collection("Collaborators")
+                                            .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                            if (queryDocumentSnapshots.size() > 0) {
+                                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                                    String userEmail = documentSnapshot.get("emailID").toString();
+                                                    db.collection("Users").document("User " + userEmail).collection("PreviousCollabs")
+                                                            .document(projectID).update("collabStatus", "Ongoing").addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }).setNegativeButton("Cancel", null)
+                            .create();
+                    endEndProjectDialog.show();
+                    endEndProjectDialog.setCancelable(false);
+                    endEndProjectDialog.setCanceledOnTouchOutside(false);
+                }
+            }
+        });
     }
 
     private void applicantsLog() {
