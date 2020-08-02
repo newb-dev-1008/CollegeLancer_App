@@ -9,8 +9,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -41,6 +43,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -81,6 +84,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     private Date DOBDate, currentDate;
     private Calendar selectedDate;
     private String[] skillArray;
+    private ArrayList<String> newSkills;
 
     private boolean running, wasrunning;
 
@@ -104,6 +108,8 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         studentSem = findViewById(R.id.studentSemSpinner);
         dateOfBirthET = findViewById(R.id.dateOfBirthET);
         bioET = findViewById(R.id.student_profileBio);
+
+        newSkills = new ArrayList<>();
 
         chipGroup = findViewById(R.id.mainTagChipGroup);
         skills = findViewById(R.id.student_Skills);
@@ -131,6 +137,20 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
                 skills.setText(null);
                 String skillName = adapterView.getItemAtPosition(i).toString();
                 addSkills(skillName);
+            }
+        });
+
+        skills.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_DONE) {
+                    String skillName = skills.getText().toString();
+                    skills.setText(null);
+                    addSkills(skillName);
+                    return true;
+                } else {
+                    return false;
+                }
             }
         });
 
@@ -166,6 +186,15 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
                 }
             }
         });
+    }
+
+    private void addSkills(String name) {
+        if (!name.isEmpty() && !newSkills.contains(name)) {
+            addChipToGroup(name, chipGroup, newSkills);
+            newSkills.add(name);
+        } else {
+            Toast.makeText(this, "Enter a valid skill/ a skill you haven't already entered.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private String checkUserType(){
