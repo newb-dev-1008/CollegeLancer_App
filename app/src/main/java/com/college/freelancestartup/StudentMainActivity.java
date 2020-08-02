@@ -93,6 +93,7 @@ public class StudentMainActivity extends AppCompatActivity {
                         studentNavBottom.setVisibility(View.GONE);
                         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
                                 new StudentFindCollabsFragment(), "StudentFindCollabsFrag").addToBackStack("StudentFindCollabsFrag").commit();
+                        break;
                     case R.id.studentSettings:
                         studentNavBottom.setVisibility(View.GONE);
                         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
