@@ -241,6 +241,10 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
                             }
                         });
                     }
-                }).setNegativeButton()
+                }).setNegativeButton("Cancel", null)
+                .create();
+        endProjectDialog.show();
+        endProjectDialog.setCancelable(false);
+        endProjectDialog.setCanceledOnTouchOutside(false);
     }
 }
