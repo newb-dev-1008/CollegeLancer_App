@@ -303,6 +303,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
                             userDetails.put(KEY_STUD_SEM, studentSem.getSelectedItem());
                             userDetails.put(KEY_BIO, bio);
                             userDetails.put(KEY_STUDSTATUS, status);
+                            userDetails.put(KEY_STUDENTSKILLS, newSkills);
                             userDetails.put(KEY_NOCOLLABS, 0);
                             userDetails.put(KEY_NOPROJECTS, 0);
 
