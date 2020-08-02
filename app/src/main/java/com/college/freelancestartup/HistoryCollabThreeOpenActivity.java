@@ -75,7 +75,7 @@ class HistoryCollabThreeOpenActivity extends AppCompatActivity {
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     String numVotes = documentSnapshot.get("endVotes").toString();
                     noPicked = documentSnapshot.get("numberPicked").toString();
-                    String votes = numVotes + " / " + noPicked
+                    String votes = numVotes + " / " + noPicked;
                     noVotes.setText(votes);
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -158,6 +158,39 @@ class HistoryCollabThreeOpenActivity extends AppCompatActivity {
                     endVoteCheck.setCancelable(false);
                     endVoteCheck.setCanceledOnTouchOutside(false);
 
+                } else {
+                    AlertDialog pullVoteCheck = new MaterialAlertDialogBuilder(HistoryCollabThreeOpenActivity.this)
+                            .setTitle("Are you sure you want to remove your vote?")
+                            .setMessage("The project will end only after all collaborates have voted for finishing the project.\n" +
+                                    "Please note that all due credits will be provided automatically after the project has been officially finished.")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    int nVotes = Integer.parseInt(noVotes.getText().toString());
+                                    nVotes--;
+                                    String vote = nVotes + " / " + noPicked;
+                                    noVotes.setText(vote);
+
+                                    db.collection("CollabProjects").document(projectID).collection("Collaborators")
+                                            .document("General").update("endVotes", noVotes.getText().toString())
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(HistoryCollabThreeOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                    dialogInterface.dismiss();
+                                }
+                            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    addVote.setChecked(true);
+                                    dialogInterface.dismiss();
+                                }
+                            }).create();
+                    pullVoteCheck.show();
+                    pullVoteCheck.setCancelable(false);
+                    pullVoteCheck.setCanceledOnTouchOutside(false);
                 }
             }
         });
