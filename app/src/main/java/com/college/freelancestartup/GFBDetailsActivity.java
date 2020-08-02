@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -121,6 +122,15 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
             @Override
             public void onClick(View view) {
                 skills.showDropDown();
+            }
+        });
+
+        skills.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                skills.setText(null);
+                String skillName = adapterView.getItemAtPosition(i).toString();
+                addSkills(skillName);
             }
         });
 
