@@ -57,6 +57,21 @@
         <activity android:name=".IDVerificationActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
 
+        <activity android:name=".AllColabsOneOpenActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
+
+        <activity android:name=".RequestCollabTwoOpenActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
+
+        <activity android:name=".HistoryCollabThreeOpenActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
+
+        <activity android:name=".MyCollabsFourOpenActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
+
+        <activity android:name=".AvailableCollabsFiveOpenActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
+
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="ocr"/>
