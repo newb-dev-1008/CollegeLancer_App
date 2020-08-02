@@ -4,6 +4,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 class HistoryCollabThreeOpenActivity extends AppCompatActivity {
 
     private TextView posterName1, projectTitle1, collabDate1, projectDesc1, collabStatus1, fellowCollabsTV, noVotes, noVotesTV;
-    private String projectID;
+    private String projectID, noPicked;
     private FirebaseFirestore db;
     private String fellowCollabNames;
     private Switch addVote;
@@ -70,8 +71,9 @@ class HistoryCollabThreeOpenActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     String numVotes = documentSnapshot.get("endVotes").toString();
-                    String noPicked = documentSnapshot.get("numberPicked").toString();
-                    noVotes.setText(numVotes + " / " + noPicked);
+                    noPicked = documentSnapshot.get("numberPicked").toString();
+                    String votes = numVotes + " / " + noPicked
+                    noVotes.setText(votes);
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -115,5 +117,26 @@ class HistoryCollabThreeOpenActivity extends AppCompatActivity {
         }
 
         fellowCollabsTV.setText(fellowCollabNames);
+
+        addVote.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    int nVotes = Integer.parseInt(noVotes.getText().toString());
+                    nVotes++;
+                    String vote = nVotes + " / " + noPicked;
+                    noVotes.setText(vote);
+
+                    db.collection("CollabProjects").document(projectID).collection("Collaborators")
+                            .document("General").update("endVotes", noVotes.getText().toString())
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(HistoryCollabThreeOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+            }
+        });
     }
 }
