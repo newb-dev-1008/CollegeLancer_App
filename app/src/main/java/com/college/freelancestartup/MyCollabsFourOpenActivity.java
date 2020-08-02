@@ -27,7 +27,7 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
 
     private TextView posterName, projectTitle, postedDate, collabStatus, projectDesc, numApplicants, numSelectedApplicants, skills, openFor;
     private MaterialButton applicantsLogButton, finishProjectButton;
-    private Switch collab4VisibleSwitch;
+    private Switch collab4VisibleSwitch, endProjectSwitch;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private String projectID;
@@ -49,6 +49,7 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
         collab4VisibleSwitch = findViewById(R.id.collab4_visibleSwitch);
         skills = findViewById(R.id.collab4_skills);
         openFor = findViewById(R.id.collab4_openFor);
+        endProjectSwitch = findViewById(R.id.collab4_endProjectSwitch);
 
         projectID = getIntent().getExtras().get("projectID").toString();
 
@@ -163,7 +164,7 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
         finishProjectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                finishButtonPressed();
             }
         });
     }
@@ -172,5 +173,9 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
         Intent intent = new Intent(MyCollabsFourOpenActivity.this, ApplicantLogActivity.class);
         intent.putExtra("projectID", projectID);
         startActivity(intent);
+    }
+
+    private void finishButtonPressed() {
+
     }
 }
