@@ -3,6 +3,7 @@ package com.college.freelancestartup;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,10 +55,30 @@ class HistoryCollabThreeOpenActivity extends AppCompatActivity {
 
         projectID = getIntent().getExtras().get("projectID1").toString();
 
-        if (collabStatus1.getText().toString().equals("Completed")) {
+        if (collabStatus1.getText().toString().equals("Completed") || collabStatus1.getText().toString().equals("Ongoing")) {
             collabStatus1.setTextColor(Color.parseColor("#228B22"));
         } else {
             collabStatus1.setTextColor(Color.parseColor("#800000"));
+        }
+
+        if (collabStatus1.getText().toString().equals("Ending")) {
+            noVotesTV.setVisibility(View.VISIBLE);
+            noVotes.setVisibility(View.VISIBLE);
+            addVote.setVisibility(View.VISIBLE);
+            db.collection("CollabProjects").document(projectID).collection("Collaborators").document("General")
+                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    String numVotes = documentSnapshot.get("endVotes").toString();
+                    String noPicked = documentSnapshot.get("numberPicked").toString();
+                    noVotes.setText(numVotes + " / " + noPicked);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(HistoryCollabThreeOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         ArrayList<String> fellowCollabsEmail = new ArrayList<>();
