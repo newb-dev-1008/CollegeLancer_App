@@ -3,6 +3,7 @@ package com.college.freelancestartup;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ class HistoryCollabThreeOpenActivity extends AppCompatActivity {
     private String projectID;
     private FirebaseFirestore db;
     private String fellowCollabNames;
+    private Switch addVote;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
