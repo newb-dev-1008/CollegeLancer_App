@@ -72,6 +72,9 @@
         <activity android:name=".AvailableCollabsFiveOpenActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
 
+        <activity android:name=".PreviousCollabsCollabFiveActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
+
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="ocr"/>
