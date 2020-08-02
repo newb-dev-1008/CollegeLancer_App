@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -78,6 +79,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     private String DOB;
     private Date DOBDate, currentDate;
     private Calendar selectedDate;
+    private String[] skillArray;
 
     private boolean running, wasrunning;
 
@@ -104,13 +106,23 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
 
         chipGroup = findViewById(R.id.mainTagChipGroup);
         skills = findViewById(R.id.student_Skills);
-
+        skillArray = getResources().getStringArray(R.array.skills);
         currentDate = Calendar.getInstance().getTime();
         selectedDate = Calendar.getInstance();
 
         firebaseAuth = FirebaseAuth.getInstance();
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        ArrayAdapter<String> skillsAdapter = new ArrayAdapter<String>(GFBDetailsActivity.this, android.R.layout.simple_dropdown_item_1line, skillArray);
+
+        skills.setAdapter(skillsAdapter);
+        skills.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                skills.showDropDown();
+            }
+        });
 
         dateOfBirthET.setOnClickListener(new View.OnClickListener() {
             @Override
