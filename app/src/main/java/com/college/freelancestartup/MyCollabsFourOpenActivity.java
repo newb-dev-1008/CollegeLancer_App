@@ -22,6 +22,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 class MyCollabsFourOpenActivity extends AppCompatActivity {
 
@@ -199,9 +200,46 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
                         noVotesTV.setVisibility(View.VISIBLE);
 
                         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                                .collection("MyCollabs").document(projectID).update("collabStatus", "Ending");
+                                .collection("MyCollabs").document(projectID).update("collabStatus", "Ending")
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
 
-                        db.collection()
+                        db.collection("CollabProjects").document(projectID).collection("Collaborators")
+                                .document("General").update("endVotes", numberVotes)
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                        db.collection("CollabProjects").document(projectID).collection("Collaborators")
+                                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                if (queryDocumentSnapshots.size() > 0) {
+                                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                        String userEmail = documentSnapshot.get("emailID").toString();
+                                        db.collection("Users").document("User " + userEmail).collection("PreviousCollabs")
+                                                .document(projectID).update("collabStatus", "Ending").addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
     }
 }
