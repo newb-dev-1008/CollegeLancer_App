@@ -176,6 +176,22 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
     }
 
     private void finishButtonPressed() {
-
+        AlertDialog endProjectDialog = new MaterialAlertDialogBuilder(MyCollabsFourOpenActivity.this)
+                .setTitle("Are you sure you want to end the project?")
+                .setMessage("Finishing the project will initiate a voting procedure. All your fellow collaborators will have to vote to finish the project." +
+                        "\n\nBy doing this, you agree to the following:\n" +
+                        "1. You can restart the project only as long as all votes haven't been turned in.\n" +
+                        "2. The project isn't considered finished as long as all votes have been turned in.\n" +
+                        "3. All collaborators, including yourself, will receive their due credits only after the project has been officially finished.\n\n" +
+                        "Once all votes have been turned in, the project will automatically end, credits will be transferred to respective users and everyone will " +
+                        "be notified by the app and e-mail.")
+                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        endProjectSwitch.setVisibility(View.VISIBLE);
+                        endProjectSwitch.setChecked(true);
+                        finishProjectButton.setVisibility(View.GONE);
+                    }
+                })
     }
 }
