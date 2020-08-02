@@ -2,6 +2,7 @@ package com.college.freelancestartup;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,11 +65,18 @@ class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapter.MyCol
         holder.projectTitle.setText(projectTitle);
         holder.projectDesc.setText(projectDesc);
         holder.postedDate.setText(postedDate);
-        holder.projectStatus.setText(projectStatus);
         holder.numApplicants.setText(numApplicants);
         holder.numSelectedApplicants.setText(numSelectedApplicants);
         holder.projectSkills.setText(projectSkills);
         holder.projectOpenFor.setText(projectOpenFor);
+
+        if (projectStatus.equals("Ongoing") || projectStatus.equals("Completed")) {
+            holder.projectStatus.setTextColor(Color.parseColor("#"));
+            holder.projectStatus.setText(projectStatus);
+        } else {
+            holder.projectStatus.setTextColor(Color.parseColor("#800000"));
+            holder.projectStatus.setText(projectStatus);
+        }
     }
 
     public static class MyCollabsFourViewHolder extends RecyclerView.ViewHolder {

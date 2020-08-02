@@ -25,12 +25,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 class MyCollabsFourOpenActivity extends AppCompatActivity {
 
-    private TextView posterName, projectTitle, postedDate, collabStatus, projectDesc, numApplicants, numSelectedApplicants, skills, openFor;
+    private TextView posterName, projectTitle, postedDate, collabStatus, projectDesc, numApplicants, numSelectedApplicants, skills, openFor, noVotes, noVotesTV;
     private MaterialButton applicantsLogButton, finishProjectButton;
     private Switch collab4VisibleSwitch, endProjectSwitch;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private String projectID;
+    private int numberVotes;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
         skills = findViewById(R.id.collab4_skills);
         openFor = findViewById(R.id.collab4_openFor);
         endProjectSwitch = findViewById(R.id.collab4_endProjectSwitch);
+        noVotes = findViewById(R.id.collab4_noVotes);
+        noVotesTV = findViewById(R.id.collab4_noVotesTV);
 
         projectID = getIntent().getExtras().get("projectID").toString();
 
@@ -188,10 +191,17 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        numberVotes = 1;
                         endProjectSwitch.setVisibility(View.VISIBLE);
                         endProjectSwitch.setChecked(true);
                         finishProjectButton.setVisibility(View.GONE);
+                        noVotes.setVisibility(View.VISIBLE);
+                        noVotesTV.setVisibility(View.VISIBLE);
+
+                        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                .collection("MyCollabs").document(projectID).update("collabStatus", "Ending");
+
+                        db.collection()
                     }
-                })
     }
 }

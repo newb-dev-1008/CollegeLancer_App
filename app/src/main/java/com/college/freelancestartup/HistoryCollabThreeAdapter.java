@@ -68,7 +68,7 @@ class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeA
         holder.postedDate1.setText(collabDate);
         holder.collabStatus1.setText(collabStatus);
 
-        if (collabStatus.equals("Completed")) {
+        if (collabStatus.equals("Completed") || collabStatus.equals("Ongoing")) {
             holder.collabStatus1.setTextColor(Color.parseColor("#228B22"));
         } else {
             holder.collabStatus1.setTextColor(Color.parseColor("#800000"));
