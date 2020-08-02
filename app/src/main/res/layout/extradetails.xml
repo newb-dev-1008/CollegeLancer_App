@@ -17,9 +17,9 @@
             android:fontFamily="sans-serif-black"
             android:text="Additional Details"
             android:textColor="#000000"
+            android:layout_marginTop="30dp"
             android:textSize="30sp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/nameEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -33,7 +33,6 @@
             android:inputType="textPersonName"
             android:hint="Enter your full name"
             app:layout_constraintTop_toBottomOf="@id/extraDetailsTV"
-            app:layout_constraintBottom_toTopOf="@id/phoneNumberEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintVertical_bias="0.0" />
@@ -48,7 +47,6 @@
             android:hint="Enter your 10 digit phone number"
             android:inputType="phone"
             android:maxLength="10"
-            app:layout_constraintBottom_toTopOf="@id/universityEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
@@ -64,8 +62,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:inputType="textPersonName"
             android:layout_marginTop="5dp"
-            app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText"
-            app:layout_constraintBottom_toTopOf="@id/dateOfBirth"/>
+            app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText"/>
 
         <TextView
             android:id="@+id/dateOfBirth"
@@ -78,7 +75,6 @@
             android:textSize="20sp"
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/universityEditText"
-            app:layout_constraintBottom_toTopOf="@id/dateOfBirthET"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.0"/>
@@ -95,8 +91,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="5dp"
-            app:layout_constraintTop_toBottomOf="@+id/dateOfBirth"
-            app:layout_constraintBottom_toTopOf="@id/userType" />
+            app:layout_constraintTop_toBottomOf="@+id/dateOfBirth" />
 
         <TextView
             android:id="@+id/userType"
@@ -108,7 +103,6 @@
             android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/dateOfBirthET"
-            app:layout_constraintBottom_toTopOf="@id/userTypeRadioGroup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             android:layout_marginTop="30dp"
@@ -119,7 +113,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            app:layout_constraintBottom_toTopOf="@id/signupButtonGFB"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -158,7 +151,6 @@
             android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/userTypeRadioGroup"
-            app:layout_constraintBottom_toTopOf="@id/deptEnggSpinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.0"/>
@@ -174,7 +166,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/userDeptTV"
-            app:layout_constraintBottom_toTopOf="@id/studentSemTV"
             android:textAlignment="center"/>
 
         <TextView
@@ -188,7 +179,6 @@
             android:textSize="20sp"
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/deptEnggSpinner"
-            app:layout_constraintBottom_toTopOf="@id/studentSemSpinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -205,7 +195,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/studentSemTV"
-            app:layout_constraintBottom_toTopOf="@id/signupButtonGFB"
             android:visibility="gone"/>
 
         <TextView
@@ -219,7 +208,6 @@
             android:textSize="20sp"
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/studentSemSpinner"
-            app:layout_constraintBottom_toTopOf="@id/student_profileBio"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.0"/>
@@ -234,8 +222,35 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="5dp"
-            app:layout_constraintTop_toBottomOf="@+id/student_profileBioTV"
-            app:layout_constraintBottom_toTopOf="@id/signupButtonGFB"/>
+            app:layout_constraintTop_toBottomOf="@+id/student_profileBioTV"/>
+
+        <TextView
+            android:id="@+id/student_SkillsTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Your current skills:"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/student_profileBio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/student_Skills"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:hint="Add Skills"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/student_SkillsTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"/>
 
         <Button
             android:id="@+id/signupButtonGFB"
@@ -249,7 +264,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/studentSemSpinner" />
+            app:layout_constraintTop_toBottomOf="@+id/student_Skills" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
