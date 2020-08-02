@@ -159,6 +159,13 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
                 applicantsLog();
             }
         });
+
+        finishProjectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void applicantsLog() {
