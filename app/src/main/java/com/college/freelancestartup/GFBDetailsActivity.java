@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -29,6 +30,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,6 +56,8 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     private TextView dateOfBirthET, studentSemTV;
     private RadioGroup userType;
     private RadioButton userTypeSelectedRadioButton;
+    private AutoCompleteTextView skills;
+    private ChipGroup chipGroup;
     private FirebaseAuth firebaseAuth;
     private Spinner deptEngg, studentSem;
     private String userTypeSelected;
@@ -97,6 +101,9 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         studentSem = findViewById(R.id.studentSemSpinner);
         dateOfBirthET = findViewById(R.id.dateOfBirthET);
         bioET = findViewById(R.id.student_profileBio);
+
+        chipGroup = findViewById(R.id.mainTagChipGroup);
+        skills = findViewById(R.id.student_Skills);
 
         currentDate = Calendar.getInstance().getTime();
         selectedDate = Calendar.getInstance();
