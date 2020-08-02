@@ -36,6 +36,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.AuthResult;
@@ -177,6 +178,8 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
             }
         });
 
+
+
         dateOfBirthET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -218,6 +221,23 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         } else {
             Toast.makeText(this, "Enter a valid skill/ a skill you haven't already entered.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void addChipToGroup(String name1, ChipGroup chipGroup1, ArrayList<String> arrayList) {
+        Chip chip = new Chip(this);
+        chip.setText(name1);
+        chip.setClickable(true);
+        chip.setCheckable(false);
+        chip.setCloseIconVisible(true);
+
+        chipGroup1.addView(chip);
+        chip.setOnCloseIconClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chipGroup1.removeView(chip);
+                arrayList.remove(name1);
+            }
+        });
     }
 
     private String checkUserType(){
