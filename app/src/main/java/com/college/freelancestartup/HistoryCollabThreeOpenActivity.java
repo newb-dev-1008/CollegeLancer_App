@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 class HistoryCollabThreeOpenActivity extends AppCompatActivity {
 
-    private TextView posterName1, projectTitle1, collabDate1, projectDesc1, collabStatus1, fellowCollabsTV;
+    private TextView posterName1, projectTitle1, collabDate1, projectDesc1, collabStatus1, fellowCollabsTV, noVotes, noVotesTV;
     private String projectID;
     private FirebaseFirestore db;
     private String fellowCollabNames;
@@ -38,6 +38,9 @@ class HistoryCollabThreeOpenActivity extends AppCompatActivity {
         projectDesc1 = findViewById(R.id.collab3_projectDesc);
         collabStatus1 = findViewById(R.id.collab3_status);
         fellowCollabsTV = findViewById(R.id.collab3_fellowCollabs);
+        noVotes = findViewById(R.id.collab3_noVotes);
+        noVotesTV = findViewById(R.id.collab3_noVotesTV);
+        addVote = findViewById(R.id.collab3_endProjectSwitch);
 
         db = FirebaseFirestore.getInstance();
 

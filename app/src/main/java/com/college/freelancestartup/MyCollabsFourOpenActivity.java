@@ -241,5 +241,6 @@ class MyCollabsFourOpenActivity extends AppCompatActivity {
                             }
                         });
                     }
+                }).setNegativeButton()
     }
 }
