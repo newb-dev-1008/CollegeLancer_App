@@ -176,8 +176,9 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.charAt(i) == ',' || charSequence.charAt(i) == ' ') {
-                    String skillName = charSequence.subSequence(i, i1).toString();
+                String s = String.valueOf(charSequence);
+                if (s.equals(",") || s.equals(" ")) {
+                    String skillName = skills.getText().subSequence(0, (skills.getText().length()-1)).toString();
                     addSkills(skillName);
                     skills.setText(null);
                 }
