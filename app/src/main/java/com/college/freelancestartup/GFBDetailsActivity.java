@@ -1,5 +1,6 @@
 package com.college.freelancestartup;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +13,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -134,6 +136,14 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
             }
         });
 
+        skills.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                skills.showDropDown();
+                return false;
+            }
+        });
+
         skills.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -157,6 +167,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
             }
         });
 
+
         skills.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -165,8 +176,8 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.charAt(charSequence.length() - 1) == ',' || charSequence.charAt(charSequence.length() - 1) == ',') {
-                    String skillName = charSequence.subSequence(0, charSequence.length()-1).toString();
+                if (charSequence.charAt(i) == ',' || charSequence.charAt(i) == ' ') {
+                    String skillName = charSequence.subSequence(i, i1).toString();
                     addSkills(skillName);
                     skills.setText(null);
                 }
@@ -226,7 +237,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
     private void addChipToGroup(String name1, ChipGroup chipGroup1, ArrayList<String> arrayList) {
         Chip chip = new Chip(this);
         chip.setText(name1);
-        chip.setClickable(true);
+        chip.setClickable(false);
         chip.setCheckable(false);
         chip.setCloseIconVisible(true);
 
