@@ -3,7 +3,9 @@ package com.college.freelancestartup;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,11 +19,13 @@ import androidx.fragment.app.Fragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,12 +35,15 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
 
     private EditText projectTitle, projectOpenFor, projectDesc;
     private AutoCompleteTextView projectSkills;
-    private String posterTitle, posterEmail, postDate, projectID, projectStatus, skillset;
+    private String posterTitle, posterEmail, postDate, projectID, projectStatus;
     private Calendar calendar;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore db;
     private int numberPicked, numberApps, endVotes;
     private MaterialButton addExistingButton, addNewButton;
+    private ChipGroup chipGroup;
+    private String[] allSkillsArray;
+    private ArrayList<String> skillset;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,10 +58,14 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
         projectSkills = findViewById(R.id.proj_Skills);
         addExistingButton = findViewById(R.id.addExistingProjectButton);
         addNewButton = findViewById(R.id.addNewProjectButton);
+        chipGroup = findViewById(R.id.addProjSkillsChipGroup);
         numberApps = 0;
         numberPicked = 0;
         endVotes = 0;
         calendar = Calendar.getInstance();
+
+        skillset = new ArrayList<>();
+        allSkillsArray = getResources().getStringArray(R.array.skills);
 
         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -69,6 +80,26 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
                 Toast.makeText(StudentAddProjectForCollab.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        ArrayAdapter<String> skillsAdapter = new ArrayAdapter<String>(StudentAddProjectForCollab.this, android.R.layout.simple_dropdown_item_1line, allSkillsArray);
+
+        projectSkills.setAdapter(skillsAdapter);
+        projectSkills.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                projectSkills.showDropDown();
+            }
+        });
+
+        projectSkills.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                projectSkills.showDropDown();
+                return true;
+            }
+        });
+
+
 
         addExistingButton.setOnClickListener(new View.OnClickListener() {
             @Override
