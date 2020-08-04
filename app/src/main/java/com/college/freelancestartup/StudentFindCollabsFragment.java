@@ -15,12 +15,16 @@ import com.google.android.material.tabs.TabLayout;
 public class StudentFindCollabsFragment extends Fragment {
 
     private View root;
-    private ViewPager complaintViewPager;
-    private TabLayout complaintTabLayout;
+    private ViewPager collabViewPager;
+    private TabLayout collabTabLayout;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.collab_viewpager, container, false);
+        root = inflater.inflate(R.layout.collab_viewpager, container, false);
+
+        collabViewPager = root.findViewById(R.id.collabViewPager);
+        collabTabLayout = root.findViewById(R.id.tablayout);
+        return root;
     }
 }
