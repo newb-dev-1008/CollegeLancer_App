@@ -141,13 +141,13 @@
             app:chipSpacingVertical="4dp" />
 
         <Button
-            android:id="@+id/signupButtonGFB"
+            android:id="@+id/addNewProject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp"
             android:padding="10dp"
-            android:text="@string/signupButton"
+            android:text="Add Project"
             android:textAllCaps="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

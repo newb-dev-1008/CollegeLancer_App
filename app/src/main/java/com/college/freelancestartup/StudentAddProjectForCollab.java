@@ -28,6 +28,16 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
         setContentView(R.layout.student_addnew_project_forcollab);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        projectTitle = findViewById(R.id.projectTitleEditText);
+        projectOpenFor = findViewById(R.id.projectOpenForEditText);
+        projectDesc = findViewById(R.id.projDescEditText);
+        projectSkills = findViewById(R.id.proj_Skills);
+        numberApps = 0;
+        numberPicked = 0;
+        endVotes = 0;
+        calendar = Calendar.getInstance();
+
 
     }
 }
