@@ -1,6 +1,7 @@
 package com.college.freelancestartup;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,14 +29,14 @@ import java.util.Random;
 
 public class StudentAddProjectForCollab extends AppCompatActivity {
 
-    EditText projectTitle, projectOpenFor, projectDesc;
-    AutoCompleteTextView projectSkills;
-    String posterTitle, posterEmail, postDate, projectID, projectStatus;
-    Calendar calendar;
-    FirebaseAuth firebaseAuth;
-    FirebaseFirestore db;
-    int numberPicked, numberApps, endVotes;
-    MaterialButton addExistingButton, addNewButton;
+    private EditText projectTitle, projectOpenFor, projectDesc;
+    private AutoCompleteTextView projectSkills;
+    private String posterTitle, posterEmail, postDate, projectID, projectStatus, skillset;
+    private Calendar calendar;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore db;
+    private int numberPicked, numberApps, endVotes;
+    private MaterialButton addExistingButton, addNewButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -126,7 +128,23 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
         addProjectMap.put("posterEmail", posterEmail);
         addProjectMap.put("postDate", postDate);
         addProjectMap.put("projectOpenFor", projectOpenFor.getText().toString());
-        addProjectMap.put()
+        addProjectMap.put("projectSkills", skillset);
+        addProjectMap.put("projectDesc", projectDesc);
+        addProjectMap.put("projectTitle", projectTitle);
+        addProjectMap.put("projectStatus", projectStatus);
+
+
+        db.collection("CollabProjects").document(projectID).set(addProjectMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(StudentAddProjectForCollab.this, "Your project has been added. Expect some calls and applications!", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(StudentAddProjectForCollab.this, StudentMainActivity.class);
+                intent.putExtra("Go_to_fragment_addProj", "Go to fragment addProj");
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        })
     }
 
     private String generateProjectID() {

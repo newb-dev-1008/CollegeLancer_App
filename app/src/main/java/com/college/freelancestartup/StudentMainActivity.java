@@ -33,6 +33,7 @@ public class StudentMainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private LoginManager fbLoggedIn;
     private boolean running, wasrunning;
+    private String goToFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -50,6 +51,13 @@ public class StudentMainActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         fbLoggedIn = LoginManager.getInstance();
 
+        goToFrag = getIntent().getExtras().get("Go_to_fragment_addProj").toString();
+
+        if (goToFrag.equals("Go to fragment addProj")) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                    new StudentFindCollabsFragment()).addToBackStack(null).commit();
+        }
+
         drawer = findViewById(R.id.student_drawer_layout);
         NavigationView studentNavigationView = findViewById(R.id.student_navigation_drawer);
 
@@ -57,7 +65,6 @@ public class StudentMainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
                 new StudentHomeFragment()).addToBackStack(null).commit();
-
 
         studentNavBottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
