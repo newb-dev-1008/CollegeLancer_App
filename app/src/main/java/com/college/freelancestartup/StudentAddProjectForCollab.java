@@ -87,7 +87,7 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
     }
 
     private void addNewProjectFunction() {
-        AlertDialog.Builder addProjectDialog = new MaterialAlertDialogBuilder(this)
+        AlertDialog addProjectDialog = new MaterialAlertDialogBuilder(this)
                 .setTitle("Add project?")
                 .setMessage("Your project will be out in the open for developers to see and apply for collaboration.")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -95,7 +95,9 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         addNewProjectRealFunction();
                     }
-                })
+                }).setNegativeButton("Cancel", null)
+                .create();
+        addProjectDialog.show();
     }
 
     private void addNewProjectRealFunction() {
@@ -133,7 +135,6 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
         addProjectMap.put("projectTitle", projectTitle);
         addProjectMap.put("projectStatus", projectStatus);
 
-
         db.collection("CollabProjects").document(projectID).set(addProjectMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -144,7 +145,12 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
-        })
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(StudentAddProjectForCollab.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private String generateProjectID() {
