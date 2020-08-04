@@ -21,6 +21,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class StudentAddProjectForCollab extends AppCompatActivity {
@@ -89,10 +91,42 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        postDate = calendar.getTime().toString();
-                        projectStatus = "Open";
+                        addNewProjectRealFunction();
                     }
                 })
+    }
+
+    private void addNewProjectRealFunction() {
+        postDate = calendar.getTime().toString();
+        projectStatus = "Open";
+        String projeccID = generateProjectID();
+        db.collection("CollabProjects").document(projeccID).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            addNewProjectRealFunction();
+                        } else {
+                            projectID = projeccID;
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(StudentAddProjectForCollab.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Map<String, Object> addProjectMap = new HashMap<>();
+        addProjectMap.put("numberApps", numberApps);
+        addProjectMap.put("numberPicked", numberPicked);
+        addProjectMap.put("endVotes", endVotes);
+        addProjectMap.put("projectID", projectID);
+        addProjectMap.put("posterTitle", posterTitle);
+        addProjectMap.put("posterEmail", posterEmail);
+        addProjectMap.put("postDate", postDate);
+        addProjectMap.put("projectOpenFor", projectOpenFor.getText().toString());
+        addProjectMap.put()
     }
 
     private String generateProjectID() {
