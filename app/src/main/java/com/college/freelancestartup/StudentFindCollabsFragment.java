@@ -1,9 +1,14 @@
 package com.college.freelancestartup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,5 +35,30 @@ public class StudentFindCollabsFragment extends Fragment {
         collabViewPager.setAdapter(new FindCollabsViewPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
         collabTabLayout.setupWithViewPager(collabViewPager);
         return root;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.student_add_collab_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.addProjForCollab) {
+            Toast.makeText(getContext(), "Add an existing project or create a new project for collaboration.", Toast.LENGTH_LONG).show();
+
+            addNewProject();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void addNewProject() {
+        Intent intent = new Intent(getContext(), StudentAddProjectForCollab.class);
+        startActivity(intent);
     }
 }
