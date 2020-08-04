@@ -51,11 +51,13 @@ public class StudentMainActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         fbLoggedIn = LoginManager.getInstance();
 
-        goToFrag = getIntent().getExtras().get("Go_to_fragment_addProj").toString();
+        if (savedInstanceState != null) {
+            goToFrag = getIntent().getExtras().get("Go_to_fragment_addProj").toString();
 
-        if (goToFrag.equals("Go to fragment addProj")) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                    new StudentFindCollabsFragment()).addToBackStack(null).commit();
+            if (goToFrag.equals("Go to fragment addProj")) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                        new StudentFindCollabsFragment()).addToBackStack(null).commit();
+            }
         }
 
         drawer = findViewById(R.id.student_drawer_layout);
