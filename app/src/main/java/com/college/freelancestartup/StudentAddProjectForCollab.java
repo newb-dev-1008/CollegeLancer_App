@@ -3,11 +3,17 @@ package com.college.freelancestartup;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
@@ -99,6 +106,51 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
             }
         });
 
+        projectSkills.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                projectSkills.setText(null);
+                String skillName = adapterView.getItemAtPosition(i).toString();
+                addSkills(skillName);
+            }
+        });
+
+        projectSkills.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_DONE) {
+                    String skillName = projectSkills.getText().toString();
+                    projectSkills.setText(null);
+                    addSkills(skillName);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+
+
+        projectSkills.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String s = String.valueOf(charSequence);
+                if (s.equals(",") || s.equals(" ")) {
+                    String skillName = projectSkills.getText().subSequence(0, (projectSkills.getText().length()-1)).toString();
+                    addSkills(skillName);
+                    projectSkills.setText(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Do nothing
+            }
+        });
 
 
         addExistingButton.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +167,32 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void addSkills(String name) {
+        if (!name.isEmpty() && !skillset.contains(name)) {
+            addChipToGroup(name, chipGroup, skillset);
+            skillset.add(name);
+        } else {
+            Toast.makeText(this, "Enter a valid skill/ a skill you haven't already entered.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void addChipToGroup(String name1, ChipGroup chipGroup1, ArrayList<String> arrayList) {
+        Chip chip = new Chip(this);
+        chip.setText(name1);
+        chip.setClickable(false);
+        chip.setCheckable(false);
+        chip.setCloseIconVisible(true);
+
+        chipGroup1.addView(chip);
+        chip.setOnCloseIconClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chipGroup1.removeView(chip);
+                arrayList.remove(name1);
+            }
+        });
     }
 
     private void addNewProjectFunction() {
