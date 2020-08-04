@@ -23,7 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-class AvailableCollabsFragment extends Fragment {
+public class AvailableCollabsFragment extends Fragment {
 
     private View root;
     private FirebaseFirestore db;

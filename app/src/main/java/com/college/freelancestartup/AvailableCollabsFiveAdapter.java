@@ -20,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsFiveAdapter.AvailableCollabsFiveViewHolder> {
+public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsFiveAdapter.AvailableCollabsFiveViewHolder> {
     private ArrayList<AvailableCollabsFive> AvailableCollabsList;
     private String name, semester, department, skills, noCollabs, noProjects, userEmail, projectID, pickedStatusT, applicationArticle;
     private int flag;

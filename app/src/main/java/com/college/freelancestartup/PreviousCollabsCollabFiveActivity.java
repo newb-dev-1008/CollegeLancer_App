@@ -20,7 +20,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-class PreviousCollabsCollabFiveActivity extends AppCompatActivity {
+public class PreviousCollabsCollabFiveActivity extends AppCompatActivity {
 
     private RecyclerView previousCollabRecyclerView;
     private TextView emptyTV;

@@ -24,7 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-class HistoryCollabThreeOpenActivity extends AppCompatActivity {
+public class HistoryCollabThreeOpenActivity extends AppCompatActivity {
 
     private TextView posterName1, projectTitle1, collabDate1, projectDesc1, collabStatus1, fellowCollabsTV, noVotes, noVotesTV;
     private String projectID, noPicked;

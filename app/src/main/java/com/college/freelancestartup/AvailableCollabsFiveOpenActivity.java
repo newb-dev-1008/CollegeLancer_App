@@ -26,7 +26,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
+public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
 
     private TextView name1, personDepartment1, personSemester1, numberCollabs1, numberProjects1, skills1, personPhone1;
     private FirebaseFirestore db;

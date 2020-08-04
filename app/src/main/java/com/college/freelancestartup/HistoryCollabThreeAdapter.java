@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeAdapter.HistoryCollabsThreeViewHolder> {
+public class HistoryCollabThreeAdapter extends RecyclerView.Adapter<HistoryCollabThreeAdapter.HistoryCollabsThreeViewHolder> {
     private ArrayList<HistoryCollabsThree> HistoryCollabsList;
     private String posterName, projectTitle, projectDesc, collabDate, collabStatus, projectID;
 

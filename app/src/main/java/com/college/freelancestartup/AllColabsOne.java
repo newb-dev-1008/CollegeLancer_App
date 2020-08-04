@@ -1,6 +1,6 @@
 package com.college.freelancestartup;
 
-class AllColabsOne {
+public class AllColabsOne {
     private String posterTitle;
     private String projectTitle;
     private String projectDesc;

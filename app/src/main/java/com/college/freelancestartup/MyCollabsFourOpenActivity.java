@@ -24,7 +24,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-class MyCollabsFourOpenActivity extends AppCompatActivity {
+public class MyCollabsFourOpenActivity extends AppCompatActivity {
 
     private TextView posterName, projectTitle, postedDate, collabStatus, projectDesc, numApplicants, numSelectedApplicants, skills, openFor, noVotes, noVotesTV;
     private MaterialButton applicantsLogButton, finishProjectButton;

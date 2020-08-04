@@ -24,7 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-class MyCollabsFragment extends Fragment {
+public class MyCollabsFragment extends Fragment {
 
     private View root;
     private SwipeRefreshLayout swipeRefreshLayout;

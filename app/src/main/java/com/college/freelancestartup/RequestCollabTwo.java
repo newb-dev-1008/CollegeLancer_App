@@ -1,6 +1,6 @@
 package com.college.freelancestartup;
 
-class RequestCollabTwo {
+public class RequestCollabTwo {
     private String posterTitle;
     private String projectTitle;
     private String projectDesc;

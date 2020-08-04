@@ -1,6 +1,6 @@
 package com.college.freelancestartup;
 
-class AvailableCollabsFive {
+public class AvailableCollabsFive {
     private String name, department, skills, noCollabs, noProjects, semester, userEmail, projectID;
     private int flag;
 

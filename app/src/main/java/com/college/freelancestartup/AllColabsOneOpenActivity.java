@@ -26,7 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 import java.util.Map;
 
-class AllColabsOneOpenActivity extends AppCompatActivity {
+public class AllColabsOneOpenActivity extends AppCompatActivity {
 
     private TextView posterName1, projectTitle1, postedDate1, projectDesc1, openFor1, skills1;
     private MaterialButton messageButton, applyButton;

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapter.MyCollabsFourViewHolder> {
+public class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapter.MyCollabsFourViewHolder> {
     private ArrayList<MyCollabsFour> MyCollabsList;
     private String posterName, projectTitle, projectDesc, postedDate, projectStatus, numApplicants, numSelectedApplicants, projectSkills, projectOpenFor, projectID;
 
