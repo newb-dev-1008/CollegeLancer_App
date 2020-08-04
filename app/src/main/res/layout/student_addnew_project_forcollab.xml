@@ -140,8 +140,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:chipSpacingVertical="4dp" />
 
-        <Button
-            android:id="@+id/addNewProject"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addNewProjectButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
