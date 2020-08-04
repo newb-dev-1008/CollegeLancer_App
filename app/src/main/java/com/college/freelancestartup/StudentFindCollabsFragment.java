@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -25,6 +26,9 @@ public class StudentFindCollabsFragment extends Fragment {
 
         collabViewPager = root.findViewById(R.id.collabViewPager);
         collabTabLayout = root.findViewById(R.id.tablayout);
+
+        collabViewPager.setAdapter(new FindCollabsViewPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
+        collabTabLayout.setupWithViewPager(collabViewPager);
         return root;
     }
 }
