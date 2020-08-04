@@ -27,7 +27,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="4dp"
-            android:layout_toLeftOf="@id/collab5_personPickedStatus"
+            android:layout_toLeftOf="@id/collab5_personPickedStatusClosed"
             android:layout_marginEnd="35dp"
             android:layout_marginStart="4dp"
             android:text="Available Person's Name"/>
@@ -40,7 +40,7 @@
             android:layout_below="@id/collab5_name"
             android:layout_marginTop="10dp"
             android:textColor="@color/black"
-            android:layout_toLeftOf="@id/collab5_personPickedStatus"
+            android:layout_toLeftOf="@id/collab5_personPickedStatusClosed"
             android:layout_alignParentStart="true"
             android:layout_marginStart="4dp"
             android:text="Current Semester"/>

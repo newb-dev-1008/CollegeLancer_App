@@ -48,7 +48,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         cObj = Calendar.getInstance();
 
         name1 = findViewById(R.id.collab5_name);
-        personDepartment1 = findViewById(R.id.collab5_personDepartment);
+        personDepartment1 = findViewById(R.id.collab5_personDepartments);
         personSemester1 = findViewById(R.id.collab5_personSemester);
         personPhone1 = findViewById(R.id.collab5_personPhoneNo);
         numberCollabs1 = findViewById(R.id.collab5_collaborations);

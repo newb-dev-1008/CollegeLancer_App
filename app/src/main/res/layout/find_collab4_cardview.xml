@@ -46,7 +46,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/collab3_status"
+            android:id="@+id/collab4_status4"
             android:text="Open"
             android:textColor="@color/green"
             android:layout_alignParentRight="true"

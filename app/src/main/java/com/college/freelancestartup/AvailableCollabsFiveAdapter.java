@@ -112,7 +112,7 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
             super(itemView);
             name1 = itemView.findViewById(R.id.collab5_name);
             semester1 = itemView.findViewById(R.id.collab5_personSemester);
-            department1 = itemView.findViewById(R.id.collab5_personDepartment);
+            department1 = itemView.findViewById(R.id.collab5_personDepartments);
             skills1 = itemView.findViewById(R.id.collab5_skills);
             noProjects1 = itemView.findViewById(R.id.collab5_projectsCompleted);
             noCollabs1 = itemView.findViewById(R.id.collab5_collaborations);

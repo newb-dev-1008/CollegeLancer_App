@@ -25,7 +25,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/collab5_personDepartment"
+        android:id="@+id/collab5_personDepartments"
         app:layout_constraintTop_toBottomOf="@id/collab5_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/collab5_personPickedStatus"
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/collab5_personSemester"
-        app:layout_constraintTop_toBottomOf="@id/collab5_personDepartment"
+        app:layout_constraintTop_toBottomOf="@id/collab5_personDepartments"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/collab5_personPickedStatus"
         app:layout_constraintHorizontal_bias="0"

@@ -88,7 +88,7 @@ public class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapte
             projectTitle = itemView.findViewById(R.id.collab4_projectTitle);
             postedDate = itemView.findViewById(R.id.collab4_date);
             projectDesc = itemView.findViewById(R.id.collab4_projectDesc);
-            projectStatus = itemView.findViewById(R.id.collab4_status);
+            projectStatus = itemView.findViewById(R.id.collab4_status4);
             numApplicants = itemView.findViewById(R.id.collab4_noApplicants);
             numSelectedApplicants = itemView.findViewById(R.id.collab4_noAcceptedApplicants);
             projectSkills = itemView.findViewById(R.id.collab4_skills);

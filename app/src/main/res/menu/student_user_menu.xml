@@ -9,4 +9,11 @@
         android:tooltipText="Edit Profile"
         app:showAsAction="always"/>
 
+    <item
+        android:title="Add Project for Collaboration"
+        android:id="@+id/addProjForCollab"
+        android:icon="@drawable/student_add_projCollab"
+        app:showAsAction="always"
+        android:tooltipText="Add existing project for collaboration"
+
 </menu>
