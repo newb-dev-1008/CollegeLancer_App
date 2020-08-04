@@ -3,11 +3,16 @@ package com.college.freelancestartup;
 import android.os.Bundle;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -37,6 +42,20 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
         numberPicked = 0;
         endVotes = 0;
         calendar = Calendar.getInstance();
+
+        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                posterTitle = documentSnapshot.get("name").toString();
+                posterEmail = documentSnapshot.get("email").toString();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(StudentAddProjectForCollab.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
