@@ -146,6 +146,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
+            android:background="@color/grey"
             android:visibility="gone"
             android:layout_marginTop="15dp"/>
 
@@ -201,7 +202,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:padding="5dp"
-                android:text="Yes, and I want to lodge a complaint and retrieve my lost work as soon as possible"
+                android:text="Yes, and I want to lodge a complaint and retrieve my lost work as soon as possible."
                 android:textSize="14sp" />
 
             <RadioButton
@@ -213,22 +214,13 @@
                 android:textSize="14sp" />
 
             <RadioButton
-                android:id="@+id/often"
+                android:id="@+id/no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/studentDescription"
                 android:padding="5dp"
-                android:text="Occurs fairly often"
+                android:text="No, it was a bug I encountered while casually using the app."
                 android:textSize="14sp" />
 
-            <RadioButton
-                android:id="@+id/very"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/studentDescription"
-                android:padding="5dp"
-                android:text="Occurs almost every time"
-                android:textSize="14sp" />
         </RadioGroup>
 
         <com.google.android.material.button.MaterialButton
