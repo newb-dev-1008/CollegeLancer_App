@@ -41,22 +41,34 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="25dp"
-            android:hint="Try mentioning the name of the screen"
+            android:hint="Try mentioning the name of the screen."
             app:layout_constraintTop_toBottomOf="@id/bugLocationTV"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bugDescriptionTV"
+            android:text="Tell us more about this bug."
+            app:layout_constraintTop_toBottomOf="@id/bugLocationEditText"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="25dp"
+            android:textColor="@color/black"/>
+
         <EditText
-            android:id="@+id/projectOpenForEditText"
+            android:id="@+id/bugDescriptionET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="25dp"
-            android:hint="Eligibility criteria to contribute to the project"
+            android:hint="Try to be as detailed as possible."
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/projectTitleEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/bugLocationEditText" />
 
         <EditText
             android:id="@+id/projDescEditText"
