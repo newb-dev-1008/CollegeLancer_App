@@ -74,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bugFrequencyET"
-            android:text="How frequent is this bug?"
+            android:text="How frequently does this problem occur?"
             app:layout_constraintTop_toBottomOf="@id/bugDescriptionET"
             android:layout_marginTop="10dp"
             android:textSize="16sp"
@@ -164,6 +164,30 @@
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bugComplaintTV"
+            android:text="Did the problem stall any important work?"
+            app:layout_constraintTop_toBottomOf="@id/addSSButton"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="25dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bugComplaintContTV"
+            android:text="We sincerely apologize for the inconvenience. Please let us know if there is anything we can do to bring back unsaved changes."
+            app:layout_constraintTop_toBottomOf="@id/bugComplaintTV"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="25dp"
+            app:layout_constraintStart_toStartOf="@id/bugComplaintTV"
+            android:layout_marginStart="25dp"/>
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/addProjSkillsChipGroup"
