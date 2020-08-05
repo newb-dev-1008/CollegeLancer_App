@@ -36,6 +36,8 @@ public class StudentFindCollabsFragment extends Fragment {
         collabTabLayout = root.findViewById(R.id.tablayout);
         collabViewPagerToolbar = root.findViewById(R.id.collab_viewpagerToolbar);
 
+        setHasOptionsMenu(true);
+
         collabViewPager.setAdapter(new FindCollabsViewPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
         collabTabLayout.setupWithViewPager(collabViewPager);
         ((AppCompatActivity) getActivity()).setSupportActionBar(collabViewPagerToolbar);
