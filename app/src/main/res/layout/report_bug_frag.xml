@@ -129,6 +129,18 @@
                 android:textSize="14sp" />
         </RadioGroup>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bugAddSSTV"
+            android:text="Enclose Screenshots:"
+            app:layout_constraintTop_toBottomOf="@id/bugFrequencyRadioGroup"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="25dp"
+            android:textColor="@color/black"/>
+
         <AutoCompleteTextView
             android:id="@+id/proj_Skills"
             android:layout_width="match_parent"
