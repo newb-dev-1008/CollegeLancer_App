@@ -22,18 +22,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bugLocationTV"
+            android:text="Where did you encounter the bug?"
+            app:layout_constraintTop_toBottomOf="@id/reportBugTV"
+            android:layout_marginTop="25dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="25dp"
+            android:textColor="@color/black"/>
+
         <EditText
-            android:id="@+id/projectTitleEditText"
+            android:id="@+id/bugLocationEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="25dp"
-            android:hint="Enter your project title"
-            app:layout_constraintTop_toBottomOf="@id/newProjectTV"
+            android:hint="Try mentioning the name of the screen"
+            app:layout_constraintTop_toBottomOf="@id/bugLocationTV"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/projectOpenForEditText"
