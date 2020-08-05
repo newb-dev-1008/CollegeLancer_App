@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -31,6 +32,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -162,7 +165,11 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
         addNewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addNewProjectFunction();
+                if (TextUtils.isEmpty(projectTitle.toString()) || TextUtils.isEmpty(projectOpenFor.toString()) || TextUtils.isEmpty(projectDesc.toString()) || TextUtils.isEmpty(skillset.toString())) {
+                    Toast.makeText(StudentAddProjectForCollab.this, "Please enter all the above details.", Toast.LENGTH_SHORT).show();
+                } else {
+                    addNewProjectFunction();
+                }
             }
         });
 
