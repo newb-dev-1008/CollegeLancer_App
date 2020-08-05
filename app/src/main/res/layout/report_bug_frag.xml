@@ -141,20 +141,29 @@
             android:layout_marginStart="25dp"
             android:textColor="@color/black"/>
 
-        <AutoCompleteTextView
-            android:id="@+id/proj_Skills"
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/encloseSSRecyclerView"
+            app:layout_constraintTop_toBottomOf="@id/bugAddSSTV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
-            android:hint="Add Skills"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/proj_SkillsTV"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:completionThreshold="1"
+            android:visibility="gone"
+            android:layout_marginTop="15dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Screenshots"
+            android:id="@+id/addSSButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:imeOptions="actionDone"/>
+            app:layout_constraintTop_toBottomOf="@id/encloseSSRecyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginTop="15dp"/>
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/addProjSkillsChipGroup"
