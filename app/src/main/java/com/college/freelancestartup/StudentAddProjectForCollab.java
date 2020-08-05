@@ -165,7 +165,7 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
         addNewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(projectTitle.toString()) || TextUtils.isEmpty(projectOpenFor.toString()) || TextUtils.isEmpty(projectDesc.toString()) || TextUtils.isEmpty(skillset.toString())) {
+                if (projectTitle.getText().toString().equals("") || projectOpenFor.getText().toString().equals("") || projectDesc.getText().toString().equals("") || (skillset.size() == 0)) {
                     Toast.makeText(StudentAddProjectForCollab.this, "Please enter all the above details.", Toast.LENGTH_SHORT).show();
                 } else {
                     addNewProjectFunction();
