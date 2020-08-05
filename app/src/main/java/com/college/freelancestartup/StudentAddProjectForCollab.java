@@ -208,6 +208,7 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        checkProjectIDValidFunction();
                         addNewProjectRealFunction();
                     }
                 }).setNegativeButton("Cancel", null)
@@ -215,7 +216,7 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
         addProjectDialog.show();
     }
 
-    private void addNewProjectRealFunction() {
+    private void checkProjectIDValidFunction() {
         postDate = calendar.getTime().toString();
         projectStatus = "Open";
         String projeccID = generateProjectID();
@@ -224,9 +225,11 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
-                            addNewProjectRealFunction();
+                            checkProjectIDValidFunction();
                         } else {
                             projectID = projeccID;
+                            addNewProjectRealFunction();
+                            Toast.makeText(StudentAddProjectForCollab.this, projectID, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -235,7 +238,9 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
                 Toast.makeText(StudentAddProjectForCollab.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
+    private void addNewProjectRealFunction() {
         Map<String, Object> addProjectMap = new HashMap<>();
         addProjectMap.put("numberApps", numberApps);
         addProjectMap.put("numberPicked", numberPicked);
