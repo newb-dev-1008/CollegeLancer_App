@@ -102,7 +102,7 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 projectSkills.showDropDown();
-                return true;
+                return false;
             }
         });
 
@@ -151,7 +151,6 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
                 // Do nothing
             }
         });
-
 
         addExistingButton.setOnClickListener(new View.OnClickListener() {
             @Override

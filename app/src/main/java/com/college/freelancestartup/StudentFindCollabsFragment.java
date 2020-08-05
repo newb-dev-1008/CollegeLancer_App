@@ -31,6 +31,9 @@ public class StudentFindCollabsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.collab_viewpager, container, false);
+        if (((AppCompatActivity) getActivity()).getSupportActionBar() != null) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        }
 
         collabViewPager = root.findViewById(R.id.collabViewPager);
         collabTabLayout = root.findViewById(R.id.tablayout);
