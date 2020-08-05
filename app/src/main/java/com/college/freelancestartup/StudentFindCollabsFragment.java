@@ -12,10 +12,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
 public class StudentFindCollabsFragment extends Fragment {
@@ -23,6 +25,7 @@ public class StudentFindCollabsFragment extends Fragment {
     private View root;
     private ViewPager collabViewPager;
     private TabLayout collabTabLayout;
+    private MaterialToolbar collabViewPagerToolbar;
 
     @Nullable
     @Override
@@ -31,9 +34,11 @@ public class StudentFindCollabsFragment extends Fragment {
 
         collabViewPager = root.findViewById(R.id.collabViewPager);
         collabTabLayout = root.findViewById(R.id.tablayout);
+        collabViewPagerToolbar = root.findViewById(R.id.collab_viewpagerToolbar);
 
         collabViewPager.setAdapter(new FindCollabsViewPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
         collabTabLayout.setupWithViewPager(collabViewPager);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(collabViewPagerToolbar);
         return root;
     }
 
