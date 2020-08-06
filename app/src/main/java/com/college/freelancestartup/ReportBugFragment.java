@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
@@ -18,7 +19,8 @@ public class ReportBugFragment extends Fragment {
     private EditText bugLocationET, bugDescriptionET;
     private RadioGroup bugFrequencyRadioGroup, bugStallRadioGroup;
     private View root;
-    private MaterialButton addScreenshots, reportBug;
+    private MaterialButton addScreenshots, reportBugButton;
+    private String bugFreq, bugStalled;
 
     @Nullable
     @Override
@@ -31,8 +33,26 @@ public class ReportBugFragment extends Fragment {
         bugStallRadioGroup = root.findViewById(R.id.bugStallRadioGroup);
 
         addScreenshots = root.findViewById(R.id.addSSButton);
-        reportBug = root.findViewById(R.id.reportBugButton);
+        reportBugButton = root.findViewById(R.id.reportBugButton);
+
+        bugStallRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton checkedButton = radioGroup.findViewById(i);
+                String bugStalled = checkedButton.getText().toString();
+                if (bugStalled.equals("Yes, and I want to lodge a complaint and retrieve my lost work as soon as possible.")) {
+                    String s = "Report Bug and lodge complaint";
+                    reportBugButton.setText(s);
+                } else {
+                    String s1 = "Report Bug";
+                    reportBugButton.setText(s1);
+                }
+            }
+        });
 
         return root;
     }
+
+    private void
+
 }
