@@ -45,21 +45,21 @@ public class StudentMainActivity extends AppCompatActivity {
             wasrunning = savedInstanceState.getBoolean("wasrunning");
         }
 
+        Intent recIntent = getIntent();
+
+        if (recIntent.hasExtra("Go_to_fragment_NewComplaint")) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                    new NewComplaintsFragment()).addToBackStack(null).commit();
+        } else if (recIntent.hasExtra("Go_to_fragment_addProj")) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                    new StudentFindCollabsFragment()).addToBackStack(null).commit();
+        }
+
         Toolbar studentToolbar = findViewById(R.id.studentToolbar);
         setSupportActionBar(studentToolbar);
 
         firebaseAuth = FirebaseAuth.getInstance();
         fbLoggedIn = LoginManager.getInstance();
-
-        if (savedInstanceState != null) {
-            if (getIntent().getExtras().get("Go_to_fragment_addProj").toString().equals(null))
-                goToFrag = getIntent().getExtras().get("Go_to_fragment_NewComplaint").toString();
-
-            if (goToFrag.equals("Go to fragment addProj")) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                        new StudentFindCollabsFragment()).addToBackStack(null).commit();
-            }
-        }
 
         drawer = findViewById(R.id.student_drawer_layout);
         NavigationView studentNavigationView = findViewById(R.id.student_navigation_drawer);
