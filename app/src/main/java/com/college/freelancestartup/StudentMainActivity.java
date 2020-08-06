@@ -52,7 +52,8 @@ public class StudentMainActivity extends AppCompatActivity {
         fbLoggedIn = LoginManager.getInstance();
 
         if (savedInstanceState != null) {
-            goToFrag = getIntent().getExtras().get("Go_to_fragment_addProj").toString();
+            if (getIntent().getExtras().get("Go_to_fragment_addProj").toString().equals(null))
+                goToFrag = getIntent().getExtras().get("Go_to_fragment_NewComplaint").toString();
 
             if (goToFrag.equals("Go to fragment addProj")) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,

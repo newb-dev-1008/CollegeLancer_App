@@ -98,7 +98,7 @@ public class GFBDetailsActivity extends AppCompatActivity implements DatePickerD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.extradetails);
         running = true;
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             running = savedInstanceState.getBoolean("running");
             wasrunning = savedInstanceState.getBoolean("wasrunning");
         }
