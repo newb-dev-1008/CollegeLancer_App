@@ -124,9 +124,40 @@ public class ReportBugFragment extends Fragment {
                                     startActivity(intent);
                                 }
                             });
-
                         }
-                    })
+                    }).setNegativeButton("Cancel", null)
+                    .create();
+            reportBugDialog.show();
+        } else {
+            AlertDialog reportBugDialog = new MaterialAlertDialogBuilder(getContext())
+                    .setTitle("Submit bug report?")
+                    .setMessage("Thank you for contributing towards making the app bug-free. We will submit your bug report and get " +
+                            "back to you about it over e-mail.")
+                    .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Map<String, Object> bugReport = new HashMap<>();
+                            bugReport.put("bugLocation", bugLocationET.getText().toString());
+                            bugReport.put("bugDescription", bugDescriptionET.getText().toString());
+                            bugReport.put("bugFrequency", bugFreq);
+                            bugReport.put("bugStalledWork", bugStalled);
+                            bugReport.put("bugReporterEmail", firebaseAuth.getCurrentUser().getEmail());
+                            bugReport.put("bugPictures", bugPictures);
+                            bugReport.put("reportTime", reportTime);
+                            bugReport.put("resolved", "No");
+                            db.collection("BugReports").document(reportTime).set(bugReport).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(getContext(), "Your bug report has been submitted. Please lodge your complaint with as much detail as possible.", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(getContext(), StudentMainActivity.class);
+                                    intent.putExtra("Go_to_fragment_NewComplaint", "New Complaint");
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+                    }).setNegativeButton("Cancel", null)
+                    .create();
+            reportBugDialog.show();
         }
     }
 
