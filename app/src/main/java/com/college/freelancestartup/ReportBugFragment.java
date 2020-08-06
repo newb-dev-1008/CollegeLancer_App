@@ -1,5 +1,7 @@
 package com.college.freelancestartup;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class ReportBugFragment extends Fragment {
 
@@ -21,6 +24,7 @@ public class ReportBugFragment extends Fragment {
     private View root;
     private MaterialButton addScreenshots, reportBugButton;
     private String bugFreq, bugStalled;
+    private int flag;
 
     @Nullable
     @Override
@@ -28,6 +32,7 @@ public class ReportBugFragment extends Fragment {
         root = inflater.inflate(R.layout.report_bug_frag, container, false);
         bugLocationET = root.findViewById(R.id.bugLocationEditText);
         bugDescriptionET = root.findViewById(R.id.bugDescriptionET);
+        flag = 0;
 
         bugFrequencyRadioGroup = root.findViewById(R.id.bugFrequencyRadioGroup);
         bugStallRadioGroup = root.findViewById(R.id.bugStallRadioGroup);
@@ -42,6 +47,7 @@ public class ReportBugFragment extends Fragment {
                 String bugStalled1 = checkedButton.getText().toString();
                 if (bugStalled1.equals("Yes, and I want to lodge a complaint and retrieve my lost work as soon as possible.")) {
                     String s = "Report Bug and lodge complaint";
+                    flag = 1;
                     bugStalled = bugStalled1;
                     reportBugButton.setText(s);
                 } else {
@@ -60,9 +66,32 @@ public class ReportBugFragment extends Fragment {
             }
         });
 
+        reportBugButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reportBug();
+            }
+        });
+
         return root;
     }
 
-    private void
+    private void reportBug() {
+        if (flag == 1) {
+            AlertDialog reportBugDialog = new MaterialAlertDialogBuilder(getContext())
+                    .setTitle("Submit bug report?")
+                    .setMessage("Thank you for contributing towards making the app bug-free. We will submit your bug report and " +
+                            "redirect you to our complaints section.\n" +
+                            "Please try to be as detailed as possible about the unsaved progress you have lost.\n" +
+                            "While we assure you that we will do everything we can to help retrieve your lost data, we cannot fully guarantee " +
+                            "the existence of the data on our servers. Either way, we will get back to you, over e-mail.")
+                    .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    })
+        }
+    }
 
 }
