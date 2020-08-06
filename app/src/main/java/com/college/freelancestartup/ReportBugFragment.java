@@ -148,9 +148,8 @@ public class ReportBugFragment extends Fragment {
                             db.collection("BugReports").document(reportTime).set(bugReport).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(getContext(), "Your bug report has been submitted. Please lodge your complaint with as much detail as possible.", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), "Your bug report has been submitted!", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(getContext(), StudentMainActivity.class);
-                                    intent.putExtra("Go_to_fragment_NewComplaint", "New Complaint");
                                     startActivity(intent);
                                 }
                             });
