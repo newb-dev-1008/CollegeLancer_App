@@ -2,6 +2,7 @@ package com.college.freelancestartup;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +10,23 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.FirebaseApiNotAvailableException;
+import com.google.firebase.FirebaseError;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ReportBugFragment extends Fragment {
 
@@ -23,8 +34,11 @@ public class ReportBugFragment extends Fragment {
     private RadioGroup bugFrequencyRadioGroup, bugStallRadioGroup;
     private View root;
     private MaterialButton addScreenshots, reportBugButton;
-    private String bugFreq, bugStalled;
+    private String bugFreq, bugStalled, reportTime;
     private int flag;
+    private FirebaseFirestore db;
+    private FirebaseAuth firebaseAuth;
+    private Calendar c;
 
     @Nullable
     @Override
@@ -34,8 +48,12 @@ public class ReportBugFragment extends Fragment {
         bugDescriptionET = root.findViewById(R.id.bugDescriptionET);
         flag = 0;
 
+        db = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
         bugFrequencyRadioGroup = root.findViewById(R.id.bugFrequencyRadioGroup);
         bugStallRadioGroup = root.findViewById(R.id.bugStallRadioGroup);
+        c = Calendar.getInstance();
+        reportTime = c.getTime().toString();
 
         addScreenshots = root.findViewById(R.id.addSSButton);
         reportBugButton = root.findViewById(R.id.reportBugButton);
@@ -88,6 +106,23 @@ public class ReportBugFragment extends Fragment {
                     .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            Map<String, Object> bugReport = new HashMap<>();
+                            bugReport.put("bugLocation", bugLocationET.getText().toString());
+                            bugReport.put("bugDescription", bugDescriptionET.getText().toString());
+                            bugReport.put("bugFrequency", bugFreq);
+                            bugReport.put("bugStalledWork", bugStalled);
+                            bugReport.put("bugReporterEmail", firebaseAuth.getCurrentUser().getEmail());
+                            bugReport.put("bugPictures", bugPictures);
+                            bugReport.put("reportTime", reportTime);
+                            bugReport.put("resolved", "No");
+                            db.collection("BugReports").document(reportTime).set(bugReport).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(getContext(), "Your bug report has been submitted. Please lodge your complaint with as much detail as possible.", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(getContext(), StudentMainActivity.class);
+                                    intent.putExtra("")
+                                }
+                            });
 
                         }
                     })
