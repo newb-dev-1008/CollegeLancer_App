@@ -39,14 +39,24 @@ public class ReportBugFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton checkedButton = radioGroup.findViewById(i);
-                String bugStalled = checkedButton.getText().toString();
-                if (bugStalled.equals("Yes, and I want to lodge a complaint and retrieve my lost work as soon as possible.")) {
+                String bugStalled1 = checkedButton.getText().toString();
+                if (bugStalled1.equals("Yes, and I want to lodge a complaint and retrieve my lost work as soon as possible.")) {
                     String s = "Report Bug and lodge complaint";
+                    bugStalled = bugStalled1;
                     reportBugButton.setText(s);
                 } else {
                     String s1 = "Report Bug";
+                    bugStalled = bugStalled1;
                     reportBugButton.setText(s1);
                 }
+            }
+        });
+
+        bugFrequencyRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton checkedButton1 = radioGroup.findViewById(i);
+                String bugFreq
             }
         });
 
