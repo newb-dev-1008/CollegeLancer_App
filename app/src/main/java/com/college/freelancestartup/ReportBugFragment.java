@@ -120,7 +120,8 @@ public class ReportBugFragment extends Fragment {
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(getContext(), "Your bug report has been submitted. Please lodge your complaint with as much detail as possible.", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(getContext(), StudentMainActivity.class);
-                                    intent.putExtra("")
+                                    intent.putExtra("Go_to_fragment_NewComplaint", "New Complaint");
+                                    startActivity(intent);
                                 }
                             });
 
