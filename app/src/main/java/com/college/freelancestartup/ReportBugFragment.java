@@ -56,7 +56,7 @@ public class ReportBugFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton checkedButton1 = radioGroup.findViewById(i);
-                String bugFreq
+                bugFreq = checkedButton1.getText().toString();
             }
         });
 
