@@ -25,7 +25,13 @@ public class ReportBugFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.report_bug_frag, container, false);
         bugLocationET = root.findViewById(R.id.bugLocationEditText);
-        bugDescriptionET = root
+        bugDescriptionET = root.findViewById(R.id.bugDescriptionET);
+
+        bugFrequencyRadioGroup = root.findViewById(R.id.bugFrequencyRadioGroup);
+        bugStallRadioGroup = root.findViewById(R.id.bugStallRadioGroup);
+
+        addScreenshots = root.findViewById(R.id.addSSButton);
+        reportBug = root.findViewById(R.id.reportBugButton);
 
         return root;
     }
