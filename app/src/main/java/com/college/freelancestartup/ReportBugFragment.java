@@ -150,6 +150,7 @@ public class ReportBugFragment extends Fragment {
                                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                                 String picturePath = cursor.getString(columnIndex);
                                 Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+                                bugPictures.add(bitmap);
                                 populateRecyclerView(bitmap, picturePath);
                                 cursor.close();
 
