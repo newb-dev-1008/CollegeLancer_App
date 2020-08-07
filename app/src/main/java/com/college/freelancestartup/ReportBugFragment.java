@@ -57,6 +57,8 @@ public class ReportBugFragment extends Fragment {
     private RecyclerView recyclerView;
     private ImageView idImage, deleteImage;
     private ArrayList<BugReport> bugReport;
+    private RecyclerView.Adapter bugReportAdapter;
+    private RecyclerView.LayoutManager bugReportLayoutManager;
 
     @Nullable
     @Override
@@ -164,11 +166,11 @@ public class ReportBugFragment extends Fragment {
 
         recyclerView.setVisibility(View.VISIBLE);
 
-        regComplaintsLayoutManager = new LinearLayoutManager(getContext());
-        regComplaintsAdapter = new RegComplaintsAdapter(registeredComplaints);
-        regComplaintsRecyclerView.setHasFixedSize(true);
-        regComplaintsRecyclerView.setLayoutManager(regComplaintsLayoutManager);
-        regComplaintsRecyclerView.setAdapter(regComplaintsAdapter);
+        bugReportLayoutManager = new LinearLayoutManager(getContext());
+        bugReportAdapter = new BugReportAdapter(bugReport);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(bugReportLayoutManager);
+        recyclerView.setAdapter(bugReportAdapter);
     }
 
     private void reportBug() {
