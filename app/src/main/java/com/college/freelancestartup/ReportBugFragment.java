@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
@@ -42,6 +43,7 @@ public class ReportBugFragment extends Fragment {
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private Calendar c;
+    private RecyclerView recyclerView;
 
     @Nullable
     @Override
@@ -53,6 +55,7 @@ public class ReportBugFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
+        recyclerView = root.findViewById(R.id.encloseSSRecyclerView);
         bugFrequencyRadioGroup = root.findViewById(R.id.bugFrequencyRadioGroup);
         bugStallRadioGroup = root.findViewById(R.id.bugStallRadioGroup);
         c = Calendar.getInstance();
@@ -95,6 +98,13 @@ public class ReportBugFragment extends Fragment {
                 } else {
                     reportBug();
                 }
+            }
+        });
+
+        addScreenshots.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
