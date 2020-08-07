@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 
 public class ReportBugFragment extends Fragment {
 
@@ -51,6 +53,7 @@ public class ReportBugFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private Calendar c;
     private RecyclerView recyclerView;
+    private ImageView idImage, deleteImage;
 
     @Nullable
     @Override
@@ -64,6 +67,9 @@ public class ReportBugFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         recyclerView = root.findViewById(R.id.encloseSSRecyclerView);
         bugFrequencyRadioGroup = root.findViewById(R.id.bugFrequencyRadioGroup);
+        deleteImage = root.findViewById(R.id.bug_remove_ss);
+        idImage = root.findViewById(R.id.bugImage);
+
         bugStallRadioGroup = root.findViewById(R.id.bugStallRadioGroup);
         c = Calendar.getInstance();
         reportTime = c.getTime().toString();
@@ -129,7 +135,7 @@ public class ReportBugFragment extends Fragment {
                         Uri selectedImage = data.getData();
                         String[] filePathColumn = {MediaStore.Images.Media.DATA};
                         if (selectedImage != null) {
-                            Cursor cursor = getContentResolver().query(selectedImage,
+                            Cursor cursor = getContext().getContentResolver().query(selectedImage,
                                     filePathColumn, null, null, null);
                             if (cursor != null) {
                                 cursor.moveToFirst();
@@ -137,8 +143,6 @@ public class ReportBugFragment extends Fragment {
                                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                                 String picturePath = cursor.getString(columnIndex);
                                 idImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-                                Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
-                                verifyID(bitmap);
                                 cursor.close();
 
                             }
