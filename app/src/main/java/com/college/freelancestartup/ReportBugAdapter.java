@@ -48,31 +48,23 @@ public class BugReportAdapter extends RecyclerView.Adapter<BugReportAdapter.BugR
 
     @NonNull
     @Override
-    public RegComplaintsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BugReportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.reg_complaints_cardview, parent, false);
-        RegComplaintsViewHolder regComplaintsViewHolder = new RegComplaintsViewHolder(v);
+        BugReportViewHolder regComplaintsViewHolder = new BugReportViewHolder(v);
         return regComplaintsViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RegComplaintsViewHolder holder, int position) {
-        RegisteredComplaints currentComplaint = RegisteredComplaintsList.get(position);
+    public void onBindViewHolder(@NonNull BugReportViewHolder holder, int position) {
+        BugReport bugRep = BugReportList.get(position);
 
-        holder.regComplaintsTitle.setText(currentComplaint.getComplaintTitle());
-        holder.regComplaintsDate.setText(currentComplaint.getComplaintDate());
-        holder.regComplaintsComplaint.setText(currentComplaint.getComplaint());
-        holder.complaintID.setText(currentComplaint.getComplaintID());
-        if (currentComplaint.getComplaintStatus().equals("Pending")){
-            holder.regComplaintsStatus.setText(currentComplaint.getComplaintStatus());
-            holder.regComplaintsStatus.setTextColor(Color.parseColor("#800000"));
-        } else {
-            holder.regComplaintsStatus.setText(currentComplaint.getComplaintStatus());
-            holder.regComplaintsStatus.setTextColor(Color.parseColor("#228B22"));
-        }
+        holder.filePath.setText(bugRep.getFilePath());
+        holder.imgBitmap.setImageBitmap(bugRep.getBitmap());
     }
 
     @Override
     public int getItemCount() {
-        return RegisteredComplaintsList.size();
+        return BugReportList.size();
     }
+
 }
