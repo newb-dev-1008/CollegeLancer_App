@@ -34,6 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -139,10 +140,11 @@ public class ReportBugFragment extends Fragment {
                                     filePathColumn, null, null, null);
                             if (cursor != null) {
                                 cursor.moveToFirst();
-
                                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                                 String picturePath = cursor.getString(columnIndex);
                                 idImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                                Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+                                populateRecyclerView(bitmap, picturePath);
                                 cursor.close();
 
                             }
@@ -151,6 +153,10 @@ public class ReportBugFragment extends Fragment {
                     break;
             }
         }
+    }
+
+    private void populateRecyclerView(Bitmap bitmapImage, String path) {
+        ArrayList<BugReport> bugReport = new ArrayList<BugReport>();
     }
 
     private void reportBug() {

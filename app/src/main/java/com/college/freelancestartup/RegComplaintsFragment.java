@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class RegComplaintsFragment extends Fragment {
 
-    private View root;
+    private View root, root1;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private RecyclerView regComplaintsRecyclerView;
