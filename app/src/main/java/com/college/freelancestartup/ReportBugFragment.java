@@ -109,7 +109,7 @@ public class ReportBugFragment extends Fragment {
                             "redirect you to our complaints section.\n" +
                             "Please try to be as detailed as possible about the unsaved progress you have lost.\n" +
                             "While we assure you that we will do everything we can to help retrieve your lost data, we cannot fully guarantee " +
-                            "the existence of the data on our servers. Either way, we will get back to you, over e-mail.")
+                            "it's existence on our servers. Either way, we will get back to you, over e-mail.")
                     .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
