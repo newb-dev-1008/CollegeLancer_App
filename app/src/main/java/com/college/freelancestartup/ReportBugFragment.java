@@ -2,7 +2,12 @@ package com.college.freelancestartup;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +36,8 @@ import org.w3c.dom.Text;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import static android.app.Activity.RESULT_CANCELED;
 
 public class ReportBugFragment extends Fragment {
 
@@ -104,11 +111,42 @@ public class ReportBugFragment extends Fragment {
         addScreenshots.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(pickPhoto, 0);
             }
         });
 
         return root;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_CANCELED) {
+            switch (requestCode) {
+                case 0:
+                    if (resultCode == RESULT_OK && data != null) {
+                        Uri selectedImage = data.getData();
+                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                        if (selectedImage != null) {
+                            Cursor cursor = getContentResolver().query(selectedImage,
+                                    filePathColumn, null, null, null);
+                            if (cursor != null) {
+                                cursor.moveToFirst();
+
+                                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                                String picturePath = cursor.getString(columnIndex);
+                                idImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                                Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+                                verifyID(bitmap);
+                                cursor.close();
+
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
     }
 
     private void reportBug() {
