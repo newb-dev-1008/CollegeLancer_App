@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -55,6 +56,7 @@ public class ReportBugFragment extends Fragment {
     private Calendar c;
     private RecyclerView recyclerView;
     private ImageView idImage, deleteImage;
+    private ArrayList<BugReport> bugReport;
 
     @Nullable
     @Override
@@ -70,6 +72,8 @@ public class ReportBugFragment extends Fragment {
         bugFrequencyRadioGroup = root.findViewById(R.id.bugFrequencyRadioGroup);
         deleteImage = root.findViewById(R.id.bug_remove_ss);
         idImage = root.findViewById(R.id.bugImage);
+
+        bugReport = new ArrayList<>();
 
         bugStallRadioGroup = root.findViewById(R.id.bugStallRadioGroup);
         c = Calendar.getInstance();
@@ -156,7 +160,15 @@ public class ReportBugFragment extends Fragment {
     }
 
     private void populateRecyclerView(Bitmap bitmapImage, String path) {
-        ArrayList<BugReport> bugReport = new ArrayList<BugReport>();
+        bugReport.add(new BugReport(bitmapImage, path));
+
+        recyclerView.setVisibility(View.VISIBLE);
+
+        regComplaintsLayoutManager = new LinearLayoutManager(getContext());
+        regComplaintsAdapter = new RegComplaintsAdapter(registeredComplaints);
+        regComplaintsRecyclerView.setHasFixedSize(true);
+        regComplaintsRecyclerView.setLayoutManager(regComplaintsLayoutManager);
+        regComplaintsRecyclerView.setAdapter(regComplaintsAdapter);
     }
 
     private void reportBug() {

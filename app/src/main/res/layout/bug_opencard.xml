@@ -45,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bugImage"
+            android:visibility="gone"
             android:layout_below="@id/bug_remove_ss"
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"/>
