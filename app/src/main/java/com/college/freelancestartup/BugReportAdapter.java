@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
@@ -21,11 +22,12 @@ public class BugReportAdapter extends RecyclerView.Adapter<BugReportAdapter.BugR
     public static class BugReportViewHolder extends RecyclerView.ViewHolder {
 
         public TextView filePath;
-        public ImageView imgBitmap;
+        public ImageView imgBitmap, deleteImg;
         public BugReportViewHolder(@NonNull View itemView) {
             super(itemView);
             filePath = itemView.findViewById(R.id.bug_ss_name);
             imgBitmap = itemView.findViewById(R.id.bugImage);
+            deleteImg = itemView.findViewById(R.id.bug_remove_ss);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -50,8 +52,8 @@ public class BugReportAdapter extends RecyclerView.Adapter<BugReportAdapter.BugR
     @Override
     public BugReportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.reg_complaints_cardview, parent, false);
-        BugReportViewHolder regComplaintsViewHolder = new BugReportViewHolder(v);
-        return regComplaintsViewHolder;
+        BugReportViewHolder bugReportViewHolder = new BugReportViewHolder(v);
+        return bugReportViewHolder;
     }
 
     @Override
@@ -60,6 +62,12 @@ public class BugReportAdapter extends RecyclerView.Adapter<BugReportAdapter.BugR
 
         holder.filePath.setText(bugRep.getFilePath());
         holder.imgBitmap.setImageBitmap(bugRep.getBitmap());
+        holder.deleteImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog deleteImg
+            }
+        });
     }
 
     @Override

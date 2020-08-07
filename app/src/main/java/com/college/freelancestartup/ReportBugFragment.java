@@ -73,7 +73,6 @@ public class ReportBugFragment extends Fragment {
         recyclerView = root.findViewById(R.id.encloseSSRecyclerView);
         bugFrequencyRadioGroup = root.findViewById(R.id.bugFrequencyRadioGroup);
         deleteImage = root.findViewById(R.id.bug_remove_ss);
-        idImage = root.findViewById(R.id.bugImage);
 
         bugReport = new ArrayList<>();
 
@@ -148,7 +147,6 @@ public class ReportBugFragment extends Fragment {
                                 cursor.moveToFirst();
                                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                                 String picturePath = cursor.getString(columnIndex);
-                                idImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
                                 Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
                                 populateRecyclerView(bitmap, picturePath);
                                 cursor.close();
@@ -185,16 +183,16 @@ public class ReportBugFragment extends Fragment {
                     .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Map<String, Object> bugReport = new HashMap<>();
-                            bugReport.put("bugLocation", bugLocationET.getText().toString());
-                            bugReport.put("bugDescription", bugDescriptionET.getText().toString());
-                            bugReport.put("bugFrequency", bugFreq);
-                            bugReport.put("bugStalledWork", bugStalled);
-                            // bugReport.put("bugPictures", bugPictures);
-                            bugReport.put("bugReporterEmail", firebaseAuth.getCurrentUser().getEmail());
-                            bugReport.put("reportTime", reportTime);
-                            bugReport.put("resolved", "No");
-                            db.collection("BugReports").document(reportTime).set(bugReport).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            Map<String, Object> bugReportMap = new HashMap<>();
+                            bugReportMap.put("bugLocation", bugLocationET.getText().toString());
+                            bugReportMap.put("bugDescription", bugDescriptionET.getText().toString());
+                            bugReportMap.put("bugFrequency", bugFreq);
+                            bugReportMap.put("bugStalledWork", bugStalled);
+                            bugReportMap.put("bugPictures", bugPictures);
+                            bugReportMap.put("bugReporterEmail", firebaseAuth.getCurrentUser().getEmail());
+                            bugReportMap.put("reportTime", reportTime);
+                            bugReportMap.put("resolved", "No");
+                            db.collection("BugReports").document(reportTime).set(bugReportMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(getContext(), "Your bug report has been submitted. Please lodge your complaint with as much detail as possible.", Toast.LENGTH_LONG).show();
@@ -215,16 +213,16 @@ public class ReportBugFragment extends Fragment {
                     .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Map<String, Object> bugReport = new HashMap<>();
-                            bugReport.put("bugLocation", bugLocationET.getText().toString());
-                            bugReport.put("bugDescription", bugDescriptionET.getText().toString());
-                            bugReport.put("bugFrequency", bugFreq);
-                            bugReport.put("bugStalledWork", bugStalled);
-                            bugReport.put("bugReporterEmail", firebaseAuth.getCurrentUser().getEmail());
-                            // bugReport.put("bugPictures", bugPictures);
-                            bugReport.put("reportTime", reportTime);
-                            bugReport.put("resolved", "No");
-                            db.collection("BugReports").document(reportTime).set(bugReport).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            Map<String, Object> bugReportMap = new HashMap<>();
+                            bugReportMap.put("bugLocation", bugLocationET.getText().toString());
+                            bugReportMap.put("bugDescription", bugDescriptionET.getText().toString());
+                            bugReportMap.put("bugFrequency", bugFreq);
+                            bugReportMap.put("bugStalledWork", bugStalled);
+                            bugReportMap.put("bugReporterEmail", firebaseAuth.getCurrentUser().getEmail());
+                            bugReportMap.put("bugPictures", bugPictures);
+                            bugReportMap.put("reportTime", reportTime);
+                            bugReportMap.put("resolved", "No");
+                            db.collection("BugReports").document(reportTime).set(bugReportMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(getContext(), "Your bug report has been submitted!", Toast.LENGTH_LONG).show();
