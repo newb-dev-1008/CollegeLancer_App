@@ -57,6 +57,7 @@ public class ReportBugFragment extends Fragment {
     private RecyclerView recyclerView;
     private ImageView idImage, deleteImage;
     private ArrayList<BugReport> bugReport;
+    private ArrayList<Bitmap> bugPictures;
     private RecyclerView.Adapter bugReportAdapter;
     private RecyclerView.LayoutManager bugReportLayoutManager;
 
@@ -75,6 +76,7 @@ public class ReportBugFragment extends Fragment {
         deleteImage = root.findViewById(R.id.bug_remove_ss);
 
         bugReport = new ArrayList<>();
+        bugPictures = new ArrayList<>();
 
         bugStallRadioGroup = root.findViewById(R.id.bugStallRadioGroup);
         c = Calendar.getInstance();

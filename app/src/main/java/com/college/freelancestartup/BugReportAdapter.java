@@ -1,5 +1,7 @@
 package com.college.freelancestartup;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -14,10 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import java.util.ArrayList;
 
 public class BugReportAdapter extends RecyclerView.Adapter<BugReportAdapter.BugReportViewHolder> {
     private ArrayList<BugReport> BugReportList;
+    private Context context;
 
     public static class BugReportViewHolder extends RecyclerView.ViewHolder {
 
@@ -51,7 +56,8 @@ public class BugReportAdapter extends RecyclerView.Adapter<BugReportAdapter.BugR
     @NonNull
     @Override
     public BugReportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.reg_complaints_cardview, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.bug_opencard, parent, false);
+        context = parent.getContext();
         BugReportViewHolder bugReportViewHolder = new BugReportViewHolder(v);
         return bugReportViewHolder;
     }
@@ -65,7 +71,20 @@ public class BugReportAdapter extends RecyclerView.Adapter<BugReportAdapter.BugR
         holder.deleteImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog deleteImg
+                AlertDialog deleteImg = new MaterialAlertDialogBuilder(context)
+                        .setTitle("Remove screenshot")
+                        .setMessage("Are you sure you want to remove the screenshot?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                BugReportList.remove(holder.getAdapterPosition());
+                                notifyItemRemoved(holder.getAdapterPosition());
+                                notifyItemRangeChanged(holder.getAdapterPosition(), BugReportList.size());
+                            }
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .create();
+                deleteImg.show();
             }
         });
     }
