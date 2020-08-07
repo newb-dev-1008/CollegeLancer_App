@@ -1,9 +1,9 @@
 package com.college.freelancestartup;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -23,6 +24,8 @@ import com.google.firebase.FirebaseApiNotAvailableException;
 import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -87,7 +90,11 @@ public class ReportBugFragment extends Fragment {
         reportBugButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reportBug();
+                if (TextUtils.isEmpty(bugLocationET.getText().toString()) || TextUtils.isEmpty(bugDescriptionET.getText().toString()) || TextUtils.isEmpty(bugStalled) || TextUtils.isEmpty(bugFreq)) {
+                    Toast.makeText(getContext(), "Please enter all the details.", Toast.LENGTH_SHORT).show();
+                } else {
+                    reportBug();
+                }
             }
         });
 
@@ -96,7 +103,7 @@ public class ReportBugFragment extends Fragment {
 
     private void reportBug() {
         if (flag == 1) {
-            AlertDialog reportBugDialog = new MaterialAlertDialogBuilder(getContext())
+            androidx.appcompat.app.AlertDialog reportBugDialog = new MaterialAlertDialogBuilder(getContext())
                     .setTitle("Submit bug report?")
                     .setMessage("Thank you for contributing towards making the app bug-free. We will submit your bug report and " +
                             "redirect you to our complaints section.\n" +
@@ -111,8 +118,8 @@ public class ReportBugFragment extends Fragment {
                             bugReport.put("bugDescription", bugDescriptionET.getText().toString());
                             bugReport.put("bugFrequency", bugFreq);
                             bugReport.put("bugStalledWork", bugStalled);
+                            // bugReport.put("bugPictures", bugPictures);
                             bugReport.put("bugReporterEmail", firebaseAuth.getCurrentUser().getEmail());
-                            bugReport.put("bugPictures", bugPictures);
                             bugReport.put("reportTime", reportTime);
                             bugReport.put("resolved", "No");
                             db.collection("BugReports").document(reportTime).set(bugReport).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -142,7 +149,7 @@ public class ReportBugFragment extends Fragment {
                             bugReport.put("bugFrequency", bugFreq);
                             bugReport.put("bugStalledWork", bugStalled);
                             bugReport.put("bugReporterEmail", firebaseAuth.getCurrentUser().getEmail());
-                            bugReport.put("bugPictures", bugPictures);
+                            // bugReport.put("bugPictures", bugPictures);
                             bugReport.put("reportTime", reportTime);
                             bugReport.put("resolved", "No");
                             db.collection("BugReports").document(reportTime).set(bugReport).addOnSuccessListener(new OnSuccessListener<Void>() {
