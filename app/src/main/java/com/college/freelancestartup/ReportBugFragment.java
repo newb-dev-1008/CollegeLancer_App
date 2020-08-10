@@ -201,25 +201,6 @@ public class ReportBugFragment extends Fragment {
                     .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Map<String, Object> bugReportMap = new HashMap<>();
-                            bugReportMap.put("bugLocation", bugLocationET.getText().toString());
-                            bugReportMap.put("bugDescription", bugDescriptionET.getText().toString());
-                            bugReportMap.put("bugFrequency", bugFreq);
-                            bugReportMap.put("bugStalledWork", bugStalled);
-                            // bugReportMap.put("bugPictures", bugPictures);
-                            bugReportMap.put("bugReporterEmail", firebaseAuth.getCurrentUser().getEmail());
-                            bugReportMap.put("reportTime", reportTime);
-                            bugReportMap.put("resolved", "No");
-                            db.collection("BugReports").document(reportTime).set(bugReportMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(getContext(), "Your bug report has been submitted. Please lodge your complaint with as much detail as possible.", Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(getContext(), StudentMainActivity.class);
-                                    intent.putExtra("Go_to_fragment_NewComplaint", "New Complaint");
-                                    startActivity(intent);
-                                }
-                            });
-
                             Integer x = 1;
                             for (Bitmap imgUpload : bugPictures) {
                                 StorageReference imgStorage = storageReference.child(reportTime).child(x.toString());
@@ -235,7 +216,8 @@ public class ReportBugFragment extends Fragment {
                                             bugScreenshotURLs.add(new URL(imgStorage.getDownloadUrl().toString()));
                                             Toast.makeText(getContext(), "Your photos have been uploaded.", Toast.LENGTH_SHORT).show();
                                         } catch (MalformedURLException e) {
-                                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();;
+                                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            ;
                                         }
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -245,8 +227,27 @@ public class ReportBugFragment extends Fragment {
                                     }
                                 });
                                 x++;
-                                // Add path of all images to firestore as well
                             }
+
+                            Map<String, Object> bugReportMap = new HashMap<>();
+                            bugReportMap.put("bugLocation", bugLocationET.getText().toString());
+                            bugReportMap.put("bugDescription", bugDescriptionET.getText().toString());
+                            bugReportMap.put("bugFrequency", bugFreq);
+                            bugReportMap.put("bugStalledWork", bugStalled);
+                            bugReportMap.put("bugScreenshotURLs", bugScreenshotURLs);
+                            bugReportMap.put("bugReporterEmail", firebaseAuth.getCurrentUser().getEmail());
+                            bugReportMap.put("reportTime", reportTime);
+                            bugReportMap.put("resolved", "No");
+                            db.collection("BugReports").document(reportTime).set(bugReportMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(getContext(), "Your bug report has been submitted. Please lodge your complaint with as much detail as possible.", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(getContext(), StudentMainActivity.class);
+                                    intent.putExtra("Go_to_fragment_NewComplaint", "New Complaint");
+                                    startActivity(intent);
+                                }
+                            });
+
                         }
                     }).setNegativeButton("Cancel", null)
                     .create();
