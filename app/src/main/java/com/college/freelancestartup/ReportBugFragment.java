@@ -65,7 +65,7 @@ public class ReportBugFragment extends Fragment {
     private RecyclerView recyclerView;
     private ImageView idImage, deleteImage;
     private ArrayList<BugReport> bugReport;
-    private ArrayList<URL> bugScreenshotURLs;
+    private ArrayList<String> bugScreenshotURLs;
     private ArrayList<Bitmap> bugPictures;
     private RecyclerView.Adapter bugReportAdapter;
     private RecyclerView.LayoutManager bugReportLayoutManager;
@@ -212,13 +212,8 @@ public class ReportBugFragment extends Fragment {
                                 uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        try {
-                                            bugScreenshotURLs.add(new URL(imgStorage.getDownloadUrl().toString()));
-                                            Toast.makeText(getContext(), "Your photos have been uploaded.", Toast.LENGTH_SHORT).show();
-                                        } catch (MalformedURLException e) {
-                                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                                            ;
-                                        }
+                                        bugScreenshotURLs.add(imgStorage.getDownloadUrl().toString());
+                                        Toast.makeText(getContext(), "Your photos have been uploaded.", Toast.LENGTH_SHORT).show();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
