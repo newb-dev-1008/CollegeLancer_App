@@ -40,6 +40,8 @@ import com.google.firebase.storage.UploadTask;
 import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -229,7 +231,12 @@ public class ReportBugFragment extends Fragment {
                                 uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        Toast.makeText(getContext(), "Your photos have been uploaded.", Toast.LENGTH_SHORT).show();
+                                        try {
+                                            bugScreenshotURLs.add(new URL(imgStorage.getDownloadUrl().toString()));
+                                            Toast.makeText(getContext(), "Your photos have been uploaded.", Toast.LENGTH_SHORT).show();
+                                        } catch (MalformedURLException e) {
+                                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();;
+                                        }
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
