@@ -40,6 +40,7 @@ import com.google.firebase.storage.UploadTask;
 import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -62,6 +63,7 @@ public class ReportBugFragment extends Fragment {
     private RecyclerView recyclerView;
     private ImageView idImage, deleteImage;
     private ArrayList<BugReport> bugReport;
+    private ArrayList<URL> bugScreenshotURLs;
     private ArrayList<Bitmap> bugPictures;
     private RecyclerView.Adapter bugReportAdapter;
     private RecyclerView.LayoutManager bugReportLayoutManager;
@@ -87,6 +89,7 @@ public class ReportBugFragment extends Fragment {
 
         bugReport = new ArrayList<>();
         bugPictures = new ArrayList<>();
+        bugScreenshotURLs = new ArrayList<>();
 
         bugStallRadioGroup = root.findViewById(R.id.bugStallRadioGroup);
         c = Calendar.getInstance();
@@ -235,6 +238,7 @@ public class ReportBugFragment extends Fragment {
                                     }
                                 });
                                 x++;
+                                // Add path of all images to firestore as well
                             }
                         }
                     }).setNegativeButton("Cancel", null)
