@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -32,9 +33,13 @@ import com.google.firebase.FirebaseApiNotAvailableException;
 import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -60,6 +65,8 @@ public class ReportBugFragment extends Fragment {
     private ArrayList<Bitmap> bugPictures;
     private RecyclerView.Adapter bugReportAdapter;
     private RecyclerView.LayoutManager bugReportLayoutManager;
+    private FirebaseStorage firebaseStorage;
+    private StorageReference storageReference;
 
     @Nullable
     @Override
@@ -71,6 +78,9 @@ public class ReportBugFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance();
+        storageReference = firebaseStorage.getReference();
+
         recyclerView = root.findViewById(R.id.encloseSSRecyclerView);
         bugFrequencyRadioGroup = root.findViewById(R.id.bugFrequencyRadioGroup);
         deleteImage = root.findViewById(R.id.bug_remove_ss);
@@ -191,7 +201,7 @@ public class ReportBugFragment extends Fragment {
                             bugReportMap.put("bugDescription", bugDescriptionET.getText().toString());
                             bugReportMap.put("bugFrequency", bugFreq);
                             bugReportMap.put("bugStalledWork", bugStalled);
-                            bugReportMap.put("bugPictures", bugPictures);
+                            // bugReportMap.put("bugPictures", bugPictures);
                             bugReportMap.put("bugReporterEmail", firebaseAuth.getCurrentUser().getEmail());
                             bugReportMap.put("reportTime", reportTime);
                             bugReportMap.put("resolved", "No");
@@ -204,6 +214,28 @@ public class ReportBugFragment extends Fragment {
                                     startActivity(intent);
                                 }
                             });
+
+                            Integer x = 1;
+                            for (Bitmap imgUpload : bugPictures) {
+                                StorageReference imgStorage = storageReference.child(reportTime).child(x.toString());
+                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                imgUpload.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                byte[] data = baos.toByteArray();
+
+                                UploadTask uploadTask = imgStorage.putBytes(data);
+                                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        Toast.makeText(getContext(), "Your photos have been uploaded.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                x++;
+                            }
                         }
                     }).setNegativeButton("Cancel", null)
                     .create();
