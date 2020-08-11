@@ -79,7 +79,8 @@ public class BugReportAdapter extends RecyclerView.Adapter<BugReportAdapter.BugR
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 BugReportList.remove(holder.getAdapterPosition());
                                 notifyItemRemoved(holder.getAdapterPosition());
-                                notifyItemRangeChanged(holder.getAdapterPosition(), BugReportList.size());
+                                // notifyItemRangeChanged(holder.getAdapterPosition(), BugReportList.size());
+
                             }
                         })
                         .setNegativeButton("Cancel", null)
@@ -92,6 +93,10 @@ public class BugReportAdapter extends RecyclerView.Adapter<BugReportAdapter.BugR
     @Override
     public int getItemCount() {
         return BugReportList.size();
+    }
+
+    public void reportThatBug() {
+
     }
 
 }

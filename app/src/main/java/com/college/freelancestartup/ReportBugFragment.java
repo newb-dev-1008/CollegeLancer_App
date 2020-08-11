@@ -66,11 +66,12 @@ public class ReportBugFragment extends Fragment {
     private ImageView idImage, deleteImage;
     private ArrayList<BugReport> bugReport;
     private ArrayList<String> bugScreenshotURLs;
-    private ArrayList<Bitmap> bugPictures;
+    private ArrayList<Bitmap> bugPictures, bugPicturesNew;
     private RecyclerView.Adapter bugReportAdapter;
     private RecyclerView.LayoutManager bugReportLayoutManager;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
+    // public int deleteBugSS;
 
     @Nullable
     @Override
@@ -91,6 +92,7 @@ public class ReportBugFragment extends Fragment {
 
         bugReport = new ArrayList<>();
         bugPictures = new ArrayList<>();
+        bugPicturesNew = new ArrayList<>();
         bugScreenshotURLs = new ArrayList<>();
 
         bugStallRadioGroup = root.findViewById(R.id.bugStallRadioGroup);
@@ -190,6 +192,9 @@ public class ReportBugFragment extends Fragment {
     }
 
     private void reportBug() {
+        for (BugReport i : bugReport) {
+            bugPicturesNew.add(i.getBitmap());
+        }
         if (flag == 1) {
             androidx.appcompat.app.AlertDialog reportBugDialog = new MaterialAlertDialogBuilder(getContext())
                     .setTitle("Submit bug report?")
@@ -202,7 +207,7 @@ public class ReportBugFragment extends Fragment {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             Integer x = 1;
-                            for (Bitmap imgUpload : bugPictures) {
+                            for (Bitmap imgUpload : bugPicturesNew) {
                                 StorageReference imgStorage = storageReference.child(reportTime).child(x.toString());
                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                                 imgUpload.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -224,6 +229,7 @@ public class ReportBugFragment extends Fragment {
                                 x++;
                             }
 
+                            // Compress the photo before upload
                             Map<String, Object> bugReportMap = new HashMap<>();
                             bugReportMap.put("bugLocation", bugLocationET.getText().toString());
                             bugReportMap.put("bugDescription", bugDescriptionET.getText().toString());
