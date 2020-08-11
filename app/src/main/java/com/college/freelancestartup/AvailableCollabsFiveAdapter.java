@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableCollabsFiveAdapter.AvailableCollabsFiveViewHolder> {
     private ArrayList<AvailableCollabsFive> AvailableCollabsList;
-    private String name, semester, department, skills, noCollabs, noProjects, userEmail, projectID, pickedStatusT, applicationArticle;
+    private String name, semester, department, skills, noCollabs, noProjects, userEmail, projectID, pickedStatusT;
     private int flag;
 
     public AvailableCollabsFiveAdapter(ArrayList<AvailableCollabsFive> availableCollabsExampleList){
@@ -41,14 +41,17 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
                 String transitionName = view.getResources().getString(R.string.transitionAnimation);
                 View viewStart = view.findViewById(R.id.find_collab5_cardview);
 
+                /*
                 intent.putExtra("name", name);
                 intent.putExtra("department", department);
                 intent.putExtra("skills", skills);
                 intent.putExtra("semester", semester);
                 intent.putExtra("numberCollabs", noCollabs);
                 intent.putExtra("numberProjects", noProjects);
-                intent.putExtra("userEmail", userEmail);
+                */
+
                 intent.putExtra("flagLog", flag);
+                intent.putExtra("userEmail", userEmail);
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
@@ -75,10 +78,13 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
 
         holder.name1.setText(name);
         holder.semester1.setText(semester);
+
+        /*
         holder.department12.setText(department);
         holder.skills1.setText(skills);
         holder.noProjects1.setText(noProjects);
         holder.noCollabs1.setText(noCollabs);
+        */
 
         if (flag == 1) {
             holder.pickedStatus.setVisibility(View.VISIBLE);
@@ -91,10 +97,10 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             pickedStatusT = documentSnapshot.get("picked").toString();
-                            applicationArticle = documentSnapshot.get("appArticle").toString();
+                            // applicationArticle = documentSnapshot.get("appArticle").toString();
                         }
                     });
-            if (pickedStatusT.equals("Selected")) {
+            if (pickedStatusT.equals("Accepted")) {
                 holder.pickedStatus.setText(pickedStatusT);
                 holder.pickedStatus.setTextColor(Color.parseColor("#228B22"));
             } else {

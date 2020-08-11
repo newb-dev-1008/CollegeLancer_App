@@ -222,12 +222,11 @@
         android:id="@+id/collab5_personPickedStatus"
         android:textSize="18sp"
         android:textColor="@color/maroon"
-        android:visibility="gone"
         android:layout_marginEnd="4dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/collab5_seeCollabsButton"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="4dp"
-        android:text="On Hold" />
+        android:text="Requested" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
