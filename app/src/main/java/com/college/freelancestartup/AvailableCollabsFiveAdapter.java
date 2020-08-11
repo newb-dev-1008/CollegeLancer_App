@@ -75,7 +75,7 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
 
         holder.name1.setText(name);
         holder.semester1.setText(semester);
-        holder.department1.setText(department);
+        holder.department12.setText(department);
         holder.skills1.setText(skills);
         holder.noProjects1.setText(noProjects);
         holder.noCollabs1.setText(noCollabs);
@@ -105,14 +105,14 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
     }
 
     public static class AvailableCollabsFiveViewHolder extends RecyclerView.ViewHolder {
-        public TextView name1, semester1, department1, skills1, noProjects1, noCollabs1, pickedStatus, applicationArticleTV;
+        public TextView name1, semester1, department12, skills1, noProjects1, noCollabs1, pickedStatus, applicationArticleTV;
         private MaterialButton selectButton;
 
         public AvailableCollabsFiveViewHolder(@NonNull View itemView) {
             super(itemView);
             name1 = itemView.findViewById(R.id.collab5_name);
             semester1 = itemView.findViewById(R.id.collab5_personSemester);
-            department1 = itemView.findViewById(R.id.collab5_personDepartments);
+            department12 = itemView.findViewById(R.id.collab5_personDepartments);
             skills1 = itemView.findViewById(R.id.collab5_skills);
             noProjects1 = itemView.findViewById(R.id.collab5_projectsCompleted);
             noCollabs1 = itemView.findViewById(R.id.collab5_collaborations);

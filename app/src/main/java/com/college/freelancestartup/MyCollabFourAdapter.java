@@ -33,7 +33,7 @@ public class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapte
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), MyCollabsFourOpenActivity.class);
                 String transitionName = view.getResources().getString(R.string.transitionAnimation);
-                View viewStart = view.findViewById(R.id.find_collab3_cardview);
+                View viewStart = view.findViewById(R.id.find_collab4_cardview);
 
                 intent.putExtra("projectID", projectID);
 

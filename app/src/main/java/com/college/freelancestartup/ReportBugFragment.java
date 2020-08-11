@@ -229,7 +229,6 @@ public class ReportBugFragment extends Fragment {
                                 x++;
                             }
 
-                            // Compress the photo before upload
                             Map<String, Object> bugReportMap = new HashMap<>();
                             bugReportMap.put("bugLocation", bugLocationET.getText().toString());
                             bugReportMap.put("bugDescription", bugDescriptionET.getText().toString());
