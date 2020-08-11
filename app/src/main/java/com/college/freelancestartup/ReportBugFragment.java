@@ -210,7 +210,7 @@ public class ReportBugFragment extends Fragment {
                             for (Bitmap imgUpload : bugPicturesNew) {
                                 StorageReference imgStorage = storageReference.child(reportTime).child(x.toString());
                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                imgUpload.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                imgUpload.compress(Bitmap.CompressFormat.JPEG, 25, baos);
                                 byte[] data = baos.toByteArray();
 
                                 UploadTask uploadTask = imgStorage.putBytes(data);
@@ -265,7 +265,7 @@ public class ReportBugFragment extends Fragment {
                             for (Bitmap imgUpload : bugPicturesNew) {
                                 StorageReference imgStorage = storageReference.child(reportTime).child(x.toString());
                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                imgUpload.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                imgUpload.compress(Bitmap.CompressFormat.JPEG, 25, baos);
                                 byte[] data = baos.toByteArray();
 
                                 UploadTask uploadTask = imgStorage.putBytes(data);
