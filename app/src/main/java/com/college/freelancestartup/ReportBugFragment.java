@@ -217,7 +217,7 @@ public class ReportBugFragment extends Fragment {
                                 uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        bugScreenshotURLs.add(imgStorage.getDownloadUrl().toString());
+                                        bugScreenshotURLs.add(taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
                                         Toast.makeText(getContext(), "Your photos have been uploaded.", Toast.LENGTH_SHORT).show();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -261,13 +261,36 @@ public class ReportBugFragment extends Fragment {
                     .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            Integer x = 1;
+                            for (Bitmap imgUpload : bugPicturesNew) {
+                                StorageReference imgStorage = storageReference.child(reportTime).child(x.toString());
+                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                imgUpload.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                byte[] data = baos.toByteArray();
+
+                                UploadTask uploadTask = imgStorage.putBytes(data);
+                                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        bugScreenshotURLs.add(taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+                                        Toast.makeText(getContext(), "Your photos have been uploaded.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                x++;
+                            }
+
                             Map<String, Object> bugReportMap = new HashMap<>();
                             bugReportMap.put("bugLocation", bugLocationET.getText().toString());
                             bugReportMap.put("bugDescription", bugDescriptionET.getText().toString());
                             bugReportMap.put("bugFrequency", bugFreq);
                             bugReportMap.put("bugStalledWork", bugStalled);
                             bugReportMap.put("bugReporterEmail", firebaseAuth.getCurrentUser().getEmail());
-                            bugReportMap.put("bugPictures", bugPictures);
+                            bugReportMap.put("bugScreenshotURLs", bugScreenshotURLs);
                             bugReportMap.put("reportTime", reportTime);
                             bugReportMap.put("resolved", "No");
                             db.collection("BugReports").document(reportTime).set(bugReportMap).addOnSuccessListener(new OnSuccessListener<Void>() {
