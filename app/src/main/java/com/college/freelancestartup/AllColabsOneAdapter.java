@@ -36,12 +36,12 @@ public class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapte
                 String transitionName = view.getResources().getString(R.string.transitionAnimation);
                 View viewStart = view.findViewById(R.id.find_collab1_cardview);
 
-                intent.putExtra("posterName1", posterName);
-                intent.putExtra("projectTitle1", projectTitle);
-                intent.putExtra("projectDesc1", projectDesc);
-                intent.putExtra("openFor1", openFor);
-                intent.putExtra("skills1", skills);
-                intent.putExtra("postedDate1", postedDate);
+                // intent.putExtra("posterName1", posterName);
+                // intent.putExtra("projectTitle1", projectTitle);
+                // intent.putExtra("projectDesc1", projectDesc);
+                // intent.putExtra("openFor1", openFor);
+                // intent.putExtra("skills1", skills);
+                // intent.putExtra("postedDate1", postedDate);
                 intent.putExtra("projectID1", projectID);
                 intent.putExtra("flag1", flag);
 

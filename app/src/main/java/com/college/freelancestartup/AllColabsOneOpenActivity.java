@@ -32,7 +32,7 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
     private MaterialButton messageButton, applyButton;
     private View view;
     private EditText applyEditText;
-    private String projectID, posterEmail;
+    private String projectID, posterEmail, posterName, projectTitle, postedDate, projectDesc, openFor, skills;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private int numberApps, flag;
@@ -59,12 +59,12 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
         applyButton = findViewById(R.id.collab1_applyBtn);
         messageButton = findViewById(R.id.collab1_messageBtn);
 
-        posterName1.setText(getIntent().getExtras().get("posterName1").toString());
-        projectTitle1.setText(getIntent().getExtras().get("projectTitle1").toString());
-        postedDate1.setText(getIntent().getExtras().get("postedDate1").toString());
-        projectDesc1.setText(getIntent().getExtras().get("projectDesc1").toString());
-        openFor1.setText(getIntent().getExtras().get("openFor1").toString());
-        skills1.setText(getIntent().getExtras().get("skills1").toString());
+        // posterName1.setText(getIntent().getExtras().get("posterName1").toString());
+        // projectTitle1.setText(getIntent().getExtras().get("projectTitle1").toString());
+        // postedDate1.setText(getIntent().getExtras().get("postedDate1").toString());
+        // projectDesc1.setText(getIntent().getExtras().get("projectDesc1").toString());
+        // openFor1.setText(getIntent().getExtras().get("openFor1").toString());
+        // skills1.setText(getIntent().getExtras().get("skills1").toString());
         projectID = getIntent().getExtras().get("projectID1").toString();
         flag = Integer.parseInt(getIntent().getExtras().get("flag1").toString());
 
@@ -76,10 +76,15 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
             messageButton.setVisibility(View.GONE);
         }
 
+        // Check if the project is his own; if it is, then don't show
         db.collection("CollabProjects").document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 posterEmail = documentSnapshot.get("posterEmail").toString();
+                posterName = documentSnapshot.get("posterTitle").toString();
+                projectTitle = documentSnapshot.get("projectTitle").toString();
+                postedDate = documentSnapshot.get("postDate").toString();
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
