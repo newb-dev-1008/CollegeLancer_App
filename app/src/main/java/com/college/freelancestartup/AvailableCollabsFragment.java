@@ -71,14 +71,19 @@ public class AvailableCollabsFragment extends Fragment {
                             emptyTV.setVisibility(View.GONE);
                             ArrayList<AvailableCollabsFive> availableCollabs = new ArrayList<>();
                             for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                String name = documentSnapshot.get("name").toString();
-                                String semester = documentSnapshot.get("studentSemester").toString();
-                                String skills = documentSnapshot.get("studentSkills").toString();
-                                String department = documentSnapshot.get("department").toString();
-                                String previousCollabs = documentSnapshot.get("numberCollabs").toString();
-                                String previousProjects = documentSnapshot.get("numberProjects").toString();
-                                String userEmail = documentSnapshot.get("email").toString();
-                                availableCollabs.add(new AvailableCollabsFive(name, department, skills, previousCollabs, previousProjects, semester, userEmail, flag, "Zero"));
+                                if (documentSnapshot.get("email").equals(firebaseAuth.getCurrentUser().getEmail().toString())) {
+                                    continue;
+                                } else {
+                                    String name = documentSnapshot.get("name").toString();
+                                    String semester = documentSnapshot.get("studentSemester").toString();
+                                    String skills = documentSnapshot.get("studentSkills").toString();
+                                    String department = documentSnapshot.get("department").toString();
+                                    String previousCollabs = documentSnapshot.get("numberCollabs").toString();
+                                    String previousProjects = documentSnapshot.get("numberProjects").toString();
+                                    String userEmail = documentSnapshot.get("email").toString();
+                                    availableCollabs.add(new AvailableCollabsFive(name, department, skills, previousCollabs, previousProjects, semester, userEmail, flag, "Zero"));
+
+                                }
 
                                 availableCollab5LayoutManager = new LinearLayoutManager(getContext());
                                 availableCollab5Adapter = new AvailableCollabsFiveAdapter(availableCollabs);
