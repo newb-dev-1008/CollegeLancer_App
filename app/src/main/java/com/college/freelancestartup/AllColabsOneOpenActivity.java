@@ -147,6 +147,14 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
             }
         });
 
+        db.collection("CollabProjects").document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                numberApps = Integer.parseInt(documentSnapshot.get("numberApps").toString());
+                numberApps = numberApps + 1;
+                db.collection("CollabProject")
+            }
+        })
         db.collection("CollabProjects").document(projectID).collection("Collaborators")
                 .document("General").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
