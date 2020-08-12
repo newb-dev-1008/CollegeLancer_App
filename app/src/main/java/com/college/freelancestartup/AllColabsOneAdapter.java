@@ -42,8 +42,8 @@ public class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapte
                 intent.putExtra("openFor1", openFor);
                 intent.putExtra("skills1", skills);
                 intent.putExtra("postedDate1", postedDate);
-                intent.putExtra("projectID", projectID);
-                intent.putExtra("flag", flag);
+                intent.putExtra("projectID1", projectID);
+                intent.putExtra("flag1", flag);
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);

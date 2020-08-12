@@ -66,7 +66,7 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
         openFor1.setText(getIntent().getExtras().get("openFor1").toString());
         skills1.setText(getIntent().getExtras().get("skills1").toString());
         projectID = getIntent().getExtras().get("projectID1").toString();
-        flag = Integer.parseInt(getIntent().getExtras().get("flag").toString());
+        flag = Integer.parseInt(getIntent().getExtras().get("flag1").toString());
 
         if (flag == 0) {
             applyButton.setVisibility(View.VISIBLE);
