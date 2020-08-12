@@ -66,6 +66,7 @@ public class AllCollabsFragment extends Fragment {
                     emptyTV.setVisibility(View.GONE);
                     ArrayList<AllColabsOne> allColabs = new ArrayList<>();
                     for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        if (documentSnapshot.get("posterEmail").equals())
                         String posterTitle = documentSnapshot.get("posterTitle").toString();
                         String projectTitle = documentSnapshot.get("projectTitle").toString();
                         String posterDate = documentSnapshot.get("postDate").toString();

@@ -87,6 +87,13 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
                 projectDesc = documentSnapshot.get("projectDesc").toString();
                 openFor = documentSnapshot.get("projectOpenFor").toString();
                 skills = documentSnapshot.get("projectSkills").toString();
+
+                posterName1.setText(posterName);
+                postedDate1.setText(postedDate);
+                projectTitle1.setText(projectTitle);
+                projectDesc1.setText(projectDesc);
+                openFor1.setText(openFor);
+                skills1.setText(skills);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -94,13 +101,6 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
                 Toast.makeText(AllColabsOneOpenActivity.this, "Error: Couldn't access database.\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-        posterName1.setText(posterName);
-        postedDate1.setText(postedDate);
-        projectTitle1.setText(projectTitle);
-        projectDesc1.setText(projectDesc);
-        openFor1.setText(openFor);
-        skills1.setText(skills);
 
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
