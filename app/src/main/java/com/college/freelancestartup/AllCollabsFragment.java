@@ -30,6 +30,7 @@ public class AllCollabsFragment extends Fragment {
     private RecyclerView collab1RecyclerView;
     private TextView swipeDownRefreshTV, emptyTV;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private FirebaseAuth firebaseAuth;
 
     private RecyclerView.LayoutManager allCollab1LayoutManager;
     private RecyclerView.Adapter allCollab1Adapter;
@@ -45,6 +46,7 @@ public class AllCollabsFragment extends Fragment {
         swipeDownRefreshTV = root.findViewById(R.id.swipeRefreshTVCollab1);
         emptyTV = root.findViewById(R.id.find_collab1_emptyTV);
         swipeRefreshLayout = root.findViewById(R.id.swipeRefreshLayoutCollab1);
+        firebaseAuth = FirebaseAuth.getInstance();
 
         showCollab1();
 
@@ -66,17 +68,20 @@ public class AllCollabsFragment extends Fragment {
                     emptyTV.setVisibility(View.GONE);
                     ArrayList<AllColabsOne> allColabs = new ArrayList<>();
                     for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        if (documentSnapshot.get("posterEmail").equals())
-                        String posterTitle = documentSnapshot.get("posterTitle").toString();
-                        String projectTitle = documentSnapshot.get("projectTitle").toString();
-                        String posterDate = documentSnapshot.get("postDate").toString();
-                        String projectSkills = documentSnapshot.get("projectSkills").toString();
-                        String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
-                        String projectDesc = documentSnapshot.get("projectDesc").toString();
-                        String projectID = documentSnapshot.get("projectID").toString();
+                        if (documentSnapshot.get("posterEmail").equals(firebaseAuth.getCurrentUser().getEmail().toString())) {
+                            continue;
+                        } else {
+                            String posterTitle = documentSnapshot.get("posterTitle").toString();
+                            String projectTitle = documentSnapshot.get("projectTitle").toString();
+                            String posterDate = documentSnapshot.get("postDate").toString();
+                            String projectSkills = documentSnapshot.get("projectSkills").toString();
+                            String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
+                            String projectDesc = documentSnapshot.get("projectDesc").toString();
+                            String projectID = documentSnapshot.get("projectID").toString();
 
-                        int flag = 0;
-                        allColabs.add(new AllColabsOne(posterTitle, projectTitle, projectDesc, posterDate, projectSkills, projectOpenFor, projectID, flag));
+                            int flag = 0;
+                            allColabs.add(new AllColabsOne(posterTitle, projectTitle, projectDesc, posterDate, projectSkills, projectOpenFor, projectID, flag));
+                        }
 
                         allCollab1LayoutManager = new LinearLayoutManager(getContext());
                         allCollab1Adapter = new AllColabsOneAdapter(allColabs);
