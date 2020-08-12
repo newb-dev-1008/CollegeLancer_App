@@ -85,11 +85,16 @@ public class AvailableCollabsFragment extends Fragment {
 
                                 }
 
-                                availableCollab5LayoutManager = new LinearLayoutManager(getContext());
-                                availableCollab5Adapter = new AvailableCollabsFiveAdapter(availableCollabs);
-                                collab5RecyclerView.setHasFixedSize(true);
-                                collab5RecyclerView.setLayoutManager(availableCollab5LayoutManager);
-                                collab5RecyclerView.setAdapter(availableCollab5Adapter);
+                                if (availableCollabs.size() == 0) {
+                                    collab5RecyclerView.setVisibility(View.GONE);
+                                    swipeDownRefreshTV.setVisibility(View.GONE);
+                                } else {
+                                    availableCollab5LayoutManager = new LinearLayoutManager(getContext());
+                                    availableCollab5Adapter = new AvailableCollabsFiveAdapter(availableCollabs);
+                                    collab5RecyclerView.setHasFixedSize(true);
+                                    collab5RecyclerView.setLayoutManager(availableCollab5LayoutManager);
+                                    collab5RecyclerView.setAdapter(availableCollab5Adapter);
+                                }
                             }
                         } else {
                             collab5RecyclerView.setVisibility(View.GONE);
