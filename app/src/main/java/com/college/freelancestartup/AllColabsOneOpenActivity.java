@@ -84,7 +84,9 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
                 posterName = documentSnapshot.get("posterTitle").toString();
                 projectTitle = documentSnapshot.get("projectTitle").toString();
                 postedDate = documentSnapshot.get("postDate").toString();
-
+                projectDesc = documentSnapshot.get("projectDesc").toString();
+                openFor = documentSnapshot.get("projectOpenFor").toString();
+                skills = documentSnapshot.get("projectSkills").toString();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
