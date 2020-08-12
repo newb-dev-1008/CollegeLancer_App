@@ -209,7 +209,7 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         checkProjectIDValidFunction();
-                        addNewProjectRealFunction();
+                        // addNewProjectRealFunction();
                     }
                 }).setNegativeButton("Cancel", null)
                 .create();
@@ -251,26 +251,36 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
         addProjectMap.put("postDate", postDate);
         addProjectMap.put("projectOpenFor", projectOpenFor.getText().toString());
         addProjectMap.put("projectSkills", skillset);
-        addProjectMap.put("projectDesc", projectDesc);
-        addProjectMap.put("projectTitle", projectTitle);
+        addProjectMap.put("projectDesc", projectDesc.getText().toString());
+        addProjectMap.put("projectTitle", projectTitle.getText().toString());
         addProjectMap.put("projectStatus", projectStatus);
 
-        db.collection("CollabProjects").document(projectID).set(addProjectMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(StudentAddProjectForCollab.this, "Your project has been added. Expect some calls and applications!", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(StudentAddProjectForCollab.this, StudentMainActivity.class);
-                intent.putExtra("Go_to_fragment_addProj", "Go to fragment addProj");
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(StudentAddProjectForCollab.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        AlertDialog checking = new MaterialAlertDialogBuilder(this)
+                .setTitle("Check")
+                .setMessage(projectID)
+                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        db.collection("CollabProjects").document(projectID).set(addProjectMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(StudentAddProjectForCollab.this, "Your project has been added. Expect some calls and applications!", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(StudentAddProjectForCollab.this, StudentMainActivity.class);
+                                intent.putExtra("Go_to_fragment_addProj", "Go to fragment addProj");
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(StudentAddProjectForCollab.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    }
+                }).setNegativeButton("Cancel", null)
+                .create();
+        checking.show();
     }
 
     private String generateProjectID() {

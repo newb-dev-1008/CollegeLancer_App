@@ -69,10 +69,10 @@ public class AllColabsOneAdapter extends RecyclerView.Adapter<AllColabsOneAdapte
 
         holder.posterName1.setText(posterName);
         holder.projectTitle1.setText(projectTitle);
-        holder.projectDesc1.setText(projectDesc);
-        holder.skills1.setText(skills);
-        holder.openFor1.setText(openFor);
-        holder.postedDate1.setText(postedDate);
+        // holder.projectDesc1.setText(projectDesc);
+        // holder.skills1.setText(skills);
+        // holder.openFor1.setText(openFor);
+        // holder.postedDate1.setText(postedDate);
 
     }
 
