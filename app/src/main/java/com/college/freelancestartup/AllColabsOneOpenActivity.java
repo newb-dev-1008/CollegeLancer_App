@@ -152,9 +152,24 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 numberApps = Integer.parseInt(documentSnapshot.get("numberApps").toString());
                 numberApps = numberApps + 1;
-                db.collection("CollabProject")
+                db.collection("CollabProjects").document(projectID).update("numberApps", numberApps)
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(AllColabsOneOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                db.collection("Users").document("User " + posterEmail).collection("MyCollabs")
+                        .document(projectID).update("numberApps", numberApps);
             }
-        })
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(AllColabsOneOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        /*
         db.collection("CollabProjects").document(projectID).collection("Collaborators")
                 .document("General").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -177,5 +192,6 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
                 Toast.makeText(AllColabsOneOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+        */
     }
 }
