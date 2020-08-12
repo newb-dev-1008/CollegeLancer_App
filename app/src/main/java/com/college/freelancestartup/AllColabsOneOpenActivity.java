@@ -1,6 +1,7 @@
 package com.college.freelancestartup;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -139,6 +140,11 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(AllColabsOneOpenActivity.this, "Get excited! The project head has received your application and will review it soon.", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(AllColabsOneOpenActivity.this, StudentMainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
