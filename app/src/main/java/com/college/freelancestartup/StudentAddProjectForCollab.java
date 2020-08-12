@@ -229,7 +229,7 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
                         } else {
                             projectID = projeccID;
                             addNewProjectRealFunction();
-                            Toast.makeText(StudentAddProjectForCollab.this, projectID, Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(StudentAddProjectForCollab.this, projectID, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
