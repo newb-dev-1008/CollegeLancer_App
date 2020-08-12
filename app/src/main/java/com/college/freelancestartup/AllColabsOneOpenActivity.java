@@ -105,8 +105,9 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final EditText articleEditText = new EditText(AllColabsOneOpenActivity.this);
                 AlertDialog applyCollab1 = new MaterialAlertDialogBuilder(AllColabsOneOpenActivity.this)
-                        .setView(view)
+                        .setView(articleEditText)
                         .setTitle("Apply for collaboration")
                         .setMessage("Write a brief description about yourself and how you'd be contributing to the project.")
                         .setPositiveButton("Apply", new DialogInterface.OnClickListener() {
