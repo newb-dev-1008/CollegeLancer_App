@@ -83,6 +83,7 @@ public class AllCollabsFragment extends Fragment {
                             allColabs.add(new AllColabsOne(posterTitle, projectTitle, projectDesc, posterDate, projectSkills, projectOpenFor, projectID, flag));
                         }
 
+
                         allCollab1LayoutManager = new LinearLayoutManager(getContext());
                         allCollab1Adapter = new AllColabsOneAdapter(allColabs);
                         collab1RecyclerView.setHasFixedSize(true);

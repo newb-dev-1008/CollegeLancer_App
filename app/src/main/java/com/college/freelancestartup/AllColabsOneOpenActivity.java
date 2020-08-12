@@ -113,7 +113,7 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
                         .setPositiveButton("Apply", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                if (TextUtils.isEmpty(applyEditText.getText().toString())) {
+                                if (TextUtils.isEmpty(articleEditText.getText().toString())) {
                                     Toast.makeText(AllColabsOneOpenActivity.this, "Please enter a short description.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     completeApplicationCollab1();
