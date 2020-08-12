@@ -86,6 +86,7 @@ public class AllCollabsFragment extends Fragment {
                         if (allColabs.size() == 0) {
                             collab1RecyclerView.setVisibility(View.GONE);
                             swipeDownRefreshTV.setVisibility(View.GONE);
+                            emptyTV.setVisibility(View.VISIBLE);
                         } else {
                             allCollab1LayoutManager = new LinearLayoutManager(getContext());
                             allCollab1Adapter = new AllColabsOneAdapter(allColabs);

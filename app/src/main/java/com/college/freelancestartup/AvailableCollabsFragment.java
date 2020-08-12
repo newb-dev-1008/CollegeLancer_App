@@ -88,6 +88,7 @@ public class AvailableCollabsFragment extends Fragment {
                                 if (availableCollabs.size() == 0) {
                                     collab5RecyclerView.setVisibility(View.GONE);
                                     swipeDownRefreshTV.setVisibility(View.GONE);
+                                    emptyTV.setVisibility(View.VISIBLE);
                                 } else {
                                     availableCollab5LayoutManager = new LinearLayoutManager(getContext());
                                     availableCollab5Adapter = new AvailableCollabsFiveAdapter(availableCollabs);
