@@ -95,6 +95,13 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
             }
         });
 
+        posterName1.setText(posterName);
+        postedDate1.setText(postedDate);
+        projectTitle1.setText(projectTitle);
+        projectDesc1.setText(projectDesc);
+        openFor1.setText(openFor);
+        skills1.setText(skills);
+
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
