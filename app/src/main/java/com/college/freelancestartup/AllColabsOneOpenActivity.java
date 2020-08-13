@@ -169,7 +169,7 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
                             }
                         });
                 db.collection("Users").document("User " + posterEmail).collection("MyCollabs")
-                        .document(projectID).update("numberApps", numberApps, "numberPicked", 0, "endVotes", 0);
+                        .document(projectID).update("numberApps", numberApps);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
