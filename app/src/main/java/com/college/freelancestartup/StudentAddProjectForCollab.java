@@ -258,12 +258,23 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
         db.collection("CollabProjects").document(projectID).set(addProjectMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(StudentAddProjectForCollab.this, "Your project has been added. Expect some calls and applications!", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(StudentAddProjectForCollab.this, StudentMainActivity.class);
-                intent.putExtra("Go_to_fragment_addProj", "Go to fragment addProj");
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                        .collection("Projects").document(projectID).set(addProjectMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(StudentAddProjectForCollab.this, "Your project has been added. Expect some calls and applications!", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(StudentAddProjectForCollab.this, StudentMainActivity.class);
+                        intent.putExtra("Go_to_fragment_addProj", "Go to fragment addProj");
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(StudentAddProjectForCollab.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -271,6 +282,7 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
                 Toast.makeText(StudentAddProjectForCollab.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     private String generateProjectID() {
