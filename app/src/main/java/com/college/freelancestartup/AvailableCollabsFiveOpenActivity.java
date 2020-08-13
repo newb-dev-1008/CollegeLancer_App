@@ -72,7 +72,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         messageButton = findViewById(R.id.collab5_messageBtn);
         requestButton = findViewById(R.id.collab5_selectBtn);
         internalReqFlag = 0;
-        checkedItem = 0;
+        checkedItem = -1;
 
         userEmail = getIntent().getExtras().get("userEmail").toString();
         flagLog = Integer.parseInt(getIntent().getExtras().get("flagLog").toString());
@@ -124,7 +124,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         ArrayList<String> projectIDs = new ArrayList<>();
         AlertDialog requestFor = new MaterialAlertDialogBuilder(AvailableCollabsFiveOpenActivity.this)
                 .setTitle("Are you sure you want to send a collaboration request?")
-                .setMessage("The user will be notified. Please note that this does not seal the deal.\n" +
+                .setMessage("The user will be notified. Please note that this does not seal the deal.\n\n" +
                         "The final decision to contribute to your project lies with the user, about which you will be informed shortly.")
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                     @Override
