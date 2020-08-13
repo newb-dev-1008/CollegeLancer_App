@@ -32,8 +32,8 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
     private TextView posterName1, projectTitle1, postedDate1, projectDesc1, openFor1, skills1;
     private MaterialButton messageButton, applyButton;
     private View view;
-    private EditText applyEditText;
-    private String projectID, posterEmail, posterName, projectTitle, postedDate, projectDesc, openFor, skills;
+    // private EditText applyEditText;
+    private String projectID, posterEmail, posterName, projectTitle, postedDate, projectDesc, openFor, skills, applicationArticle;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private int numberApps, flag;
@@ -49,7 +49,7 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         view = inflater.inflate(R.layout.apply_collab1_dialogedittext, null);
 
-        applyEditText = view.findViewById(R.id.applyEditText);
+        // applyEditText = view.findViewById(R.id.applyEditText);
 
         posterName1 = findViewById(R.id.collab1_name);
         projectTitle1 = findViewById(R.id.collab1_projectTitle);
@@ -114,7 +114,8 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
                         .setPositiveButton("Apply", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                if (TextUtils.isEmpty(articleEditText.getText().toString())) {
+                                applicationArticle = articleEditText.getText().toString();
+                                if (TextUtils.isEmpty(applicationArticle)) {
                                     Toast.makeText(AllColabsOneOpenActivity.this, "Please enter a short description.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     completeApplicationCollab1();
@@ -132,7 +133,7 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
     private void completeApplicationCollab1(){
         Map<String, Object> userMap = new HashMap<>();
         userMap.put("emailID", firebaseAuth.getCurrentUser().getEmail());
-        userMap.put("applicationArticle", applyEditText.getText().toString());
+        userMap.put("applicationArticle", applicationArticle);
         userMap.put("picked", null);
         db.collection("CollabProjects").document(projectID).collection("Collaborators")
                 .document("User " + firebaseAuth.getCurrentUser().getEmail()).set(userMap)
