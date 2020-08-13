@@ -120,7 +120,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     }
 
     private void requestCollabsPressed() {
-        ArrayList<String> projectNames = new ArrayList<>();
+        ArrayList<CharSequence> projectNames = new ArrayList<>();
         ArrayList<String> projectIDs = new ArrayList<>();
         AlertDialog requestFor = new MaterialAlertDialogBuilder(AvailableCollabsFiveOpenActivity.this)
                 .setTitle("Are you sure you want to send a collaboration request?")
@@ -156,9 +156,13 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                         });
 
                         if (internalReqFlag != 1) {
+                            CharSequence[] projNames = new CharSequence[projectNames.size()];
+                            for (int j = 0; j < projectNames.size(); j++) {
+                                projNames[j] = projectNames.get(j);
+                            }
                             AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(AvailableCollabsFiveOpenActivity.this);
                             chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
-                            chooseProjectBuilder.setSingleChoiceItems((CharSequence[]) projectNames.toArray(), checkedItem, null);
+                            chooseProjectBuilder.setSingleChoiceItems(projNames, checkedItem, null);
                             chooseProjectBuilder.setPositiveButton("Select", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
