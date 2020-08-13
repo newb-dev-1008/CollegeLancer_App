@@ -82,19 +82,20 @@ public class AllCollabsFragment extends Fragment {
                             int flag = 0;
                             allColabs.add(new AllColabsOne(posterTitle, projectTitle, projectDesc, posterDate, projectSkills, projectOpenFor, projectID, flag));
                         }
-
-                        if (allColabs.size() == 0) {
-                            collab1RecyclerView.setVisibility(View.GONE);
-                            swipeDownRefreshTV.setVisibility(View.GONE);
-                            emptyTV.setVisibility(View.VISIBLE);
-                        } else {
-                            allCollab1LayoutManager = new LinearLayoutManager(getContext());
-                            allCollab1Adapter = new AllColabsOneAdapter(allColabs);
-                            collab1RecyclerView.setHasFixedSize(true);
-                            collab1RecyclerView.setLayoutManager(allCollab1LayoutManager);
-                            collab1RecyclerView.setAdapter(allCollab1Adapter);
-                        }
                     }
+
+                    if (allColabs.size() == 0) {
+                        collab1RecyclerView.setVisibility(View.GONE);
+                        swipeDownRefreshTV.setVisibility(View.GONE);
+                        emptyTV.setVisibility(View.VISIBLE);
+                    } else {
+                        allCollab1LayoutManager = new LinearLayoutManager(getContext());
+                        allCollab1Adapter = new AllColabsOneAdapter(allColabs);
+                        collab1RecyclerView.setHasFixedSize(true);
+                        collab1RecyclerView.setLayoutManager(allCollab1LayoutManager);
+                        collab1RecyclerView.setAdapter(allCollab1Adapter);
+                    }
+
                 } else {
                     collab1RecyclerView.setVisibility(View.GONE);
                     swipeDownRefreshTV.setVisibility(View.GONE);
