@@ -107,6 +107,8 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final EditText articleEditText = new EditText(AllColabsOneOpenActivity.this);
+                articleEditText.setHint("Enter your application here");
+                articleEditText.setEnabled(true);
                 AlertDialog applyCollab1 = new MaterialAlertDialogBuilder(AllColabsOneOpenActivity.this)
                         .setView(articleEditText)
                         .setTitle("Apply for collaboration")
