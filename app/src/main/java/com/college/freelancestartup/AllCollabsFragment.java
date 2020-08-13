@@ -68,7 +68,7 @@ public class AllCollabsFragment extends Fragment {
                     emptyTV.setVisibility(View.GONE);
                     ArrayList<AllColabsOne> allColabs = new ArrayList<>();
                     for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        if (documentSnapshot.get("posterEmail").equals(firebaseAuth.getCurrentUser().getEmail().toString())) {
+                        if (documentSnapshot.get("posterEmail").equals(firebaseAuth.getCurrentUser().getEmail())) {
                             continue;
                         } else {
                             String posterTitle = documentSnapshot.get("posterTitle").toString();

@@ -140,6 +140,8 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(AllColabsOneOpenActivity.this, "Get excited! The project head has received your application and will review it soon.", Toast.LENGTH_LONG).show();
+                        // Send notification to project head
+
                         Intent intent = new Intent(AllColabsOneOpenActivity.this, StudentMainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
