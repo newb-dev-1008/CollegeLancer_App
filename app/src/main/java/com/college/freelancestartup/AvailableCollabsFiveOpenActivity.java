@@ -36,6 +36,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     // private String projectID;
     private Calendar cObj;
     private MaterialButton previousCollabsButton, messageButton, requestButton;
+    private String[] projNames;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -120,7 +121,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     }
 
     private void requestCollabsPressed() {
-        ArrayList<CharSequence> projectNames = new ArrayList<>();
+        ArrayList<String> projectNames = new ArrayList<>();
         ArrayList<String> projectIDs = new ArrayList<>();
         AlertDialog requestFor = new MaterialAlertDialogBuilder(AvailableCollabsFiveOpenActivity.this)
                 .setTitle("Are you sure you want to send a collaboration request?")
@@ -156,16 +157,18 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                         });
 
                         if (internalReqFlag != 1) {
-                            CharSequence[] projNames = new CharSequence[projectNames.size()];
+                            projNames = new String[projectNames.size()];
+                            // projNames = (CharSequence[]) projectNames.toArray();
                             for (int j = 0; j < projectNames.size(); j++) {
                                 projNames[j] = projectNames.get(j);
                             }
+
                             AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(AvailableCollabsFiveOpenActivity.this);
                             chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
                             chooseProjectBuilder.setSingleChoiceItems(projNames, -1, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
-                                            selectedProjectID = projNames[i].toString();
+                                            selectedProjectID = projectIDs.get(i);
                                             checkedItem = i;
                                         }
                                     });
@@ -177,7 +180,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                     } else {
                                         Map<String, Object> sendRequestCollab5 = new HashMap<>();
                                         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                                                .collection("Projects").document(projectIDs.get(checkedItem)).get()
+                                                .collection("Projects").document(selectedProjectID).get()
                                                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                     @Override
                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -213,9 +216,8 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                             }
                                         }
                                     }).setNegativeButton("Cancel", null);
-                            AlertDialog chooseProjectDialog = chooseProjectBuilder.create();
-                            chooseProjectDialog.show();
-                            chooseProjectDialog.setCancelable(false);
+                            chooseProjectBuilder.create().show();
+                            chooseProjectBuilder.setCancelable(false);
 
                         } else {
                             Toast.makeText(AvailableCollabsFiveOpenActivity.this, "You don't have any projects to collaborate on.", Toast.LENGTH_SHORT).show();
