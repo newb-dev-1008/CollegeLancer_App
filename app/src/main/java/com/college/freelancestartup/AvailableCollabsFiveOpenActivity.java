@@ -140,10 +140,12 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                         if (!documentSnapshot.get("projectStatus").toString().equals("Completed")) {
                                             projectNames.add(documentSnapshot.get("projectTitle").toString());
                                             projectIDs.add(documentSnapshot.get("projectID").toString());
+                                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Adding projects to lists", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                     if (projectNames.size() == 0) {
                                         internalReqFlag = 1;
+                                        Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Internal Flag Incremented", Toast.LENGTH_LONG).show();
                                     }
                                 } else {
                                     internalReqFlag = 1;
@@ -161,7 +163,18 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                             Object[] intermediate = projectNames.toArray();
                             projNames = Arrays.copyOf(intermediate, intermediate.length, String[].class);
 
-                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, projNames[0], Toast.LENGTH_SHORT).show();
+                            String s = new String();
+                            for (String x : projectNames) {
+                                s.concat(x);
+                            }
+
+                            new MaterialAlertDialogBuilder(AvailableCollabsFiveOpenActivity.this)
+                                    .setTitle("Test")
+                                    .setMessage(s)
+                                    .setPositiveButton("Okay", null)
+                                    .setNegativeButton("Cancel", null)
+                                    .create().show();
+
                             AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(AvailableCollabsFiveOpenActivity.this);
                             chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
                             chooseProjectBuilder.setSingleChoiceItems(projNames, -1, new DialogInterface.OnClickListener() {
