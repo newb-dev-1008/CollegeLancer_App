@@ -213,8 +213,9 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                             }
                                         }
                                     }).setNegativeButton("Cancel", null);
-                            chooseProjectBuilder.show();
-                            chooseProjectBuilder.setCancelable(false);
+                            AlertDialog chooseProjectDialog = chooseProjectBuilder.create();
+                            chooseProjectDialog.show();
+                            chooseProjectDialog.setCancelable(false);
 
                         } else {
                             Toast.makeText(AvailableCollabsFiveOpenActivity.this, "You don't have any projects to collaborate on.", Toast.LENGTH_SHORT).show();
