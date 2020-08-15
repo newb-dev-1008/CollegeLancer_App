@@ -49,6 +49,7 @@ public class StudentSettingsFragment extends DialogFragment {
         studentSettingsArray = getResources().getStringArray(R.array.studentSettingsArray);
         root = inflater.inflate(R.layout.student_settings_frag, container, false);
         studentSettingsListView = root.findViewById(R.id.student_settings_listview);
+        checkedStatus = 0;
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         UIDEmailID = firebaseAuth.getCurrentUser().getEmail();
@@ -61,6 +62,7 @@ public class StudentSettingsFragment extends DialogFragment {
         return root;
     }
 
+    /*
     protected int getCheckedStatus(){
         statusDB.collection("Users").document("User " + UIDEmailID).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -83,6 +85,7 @@ public class StudentSettingsFragment extends DialogFragment {
         });
         return checked;
     }
+    */
 
     @Override
     public void onStart() {
@@ -97,7 +100,7 @@ public class StudentSettingsFragment extends DialogFragment {
                         startActivity(intent);
                         break;
                     case 1:
-                        checkedStatus = getCheckedStatus();
+                        // checkedStatus = getCheckedStatus();
                         if (checkedStatus == -1){
                             return;
                         } else {
@@ -145,6 +148,7 @@ public class StudentSettingsFragment extends DialogFragment {
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
+                                                    checkedStatus = ((AlertDialog) dialogInterface).getListView().getCheckedItemPosition();
                                                     Toast.makeText(getContext(), "Your status has been updated.", Toast.LENGTH_SHORT).show();
                                                     dialogInterface.dismiss();
                                                 }

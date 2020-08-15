@@ -162,7 +162,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                             }
                             AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(AvailableCollabsFiveOpenActivity.this);
                             chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
-                            chooseProjectBuilder.setSingleChoiceItems(projNames, checkedItem, new DialogInterface.OnClickListener() {
+                            chooseProjectBuilder.setSingleChoiceItems(projNames, -1, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             selectedProjectID = projNames[i].toString();
