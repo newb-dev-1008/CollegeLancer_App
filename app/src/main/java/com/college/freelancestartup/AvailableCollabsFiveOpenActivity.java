@@ -32,7 +32,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private int internalReqFlag, checkedItem, flagLog;
-    private String userEmail, posterName;
+    private String userEmail, posterName, selectedProjectID;
     // private String projectID;
     private Calendar cObj;
     private MaterialButton previousCollabsButton, messageButton, requestButton;
@@ -162,7 +162,13 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                             }
                             AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(AvailableCollabsFiveOpenActivity.this);
                             chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
-                            chooseProjectBuilder.setSingleChoiceItems(projNames, checkedItem, null);
+                            chooseProjectBuilder.setSingleChoiceItems(projNames, checkedItem, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            selectedProjectID = projNames[i].toString();
+                                            checkedItem = i;
+                                        }
+                                    });
                             chooseProjectBuilder.setPositiveButton("Select", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -185,28 +191,28 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                                         db.collection("Users").document("User " + userEmail)
                                                                 .collection("CollabRequests").document(documentSnapshot.get("projectID").toString())
                                                                 .set(sendRequestCollab5).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                            @Override
-                                                            public void onSuccess(Void aVoid) {
-                                                                Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Request sent. Expect a response soon!", Toast.LENGTH_SHORT).show();
+                                                                    @Override
+                                                                    public void onSuccess(Void aVoid) {
+                                                                        Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Request sent. Expect a response soon!", Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                }).addOnFailureListener(new OnFailureListener() {
+                                                                    @Override
+                                                                    public void onFailure(@NonNull Exception e) {
+                                                                        Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                        dialogInterface.dismiss();
+                                                                    }
+                                                                });
                                                             }
                                                         }).addOnFailureListener(new OnFailureListener() {
-                                                            @Override
-                                                            public void onFailure(@NonNull Exception e) {
-                                                                Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                                dialogInterface.dismiss();
-                                                            }
-                                                        });
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                        dialogInterface.dismiss();
                                                     }
-                                                }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                dialogInterface.dismiss();
+                                                });
                                             }
-                                        });
-                                    }
-                                }
-                            }).setNegativeButton("Cancel", null);
+                                        }
+                                    }).setNegativeButton("Cancel", null);
                             chooseProjectBuilder.show();
                             chooseProjectBuilder.setCancelable(false);
 
