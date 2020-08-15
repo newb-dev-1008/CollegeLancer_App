@@ -163,6 +163,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                 projNames[j] = projectNames.get(j);
                             }
 
+                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, projNames.toString(), Toast.LENGTH_SHORT).show();
                             AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(AvailableCollabsFiveOpenActivity.this);
                             chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
                             chooseProjectBuilder.setSingleChoiceItems(projNames, -1, new DialogInterface.OnClickListener() {
