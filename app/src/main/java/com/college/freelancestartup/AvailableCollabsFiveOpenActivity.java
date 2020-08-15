@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -157,13 +158,10 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                         });
 
                         if (internalReqFlag != 1) {
-                            projNames = new String[projectNames.size()];
-                            // projNames = (CharSequence[]) projectNames.toArray();
-                            for (int j = 0; j < projectNames.size(); j++) {
-                                projNames[j] = projectNames.get(j);
-                            }
+                            Object[] intermediate = projectNames.toArray();
+                            projNames = Arrays.copyOf(intermediate, intermediate.length, String[].class);
 
-                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, projNames.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, projNames[0], Toast.LENGTH_SHORT).show();
                             AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(AvailableCollabsFiveOpenActivity.this);
                             chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
                             chooseProjectBuilder.setSingleChoiceItems(projNames, -1, new DialogInterface.OnClickListener() {
