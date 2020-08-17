@@ -88,8 +88,8 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
 
         if (flag == 1) {
             holder.pickedStatus.setVisibility(View.VISIBLE);
-            holder.applicationArticleTV.setVisibility(View.VISIBLE);
-            holder.selectButton.setText("Select");
+            // holder.applicationArticleTV.setVisibility(View.VISIBLE);
+            // holder.selectButton.setText("Select");
 
             FirebaseFirestore.getInstance().collection("CollabProjects").document(projectID)
                     .collection("Collaborators").document("User " + userEmail).get()
