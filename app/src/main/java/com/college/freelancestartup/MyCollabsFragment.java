@@ -70,7 +70,7 @@ public class MyCollabsFragment extends Fragment {
                         String posterTitle = documentSnapshot.get("posterTitle").toString();
                         String projectTitle = documentSnapshot.get("projectTitle").toString();
                         String postedDate = documentSnapshot.get("postDate").toString();
-                        String collabStatus = documentSnapshot.get("collabStatus").toString();
+                        String collabStatus = documentSnapshot.get("projectStatus").toString();
                         String projectDesc = documentSnapshot.get("projectDesc").toString();
                         String projectVisible = documentSnapshot.get("projectVisible").toString();
                         String numberApplicants = documentSnapshot.get("numApplicants").toString();

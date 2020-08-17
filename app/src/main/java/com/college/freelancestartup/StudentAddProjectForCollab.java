@@ -91,7 +91,7 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<String> skillsAdapter = new ArrayAdapter<String>(StudentAddProjectForCollab.this, android.R.layout.simple_dropdown_item_1line, allSkillsArray);
+        ArrayAdapter<String> skillsAdapter = new ArrayAdapter<>(StudentAddProjectForCollab.this, android.R.layout.simple_dropdown_item_1line, allSkillsArray);
 
         projectSkills.setAdapter(skillsAdapter);
         projectSkills.setOnClickListener(new View.OnClickListener() {
@@ -165,7 +165,7 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
         addNewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (projectTitle.getText().toString().equals("") || projectOpenFor.getText().toString().equals("") || projectDesc.getText().toString().equals("") || (skillset.size() == 0)) {
+                if (projectTitle.getText().toString().equals("") || projectOpenFor.getText().toString().equals("") || projectDesc.getText().toString().equals("")) {
                     Toast.makeText(StudentAddProjectForCollab.this, "Please enter all the above details.", Toast.LENGTH_SHORT).show();
                 } else {
                     addNewProjectFunction();
