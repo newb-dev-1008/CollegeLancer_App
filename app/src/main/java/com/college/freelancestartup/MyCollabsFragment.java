@@ -73,11 +73,11 @@ public class MyCollabsFragment extends Fragment {
                         String collabStatus = documentSnapshot.get("projectStatus").toString();
                         String projectDesc = documentSnapshot.get("projectDesc").toString();
                         String projectVisible = documentSnapshot.get("projectVisible").toString();
-                        String numberApplicants = documentSnapshot.get("numApplicants").toString();
+                        String numberApplicants = documentSnapshot.get("numberApps").toString();
                         String projectID = documentSnapshot.get("projectID").toString();
                         String projectSkills = documentSnapshot.get("projectSkills").toString();
                         String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
-                        String numberSelectedApplicants = documentSnapshot.get("numSelectedApplicants").toString();
+                        String numberSelectedApplicants = documentSnapshot.get("numberPicked").toString();
                         myCollabs.add(new MyCollabsFour(posterTitle, projectTitle, projectDesc, postedDate, collabStatus, projectVisible, numberApplicants, numberSelectedApplicants, projectSkills, projectOpenFor, projectID));
 
                         myCollabs4LayoutManager = new LinearLayoutManager(getContext());
