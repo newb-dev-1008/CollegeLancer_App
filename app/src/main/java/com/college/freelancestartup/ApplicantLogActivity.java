@@ -62,7 +62,7 @@ public class ApplicantLogActivity extends AppCompatActivity {
     }
 
     private void applicantLog() {
-        db.collection("Users").document(projectID).collection("Collaborators").get()
+        db.collection("CollabProjects").document(projectID).collection("Collaborators").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -70,7 +70,7 @@ public class ApplicantLogActivity extends AppCompatActivity {
                             emptyTV.setVisibility(View.GONE);
                             ArrayList<AvailableCollabsFive> availableCollabs = new ArrayList<>();
                             for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                String userEmail = documentSnapshot.get("email").toString();
+                                String userEmail = documentSnapshot.get("emailID").toString();
                                 db.collection("Users").document("User " + userEmail).get()
                                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                             @Override

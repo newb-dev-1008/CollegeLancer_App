@@ -115,7 +115,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                                        .collection("MyCollabs").document(projectID).update("collabStatus", "Open")
+                                        .collection("MyCollabs").document(projectID).update("projectStatus", "Open")
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
@@ -148,7 +148,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                                            .collection("MyCollabs").document(projectID).update("collabStatus", "Closed")
+                                            .collection("MyCollabs").document(projectID).update("projectStatus", "Closed")
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
@@ -206,7 +206,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                     noVotesTV.setVisibility(View.GONE);
 
                                     db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                                            .collection("MyCollabs").document(projectID).update("collabStatus", "Ongoing")
+                                            .collection("MyCollabs").document(projectID).update("projectStatus", "Ongoing")
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
@@ -231,7 +231,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                                 for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                                     String userEmail = documentSnapshot.get("emailID").toString();
                                                     db.collection("Users").document("User " + userEmail).collection("PreviousCollabs")
-                                                            .document(projectID).update("collabStatus", "Ongoing").addOnFailureListener(new OnFailureListener() {
+                                                            .document(projectID).update("projectStatus", "Ongoing").addOnFailureListener(new OnFailureListener() {
                                                         @Override
                                                         public void onFailure(@NonNull Exception e) {
                                                             Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -284,7 +284,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                         noVotesTV.setVisibility(View.VISIBLE);
 
                         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                                .collection("MyCollabs").document(projectID).update("collabStatus", "Ending")
+                                .collection("MyCollabs").document(projectID).update("projectStatus", "Ending")
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
@@ -309,7 +309,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                     for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                         String userEmail = documentSnapshot.get("emailID").toString();
                                         db.collection("Users").document("User " + userEmail).collection("PreviousCollabs")
-                                                .document(projectID).update("collabStatus", "Ending").addOnFailureListener(new OnFailureListener() {
+                                                .document(projectID).update("projectStatus", "Ending").addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
