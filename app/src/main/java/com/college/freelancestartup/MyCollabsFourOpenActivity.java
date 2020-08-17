@@ -68,9 +68,9 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                 projectTitle.setText(documentSnapshot.get("projectTitle").toString());
                 postedDate.setText(documentSnapshot.get("postDate").toString());
                 projectDesc.setText(documentSnapshot.get("projectDesc").toString());
-                collabStatus.setText(documentSnapshot.get("collabStatus").toString());
-                numApplicants.setText(documentSnapshot.get("numApplicants").toString());
-                numSelectedApplicants.setText(documentSnapshot.get("numSelectedApplicants").toString());
+                collabStatus.setText(documentSnapshot.get("projectStatus").toString());
+                numApplicants.setText(documentSnapshot.get("numberApps").toString());
+                numSelectedApplicants.setText(documentSnapshot.get("numberPicked").toString());
                 skills.setText(documentSnapshot.get("projectSkills").toString());
                 openFor.setText(documentSnapshot.get("projectOpenFor").toString());
             }

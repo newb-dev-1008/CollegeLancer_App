@@ -1,7 +1,9 @@
 package com.college.freelancestartup;
 
+import android.content.AsyncQueryHandler;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -149,6 +151,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                     }
                                 } else {
                                     internalReqFlag = 1;
+                                    Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Internal Flag Incremented 2", Toast.LENGTH_LONG).show();
                                 }
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -242,4 +245,6 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         requestFor.setCancelable(false);
         requestFor.setCanceledOnTouchOutside(false);
     }
+
+    // private class AvailableAsyncTask extends AsyncTask<>
 }

@@ -262,6 +262,14 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
                         .collection("Projects").document(projectID).set(addProjectMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                .collection("MyCollabs").document(projectID).set(addProjectMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+
+                            }
+                        })
+
                         Toast.makeText(StudentAddProjectForCollab.this, "Your project has been added. Expect some calls and applications!", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(StudentAddProjectForCollab.this, StudentMainActivity.class);
                         intent.putExtra("Go_to_fragment_addProj", "Go to fragment addProj");
