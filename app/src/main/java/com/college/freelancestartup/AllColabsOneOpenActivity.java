@@ -136,7 +136,7 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
         Map<String, Object> userMap = new HashMap<>();
         userMap.put("emailID", firebaseAuth.getCurrentUser().getEmail());
         userMap.put("applicationArticle", applicationArticle);
-        userMap.put("picked", null);
+        userMap.put("picked", "Pending");
         db.collection("CollabProjects").document(projectID).collection("Collaborators")
                 .document("User " + firebaseAuth.getCurrentUser().getEmail()).set(userMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
