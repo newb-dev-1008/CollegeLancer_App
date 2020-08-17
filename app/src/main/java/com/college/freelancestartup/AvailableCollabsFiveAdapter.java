@@ -98,15 +98,15 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             pickedStatusT = documentSnapshot.get("picked").toString();
                             // applicationArticle = documentSnapshot.get("appArticle").toString();
+                            if (pickedStatusT.equals("Accepted")) {
+                                holder.pickedStatus.setText(pickedStatusT);
+                                holder.pickedStatus.setTextColor(Color.parseColor("#228B22"));
+                            } else {
+                                holder.pickedStatus.setText(pickedStatusT);
+                                holder.pickedStatus.setTextColor(Color.parseColor("#800000"));
+                            }
                         }
                     });
-            if (pickedStatusT.equals("Accepted")) {
-                holder.pickedStatus.setText(pickedStatusT);
-                holder.pickedStatus.setTextColor(Color.parseColor("#228B22"));
-            } else {
-                holder.pickedStatus.setText(pickedStatusT);
-                holder.pickedStatus.setTextColor(Color.parseColor("#800000"));
-            }
         }
     }
 
