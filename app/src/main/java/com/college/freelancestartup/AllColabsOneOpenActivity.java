@@ -172,6 +172,9 @@ public class AllColabsOneOpenActivity extends AppCompatActivity {
                         });
                 db.collection("Users").document("User " + posterEmail).collection("MyCollabs")
                         .document(projectID).update("numberApps", numberApps);
+
+                db.collection("Users").document("User " + posterEmail).collection("Projects")
+                        .document(projectID).update("numberApps", numberApps);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
