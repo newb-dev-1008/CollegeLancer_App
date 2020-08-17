@@ -30,6 +30,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.encoders.ObjectEncoderContext;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -255,6 +256,21 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
         addProjectMap.put("projectTitle", projectTitle.getText().toString());
         addProjectMap.put("projectStatus", projectStatus);
 
+        Map<String, Object> addMyCollab = new HashMap<>();
+        addMyCollab.put("numberApps", numberApps);
+        addMyCollab.put("numberPicked", numberPicked);
+        addMyCollab.put("endVotes", endVotes);
+        addMyCollab.put("projectID", projectID);
+        addMyCollab.put("posterTitle", posterTitle);
+        addMyCollab.put("posterEmail", posterEmail);
+        addMyCollab.put("postDate", postDate);
+        addMyCollab.put("projectOpenFor", projectOpenFor.getText().toString());
+        addMyCollab.put("projectSkills", skillset);
+        addMyCollab.put("projectDesc", projectDesc.getText().toString());
+        addMyCollab.put("projectTitle", projectTitle.getText().toString());
+        addMyCollab.put("projectStatus", projectStatus);
+        addMyCollab.put("projectVisible")
+
         db.collection("CollabProjects").document(projectID).set(addProjectMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -263,7 +279,7 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                                .collection("MyCollabs").document(projectID).set(addProjectMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                .collection("MyCollabs").document(projectID).set(addMyCollab).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(StudentAddProjectForCollab.this, "Your project has been added. Expect some calls and applications!", Toast.LENGTH_LONG).show();
