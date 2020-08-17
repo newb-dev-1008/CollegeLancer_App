@@ -63,12 +63,12 @@ public class MyCollabFourAdapter extends RecyclerView.Adapter<MyCollabFourAdapte
 
         holder.posterName.setText(posterName);
         holder.projectTitle.setText(projectTitle);
-        holder.projectDesc.setText(projectDesc);
-        holder.postedDate.setText(postedDate);
-        holder.numApplicants.setText(numApplicants);
-        holder.numSelectedApplicants.setText(numSelectedApplicants);
-        holder.projectSkills.setText(projectSkills);
-        holder.projectOpenFor.setText(projectOpenFor);
+        // holder.projectDesc.setText(projectDesc);
+        // holder.postedDate.setText(postedDate);
+        // holder.numApplicants.setText(numApplicants);
+        // holder.numSelectedApplicants.setText(numSelectedApplicants);
+        // holder.projectSkills.setText(projectSkills);
+        // holder.projectOpenFor.setText(projectOpenFor);
 
         if (projectStatus.equals("Ongoing") || projectStatus.equals("Completed")) {
             holder.projectStatus.setTextColor(Color.parseColor("#"));
