@@ -269,7 +269,7 @@ public class StudentAddProjectForCollab extends AppCompatActivity {
         addMyCollab.put("projectDesc", projectDesc.getText().toString());
         addMyCollab.put("projectTitle", projectTitle.getText().toString());
         addMyCollab.put("projectStatus", projectStatus);
-        addMyCollab.put("projectVisible")
+        addMyCollab.put("projectVisible", "Yes");
 
         db.collection("CollabProjects").document(projectID).set(addProjectMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
