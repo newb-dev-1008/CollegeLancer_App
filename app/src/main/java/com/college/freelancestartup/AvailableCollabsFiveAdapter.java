@@ -1,18 +1,21 @@
 package com.college.freelancestartup;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -24,6 +27,7 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
     private ArrayList<AvailableCollabsFive> AvailableCollabsList;
     private String name, semester, department, skills, noCollabs, noProjects, userEmail, projectID, pickedStatusT;
     private int flag;
+    private Context context;
 
     public AvailableCollabsFiveAdapter(ArrayList<AvailableCollabsFive> availableCollabsExampleList){
         AvailableCollabsList = availableCollabsExampleList;
@@ -33,6 +37,7 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
     @Override
     public AvailableCollabsFiveAdapter.AvailableCollabsFiveViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.find_collab5_cardview, parent, false);
+        context = v.getContext();
         AvailableCollabsFiveAdapter.AvailableCollabsFiveViewHolder availableCollabsFiveViewHolder = new AvailableCollabsFiveAdapter.AvailableCollabsFiveViewHolder(v);
         v.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +111,12 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
                                 holder.pickedStatus.setTextColor(Color.parseColor("#800000"));
                             }
                         }
-                    });
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
