@@ -12,4 +12,7 @@ class ApplicantLogAdapter extends RecyclerView.Adapter<ApplicantLogAdapter.Appli
     private String name, department, userEmail, projectID, pickedStatusT;
     private Context context;
 
+    public ApplicantLogAdapter(ArrayList<AvailableCollabsFive> applicantLogExampleList){
+        ApplicantLogList = applicantLogExampleList;
+    }
 }
