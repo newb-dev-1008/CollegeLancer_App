@@ -119,4 +119,9 @@ public class ApplicantLogAdapter extends RecyclerView.Adapter<ApplicantLogAdapte
             pickedStatus = itemView.findViewById(R.id.collab5_personPickedStatusClosed);
         }
     }
+
+    @Override
+    public int getItemCount() {
+        return ApplicantLogList.size();
+    }
 }

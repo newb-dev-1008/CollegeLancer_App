@@ -122,7 +122,7 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
 
     public static class AvailableCollabsFiveViewHolder extends RecyclerView.ViewHolder {
         public TextView name1, semester1, pickedStatus;
-        public TextView department12, skills1, noProjects1, noCollabs1, applicationArticleTV;
+        // public TextView department12, skills1, noProjects1, noCollabs1, applicationArticleTV;
         // private MaterialButton selectButton;
 
         public AvailableCollabsFiveViewHolder(@NonNull View itemView) {
