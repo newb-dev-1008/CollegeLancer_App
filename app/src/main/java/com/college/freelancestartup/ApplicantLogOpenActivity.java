@@ -6,8 +6,10 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -48,5 +50,19 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
         requestButton = findViewById(R.id.log_selectBtn);
 
         userEmail = getIntent().getExtras().get("userEmail").toString();
+
+        db.collection("Users").document("User " + userEmail).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                name1.setText(documentSnapshot.get("name").toString());
+                personDepartment1.setText(documentSnapshot.get("department").toString());
+                personSemester1.setText(documentSnapshot.get("").toString());
+                personPhone1.setText(documentSnapshot.get().toString());
+                numberCollabs1.setText(documentSnapshot.get().toString());
+                numberProjects1.setText(documentSnapshot.get().toString());
+                skills1.setText(documentSnapshot.get().toString());
+                applicationArticleTV.setText(documentSnapshot.get().toString());
+            }
+        })
     }
 }
