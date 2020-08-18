@@ -73,13 +73,13 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
 
         name = availableCollabsFive.getName();
         semester = availableCollabsFive.getSemester();
-        department = availableCollabsFive.getDepartment();
-        skills = availableCollabsFive.getSkills();
-        noProjects = availableCollabsFive.getNoProjects();
-        noCollabs = availableCollabsFive.getNoCollabs();
+        // department = availableCollabsFive.getDepartment();
+        // skills = availableCollabsFive.getSkills();
+        // noProjects = availableCollabsFive.getNoProjects();
+        // noCollabs = availableCollabsFive.getNoCollabs();
         userEmail = availableCollabsFive.getUserEmail();
         flag = availableCollabsFive.getFlag();
-        projectID = availableCollabsFive.getProjectID();
+        // projectID = availableCollabsFive.getProjectID();
 
         holder.name1.setText(name);
         holder.semester1.setText(semester);
