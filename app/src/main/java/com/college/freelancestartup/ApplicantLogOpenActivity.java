@@ -46,5 +46,7 @@ class ApplicantLogOpenActivity extends AppCompatActivity {
         previousCollabsButton = findViewById(R.id.log_seeCollabsButton);
         messageButton = findViewById(R.id.log_messageBtn);
         requestButton = findViewById(R.id.log_selectBtn);
+
+        userEmail = getIntent().getExtras().get("userEmail").toString();
     }
 }
