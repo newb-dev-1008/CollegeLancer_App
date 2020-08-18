@@ -3,14 +3,21 @@ package com.college.freelancestartup;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -75,5 +82,27 @@ class ApplicantLogAdapter extends RecyclerView.Adapter<ApplicantLogAdapter.Appli
 
         holder.name1.setText(name);
         holder.semester1.setText(semester);
-        holder.pickedStatus.setVis
+        holder.pickedStatus.setVisibility(View.VISIBLE);
+
+        FirebaseFirestore.getInstance().collection("CollabProjects").document(projectID)
+                .collection("Collaborators").document("User " + userEmail).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        pickedStatusT = documentSnapshot.get("picked").toString();
+                        // applicationArticle = documentSnapshot.get("appArticle").toString();
+                        if (pickedStatusT.equals("Accepted")) {
+                            holder.pickedStatus.setText(pickedStatusT);
+                            holder.pickedStatus.setTextColor(Color.parseColor("#228B22"));
+                        } else {
+                            holder.pickedStatus.setText(pickedStatusT);
+                            holder.pickedStatus.setTextColor(Color.parseColor("#800000"));
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 }
