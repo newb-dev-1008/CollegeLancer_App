@@ -104,4 +104,8 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
         intent.putExtra("userEmail", userEmail);
         startActivity(intent);
     }
+
+    private void requestButtonPressed() {
+
+    }
 }
