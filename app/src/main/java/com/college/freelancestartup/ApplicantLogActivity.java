@@ -63,7 +63,7 @@ public class ApplicantLogActivity extends AppCompatActivity {
     }
 
     private void applicantLog() {
-        db.collection("CollabProjects").document(projectID).collection("Collaborators").get()
+        db.collection("CollabProjects").document(projectID).collection("Collaborators").whereEqualTo("picked", "Pending").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {

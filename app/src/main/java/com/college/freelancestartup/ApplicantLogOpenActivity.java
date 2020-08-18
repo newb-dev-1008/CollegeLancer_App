@@ -53,6 +53,7 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
         requestButton = findViewById(R.id.log_selectBtn);
 
         userEmail = getIntent().getExtras().get("userEmail").toString();
+        selectedProjectID = getIntent().getExtras().get("projectID").toString();
 
         db.collection("Users").document("User " + userEmail).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -72,6 +73,6 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
             }
         });
 
-        db.collection("")
+        db.collection("CollabProjects")
     }
 }
