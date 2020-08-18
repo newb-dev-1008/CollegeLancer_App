@@ -89,7 +89,6 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
         holder.skills1.setText(skills);
         holder.noProjects1.setText(noProjects);
         holder.noCollabs1.setText(noCollabs);
-        */
 
         if (flag == 1) {
             holder.pickedStatus.setVisibility(View.VISIBLE);
@@ -118,23 +117,25 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
                 }
             });
         }
+        */
     }
 
     public static class AvailableCollabsFiveViewHolder extends RecyclerView.ViewHolder {
-        public TextView name1, semester1, department12, skills1, noProjects1, noCollabs1, pickedStatus, applicationArticleTV;
-        private MaterialButton selectButton;
+        public TextView name1, semester1, pickedStatus;
+        public TextView department12, skills1, noProjects1, noCollabs1, applicationArticleTV;
+        // private MaterialButton selectButton;
 
         public AvailableCollabsFiveViewHolder(@NonNull View itemView) {
             super(itemView);
             name1 = itemView.findViewById(R.id.collab5_name);
             semester1 = itemView.findViewById(R.id.collab5_personSemester);
-            department12 = itemView.findViewById(R.id.collab5_personDepartments);
-            skills1 = itemView.findViewById(R.id.collab5_skills);
-            noProjects1 = itemView.findViewById(R.id.collab5_projectsCompleted);
-            noCollabs1 = itemView.findViewById(R.id.collab5_collaborations);
+            // department12 = itemView.findViewById(R.id.collab5_personDepartments);
+            // skills1 = itemView.findViewById(R.id.collab5_skills);
+            // noProjects1 = itemView.findViewById(R.id.collab5_projectsCompleted);
+            // noCollabs1 = itemView.findViewById(R.id.collab5_collaborations);
             pickedStatus = itemView.findViewById(R.id.collab5_personPickedStatusClosed);
-            applicationArticleTV = itemView.findViewById(R.id.collab5_applicationArticle);
-            selectButton = itemView.findViewById(R.id.collab5_selectBtn);
+            // applicationArticleTV = itemView.findViewById(R.id.collab5_applicationArticle);
+            // selectButton = itemView.findViewById(R.id.collab5_selectBtn);
 
         }
     }

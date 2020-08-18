@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,13 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-class ApplicantLogAdapter extends RecyclerView.Adapter<ApplicantLogAdapter.ApplicantLogViewHolder> {
-
+public class ApplicantLogAdapter extends RecyclerView.Adapter<ApplicantLogAdapter.ApplicantLogViewHolder> {
     private ArrayList<AvailableCollabsFive> ApplicantLogList;
     private String name, semester, userEmail, projectID, pickedStatusT;
     private Context context;
@@ -105,4 +106,17 @@ class ApplicantLogAdapter extends RecyclerView.Adapter<ApplicantLogAdapter.Appli
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public static class ApplicantLogViewHolder extends RecyclerView.ViewHolder {
+        public TextView name1, semester1, pickedStatus;
+        // private MaterialButton selectButton;
+
+        public ApplicantLogViewHolder(@NonNull View itemView) {
+            super(itemView);
+            name1 = itemView.findViewById(R.id.collab5_name);
+            semester1 = itemView.findViewById(R.id.collab5_personSemester);
+            pickedStatus = itemView.findViewById(R.id.collab5_personPickedStatusClosed);
+        }
+    }
 }

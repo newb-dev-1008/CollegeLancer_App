@@ -12,7 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 
-class ApplicantLogOpenActivity extends AppCompatActivity {
+public class ApplicantLogOpenActivity extends AppCompatActivity {
 
     private TextView name1, personDepartment1, personSemester1, numberCollabs1, numberProjects1, skills1, personPhone1, applicationArticleTV;
     private FirebaseFirestore db;
