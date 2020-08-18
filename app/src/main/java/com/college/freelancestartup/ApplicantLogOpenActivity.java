@@ -2,10 +2,13 @@ package com.college.freelancestartup;
 
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,13 +59,19 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 name1.setText(documentSnapshot.get("name").toString());
                 personDepartment1.setText(documentSnapshot.get("department").toString());
-                personSemester1.setText(documentSnapshot.get("").toString());
-                personPhone1.setText(documentSnapshot.get().toString());
-                numberCollabs1.setText(documentSnapshot.get().toString());
-                numberProjects1.setText(documentSnapshot.get().toString());
-                skills1.setText(documentSnapshot.get().toString());
-                applicationArticleTV.setText(documentSnapshot.get().toString());
+                personSemester1.setText(documentSnapshot.get("studentSemester").toString());
+                personPhone1.setText(documentSnapshot.get("phoneNumber").toString());
+                numberCollabs1.setText(documentSnapshot.get("numberCollabs").toString());
+                numberProjects1.setText(documentSnapshot.get("numberProjects").toString());
+                skills1.setText(documentSnapshot.get("studentSkills").toString());
             }
-        })
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(ApplicantLogOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 }
