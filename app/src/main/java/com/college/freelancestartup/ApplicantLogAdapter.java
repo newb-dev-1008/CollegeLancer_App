@@ -57,6 +57,7 @@ public class ApplicantLogAdapter extends RecyclerView.Adapter<ApplicantLogAdapte
 
                 // intent.putExtra("flagLog", flag);
                 intent.putExtra("userEmail", userEmail);
+                intent.putExtra("projectID", projectID);
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), viewStart, transitionName);
@@ -79,7 +80,7 @@ public class ApplicantLogAdapter extends RecyclerView.Adapter<ApplicantLogAdapte
         // noCollabs = availableCollabsFive.getNoCollabs();
         userEmail = applicantLog.getUserEmail();
         // flag = applicantLog.getFlag();
-        // projectID = availableCollabsFive.getProjectID();
+        projectID = applicantLog.getProjectID();
 
         holder.name1.setText(name);
         holder.semester1.setText(semester);

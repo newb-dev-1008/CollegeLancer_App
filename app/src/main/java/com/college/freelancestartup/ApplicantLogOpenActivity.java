@@ -19,7 +19,7 @@ import java.util.Calendar;
 
 public class ApplicantLogOpenActivity extends AppCompatActivity {
 
-    private TextView name1, personDepartment1, personSemester1, numberCollabs1, numberProjects1, skills1, personPhone1, applicationArticleTV;
+    private TextView name1, personDepartment1, personSemester1, numberCollabs1, numberProjects1, skills1, personPhone1, applicationArticleTV, pickedStatus;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private int internalReqFlag, checkedItem, flagLog;
@@ -72,6 +72,6 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
             }
         });
 
-
+        db.collection("")
     }
 }
