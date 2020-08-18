@@ -225,6 +225,6 @@
         app:layout_constraintBottom_toTopOf="@id/log_seeCollabsButton"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="4dp"
-        android:text="Requested" />
+        android:text="Pending" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
