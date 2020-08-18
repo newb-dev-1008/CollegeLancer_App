@@ -1,6 +1,8 @@
 package com.college.freelancestartup;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,5 +83,18 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                 pickedStatus.setText(documentSnapshot.get("Picked").toString());
             }
         });
+
+        previousCollabsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                previousCollabsPressed();
+            }
+        });
+    }
+
+    private void previousCollabsPressed() {
+        Intent intent = new Intent(ApplicantLogOpenActivity.this, PreviousCollabsCollabFiveActivity.class);
+        intent.putExtra("userEmail", userEmail);
+        startActivity(intent);
     }
 }
