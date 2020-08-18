@@ -42,7 +42,7 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ApplicantLogOpenActivity.class);
+                Intent intent = new Intent(view.getContext(), AvailableCollabsFiveOpenActivity.class);
                 String transitionName = view.getResources().getString(R.string.transitionAnimation);
                 View viewStart = view.findViewById(R.id.find_collab5_cardview);
 
