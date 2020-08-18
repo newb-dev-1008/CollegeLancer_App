@@ -90,6 +90,13 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                 previousCollabsPressed();
             }
         });
+
+        requestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestButtonPressed();
+            }
+        });
     }
 
     private void previousCollabsPressed() {
