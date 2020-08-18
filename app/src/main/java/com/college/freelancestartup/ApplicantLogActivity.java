@@ -29,7 +29,7 @@ public class ApplicantLogActivity extends AppCompatActivity {
     private TextView swipeDownRefreshTV, emptyTV;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
-    private int flag;
+    private int flag, flagLog;
     private String projectID, name, semester, skills, department, previousCollabs, previousProjects;
     private RecyclerView.LayoutManager availableCollab5LayoutManager;
     private RecyclerView.Adapter availableCollab5Adapter;
@@ -45,6 +45,7 @@ public class ApplicantLogActivity extends AppCompatActivity {
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutCollab4log);
 
         projectID = getIntent().getExtras().get("projectID").toString();
+        flagLog = Integer.parseInt(getIntent().getExtras().get("flagLog").toString());
 
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
