@@ -73,6 +73,13 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
             }
         });
 
-        db.collection("CollabProjects")
+        db.collection("CollabProjects").document(selectedProjectID).collection("Collaborators")
+                .document("User " + userEmail).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                applicationArticleTV.setText(documentSnapshot.get("applicationArticle").toString());
+                pickedStatus.setText(documentSnapshot.get("Picked").toString());
+            }
+        });
     }
 }
