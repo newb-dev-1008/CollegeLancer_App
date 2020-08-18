@@ -41,6 +41,6 @@ class ApplicantLogOpenActivity extends AppCompatActivity {
         numberCollabs1 = findViewById(R.id.log_collaborations);
         numberProjects1 = findViewById(R.id.log_projectsCompleted);
         skills1 = findViewById(R.id.log_skills);
-        applicationArticleTV
+        applicationArticleTV = findViewById(R.id.log_applicationArticle);
     }
 }
