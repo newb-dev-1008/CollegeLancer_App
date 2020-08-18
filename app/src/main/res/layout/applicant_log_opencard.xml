@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    android:transitionName="@string/transitionAnimation"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/log_name"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/log_personPickedStatus"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginStart="4dp"
+        android:text="Available Person's Name"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/log_personDepartments"
+        app:layout_constraintTop_toBottomOf="@id/collab5_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/log_personPickedStatus"
+        app:layout_constraintHorizontal_bias="0"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="4dp"
+        android:text="Department"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/collab5_personSemester"
+        app:layout_constraintTop_toBottomOf="@id/collab5_personDepartments"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/collab5_personPickedStatus"
+        app:layout_constraintHorizontal_bias="0"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="4dp"
+        android:text="Current Semester"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/collab5_personPhoneNo"
+        app:layout_constraintTop_toBottomOf="@id/collab5_personSemester"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/collab5_personPickedStatus"
+        app:layout_constraintHorizontal_bias="0"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="4dp"
+        android:text="Phone Number"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/collab5_personPhoneNo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/collab5_personPickedStatus"
+        app:layout_constraintHorizontal_bias="0"
+        android:textSize="18sp"
+        android:text="Skills:"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="4dp"
+        android:id="@+id/collab5_skillsTV"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/collab5_skills"
+        app:layout_constraintTop_toBottomOf="@id/collab5_skillsTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/collab5_personPickedStatus"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="45dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/collab5_skills"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/collab5_personPickedStatus"
+        app:layout_constraintHorizontal_bias="0"
+        android:text="Projects completed: "
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/black"
+        android:id="@+id/collab5_projectsCompletedTV"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/collab5_projectsCompleted"
+        app:layout_constraintTop_toTopOf="@id/collab5_projectsCompletedTV"
+        app:layout_constraintBottom_toBottomOf="@id/collab5_projectsCompletedTV"
+        app:layout_constraintStart_toEndOf="@id/collab5_projectsCompletedTV"
+        app:layout_constraintEnd_toStartOf="@id/collab5_personPickedStatus"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginStart="4dp"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/collab5_projectsCompletedTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/collab5_personPickedStatus"
+        app:layout_constraintHorizontal_bias="0"
+        android:text="Collaborations completed: "
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/black"
+        android:id="@+id/collab5_collaborationsTV"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/collab5_collaborations"
+        app:layout_constraintTop_toTopOf="@id/collab5_collaborationsTV"
+        app:layout_constraintBottom_toBottomOf="@id/collab5_collaborationsTV"
+        app:layout_constraintStart_toEndOf="@id/collab5_collaborationsTV"
+        app:layout_constraintEnd_toStartOf="@id/collab5_personPickedStatus"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="18sp"
+        android:layout_marginEnd="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/collab5_collaborationsTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/collab5_personPickedStatus"
+        app:layout_constraintHorizontal_bias="0"
+        android:text="Application brief: "
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/black"
+        android:id="@+id/collab5_applicationArticleTV"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/collab5_applicationArticle"
+        app:layout_constraintTop_toBottomOf="@id/collab5_applicationArticleTV"
+        app:layout_constraintBottom_toTopOf="@id/collab5_seeCollabsButton"
+        app:layout_constraintStart_toStartOf="@id/collab5_applicationArticleTV"
+        app:layout_constraintEnd_toStartOf="@id/collab5_personPickedStatus"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginStart="4dp"
+        android:visibility="gone"
+        android:layout_marginBottom="8dp"
+        android:textSize="18sp"
+        android:layout_marginEnd="15dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/collab5_seeCollabsButton"
+        app:layout_constraintTop_toBottomOf="@id/collab5_applicationArticle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:text="Check Previous Collaborations"
+        android:padding="4dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/collab5_messageBtn"
+        app:layout_constraintTop_toBottomOf="@id/collab5_seeCollabsButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/collab5_selectBtn"
+        app:layout_constraintHorizontal_bias="0"
+        android:text="Message"
+        android:padding="4dp"
+        android:layout_marginTop="20dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/collab5_selectBtn"
+        app:layout_constraintTop_toBottomOf="@id/collab5_seeCollabsButton"
+        app:layout_constraintStart_toEndOf="@id/collab5_messageBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Select for project"
+        android:padding="4dp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/collab5_personPickedStatus"
+        android:textSize="18sp"
+        android:textColor="@color/maroon"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/collab5_seeCollabsButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="4dp"
+        android:text="Requested" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
