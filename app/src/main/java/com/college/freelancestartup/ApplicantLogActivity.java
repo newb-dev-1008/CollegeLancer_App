@@ -87,7 +87,7 @@ public class ApplicantLogActivity extends AppCompatActivity {
                                 availableCollabs.add(new AvailableCollabsFive(name, department, skills, previousCollabs, previousProjects, semester, userEmail, flag, projectID));
 
                                 applicantLog5LayoutManager = new LinearLayoutManager(ApplicantLogActivity.this);
-                                applicantLog5Adapter = new AvailableCollabsFiveAdapter(availableCollabs);
+                                applicantLog5Adapter = new ApplicantLogAdapter(availableCollabs);
                                 recyclerView.setHasFixedSize(true);
                                 recyclerView.setLayoutManager(applicantLog5LayoutManager);
                                 recyclerView.setAdapter(applicantLog5Adapter);
