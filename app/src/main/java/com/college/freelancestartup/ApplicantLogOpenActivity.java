@@ -1,5 +1,7 @@
 package com.college.freelancestartup;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,11 +10,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,8 +29,8 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private int internalReqFlag, checkedItem, flagLog;
-    private String userEmail, posterName, selectedProjectID;
-    // private String projectID;
+    private String userEmail, posterName, selectedProjectID, pickedStatusString;
+    // private String projectID, pickedStatusString;
     private Calendar cObj;
     private MaterialButton previousCollabsButton, messageButton, requestButton;
     private String[] projNames;
@@ -106,6 +110,20 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
     }
 
     private void requestButtonPressed() {
+        AlertDialog selectApplicant = new MaterialAlertDialogBuilder(this)
+                .setTitle("Select Applicant?")
+                .setMessage("The candidate will be added to the project as a contributor.")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        pickedStatusString = "Accepted";
+                        pickedStatus.setText(pickedStatusString);
+                        db.collection("CollabProjects").document("")
 
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .create();
+        selectApplicant.show();
     }
 }
