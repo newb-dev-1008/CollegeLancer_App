@@ -89,7 +89,7 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 applicationArticleTV.setText(documentSnapshot.get("applicationArticle").toString());
-                pickedStatus.setText(documentSnapshot.get("Picked").toString());
+                pickedStatus.setText(documentSnapshot.get("picked").toString());
             }
         });
 
