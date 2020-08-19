@@ -170,7 +170,7 @@
         app:layout_constraintTop_toBottomOf="@id/log_applicationArticleTV"
         app:layout_constraintBottom_toTopOf="@id/log_seeCollabsButton"
         app:layout_constraintStart_toStartOf="@id/log_applicationArticleTV"
-        app:layout_conlogEnd_toStartOf="@id/log_personPickedStatus"
+        app:layout_constraintEnd_toStartOf="@id/log_personPickedStatus"
         app:layout_constraintHorizontal_bias="0"
         android:layout_marginStart="4dp"
         android:layout_marginBottom="8dp"

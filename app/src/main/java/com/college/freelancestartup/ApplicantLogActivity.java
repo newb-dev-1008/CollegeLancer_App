@@ -45,7 +45,7 @@ public class ApplicantLogActivity extends AppCompatActivity {
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutCollab4log);
 
         projectID = getIntent().getExtras().get("projectID").toString();
-        flagLog = Integer.parseInt(getIntent().getExtras().get("flagLog").toString());
+        // flagLog = Integer.parseInt(getIntent().getExtras().get("flagLog").toString());
 
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();

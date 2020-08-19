@@ -56,6 +56,7 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
         numberProjects1 = findViewById(R.id.log_projectsCompleted);
         skills1 = findViewById(R.id.log_skills);
         applicationArticleTV = findViewById(R.id.log_applicationArticle);
+        pickedStatus = findViewById(R.id.log_personPickedStatus);
 
         previousCollabsButton = findViewById(R.id.log_seeCollabsButton);
         messageButton = findViewById(R.id.log_messageBtn);
