@@ -209,8 +209,20 @@
         android:id="@+id/log_selectBtn"
         app:layout_constraintTop_toBottomOf="@id/log_seeCollabsButton"
         app:layout_constraintStart_toEndOf="@id/log_messageBtn"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/log_rejectBtn"
         android:text="Select for project"
+        android:padding="4dp"
+        android:layout_marginTop="20dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/log_rejectBtn"
+        app:layout_constraintTop_toBottomOf="@id/log_seeCollabsButton"
+        app:layout_constraintStart_toEndOf="@id/log_selectBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Reject"
+        android:background="@color/red"
         android:padding="4dp"
         android:layout_marginTop="20dp"/>
 
