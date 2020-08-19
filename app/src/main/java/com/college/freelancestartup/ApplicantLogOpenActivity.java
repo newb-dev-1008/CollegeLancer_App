@@ -122,8 +122,16 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         pickedStatusString = "Rejected";
                         pickedStatus.setText(pickedStatusString);
+                        pickedStatus.setTextColor(Color.parseColor("#800000"));
                         db.collection("CollabProjects").document(selectedProjectID).collection("Collaborators")
-                                .document("User " + userEmail).update("picked", "Rejected").
+                                .document("User " + userEmail).update("picked", "Rejected").addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                // Send notification and e-mail to applicant
+                                Toast.makeText(ApplicantLogOpenActivity.this, "The applicant has been rejected.", Toast.LENGTH_SHORT).show();
+
+                            }
+                        })
                     }
                 })
     }
