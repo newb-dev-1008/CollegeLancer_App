@@ -28,7 +28,7 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
     private TextView name1, personDepartment1, personSemester1, numberCollabs1, numberProjects1, skills1, personPhone1, applicationArticleTV, pickedStatus;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
-    private int internalReqFlag, checkedItem, flagLog;
+    private int internalReqFlag, checkedItem, flagLog, numberPicked;;
     private String userEmail, posterName, selectedProjectID, pickedStatusString;
     // private String projectID, pickedStatusString;
     private Calendar cObj;
@@ -118,12 +118,16 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         pickedStatusString = "Accepted";
                         pickedStatus.setText(pickedStatusString);
-                        int numberPicked;
                         db.collection("CollabProjects").document(selectedProjectID).collection("Collaborators")
                                 .document("User " + userEmail).update("picked", "Selected").addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-
+                                db.collection("CollabProjects").document(selectedProjectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        numberPicked = ;
+                                    }
+                                })
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
