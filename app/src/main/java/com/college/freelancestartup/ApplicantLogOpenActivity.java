@@ -118,7 +118,14 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         pickedStatusString = "Accepted";
                         pickedStatus.setText(pickedStatusString);
-                        db.collection("CollabProjects").document("")
+                        int numberPicked;
+                        db.collection("CollabProjects").document(selectedProjectID).collection("Collaborators")
+                                .document("User " + userEmail).update("picked", "Selected").addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+
+                            }
+                        }).addOnFailureListener()
 
                     }
                 })
