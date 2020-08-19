@@ -22,6 +22,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ApplicantLogOpenActivity extends AppCompatActivity {
 
@@ -29,7 +31,7 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private int internalReqFlag, checkedItem, flagLog, numberPicked;;
-    private String userEmail, posterName, selectedProjectID, pickedStatusString;
+    private String userEmail, posterName, selectedProjectID, pickedStatusString, joinDate;
     // private String projectID, pickedStatusString;
     private Calendar cObj;
     private MaterialButton previousCollabsButton, messageButton, requestButton;
@@ -118,8 +120,9 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         pickedStatusString = "Accepted";
                         pickedStatus.setText(pickedStatusString);
+                        joinDate = cObj.getTime().toString();
                         db.collection("CollabProjects").document(selectedProjectID).collection("Collaborators")
-                                .document("User " + userEmail).update("picked", "Selected").addOnSuccessListener(new OnSuccessListener<Void>() {
+                                .document("User " + userEmail).update("picked", "Selected", "").addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 db.collection("CollabProjects").document(selectedProjectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -130,6 +133,10 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                                         db.collection("CollabProjects").document(selectedProjectID).update("numberPicked", numberPicked);
                                         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                                                 .collection("MyCollabs").document(selectedProjectID).update("numberPicked", numberPicked);
+                                        Map<String, Object> joinedDate = new HashMap<>();
+                                        joinedDate.put("joinDate", joinDate);
+                                        db.collection("CollabProjects").document(selectedProjectID).collection("Collaborators")
+                                                .document("User")
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
