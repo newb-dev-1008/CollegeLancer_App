@@ -31,8 +31,8 @@ public class ApplicantLogActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private int flag, flagLog;
     private String projectID, name, semester, skills, department, previousCollabs, previousProjects;
-    private RecyclerView.LayoutManager availableCollab5LayoutManager;
-    private RecyclerView.Adapter availableCollab5Adapter;
+    private RecyclerView.LayoutManager applicantLog5LayoutManager;
+    private RecyclerView.Adapter applicantLog5Adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,11 +86,11 @@ public class ApplicantLogActivity extends AppCompatActivity {
                                         });
                                 availableCollabs.add(new AvailableCollabsFive(name, department, skills, previousCollabs, previousProjects, semester, userEmail, flag, projectID));
 
-                                availableCollab5LayoutManager = new LinearLayoutManager(ApplicantLogActivity.this);
-                                availableCollab5Adapter = new AvailableCollabsFiveAdapter(availableCollabs);
+                                applicantLog5LayoutManager = new LinearLayoutManager(ApplicantLogActivity.this);
+                                applicantLog5Adapter = new AvailableCollabsFiveAdapter(availableCollabs);
                                 recyclerView.setHasFixedSize(true);
-                                recyclerView.setLayoutManager(availableCollab5LayoutManager);
-                                recyclerView.setAdapter(availableCollab5Adapter);
+                                recyclerView.setLayoutManager(applicantLog5LayoutManager);
+                                recyclerView.setAdapter(applicantLog5Adapter);
                             }
                         } else {
                             recyclerView.setVisibility(View.GONE);
