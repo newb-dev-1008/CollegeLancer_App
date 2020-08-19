@@ -141,7 +141,9 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                             }
                         });
                     }
-                })
+                }).setNegativeButton("Cancel", null)
+                .create();
+        selectApplicant.show();
     }
 
     private void previousCollabsPressed() {
