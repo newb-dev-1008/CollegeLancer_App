@@ -133,6 +133,13 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                                         db.collection("CollabProjects").document(selectedProjectID).update("numberPicked", numberPicked);
                                         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                                                 .collection("MyCollabs").document(selectedProjectID).update("numberPicked", numberPicked);
+                                        Intent intent = new Intent(ApplicantLogOpenActivity.this, ApplicantLogActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        Toast.makeText(ApplicantLogOpenActivity.this, "Get excited! You have a new member in your team!", Toast.LENGTH_SHORT).show();
+
+                                        // Notification to the applicant, and also an e-mail
+                                        startActivity(intent);
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
