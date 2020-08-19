@@ -3,6 +3,7 @@ package com.college.freelancestartup;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -142,6 +143,7 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         pickedStatusString = "Accepted";
                         pickedStatus.setText(pickedStatusString);
+                        pickedStatus.setTextColor(Color.parseColor("#228B22"));
                         joinDate = cObj.getTime().toString();
                         db.collection("CollabProjects").document(selectedProjectID).collection("Collaborators")
                                 .document("User " + userEmail).update("picked", "Selected", "joinDate", joinDate).addOnSuccessListener(new OnSuccessListener<Void>() {
