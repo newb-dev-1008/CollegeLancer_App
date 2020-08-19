@@ -34,7 +34,7 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
     private String userEmail, posterName, selectedProjectID, pickedStatusString, joinDate;
     // private String projectID, pickedStatusString;
     private Calendar cObj;
-    private MaterialButton previousCollabsButton, messageButton, requestButton;
+    private MaterialButton previousCollabsButton, messageButton, requestButton, rejectButton;
     private String[] projNames;
 
     @Override
@@ -103,7 +103,16 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                 requestButtonPressed();
             }
         });
+
+        rejectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rejectButtonPressed();
+            }
+        });
     }
+
+
 
     private void previousCollabsPressed() {
         Intent intent = new Intent(ApplicantLogOpenActivity.this, PreviousCollabsCollabFiveActivity.class);
