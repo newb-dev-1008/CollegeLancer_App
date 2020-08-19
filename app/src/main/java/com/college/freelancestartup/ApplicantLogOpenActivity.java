@@ -112,7 +112,20 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
         });
     }
 
-
+    private void rejectButtonPressed() {
+        AlertDialog selectApplicant = new MaterialAlertDialogBuilder(this)
+                .setTitle("Reject Applicant?")
+                .setMessage("The candidate will be rejected. However, re-application from the candidate will be allowed.")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        pickedStatusString = "Rejected";
+                        pickedStatus.setText(pickedStatusString);
+                        db.collection("CollabProjects").document(selectedProjectID).collection("Collaborators")
+                                .document("User " + userEmail).update("picked", "Rejected").
+                    }
+                })
+    }
 
     private void previousCollabsPressed() {
         Intent intent = new Intent(ApplicantLogOpenActivity.this, PreviousCollabsCollabFiveActivity.class);
