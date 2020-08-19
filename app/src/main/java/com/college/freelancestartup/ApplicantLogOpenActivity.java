@@ -129,9 +129,17 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                             public void onSuccess(Void aVoid) {
                                 // Send notification and e-mail to applicant
                                 Toast.makeText(ApplicantLogOpenActivity.this, "The applicant has been rejected.", Toast.LENGTH_SHORT).show();
-
+                                Intent intent = new Intent(ApplicantLogOpenActivity.this, ApplicantLogActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
                             }
-                        })
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ApplicantLogOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 })
     }
