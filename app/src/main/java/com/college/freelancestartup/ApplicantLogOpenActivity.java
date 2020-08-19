@@ -125,7 +125,12 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                             public void onSuccess(Void aVoid) {
 
                             }
-                        }).addOnFailureListener()
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ApplicantLogOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
 
                     }
                 })
