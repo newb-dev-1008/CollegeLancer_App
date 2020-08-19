@@ -126,20 +126,24 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                         numberPicked = Integer.parseInt(documentSnapshot.get("numberPicked").toString());
+                                        numberPicked = numberPicked + 1;
+                                        db.collection("CollabProjects").document(selectedProjectID).update("numberPicked", numberPicked);
+                                        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                                .collection("MyCollabs").document(selectedProjectID).update("numberPicked", numberPicked);
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-
+                                        Toast.makeText(ApplicantLogOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
-                                })
+                                });
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(ApplicantLogOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        })
+                        });
 
                     }
                 })
