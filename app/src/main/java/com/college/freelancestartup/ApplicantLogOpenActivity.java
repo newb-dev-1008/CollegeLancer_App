@@ -125,7 +125,12 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                                 db.collection("CollabProjects").document(selectedProjectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        numberPicked = ;
+                                        numberPicked = Integer.parseInt(documentSnapshot.get("numberPicked").toString());
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+
                                     }
                                 })
                             }
