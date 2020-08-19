@@ -122,7 +122,7 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                         pickedStatus.setText(pickedStatusString);
                         joinDate = cObj.getTime().toString();
                         db.collection("CollabProjects").document(selectedProjectID).collection("Collaborators")
-                                .document("User " + userEmail).update("picked", "Selected", "").addOnSuccessListener(new OnSuccessListener<Void>() {
+                                .document("User " + userEmail).update("picked", "Selected", "joinDate", joinDate).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 db.collection("CollabProjects").document(selectedProjectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -133,10 +133,6 @@ public class ApplicantLogOpenActivity extends AppCompatActivity {
                                         db.collection("CollabProjects").document(selectedProjectID).update("numberPicked", numberPicked);
                                         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                                                 .collection("MyCollabs").document(selectedProjectID).update("numberPicked", numberPicked);
-                                        Map<String, Object> joinedDate = new HashMap<>();
-                                        joinedDate.put("joinDate", joinDate);
-                                        db.collection("CollabProjects").document(selectedProjectID).collection("Collaborators")
-                                                .document("User")
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
