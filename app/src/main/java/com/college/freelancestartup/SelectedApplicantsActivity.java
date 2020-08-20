@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class SelectedApplicantsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -14,6 +17,8 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
 
     private RecyclerView.LayoutManager showApplicantsLayoutManager;
     private RecyclerView.Adapter showApplicantsAdapter;
+    private FirebaseFirestore db;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,6 +27,9 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.find_recyclerViewSelectedApplicant);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutSelectedApplicants);
+
+        db = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
