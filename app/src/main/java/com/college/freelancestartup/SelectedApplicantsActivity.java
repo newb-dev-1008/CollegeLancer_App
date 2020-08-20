@@ -22,7 +22,7 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private TextView emptyTV;
+    private TextView emptyTV, swipeDownRefreshTV;
     private String name;
     private String semester;
     private String skills;
@@ -47,6 +47,8 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.find_recyclerViewSelectedApplicant);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutSelectedApplicants);
+        swipeDownRefreshTV = findViewById(R.id.swipeRefreshTVSelectedApplicants);
+
         emptyTV = findViewById(R.id.find__emptyTVSelectedApplicants);
 
         db = FirebaseFirestore.getInstance();
@@ -92,7 +94,7 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
                         recyclerView.setAdapter(showApplicantsAdapter);
                     }
                 } else {
-                    collab4RecyclerView.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.GONE);
                     swipeDownRefreshTV.setVisibility(View.GONE);
                 }
                 }
