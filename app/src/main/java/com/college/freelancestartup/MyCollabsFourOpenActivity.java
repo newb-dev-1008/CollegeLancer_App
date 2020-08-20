@@ -81,6 +81,12 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
 
                 if (projSkills.size() == 0) {
                     skills.setText("No specific skills have been specified.");
+                } else {
+                    String skillSet = "";
+                    for (String skill : projSkills) {
+                        skillSet = skillSet.concat(skill).concat("\n");
+                    }
+                    skills.setText(skillSet);
                 }
             }
         });
