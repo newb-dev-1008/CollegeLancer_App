@@ -23,6 +23,12 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private TextView emptyTV;
+    private String name;
+    private String semester;
+    private String skills;
+    private String department;
+    private String previousCollabs;
+    private String previousProjects;
 
     private RecyclerView.LayoutManager showApplicantsLayoutManager;
     private RecyclerView.Adapter showApplicantsAdapter;
@@ -62,21 +68,28 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (queryDocumentSnapshots.size() > 0){
                     emptyTV.setVisibility(View.GONE);
-                    ArrayList<MyCollabsFour> myCollabs = new ArrayList<>();
+                    ArrayList<MyCollabsFour> selectedApp = new ArrayList<>();
                     for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        String name = documentSnapshot.get("name").toString();
-                        String semester = documentSnapshot.get("studentSemester").toString();
-                        String skills = documentSnapshot.get("studentSkills").toString();
-                        String department = documentSnapshot.get("department").toString();
-                        String previousCollabs = documentSnapshot.get("numberCollabs").toString();
-                        String previousProjects = documentSnapshot.get("numberProjects").toString();
-                        myCollabs.add(new MyCollabsFour(posterTitle, projectTitle, projectDesc, postedDate, collabStatus, projectVisible, numberApplicants, numberSelectedApplicants, projectSkills, projectOpenFor, projectID));
+                        String userEmail = documentSnapshot.get("emailID").toString();
+                        db.collection("Users").document("User " + userEmail)
+                                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                name = documentSnapshot.get("name").toString();
+                                semester = documentSnapshot.get("studentSemester").toString();
+                                skills = documentSnapshot.get("studentSkills").toString();
+                                department = documentSnapshot.get("department").toString();
+                                previousCollabs = documentSnapshot.get("numberCollabs").toString();
+                                previousProjects = documentSnapshot.get("numberProjects").toString();
+                            }
+                        });
+                        selectedApp.add(new AvailableCollabsFive(name, department, skills, previousCollabs, previousProjects, semester, userEmail, flag, projectID));
 
-                        myCollabs4LayoutManager = new LinearLayoutManager(SelectedApplicantsActivity.this);
-                        myCollabs4Adapter = new MyCollabFourAdapter(myCollabs);
-                        collab4RecyclerView.setHasFixedSize(true);
-                        collab4RecyclerView.setLayoutManager(myCollabs4LayoutManager);
-                        collab4RecyclerView.setAdapter(myCollabs4Adapter);
+                        showApplicantsLayoutManager = new LinearLayoutManager(SelectedApplicantsActivity.this);
+                        showApplicantsAdapter = new MyCollabFourAdapter(selectedApp);
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(showApplicantsLayoutManager);
+                        recyclerView.setAdapter(showApplicantsAdapter);
                     }
                 } else {
                     collab4RecyclerView.setVisibility(View.GONE);
