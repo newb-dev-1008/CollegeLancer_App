@@ -295,7 +295,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
     }
 
     private void selectedApplicantsPressed() {
-        Intent intent = new Intent(MyCollabsFourOpenActivity.this, SelectedApplicants.class);
+        Intent intent = new Intent(MyCollabsFourOpenActivity.this, SelectedApplicantsActivity.class);
         intent.putExtra("projectID", projectID);
         startActivity(intent);
     }
