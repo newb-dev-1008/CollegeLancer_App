@@ -91,9 +91,12 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
             }
         });
 
-        if (collabStatus.getText().toString().equals("Open") || collabStatus.getText().toString().equals("Completed") || collabStatus.getText().toString().equals("Ongoing")) {
+        if (collabStatus.getText().toString().equals("Open") || collabStatus.getText().toString().equals("Ongoing")) {
             collabStatus.setTextColor(Color.parseColor("#228B22"));
             collab4VisibleSwitch.setChecked(true);
+        } else if (collabStatus.getText().toString().equals("Completed")) {
+            collabStatus.setTextColor(Color.parseColor("#228B22"));
+            collab4VisibleSwitch.setChecked(false);
         } else {
             collabStatus.setTextColor(Color.parseColor("#800000"));
             collab4VisibleSwitch.setChecked(false);
