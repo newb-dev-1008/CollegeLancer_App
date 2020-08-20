@@ -1,6 +1,7 @@
 package com.college.freelancestartup;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private TextView emptyTV;
 
     private RecyclerView.LayoutManager showApplicantsLayoutManager;
     private RecyclerView.Adapter showApplicantsAdapter;
@@ -35,6 +37,7 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.find_recyclerViewSelectedApplicant);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutSelectedApplicants);
+        emptyTV = findViewById(R.id.find__emptyTVSelectedApplicants);
 
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
