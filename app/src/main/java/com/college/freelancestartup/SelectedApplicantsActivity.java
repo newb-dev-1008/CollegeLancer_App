@@ -7,8 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class SelectedApplicantsActivity extends AppCompatActivity {
 
@@ -47,6 +50,13 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
 
     private void showSelectedApplicants() {
         db.collection("CollabProjects").document(projectID).collection("Collaborators")
-                .document("User " + )
+                .whereEqualTo("picked", "Selected").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+
+                }
+            }
+        })
     }
 }
