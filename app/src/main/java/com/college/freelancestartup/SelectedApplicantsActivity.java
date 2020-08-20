@@ -18,12 +18,17 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager showApplicantsLayoutManager;
     private RecyclerView.Adapter showApplicantsAdapter;
     private FirebaseFirestore db;
+    private String projectID;
     private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selected_applicants_collab4);
+
+        if (savedInstanceState != null) {
+            projectID = getIntent().getExtras().get("projectID").toString();
+        }
 
         recyclerView = findViewById(R.id.find_recyclerViewSelectedApplicant);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutSelectedApplicants);
@@ -41,6 +46,7 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
     }
 
     private void showSelectedApplicants() {
-
+        db.collection("CollabProjects").document(projectID).collection("Collaborators")
+                .document("User " + )
     }
 }
