@@ -87,7 +87,9 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                     }
                 });
 
-                if (numberPicked !=)
+                if (numberPicked != 0) {
+                    selectedApplicantsButton.setVisibility(View.VISIBLE);
+                }
 
                 if (projSkills.size() == 0) {
                     skills.setText("No specific skills have been specified.");
