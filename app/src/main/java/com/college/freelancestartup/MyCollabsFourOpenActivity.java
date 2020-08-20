@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class MyCollabsFourOpenActivity extends AppCompatActivity {
 
     private TextView posterName, projectTitle, postedDate, collabStatus, projectDesc, numApplicants, numSelectedApplicants, skills, openFor, noVotes, noVotesTV;
-    private MaterialButton applicantsLogButton, finishProjectButton;
+    private MaterialButton applicantsLogButton, finishProjectButton, selectedApplicantsButton;
     private Switch collab4VisibleSwitch, endProjectSwitch;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
@@ -50,6 +50,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
         numSelectedApplicants = findViewById(R.id.collab4_noAcceptedApplicants);
         applicantsLogButton = findViewById(R.id.collab4_noApplicantsBtn);
         finishProjectButton = findViewById(R.id.collab4_finishProjectBtn);
+        selectedApplicantsButton = findViewById(R.id.collab4_selectedApplicantBtn);
         collab4VisibleSwitch = findViewById(R.id.collab4_visibleSwitch);
         skills = findViewById(R.id.collab4_skills);
         openFor = findViewById(R.id.collab4_openFor);
@@ -202,6 +203,13 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 applicantsLog();
+            }
+        });
+
+        selectedApplicantsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedApplicantsPressed();
             }
         });
 
