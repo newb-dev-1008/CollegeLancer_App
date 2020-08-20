@@ -294,6 +294,12 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void selectedApplicantsPressed() {
+        Intent intent = new Intent(MyCollabsFourOpenActivity.this, SelectedApplicants.class);
+        intent.putExtra("projectID", projectID);
+        startActivity(intent);
+    }
+
     private void finishButtonPressed() {
         AlertDialog endProjectDialog = new MaterialAlertDialogBuilder(MyCollabsFourOpenActivity.this)
                 .setTitle("Are you sure you want to end the project?")
