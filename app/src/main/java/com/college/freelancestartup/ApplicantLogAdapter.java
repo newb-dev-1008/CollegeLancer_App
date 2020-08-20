@@ -93,7 +93,7 @@ public class ApplicantLogAdapter extends RecyclerView.Adapter<ApplicantLogAdapte
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         pickedStatusT = documentSnapshot.get("picked").toString();
                         // applicationArticle = documentSnapshot.get("appArticle").toString();
-                        if (pickedStatusT.equals("Accepted")) {
+                        if (pickedStatusT.equals("Accepted") || pickedStatusT.equals("Selected")) {
                             holder.pickedStatus.setText(pickedStatusT);
                             holder.pickedStatus.setTextColor(Color.parseColor("#228B22"));
                         } else {

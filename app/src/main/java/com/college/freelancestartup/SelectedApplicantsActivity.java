@@ -32,6 +32,7 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
     private String department;
     private String previousCollabs;
     private String previousProjects;
+    private int flag;
 
     private RecyclerView.LayoutManager showApplicantsLayoutManager;
     private RecyclerView.Adapter showApplicantsAdapter;
@@ -53,6 +54,7 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
         swipeDownRefreshTV = findViewById(R.id.swipeRefreshTVSelectedApplicants);
 
         emptyTV = findViewById(R.id.find__emptyTVSelectedApplicants);
+        flag = 1;
 
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -73,7 +75,7 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (queryDocumentSnapshots.size() > 0){
                     emptyTV.setVisibility(View.GONE);
-                    ArrayList<MyCollabsFour> selectedApp = new ArrayList<>();
+                    ArrayList<AvailableCollabsFive> selectedApp = new ArrayList<>();
                     for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                         String userEmail = documentSnapshot.get("emailID").toString();
                         db.collection("Users").document("User " + userEmail)
@@ -91,7 +93,7 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
                         selectedApp.add(new AvailableCollabsFive(name, department, skills, previousCollabs, previousProjects, semester, userEmail, flag, projectID));
 
                         showApplicantsLayoutManager = new LinearLayoutManager(SelectedApplicantsActivity.this);
-                        showApplicantsAdapter = new MyCollabFourAdapter(selectedApp);
+                        showApplicantsAdapter = new AvailableCollabsFiveAdapter(selectedApp);
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(showApplicantsLayoutManager);
                         recyclerView.setAdapter(showApplicantsAdapter);
