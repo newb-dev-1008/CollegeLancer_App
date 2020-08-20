@@ -3,13 +3,16 @@ package com.college.freelancestartup;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -97,8 +100,12 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
                     recyclerView.setVisibility(View.GONE);
                     swipeDownRefreshTV.setVisibility(View.GONE);
                 }
-                }
             }
-        })
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(SelectedApplicantsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
