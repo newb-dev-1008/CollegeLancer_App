@@ -12,6 +12,9 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    private RecyclerView.LayoutManager showApplicantsLayoutManager;
+    private RecyclerView.Adapter showApplicantsAdapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
