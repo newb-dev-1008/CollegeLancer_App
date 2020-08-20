@@ -24,6 +24,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+
 public class MyCollabsFourOpenActivity extends AppCompatActivity {
 
     private TextView posterName, projectTitle, postedDate, collabStatus, projectDesc, numApplicants, numSelectedApplicants, skills, openFor, noVotes, noVotesTV;
@@ -72,8 +74,14 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                 collabStatus.setText(documentSnapshot.get("projectStatus").toString());
                 numApplicants.setText(documentSnapshot.get("numberApps").toString());
                 numSelectedApplicants.setText(documentSnapshot.get("numberPicked").toString());
-                skills.setText(documentSnapshot.get("projectSkills").toString());
+                // skills.setText(documentSnapshot.get("projectSkills").toString());
                 openFor.setText(documentSnapshot.get("projectOpenFor").toString());
+                ArrayList<String> projSkills = new ArrayList<>();
+                projSkills = (ArrayList<String>) documentSnapshot.get("projectSkills");
+
+                if (projSkills.size() == 0) {
+                    skills.setText("No specific skills have been specified.");
+                }
             }
         });
 
