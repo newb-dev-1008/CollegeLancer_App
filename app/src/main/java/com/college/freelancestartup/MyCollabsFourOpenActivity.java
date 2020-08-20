@@ -34,7 +34,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private String projectID;
-    private int numberVotes, switchFlag;
+    private int numberVotes, numberPicked, switchFlag;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,6 +79,15 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                 openFor.setText(documentSnapshot.get("projectOpenFor").toString());
                 ArrayList<String> projSkills = new ArrayList<>();
                 projSkills = (ArrayList<String>) documentSnapshot.get("projectSkills");
+
+                db.collection("CollabProjects").document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        numberPicked = Integer.parseInt(documentSnapshot.get("numberPicked").toString());
+                    }
+                });
+
+                if (numberPicked !=)
 
                 if (projSkills.size() == 0) {
                     skills.setText("No specific skills have been specified.");
