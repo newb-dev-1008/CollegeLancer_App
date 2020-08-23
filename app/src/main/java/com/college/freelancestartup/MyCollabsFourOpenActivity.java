@@ -111,12 +111,14 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
             collab4VisibleSwitch.setChecked(false);
         } else if (collabStatus.getText().toString().equals("Closed")) {
             collabStatus.setTextColor(Color.parseColor("#800000"));
+            selectedApplicantsButton.setVisibility(View.VISIBLE);
             collab4VisibleSwitch.setChecked(false);
         }
 
         if (collabStatus.getText().toString().equals("Ending")) {
             endProjectSwitch.setVisibility(View.VISIBLE);
             collabStatus.setTextColor(Color.parseColor("#800000"));
+            selectedApplicantsButton.setVisibility(View.VISIBLE);
             endProjectSwitch.setChecked(true);
             finishProjectButton.setVisibility(View.GONE);
             noVotes.setVisibility(View.VISIBLE);
