@@ -33,7 +33,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
     private Switch collab4VisibleSwitch, endProjectSwitch;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
-    private String projectID;
+    private String projectID, projStatus;
     private int numberVotes, numberPicked, switchFlag;
 
     @Override
@@ -68,6 +68,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                 .collection("MyCollabs").document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
+                projStatus = documentSnapshot.get("projectStatus").toString();
                 posterName.setText(documentSnapshot.get("posterTitle").toString());
                 projectTitle.setText(documentSnapshot.get("projectTitle").toString());
                 postedDate.setText(documentSnapshot.get("postDate").toString());
