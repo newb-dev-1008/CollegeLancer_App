@@ -104,19 +104,19 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
             }
         });
 
-        if (collabStatus.getText().toString().equals("Open") || collabStatus.getText().toString().equals("Ongoing")) {
+        if (projStatus.equals("Open") || projStatus.equals("Ongoing")) {
             collabStatus.setTextColor(Color.parseColor("#228B22"));
             collab4VisibleSwitch.setChecked(true);
-        } else if (collabStatus.getText().toString().equals("Completed")) {
+        } else if (projStatus.equals("Completed")) {
             collabStatus.setTextColor(Color.parseColor("#228B22"));
             collab4VisibleSwitch.setChecked(false);
-        } else if (collabStatus.getText().toString().equals("Closed")) {
+        } else if (projStatus.equals("Closed")) {
             collabStatus.setTextColor(Color.parseColor("#800000"));
             selectedApplicantsButton.setVisibility(View.VISIBLE);
             collab4VisibleSwitch.setChecked(false);
         }
 
-        if (collabStatus.getText().toString().equals("Ending")) {
+        if (projStatus.equals("Ending")) {
             endProjectSwitch.setVisibility(View.VISIBLE);
             collabStatus.setTextColor(Color.parseColor("#800000"));
             selectedApplicantsButton.setVisibility(View.VISIBLE);
