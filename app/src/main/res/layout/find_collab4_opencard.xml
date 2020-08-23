@@ -219,7 +219,7 @@
         app:layout_constraintStart_toEndOf="@id/collab4_noApplicantsBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/collab4_noApplicantsBtn"
-        android:text="Selected Applicants"
+        android:text="Collaborators"
         android:visibility="gone"
         app:layout_constraintHorizontal_bias="0"
         android:layout_marginStart="4dp"
