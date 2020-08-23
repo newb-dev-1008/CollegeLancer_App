@@ -69,6 +69,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 projStatus = documentSnapshot.get("projectStatus").toString();
+                Toast.makeText(MyCollabsFourOpenActivity.this, projStatus, Toast.LENGTH_SHORT).show();
                 posterName.setText(documentSnapshot.get("posterTitle").toString());
                 projectTitle.setText(documentSnapshot.get("projectTitle").toString());
                 postedDate.setText(documentSnapshot.get("postDate").toString());
