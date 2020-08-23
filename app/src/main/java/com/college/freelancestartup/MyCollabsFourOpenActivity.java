@@ -92,7 +92,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                 }
 
                 if (projSkills.size() == 0) {
-                    skills.setText("No specific skills have been specified.");
+                    skills.setText("No particular skills have been specified.");
                 } else {
                     String skillSet = "";
                     for (String skill : projSkills) {
@@ -109,13 +109,14 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
         } else if (collabStatus.getText().toString().equals("Completed")) {
             collabStatus.setTextColor(Color.parseColor("#228B22"));
             collab4VisibleSwitch.setChecked(false);
-        } else {
+        } else if (collabStatus.getText().toString().equals("Closed")) {
             collabStatus.setTextColor(Color.parseColor("#800000"));
             collab4VisibleSwitch.setChecked(false);
         }
 
         if (collabStatus.getText().toString().equals("Ending")) {
             endProjectSwitch.setVisibility(View.VISIBLE);
+            collabStatus.setTextColor(Color.parseColor("#800000"));
             endProjectSwitch.setChecked(true);
             finishProjectButton.setVisibility(View.GONE);
             noVotes.setVisibility(View.VISIBLE);
