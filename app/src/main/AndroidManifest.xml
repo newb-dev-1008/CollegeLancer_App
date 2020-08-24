@@ -82,6 +82,9 @@
         <activity android:name=".ApplicantLogOpenActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
 
+        <activity android:name=".SelectedApplicantsActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
+
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="ocr"/>
