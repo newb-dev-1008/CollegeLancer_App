@@ -58,6 +58,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
         noVotes = findViewById(R.id.collab4_noVotes);
         noVotesTV = findViewById(R.id.collab4_noVotesTV);
         switchFlag = 0;
+        projStatus = "";
 
         projectID = getIntent().getExtras().get("projectID").toString();
 
