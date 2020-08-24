@@ -160,7 +160,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                             switchFlag = 0;
                         }
                     } else {
-                        if (switchFlag == 0) {
+                        if (switchFlag == 1) {
                             AlertDialog confirmReCollab = new MaterialAlertDialogBuilder(MyCollabsFourOpenActivity.this)
                                     .setTitle("Are you sure you want to put this project up for collaboration again?")
                                     .setMessage("Your project will be visible to users looking for collaboration.\n" +
@@ -177,7 +177,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                                         public void onSuccess(Void aVoid) {
                                                             collabStatus.setText("Open");
                                                             collabStatus.setTextColor(Color.parseColor("#228B22"));
-                                                            switchFlag = 1;
+                                                            switchFlag = 0;
                                                         }
                                                     }).addOnFailureListener(new OnFailureListener() {
                                                 @Override
@@ -199,7 +199,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                             confirmReCollab.setCanceledOnTouchOutside(false);
                         } /*else {
                             switchFlag = 0;
-                        }*/ else if (switchFlag == 1) {
+                        }*/ else if (switchFlag == 0) {
                             AlertDialog confirmUnCollab = new MaterialAlertDialogBuilder(MyCollabsFourOpenActivity.this)
                                     .setTitle("Are you sure you want to take the project off the grid?")
                                     .setMessage("Your project will no longer be visible to users looking for collaboration.\n" +
@@ -215,7 +215,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                                         public void onSuccess(Void aVoid) {
                                                             collabStatus.setText("Closed");
                                                             collabStatus.setTextColor(Color.parseColor("#800000"));
-                                                            switchFlag = 0;
+                                                            switchFlag = 1;
                                                         }
                                                     }).addOnFailureListener(new OnFailureListener() {
                                                 @Override
