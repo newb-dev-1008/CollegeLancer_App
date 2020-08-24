@@ -69,7 +69,6 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 projStatus = documentSnapshot.get("projectStatus").toString();
-                Toast.makeText(MyCollabsFourOpenActivity.this, projStatus, Toast.LENGTH_SHORT).show();
                 posterName.setText(documentSnapshot.get("posterTitle").toString());
                 projectTitle.setText(documentSnapshot.get("projectTitle").toString());
                 postedDate.setText(documentSnapshot.get("postDate").toString());
@@ -81,6 +80,23 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                 openFor.setText(documentSnapshot.get("projectOpenFor").toString());
                 ArrayList<String> projSkills = new ArrayList<>();
                 projSkills = (ArrayList<String>) documentSnapshot.get("projectSkills");
+
+                switch (projStatus) {
+                    case "Open":
+                    case "Ongoing":
+                        collabStatus.setTextColor(Color.parseColor("#228B22"));
+                        collab4VisibleSwitch.setChecked(true);
+                        break;
+                    case "Completed":
+                        collabStatus.setTextColor(Color.parseColor("#228B22"));
+                        collab4VisibleSwitch.setChecked(false);
+                        break;
+                    case "Closed":
+                        collabStatus.setTextColor(Color.parseColor("#800000"));
+                        selectedApplicantsButton.setVisibility(View.VISIBLE);
+                        collab4VisibleSwitch.setChecked(false);
+                        break;
+                }
 
                 db.collection("CollabProjects").document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -104,23 +120,6 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                 }
             }
         });
-
-        switch (projStatus) {
-            case "Open":
-            case "Ongoing":
-                collabStatus.setTextColor(Color.parseColor("#228B22"));
-                collab4VisibleSwitch.setChecked(true);
-                break;
-            case "Completed":
-                collabStatus.setTextColor(Color.parseColor("#228B22"));
-                collab4VisibleSwitch.setChecked(false);
-                break;
-            case "Closed":
-                collabStatus.setTextColor(Color.parseColor("#800000"));
-                selectedApplicantsButton.setVisibility(View.VISIBLE);
-                collab4VisibleSwitch.setChecked(false);
-                break;
-        }
 
         if (projStatus.equals("Ending")) {
             endProjectSwitch.setVisibility(View.VISIBLE);
