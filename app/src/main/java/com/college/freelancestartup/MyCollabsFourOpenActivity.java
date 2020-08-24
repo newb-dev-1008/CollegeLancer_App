@@ -93,7 +93,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                         break;
                     case "Completed":
                         collabStatus.setTextColor(Color.parseColor("#228B22"));
-                        collab4VisibleSwitch.setChecked(false);
+                        collab4VisibleSwitch.setVisibility(View.GONE);
                         break;
                     case "Closed":
                         collabStatus.setTextColor(Color.parseColor("#800000"));
