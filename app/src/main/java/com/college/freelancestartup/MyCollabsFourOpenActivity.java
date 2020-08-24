@@ -151,6 +151,8 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
         collab4VisibleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                String str = Integer.toString(switchFlag);
+                Toast.makeText(MyCollabsFourOpenActivity.this, str, Toast.LENGTH_SHORT).show();
                 if (b) {
                     if (switchFlag == 2) {
                         String flagDep = collabStatus.getText().toString();
@@ -199,7 +201,8 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                             confirmReCollab.setCanceledOnTouchOutside(false);
                         } /*else {
                             switchFlag = 0;
-                        }*/ else if (switchFlag == 0) {
+                        }*/
+                        else {
                             AlertDialog confirmUnCollab = new MaterialAlertDialogBuilder(MyCollabsFourOpenActivity.this)
                                     .setTitle("Are you sure you want to take the project off the grid?")
                                     .setMessage("Your project will no longer be visible to users looking for collaboration.\n" +
