@@ -162,82 +162,86 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                             switchFlag = 0;
                         }
                     } else {
-                        if (switchFlag == 1) {
-                            AlertDialog confirmReCollab = new MaterialAlertDialogBuilder(MyCollabsFourOpenActivity.this)
-                                    .setTitle("Are you sure you want to put this project up for collaboration again?")
-                                    .setMessage("Your project will be visible to users looking for collaboration.\n" +
-                                            "Please note that this will only add more contributors to your project.\n" +
-                                            "Your current collaborators (if any) are still going to be a part of your project.\n\n" +
-                                            "Do you want to continue?")
-                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                                                    .collection("MyCollabs").document(projectID).update("projectStatus", "Open")
-                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void aVoid) {
-                                                            collabStatus.setText("Open");
-                                                            collabStatus.setTextColor(Color.parseColor("#228B22"));
-                                                            switchFlag = 0;
-                                                        }
-                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                    finish();
-                                                    // Go to previous fragment from activity and don't let back press return to the activity
-                                                }
-                                            });
-                                        }
-                                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            collab4VisibleSwitch.setChecked(false);
-                                        }
-                                    }).create();
-                            confirmReCollab.show();
-                            confirmReCollab.setCancelable(false);
-                            confirmReCollab.setCanceledOnTouchOutside(false);
-                        } /*else {
+                        AlertDialog confirmReCollab = new MaterialAlertDialogBuilder(MyCollabsFourOpenActivity.this)
+                                .setTitle("Are you sure you want to put this project up for collaboration again?")
+                                .setMessage("Your project will be visible to users looking for collaboration.\n" +
+                                        "Please note that this will only add more contributors to your project.\n" +
+                                        "Your current collaborators (if any) are still going to be a part of your project.\n\n" +
+                                        "Do you want to continue?")
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                                .collection("MyCollabs").document(projectID).update("projectStatus", "Open")
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        collabStatus.setText("Open");
+                                                        collabStatus.setTextColor(Color.parseColor("#228B22"));
+                                                        switchFlag = 0;
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                finish();
+                                                // Go to previous fragment from activity and don't let back press return to the activity
+                                            }
+                                        });
+                                    }
+                                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        collab4VisibleSwitch.setChecked(false);
+                                    }
+                                }).create();
+                        confirmReCollab.show();
+                        confirmReCollab.setCancelable(false);
+                        confirmReCollab.setCanceledOnTouchOutside(false);
+                    }
+                } else {
+                    if (switchFlag == 2) {
+                        String flagDep = collabStatus.getText().toString();
+                        if (flagDep.equals("Open")) {
+                            switchFlag = 1;
+                        } else {
                             switchFlag = 0;
-                        }*/
-                        else {
-                            AlertDialog confirmUnCollab = new MaterialAlertDialogBuilder(MyCollabsFourOpenActivity.this)
-                                    .setTitle("Are you sure you want to take the project off the grid?")
-                                    .setMessage("Your project will no longer be visible to users looking for collaboration.\n" +
-                                            "This means that users will no longer be able to apply for the role of contributor for your project.\n\n" +
-                                            "Do you want to continue?")
-                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                                                    .collection("MyCollabs").document(projectID).update("projectStatus", "Closed")
-                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void aVoid) {
-                                                            collabStatus.setText("Closed");
-                                                            collabStatus.setTextColor(Color.parseColor("#800000"));
-                                                            switchFlag = 1;
-                                                        }
-                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                    finish();
-                                                }
-                                            });
-                                        }
-                                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            collab4VisibleSwitch.setChecked(true);
-                                        }
-                                    }).create();
-                            confirmUnCollab.show();
-                            confirmUnCollab.setCancelable(false);
-                            confirmUnCollab.setCanceledOnTouchOutside(false);
                         }
+                    } else {
+                        AlertDialog confirmUnCollab = new MaterialAlertDialogBuilder(MyCollabsFourOpenActivity.this)
+                                .setTitle("Are you sure you want to take the project off the grid?")
+                                .setMessage("Your project will no longer be visible to users looking for collaboration.\n" +
+                                        "This means that users will no longer be able to apply for the role of contributor for your project.\n\n" +
+                                        "Do you want to continue?")
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                                .collection("MyCollabs").document(projectID).update("projectStatus", "Closed")
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        collabStatus.setText("Closed");
+                                                        collabStatus.setTextColor(Color.parseColor("#800000"));
+                                                        switchFlag = 1;
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                finish();
+                                            }
+                                        });
+                                    }
+                                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        collab4VisibleSwitch.setChecked(true);
+                                    }
+                                }).create();
+                        confirmUnCollab.show();
+                        confirmUnCollab.setCancelable(false);
+                        confirmUnCollab.setCanceledOnTouchOutside(false);
                     }
                 }
             }
