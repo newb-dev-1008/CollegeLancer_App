@@ -58,6 +58,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
         noVotes = findViewById(R.id.collab4_noVotes);
         noVotesTV = findViewById(R.id.collab4_noVotesTV);
         switchFlag = 0;
+        numberPicked = 0;
         projStatus = "";
 
         projectID = getIntent().getExtras().get("projectID").toString();
@@ -76,7 +77,9 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                 projectDesc.setText(documentSnapshot.get("projectDesc").toString());
                 collabStatus.setText(projStatus);
                 numApplicants.setText(documentSnapshot.get("numberApps").toString());
-                numSelectedApplicants.setText(documentSnapshot.get("numberPicked").toString());
+                String numberPickedStr = documentSnapshot.get("numberPicked").toString();
+                numberPicked = Integer.parseInt(documentSnapshot.get("numberPicked").toString());
+                numSelectedApplicants.setText(numberPickedStr);
                 // skills.setText(documentSnapshot.get("projectSkills").toString());
                 openFor.setText(documentSnapshot.get("projectOpenFor").toString());
                 ArrayList<String> projSkills = new ArrayList<>();
@@ -99,12 +102,14 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                         break;
                 }
 
+                /*
                 db.collection("CollabProjects").document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         numberPicked = Integer.parseInt(documentSnapshot.get("numberPicked").toString());
                     }
                 });
+                */
 
                 if (numberPicked != 0) {
                     selectedApplicantsButton.setVisibility(View.VISIBLE);
@@ -167,6 +172,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
                                             }
                                         });
                                     }
