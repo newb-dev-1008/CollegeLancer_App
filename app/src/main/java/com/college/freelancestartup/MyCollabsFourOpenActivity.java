@@ -34,7 +34,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private String projectID, projStatus;
-    private int numberVotes, numberPicked, switchFlag;
+    private int numberVotes, numberPicked, switchFlag, voluntarySwitchFlag;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
         noVotes = findViewById(R.id.collab4_noVotes);
         noVotesTV = findViewById(R.id.collab4_noVotesTV);
         switchFlag = 0;
+        voluntarySwitchFlag = 1;
         projStatus = "";
 
         projectID = getIntent().getExtras().get("projectID").toString();
@@ -87,15 +88,18 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                     case "Ongoing":
                         collabStatus.setTextColor(Color.parseColor("#228B22"));
                         collab4VisibleSwitch.setChecked(true);
+                        voluntarySwitchFlag = 1;
                         break;
                     case "Completed":
                         collabStatus.setTextColor(Color.parseColor("#228B22"));
                         collab4VisibleSwitch.setChecked(false);
+                        voluntarySwitchFlag = 1;
                         break;
                     case "Closed":
                         collabStatus.setTextColor(Color.parseColor("#800000"));
                         selectedApplicantsButton.setVisibility(View.VISIBLE);
                         collab4VisibleSwitch.setChecked(false);
+                        voluntarySwitchFlag = 1;
                         break;
                 }
 
@@ -126,6 +130,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
             endProjectSwitch.setVisibility(View.VISIBLE);
             collabStatus.setTextColor(Color.parseColor("#800000"));
             selectedApplicantsButton.setVisibility(View.VISIBLE);
+            voluntarySwitchFlag = 1;
             endProjectSwitch.setChecked(true);
             finishProjectButton.setVisibility(View.GONE);
             noVotes.setVisibility(View.VISIBLE);
@@ -145,7 +150,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    if (switchFlag != 1) {
+                    if (switchFlag != 1 && voluntarySwitchFlag != 1) {
                         AlertDialog confirmReCollab = new MaterialAlertDialogBuilder(MyCollabsFourOpenActivity.this)
                                 .setTitle("Are you sure you want to put this project up for collaboration again?")
                                 .setMessage("Your project will be visible to users looking for collaboration.\n" +
@@ -167,6 +172,8 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                switchFlag = 0;
+                                                voluntarySwitchFlag = 0;
                                             }
                                         });
                                     }
@@ -181,8 +188,9 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                         confirmReCollab.setCanceledOnTouchOutside(false);
                     } else {
                         switchFlag = 0;
+                        voluntarySwitchFlag = 0;
                     }
-                } else {
+                } else if (voluntarySwitchFlag != 1) {
                     AlertDialog confirmUnCollab = new MaterialAlertDialogBuilder(MyCollabsFourOpenActivity.this)
                             .setTitle("Are you sure you want to take the project off the grid?")
                             .setMessage("Your project will no longer be visible to users looking for collaboration.\n" +
