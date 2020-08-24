@@ -152,9 +152,12 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     if (switchFlag == 2) {
-                        // set switchFlag accordingly
-
-                        return;
+                        String flagDep = collabStatus.getText().toString();
+                        if (flagDep.equals("Open")) {
+                            switchFlag = 1;
+                        } else {
+                            switchFlag = 0;
+                        }
                     } else {
                         if (switchFlag == 0) {
                             AlertDialog confirmReCollab = new MaterialAlertDialogBuilder(MyCollabsFourOpenActivity.this)
