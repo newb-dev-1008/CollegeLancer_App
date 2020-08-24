@@ -193,6 +193,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         collab4VisibleSwitch.setChecked(false);
+                                        switchFlag = 2;
                                     }
                                 }).create();
                         confirmReCollab.show();
@@ -237,6 +238,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         collab4VisibleSwitch.setChecked(true);
+                                        switchFlag = 2;
                                     }
                                 }).create();
                         confirmUnCollab.show();
