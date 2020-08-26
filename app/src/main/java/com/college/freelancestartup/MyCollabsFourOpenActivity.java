@@ -187,6 +187,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                                         collabStatus.setText("Open");
                                                         collabStatus.setTextColor(Color.parseColor("#228B22"));
                                                         switchFlag = 0;
+                                                        finishProjectButton.setVisibility(View.GONE);
                                                     }
                                                 }).addOnFailureListener(new OnFailureListener() {
                                             @Override
@@ -201,6 +202,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         switchFlag = 2;
+                                        finishProjectButton.setVisibility(View.VISIBLE);
                                         collab4VisibleSwitch.setChecked(false);
                                     }
                                 }).create();
@@ -238,6 +240,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                                     public void onSuccess(Void aVoid) {
                                                         collabStatus.setText("Closed");
                                                         collabStatus.setTextColor(Color.parseColor("#800000"));
+                                                        finishProjectButton.setVisibility(View.VISIBLE);
                                                         switchFlag = 1;
                                                     }
                                                 }).addOnFailureListener(new OnFailureListener() {
@@ -252,6 +255,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         switchFlag = 2;
+                                        finishProjectButton.setVisibility(View.GONE);
                                         collab4VisibleSwitch.setChecked(true);
                                     }
                                 }).create();
