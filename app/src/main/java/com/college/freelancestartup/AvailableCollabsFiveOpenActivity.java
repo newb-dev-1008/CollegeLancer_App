@@ -51,6 +51,9 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
 
         cObj = Calendar.getInstance();
 
+        userEmail = getIntent().getExtras().get("userEmail").toString();
+        flagLog = Integer.parseInt(getIntent().getExtras().get("flagLog").toString());
+
         name1 = findViewById(R.id.collab5_name);
         personDepartment1 = findViewById(R.id.collab5_personDepartments);
         personSemester1 = findViewById(R.id.collab5_personSemester);
@@ -78,8 +81,9 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         internalReqFlag = 0;
         checkedItem = -1;
 
-        userEmail = getIntent().getExtras().get("userEmail").toString();
-        flagLog = Integer.parseInt(getIntent().getExtras().get("flagLog").toString());
+        if (flagLog == 1) {
+            requestButton.setVisibility(View.GONE);
+        }
 
         db.collection("Users").document("User " + userEmail).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
