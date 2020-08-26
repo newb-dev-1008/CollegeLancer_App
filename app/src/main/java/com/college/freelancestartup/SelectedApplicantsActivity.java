@@ -45,6 +45,8 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selected_applicants_collab4);
 
+        projectID = "";
+
         if (savedInstanceState != null) {
             projectID = getIntent().getExtras().get("projectID").toString();
         }
