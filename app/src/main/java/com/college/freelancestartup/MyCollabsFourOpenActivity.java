@@ -101,6 +101,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                         collabStatus.setTextColor(Color.parseColor("#800000"));
                         selectedApplicantsButton.setVisibility(View.VISIBLE);
                         collab4VisibleSwitch.setChecked(false);
+                        finishProjectButton.setVisibility(View.VISIBLE);
                         break;
                 }
 
