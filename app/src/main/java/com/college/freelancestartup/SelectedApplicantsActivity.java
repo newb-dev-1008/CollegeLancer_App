@@ -45,11 +45,13 @@ public class SelectedApplicantsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selected_applicants_collab4);
 
-        projectID = "";
+        projectID = getIntent().getExtras().get("projectID").toString();;
 
+        /*
         if (savedInstanceState != null) {
             projectID = getIntent().getExtras().get("projectID").toString();
         }
+        */
 
         recyclerView = findViewById(R.id.find_recyclerViewSelectedApplicant);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutSelectedApplicants);
