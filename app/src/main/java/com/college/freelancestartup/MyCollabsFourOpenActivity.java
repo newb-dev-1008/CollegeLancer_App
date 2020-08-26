@@ -199,8 +199,8 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        collab4VisibleSwitch.setChecked(false);
                                         switchFlag = 2;
+                                        collab4VisibleSwitch.setChecked(false);
                                     }
                                 }).create();
                         confirmReCollab.show();
@@ -250,8 +250,8 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        collab4VisibleSwitch.setChecked(true);
                                         switchFlag = 2;
+                                        collab4VisibleSwitch.setChecked(true);
                                     }
                                 }).create();
                         confirmUnCollab.show();
