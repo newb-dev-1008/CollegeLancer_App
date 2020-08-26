@@ -33,7 +33,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
     private Switch collab4VisibleSwitch, endProjectSwitch;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
-    private String projectID, projStatus;
+    private String projectID, projStatus, flagDep;
     private int numberVotes, numberPicked, switchFlag;
 
     @Override
@@ -60,6 +60,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
         switchFlag = 2;
         numberPicked = 0;
         projStatus = "";
+        flagDep = "";
 
         projectID = getIntent().getExtras().get("projectID").toString();
 
@@ -155,7 +156,13 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                 Toast.makeText(MyCollabsFourOpenActivity.this, str, Toast.LENGTH_SHORT).show();
                 if (b) {
                     if (switchFlag == 2) {
-                        String flagDep = collabStatus.getText().toString();
+                        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                .collection("MyCollabs").document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                flagDep = documentSnapshot.get("projectStatus").toString();
+                            }
+                        });
                         if (flagDep.equals("Open")) {
                             switchFlag = 1;
                         } else {
@@ -202,7 +209,13 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                     }
                 } else {
                     if (switchFlag == 2) {
-                        String flagDep = collabStatus.getText().toString();
+                        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                .collection("MyCollabs").document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                flagDep = documentSnapshot.get("projectStatus").toString();
+                            }
+                        });
                         if (flagDep.equals("Open")) {
                             switchFlag = 1;
                         } else {
