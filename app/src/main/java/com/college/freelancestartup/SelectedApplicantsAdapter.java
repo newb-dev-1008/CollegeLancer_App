@@ -27,10 +27,10 @@ public class SelectedApplicantsAdapter extends RecyclerView.Adapter<AvailableCol
 
     @NonNull
     @Override
-    public AvailableCollabsFiveAdapter.AvailableCollabsFiveViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SelectedApplicantsAdapter.SelectedApplicantsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.find_collab5_cardview, parent, false);
         context = v.getContext();
-        AvailableCollabsFiveAdapter.AvailableCollabsFiveViewHolder availableCollabsFiveViewHolder = new AvailableCollabsFiveAdapter.AvailableCollabsFiveViewHolder(v);
+        SelectedApplicantsAdapter.SelectedApplicantsViewHolder availableCollabsFiveViewHolder = new SelectedApplicantsAdapter.SelectedApplicantsViewHolder(v);
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
