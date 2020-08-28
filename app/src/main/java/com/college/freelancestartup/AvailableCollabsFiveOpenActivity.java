@@ -39,7 +39,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     // private String projectID;
     private Calendar cObj;
     private MaterialButton previousCollabsButton, messageButton, requestButton;
-    private String[] projNames;
+    // private String[] projNames;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -149,6 +149,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                             Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Adding projects to lists", Toast.LENGTH_SHORT).show();
                                         }
                                     }
+                                    Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Names and IDs ArrayLists created.", Toast.LENGTH_SHORT).show();
                                     if (projectNames.size() == 0) {
                                         internalReqFlag = 1;
                                         Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Internal Flag Incremented", Toast.LENGTH_LONG).show();
@@ -168,8 +169,9 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
 
                         if (internalReqFlag != 1) {
                             Object[] intermediate = projectNames.toArray();
-                            projNames = Arrays.copyOf(intermediate, intermediate.length, String[].class);
+                            String[] projNames = Arrays.copyOf(intermediate, intermediate.length, String[].class);
 
+                            /*
                             String s = new String();
                             for (String x : projectNames) {
                                 s.concat(x);
@@ -181,6 +183,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                     .setPositiveButton("Okay", null)
                                     .setNegativeButton("Cancel", null)
                                     .create().show();
+                            */
 
                             AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(AvailableCollabsFiveOpenActivity.this);
                             chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
