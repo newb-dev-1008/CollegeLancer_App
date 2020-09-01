@@ -42,6 +42,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     private ProgressBar collab5ProgressBar;
     // private String projectID;
     private Calendar cObj;
+    private ArrayList<String> projectNames, projectIDs;
     private MaterialButton previousCollabsButton, messageButton, requestButton;
     private String[] projNames;
 
@@ -53,6 +54,8 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
+        projectNames = new ArrayList<>();
+        projectIDs = new ArrayList<>();
         cObj = Calendar.getInstance();
 
         userEmail = getIntent().getExtras().get("userEmail").toString();
@@ -134,8 +137,6 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     }
 
     private void reqCollabsAsyncFunc() {
-        ArrayList<String> projectN = new ArrayList<>();
-        ArrayList<String> projectI = new ArrayList<>();
         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                 .collection("Projects").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
