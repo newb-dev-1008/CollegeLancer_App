@@ -266,7 +266,8 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         requestFor.setCanceledOnTouchOutside(false);
     }
 
-    private class AvailableAsyncTask extends AsyncTask<> {
+    private class AvailableAsyncTask extends AsyncTask<String, String, String> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -276,16 +277,17 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Object o) {
+        protected String doInBackground(String... params) {
+            reqCollabsAsyncFunc();
+            return "Finished!";
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
             collab5ProgressBar.setVisibility(View.GONE);
             progressTV.setVisibility(View.GONE);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
 
-        @Override
-        protected Object doInBackground(Object[] objects) {
-            reqCollabsAsyncFunc();
-            return null;
-        }
     }
 }
