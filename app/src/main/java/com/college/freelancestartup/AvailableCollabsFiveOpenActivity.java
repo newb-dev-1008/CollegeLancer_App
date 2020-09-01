@@ -277,7 +277,9 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Object o) {
-            collab5ProgressBar
+            collab5ProgressBar.setVisibility(View.GONE);
+            progressTV.setVisibility(View.GONE);
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
 
         @Override
