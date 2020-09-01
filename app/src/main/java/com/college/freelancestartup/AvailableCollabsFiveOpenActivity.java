@@ -26,6 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -183,7 +184,8 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                         // AsyncTask here
 
                         if (internalReqFlag != 1) {
-
+                            AvailableAsyncTask asyncTask = new AvailableAsyncTask(AvailableCollabsFiveOpenActivity.this);
+                            asyncTask.execute();
                             /*
                             String s = new String();
                             for (String x : projectNames) {
@@ -267,6 +269,11 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     }
 
     private class AvailableAsyncTask extends AsyncTask<String, String, String> {
+        private WeakReference<AvailableCollabsFiveOpenActivity> activityWeakReference;
+
+        AvailableAsyncTask(AvailableCollabsFiveOpenActivity activity) {
+            activityWeakReference = new WeakReference<AvailableCollabsFiveOpenActivity>(activity);
+        }
 
         @Override
         protected void onPreExecute() {
