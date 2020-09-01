@@ -32,11 +32,12 @@ import java.util.Map;
 
 public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
 
-    private TextView name1, personDepartment1, personSemester1, numberCollabs1, numberProjects1, skills1, personPhone1;
+    private TextView name1, personDepartment1, personSemester1, numberCollabs1, numberProjects1, skills1, personPhone1, progressTV;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private int internalReqFlag, checkedItem, flagLog;
     private String userEmail, posterName, selectedProjectID;
+    private ProgressBar collab5ProgressBar;
     // private String projectID;
     private Calendar cObj;
     private MaterialButton previousCollabsButton, messageButton, requestButton;
@@ -62,6 +63,8 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         numberCollabs1 = findViewById(R.id.collab5_collaborations);
         numberProjects1 = findViewById(R.id.collab5_projectsCompleted);
         skills1 = findViewById(R.id.collab5_skills);
+        collab5ProgressBar = findViewById(R.id.collab5_progressBar);
+        progressTV = findViewById(R.id.collab5_progressTV);
 
         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
