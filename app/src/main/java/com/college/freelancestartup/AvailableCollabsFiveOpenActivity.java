@@ -144,17 +144,17 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                 if (queryDocumentSnapshots.size() > 0) {
                     for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                         if (!documentSnapshot.get("projectStatus").toString().equals("Completed")) {
-                            projectN.add(documentSnapshot.get("projectTitle").toString());
-                            projectI.add(documentSnapshot.get("projectID").toString());
+                            projectNames.add(documentSnapshot.get("projectTitle").toString());
+                            projectIDs.add(documentSnapshot.get("projectID").toString());
                             // Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Adding projects to lists", Toast.LENGTH_SHORT).show();
                         }
                     }
                     Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Names and IDs ArrayLists created.", Toast.LENGTH_SHORT).show();
-                    Object[] intermediate = projectN.toArray();
+                    Object[] intermediate = projectNames.toArray();
                     projNames = Arrays.copyOf(intermediate, intermediate.length, String[].class);
                     Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Copy Created.", Toast.LENGTH_SHORT).show();
 
-                    if (projectN.size() == 0) {
+                    if (projectNames.size() == 0) {
                         internalReqFlag = 1;
                         Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Internal Flag Incremented", Toast.LENGTH_LONG).show();
                     }
@@ -173,8 +173,6 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     }
 
     private void requestCollabsPressed() {
-        ArrayList<String> projectNames = new ArrayList<>();
-        ArrayList<String> projectIDs = new ArrayList<>();
         AlertDialog requestFor = new MaterialAlertDialogBuilder(AvailableCollabsFiveOpenActivity.this)
                 .setTitle("Are you sure you want to send a collaboration request?")
                 .setMessage("The user will be notified. Please note that this does not seal the deal.\n\n" +
@@ -182,6 +180,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        // AsyncTask here
 
                         if (internalReqFlag != 1) {
 
