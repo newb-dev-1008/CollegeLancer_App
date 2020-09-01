@@ -268,7 +268,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         requestFor.setCanceledOnTouchOutside(false);
     }
 
-    private class AvailableAsyncTask extends AsyncTask<String, String, String> {
+    private static class AvailableAsyncTask extends AsyncTask<String, String, String> {
         private WeakReference<AvailableCollabsFiveOpenActivity> activityWeakReference;
 
         AvailableAsyncTask(AvailableCollabsFiveOpenActivity activity) {
@@ -294,19 +294,20 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
             if (activity == null || activity.isFinishing()) {
                 return "";
             }
-            reqCollabsAsyncFunc();
+            activity.reqCollabsAsyncFunc();
             return "Finished!";
         }
 
         @Override
         protected void onPostExecute(String s) {
+            super.onPostExecute(s);
             AvailableCollabsFiveOpenActivity activity = activityWeakReference.get();
             if (activity == null || activity.isFinishing()) {
                 return;
             }
-            collab5ProgressBar.setVisibility(View.GONE);
-            progressTV.setVisibility(View.GONE);
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            activity.collab5ProgressBar.setVisibility(View.GONE);
+            activity.progressTV.setVisibility(View.GONE);
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
 
     }
