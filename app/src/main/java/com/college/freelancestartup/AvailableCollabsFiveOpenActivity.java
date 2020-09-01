@@ -256,6 +256,15 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     }
 
     private class AvailableAsyncTask extends AsyncTask<> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+        }
 
         @Override
         protected Object doInBackground(Object[] objects) {
