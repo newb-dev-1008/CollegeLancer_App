@@ -133,6 +133,44 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void reqCollabsAsyncFunc() {
+        ArrayList<String> projectN = new ArrayList<>();
+        ArrayList<String> projectI = new ArrayList<>();
+        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                .collection("Projects").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (queryDocumentSnapshots.size() > 0) {
+                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        if (!documentSnapshot.get("projectStatus").toString().equals("Completed")) {
+                            projectN.add(documentSnapshot.get("projectTitle").toString());
+                            projectI.add(documentSnapshot.get("projectID").toString());
+                            // Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Adding projects to lists", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Names and IDs ArrayLists created.", Toast.LENGTH_SHORT).show();
+                    Object[] intermediate = projectN.toArray();
+                    projNames = Arrays.copyOf(intermediate, intermediate.length, String[].class);
+                    Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Copy Created.", Toast.LENGTH_SHORT).show();
+
+                    if (projectN.size() == 0) {
+                        internalReqFlag = 1;
+                        Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Internal Flag Incremented", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    internalReqFlag = 1;
+                    Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Internal Flag Incremented 2", Toast.LENGTH_LONG).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                internalReqFlag = 1;
+            }
+        });
+    }
+
     private void requestCollabsPressed() {
         ArrayList<String> projectNames = new ArrayList<>();
         ArrayList<String> projectIDs = new ArrayList<>();
@@ -143,39 +181,6 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                                .collection("Projects").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                if (queryDocumentSnapshots.size() > 0) {
-                                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                        if (!documentSnapshot.get("projectStatus").toString().equals("Completed")) {
-                                            projectNames.add(documentSnapshot.get("projectTitle").toString());
-                                            projectIDs.add(documentSnapshot.get("projectID").toString());
-                                            // Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Adding projects to lists", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                    Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Names and IDs ArrayLists created.", Toast.LENGTH_SHORT).show();
-                                    Object[] intermediate = projectNames.toArray();
-                                    projNames = Arrays.copyOf(intermediate, intermediate.length, String[].class);
-                                    Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Copy Created.", Toast.LENGTH_SHORT).show();
-
-                                    if (projectNames.size() == 0) {
-                                        internalReqFlag = 1;
-                                        Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Internal Flag Incremented", Toast.LENGTH_LONG).show();
-                                    }
-                                } else {
-                                    internalReqFlag = 1;
-                                    Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Internal Flag Incremented 2", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                internalReqFlag = 1;
-                            }
-                        });
 
                         if (internalReqFlag != 1) {
 
