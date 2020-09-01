@@ -289,7 +289,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
             }
             activity.collab5ProgressBar.setVisibility(View.VISIBLE);
             activity.progressTV.setVisibility(View.VISIBLE);
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
 
         @Override
