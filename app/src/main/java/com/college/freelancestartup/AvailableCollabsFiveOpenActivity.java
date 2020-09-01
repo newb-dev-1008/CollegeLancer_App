@@ -34,7 +34,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     private TextView name1, personDepartment1, personSemester1, numberCollabs1, numberProjects1, skills1, personPhone1;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
-    private int internalReqFlag, checkedItem, flagLog;
+    private int internalReqFlag, checkedItem, flagLog, taskCompleted;
     private String userEmail, posterName, selectedProjectID;
     // private String projectID;
     private Calendar cObj;
@@ -50,6 +50,8 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         cObj = Calendar.getInstance();
+
+        taskCompleted = 0;
 
         userEmail = getIntent().getExtras().get("userEmail").toString();
         flagLog = Integer.parseInt(getIntent().getExtras().get("flagLog").toString());
@@ -146,10 +148,11 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                         if (!documentSnapshot.get("projectStatus").toString().equals("Completed")) {
                                             projectNames.add(documentSnapshot.get("projectTitle").toString());
                                             projectIDs.add(documentSnapshot.get("projectID").toString());
-                                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Adding projects to lists", Toast.LENGTH_SHORT).show();
+                                            // Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Adding projects to lists", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                     Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Names and IDs ArrayLists created.", Toast.LENGTH_SHORT).show();
+                                    taskCompleted = 1;
                                     if (projectNames.size() == 0) {
                                         internalReqFlag = 1;
                                         Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Internal Flag Incremented", Toast.LENGTH_LONG).show();
@@ -167,9 +170,10 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                             }
                         });
 
-                        if (internalReqFlag != 1) {
+                        if (internalReqFlag != 1 && taskCompleted == 1) {
                             Object[] intermediate = projectNames.toArray();
                             String[] projNames = Arrays.copyOf(intermediate, intermediate.length, String[].class);
+                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Copy Created.", Toast.LENGTH_SHORT).show();
 
                             /*
                             String s = new String();
