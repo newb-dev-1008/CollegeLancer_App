@@ -282,10 +282,6 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
             AvailableCollabsFiveOpenActivity activity = activityWeakReference.get();
             if (activity == null || activity.isFinishing()) {
                 return;
-            } else {
-                collab5ProgressBar.setVisibility(View.VISIBLE);
-                progressTV.setVisibility(View.VISIBLE);
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             }
             activity.collab5ProgressBar.setVisibility(View.VISIBLE);
             activity.progressTV.setVisibility(View.VISIBLE);
@@ -294,12 +290,20 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
+            AvailableCollabsFiveOpenActivity activity = activityWeakReference.get();
+            if (activity == null || activity.isFinishing()) {
+                return "";
+            }
             reqCollabsAsyncFunc();
             return "Finished!";
         }
 
         @Override
         protected void onPostExecute(String s) {
+            AvailableCollabsFiveOpenActivity activity = activityWeakReference.get();
+            if (activity == null || activity.isFinishing()) {
+                return;
+            }
             collab5ProgressBar.setVisibility(View.GONE);
             progressTV.setVisibility(View.GONE);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
