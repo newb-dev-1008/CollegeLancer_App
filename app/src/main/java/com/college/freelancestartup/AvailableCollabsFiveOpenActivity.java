@@ -255,5 +255,11 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         requestFor.setCanceledOnTouchOutside(false);
     }
 
-    // private class AvailableAsyncTask extends AsyncTask<>
+    private class AvailableAsyncTask extends AsyncTask<> {
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            return null;
+        }
+    }
 }
