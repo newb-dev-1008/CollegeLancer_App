@@ -277,12 +277,12 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Object o) {
-            super.onPostExecute(o);
+            collab5ProgressBar
         }
 
         @Override
         protected Object doInBackground(Object[] objects) {
-
+            reqCollabsAsyncFunc();
             return null;
         }
     }
