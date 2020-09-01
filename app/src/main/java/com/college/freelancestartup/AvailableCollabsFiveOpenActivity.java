@@ -278,9 +278,18 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            collab5ProgressBar.setVisibility(View.VISIBLE);
-            progressTV.setVisibility(View.VISIBLE);
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) ;
+
+            AvailableCollabsFiveOpenActivity activity = activityWeakReference.get();
+            if (activity == null || activity.isFinishing()) {
+                return;
+            } else {
+                collab5ProgressBar.setVisibility(View.VISIBLE);
+                progressTV.setVisibility(View.VISIBLE);
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            }
+            activity.collab5ProgressBar.setVisibility(View.VISIBLE);
+            activity.progressTV.setVisibility(View.VISIBLE);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
 
         @Override
