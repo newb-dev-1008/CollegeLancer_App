@@ -224,7 +224,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                                         sendRequestCollab5.put("posterTitle", posterName);
                                                         sendRequestCollab5.put("projectTitle", documentSnapshot.get("projectTitle").toString());
                                                         sendRequestCollab5.put("postDate", cObj.getTime().toString());
-                                                        sendRequestCollab5.put("projectSkills", documentSnapshot.get("skills").toString());
+                                                        sendRequestCollab5.put("projectSkills", documentSnapshot.get("projectSkills").toString());
                                                         sendRequestCollab5.put("projectOpenFor", documentSnapshot.get("projectOpenFor").toString());
                                                         sendRequestCollab5.put("projectDesc", documentSnapshot.get("projectDesc").toString());
                                                         sendRequestCollab5.put("projectID", documentSnapshot.get("projectID").toString());
