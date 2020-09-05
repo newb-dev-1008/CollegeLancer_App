@@ -192,14 +192,14 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                             chooseProjectBuilder.setSingleChoiceItems(projNames, -1, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int item1) {
-                                    selectedProjectID = projectIDs.get(item1);
+                                    selectedProjectID = projNames[item1];
                                     checkedItem = item1;
                                 }
                             });
                             chooseProjectBuilder.setPositiveButton("Select", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    if (checkedItem == -1) {
+                                    if (checkedItem < 0) {
                                         Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Please select a project first.", Toast.LENGTH_SHORT).show();
                                     } else {
                                         Map<String, Object> sendRequestCollab5 = new HashMap<>();
