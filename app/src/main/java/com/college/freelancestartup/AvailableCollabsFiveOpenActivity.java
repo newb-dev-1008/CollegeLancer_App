@@ -185,46 +185,46 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // AsyncTask here
-                        if (activity.internalReqFlag != 1) {
-                            AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(activity);
+                        if (internalReqFlag != 1) {
+                            AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(;
                             chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
-                            chooseProjectBuilder.setSingleChoiceItems(activity.projNames, -1, new DialogInterface.OnClickListener() {
+                            chooseProjectBuilder.setSingleChoiceItems(projNames, -1, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    activity.selectedProjectID = activity.projectIDs.get(i);
-                                    activity.checkedItem = i;
+                                    selectedProjectID = projectIDs.get(i);
+                                    checkedItem = i;
                                 }
                             });
                             chooseProjectBuilder.setPositiveButton("Select", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    if (activity.checkedItem == -1) {
-                                        Toast.makeText(activity, "Please select a project first.", Toast.LENGTH_SHORT).show();
+                                    if (checkedItem == -1) {
+                                        Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Please select a project first.", Toast.LENGTH_SHORT).show();
                                     } else {
                                         Map<String, Object> sendRequestCollab5 = new HashMap<>();
-                                        activity.db.collection("Users").document("User " + activity.firebaseAuth.getCurrentUser().getEmail())
-                                                .collection("Projects").document(activity.selectedProjectID).get()
+                                        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                                .collection("Projects").document(selectedProjectID).get()
                                                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                     @Override
                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                        sendRequestCollab5.put("posterTitle", activity.posterName);
+                                                        sendRequestCollab5.put("posterTitle", posterName);
                                                         sendRequestCollab5.put("projectTitle", documentSnapshot.get("projectTitle").toString());
-                                                        sendRequestCollab5.put("postDate", activity.cObj.getTime().toString());
+                                                        sendRequestCollab5.put("postDate", cObj.getTime().toString());
                                                         sendRequestCollab5.put("projectSkills", documentSnapshot.get("projectSkills").toString());
                                                         sendRequestCollab5.put("projectOpenFor", documentSnapshot.get("projectOpenFor").toString());
                                                         sendRequestCollab5.put("projectDesc", documentSnapshot.get("projectDesc").toString());
                                                         sendRequestCollab5.put("projectID", documentSnapshot.get("projectID").toString());
-                                                        activity.db.collection("Users").document("User " + activity.userEmail)
+                                                        db.collection("Users").document("User " + userEmail)
                                                                 .collection("CollabRequests").document(documentSnapshot.get("projectID").toString())
                                                                 .set(sendRequestCollab5).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                             @Override
                                                             public void onSuccess(Void aVoid) {
-                                                                Toast.makeText(activity, "Request sent. Expect a response soon!", Toast.LENGTH_SHORT).show();
+                                                                Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Request sent. Expect a response soon!", Toast.LENGTH_SHORT).show();
                                                             }
                                                         }).addOnFailureListener(new OnFailureListener() {
                                                             @Override
                                                             public void onFailure(@NonNull Exception e) {
-                                                                Toast.makeText(activity, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                                                 dialogInterface.dismiss();
                                                             }
                                                         });
@@ -232,7 +232,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                                 }).addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(activity, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                                 dialogInterface.dismiss();
                                             }
                                         });
@@ -243,7 +243,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                             chooseProjectDialog.show();
                             chooseProjectDialog.setCancelable(false);
                         } else {
-                            Toast.makeText(activity, "You don't have any projects to collaborate on.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, "You don't have any projects to collaborate on.", Toast.LENGTH_SHORT).show();
                         }
                         /*
                         if (internalReqFlag != 1) {
