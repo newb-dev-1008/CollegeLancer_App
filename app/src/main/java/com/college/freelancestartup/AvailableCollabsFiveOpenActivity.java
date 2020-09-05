@@ -182,10 +182,10 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // AsyncTask here
-
+                        AvailableAsyncTask asyncTask = new AvailableAsyncTask(AvailableCollabsFiveOpenActivity.this);
+                        asyncTask.execute();
                         if (internalReqFlag != 1) {
-                            AvailableAsyncTask asyncTask = new AvailableAsyncTask(AvailableCollabsFiveOpenActivity.this);
-                            asyncTask.execute();
+
                             /*
                             String s = new String();
                             for (String x : projectNames) {
@@ -252,63 +252,66 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
             activity.collab5ProgressBar.setVisibility(View.GONE);
             activity.progressTV.setVisibility(View.GONE);
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-
-            AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(activity);
-            chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
-            chooseProjectBuilder.setSingleChoiceItems(activity.projNames, -1, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    activity.selectedProjectID = activity.projectIDs.get(i);
-                    activity.checkedItem = i;
-                }
-            });
-            chooseProjectBuilder.setPositiveButton("Select", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    if (activity.checkedItem == -1) {
-                        Toast.makeText(activity, "Please select a project first.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Map<String, Object> sendRequestCollab5 = new HashMap<>();
-                        activity.db.collection("Users").document("User " + activity.firebaseAuth.getCurrentUser().getEmail())
-                                .collection("Projects").document(activity.selectedProjectID).get()
-                                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        sendRequestCollab5.put("posterTitle", activity.posterName);
-                                        sendRequestCollab5.put("projectTitle", documentSnapshot.get("projectTitle").toString());
-                                        sendRequestCollab5.put("postDate", activity.cObj.getTime().toString());
-                                        sendRequestCollab5.put("projectSkills", documentSnapshot.get("projectSkills").toString());
-                                        sendRequestCollab5.put("projectOpenFor", documentSnapshot.get("projectOpenFor").toString());
-                                        sendRequestCollab5.put("projectDesc", documentSnapshot.get("projectDesc").toString());
-                                        sendRequestCollab5.put("projectID", documentSnapshot.get("projectID").toString());
-                                        activity.db.collection("Users").document("User " + activity.userEmail)
-                                                .collection("CollabRequests").document(documentSnapshot.get("projectID").toString())
-                                                .set(sendRequestCollab5).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                Toast.makeText(activity, "Request sent. Expect a response soon!", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(activity, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                dialogInterface.dismiss();
-                                            }
-                                        });
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(activity, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                dialogInterface.dismiss();
-                            }
-                        });
+            if (activity.internalReqFlag != 0) {
+                AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(activity);
+                chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
+                chooseProjectBuilder.setSingleChoiceItems(activity.projNames, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        activity.selectedProjectID = activity.projectIDs.get(i);
+                        activity.checkedItem = i;
                     }
-                }
-            }).setNegativeButton("Cancel", null);
-            AlertDialog chooseProjectDialog = chooseProjectBuilder.create();
-            chooseProjectDialog.show();
-            chooseProjectDialog.setCancelable(false);
+                });
+                chooseProjectBuilder.setPositiveButton("Select", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (activity.checkedItem == -1) {
+                            Toast.makeText(activity, "Please select a project first.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Map<String, Object> sendRequestCollab5 = new HashMap<>();
+                            activity.db.collection("Users").document("User " + activity.firebaseAuth.getCurrentUser().getEmail())
+                                    .collection("Projects").document(activity.selectedProjectID).get()
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                            sendRequestCollab5.put("posterTitle", activity.posterName);
+                                            sendRequestCollab5.put("projectTitle", documentSnapshot.get("projectTitle").toString());
+                                            sendRequestCollab5.put("postDate", activity.cObj.getTime().toString());
+                                            sendRequestCollab5.put("projectSkills", documentSnapshot.get("projectSkills").toString());
+                                            sendRequestCollab5.put("projectOpenFor", documentSnapshot.get("projectOpenFor").toString());
+                                            sendRequestCollab5.put("projectDesc", documentSnapshot.get("projectDesc").toString());
+                                            sendRequestCollab5.put("projectID", documentSnapshot.get("projectID").toString());
+                                            activity.db.collection("Users").document("User " + activity.userEmail)
+                                                    .collection("CollabRequests").document(documentSnapshot.get("projectID").toString())
+                                                    .set(sendRequestCollab5).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Toast.makeText(activity, "Request sent. Expect a response soon!", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(activity, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    dialogInterface.dismiss();
+                                                }
+                                            });
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(activity, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                        }
+                    }
+                }).setNegativeButton("Cancel", null);
+                AlertDialog chooseProjectDialog = chooseProjectBuilder.create();
+                chooseProjectDialog.show();
+                chooseProjectDialog.setCancelable(false);
+            } else {
+
+            }
         }
 
     }
