@@ -19,6 +19,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -60,7 +61,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
     private Toolbar studentProfileToolbar;
     private ImageView idImage, editName, editPhoneNumber, editDepartment, editSemester, editEmail, editDOB, editUniversity, editBio;
     private String KEY_BIO = "userBio";
-    private String dbName, dbPhoneNumber, dbDepartment, dbSemester, dbEmail, dbDOB, dbUniversity, dbBio, DOB;
+    private String dbName, dbPhoneNumber, dbDepartment, dbSemester, dbEmail, dbDOB, dbUniversity, dbBio, DOB, dbStatus;
     private ImageView[] editImages;
     private Date DOBDate, currentDate;
     private Calendar selectedDate;
@@ -68,6 +69,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
     private FirebaseFirestore db;
     private Spinner departmentET, semesterET;
     private String KEY_EMAIL = "email";
+    private TextView studentStatus;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,6 +87,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
         DOBET = findViewById(R.id.student_profileDOB);
         universityET = findViewById(R.id.student_profileUniversity);
         bioET = findViewById(R.id.student_profileBio);
+        studentStatus = findViewById(R.id.student_userstatus);
         // idImage = findViewById(R.id.idVerification);
 
         applyChanges = findViewById(R.id.student_apply_changes);
@@ -119,6 +122,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
                         dbDOB = documentSnapshot.get("dateOfBirth").toString();
                         dbUniversity = documentSnapshot.get("university").toString();
                         dbBio = documentSnapshot.get("userBio").toString();
+                        dbStatus = documentSnapshot.get("studentStatus").toString();
 
                         nameET.setText(dbName);
                         phoneNumberET.setText(dbPhoneNumber);
@@ -128,6 +132,7 @@ public class StudentUserProfile extends AppCompatActivity implements DatePickerD
                         DOBET.setText(dbDOB);
                         universityET.setText(dbUniversity);
                         bioET.setText(dbBio);
+                        studentStatus.setText(dbStatus);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
