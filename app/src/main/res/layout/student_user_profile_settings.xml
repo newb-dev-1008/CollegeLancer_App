@@ -388,6 +388,19 @@
                         android:clickable="false"
                         android:cursorVisible="false"/>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/student_profileBio"
+                        android:id="@+id/student_userstatus"
+                        android:text="Your Current Status: "
+                        android:layout_marginStart="25dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="25dp"
+                        android:fontFamily="sans-serif-black"
+                        android:layout_marginTop="20dp"/>
+
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/student_apply_changes"
                         android:layout_width="match_parent"
@@ -418,6 +431,7 @@
                         android:layout_marginTop="3dp"
                         android:layout_marginBottom="20dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 </LinearLayout>
 
