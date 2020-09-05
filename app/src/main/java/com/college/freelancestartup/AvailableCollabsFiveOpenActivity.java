@@ -191,9 +191,9 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                             chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
                             chooseProjectBuilder.setSingleChoiceItems(projNames, -1, new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    selectedProjectID = projectIDs.get(i);
-                                    checkedItem = i;
+                                public void onClick(DialogInterface dialogInterface, int item1) {
+                                    selectedProjectID = projectIDs.get(item1);
+                                    checkedItem = item1;
                                 }
                             });
                             chooseProjectBuilder.setPositiveButton("Select", new DialogInterface.OnClickListener() {
@@ -215,6 +215,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                                         sendRequestCollab5.put("projectOpenFor", documentSnapshot.get("projectOpenFor").toString());
                                                         sendRequestCollab5.put("projectDesc", documentSnapshot.get("projectDesc").toString());
                                                         sendRequestCollab5.put("projectID", documentSnapshot.get("projectID").toString());
+                                                        sendRequestCollab5.put("projectStatus", documentSnapshot.get("projectStatus").toString());
                                                         db.collection("Users").document("User " + userEmail)
                                                                 .collection("CollabRequests").document(documentSnapshot.get("projectID").toString())
                                                                 .set(sendRequestCollab5).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -239,7 +240,13 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                         });
                                     }
                                 }
-                            }).setNegativeButton("Cancel", null);
+                            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    checkedItem = -1;
+                                    dialogInterface.dismiss();
+                                }
+                            });
                             AlertDialog chooseProjectDialog = chooseProjectBuilder.create();
                             chooseProjectDialog.show();
                             chooseProjectDialog.setCancelable(false);
