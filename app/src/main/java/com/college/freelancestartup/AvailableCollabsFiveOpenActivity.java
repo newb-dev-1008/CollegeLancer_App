@@ -72,6 +72,12 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         collab5ProgressBar = findViewById(R.id.collab5_progressBar);
         progressTV = findViewById(R.id.collab5_progressTV);
 
+        previousCollabsButton = findViewById(R.id.collab5_seeCollabsButton);
+        messageButton = findViewById(R.id.collab5_messageBtn);
+        requestButton = findViewById(R.id.collab5_selectBtn);
+        internalReqFlag = 0;
+        checkedItem = -1;
+
         AvailableAsyncTask asyncTask = new AvailableAsyncTask(AvailableCollabsFiveOpenActivity.this);
         asyncTask.execute();
 
@@ -88,11 +94,6 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
             }
         });
 
-        previousCollabsButton = findViewById(R.id.collab5_seeCollabsButton);
-        messageButton = findViewById(R.id.collab5_messageBtn);
-        requestButton = findViewById(R.id.collab5_selectBtn);
-        internalReqFlag = 0;
-        checkedItem = -1;
 
         if (flagLog == 1) {
             requestButton.setVisibility(View.GONE);
