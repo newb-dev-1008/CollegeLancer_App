@@ -292,6 +292,9 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
             activity.collab5ProgressBar.setVisibility(View.VISIBLE);
             activity.progressTV.setVisibility(View.VISIBLE);
             activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            activity.requestButton.setVisibility(View.GONE);
+            activity.messageButton.setVisibility(View.GONE);
+            activity.previousCollabsButton.setVisibility(View.GONE);
         }
 
         @Override
@@ -315,7 +318,9 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
             activity.collab5ProgressBar.setVisibility(View.GONE);
             activity.progressTV.setVisibility(View.GONE);
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-
+            activity.requestButton.setVisibility(View.VISIBLE);
+            activity.messageButton.setVisibility(View.VISIBLE);
+            activity.previousCollabsButton.setVisibility(View.VISIBLE);
         }
 
     }
