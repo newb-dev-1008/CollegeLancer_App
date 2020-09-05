@@ -150,10 +150,10 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                             // Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Adding projects to lists", Toast.LENGTH_SHORT).show();
                         }
                     }
-                    Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Names and IDs ArrayLists created.", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Names and IDs ArrayLists created.", Toast.LENGTH_SHORT).show();
                     Object[] intermediate = projectNames.toArray();
                     projNames = Arrays.copyOf(intermediate, intermediate.length, String[].class);
-                    Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Copy Created.", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Copy Created.", Toast.LENGTH_SHORT).show();
 
                     if (projectNames.size() == 0) {
                         internalReqFlag = 1;
@@ -185,7 +185,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
 
                         if (internalReqFlag != 1) {
                             AvailableAsyncTask asyncTask = new AvailableAsyncTask(AvailableCollabsFiveOpenActivity.this);
-                            asyncTask.execute();
+                            asyncTask.execute().ge;
                             /*
                             String s = new String();
                             for (String x : projectNames) {
@@ -303,6 +303,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
             super.onPostExecute(s);
             AvailableCollabsFiveOpenActivity activity = activityWeakReference.get();
             if (activity == null || activity.isFinishing()) {
+                Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
                 return;
             }
             activity.collab5ProgressBar.setVisibility(View.GONE);
