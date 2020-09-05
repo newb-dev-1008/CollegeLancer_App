@@ -184,9 +184,10 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                         // AsyncTask here
                         AvailableAsyncTask asyncTask = new AvailableAsyncTask(AvailableCollabsFiveOpenActivity.this);
                         asyncTask.execute();
+                        /*
                         if (internalReqFlag != 1) {
 
-                            /*
+
                             String s = new String();
                             for (String x : projectNames) {
                                 s.concat(x);
@@ -198,11 +199,12 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                     .setPositiveButton("Okay", null)
                                     .setNegativeButton("Cancel", null)
                                     .create().show();
-                            */
+
 
                         } else {
                             Toast.makeText(AvailableCollabsFiveOpenActivity.this, "You don't have any projects to collaborate on.", Toast.LENGTH_SHORT).show();
                         }
+                        */
                     }
                 }).setNegativeButton("Cancel", null)
                 .create();
@@ -310,7 +312,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                 chooseProjectDialog.show();
                 chooseProjectDialog.setCancelable(false);
             } else {
-
+                Toast.makeText(activity, "You don't have any projects to collaborate on.", Toast.LENGTH_SHORT).show();
             }
         }
 
