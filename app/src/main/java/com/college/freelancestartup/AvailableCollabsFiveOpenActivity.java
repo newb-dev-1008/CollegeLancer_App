@@ -137,6 +137,29 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void onCreateHelper() {
+        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                .collection("Projects").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (queryDocumentSnapshots.size() > 0) {
+                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        if (!documentSnapshot.get("projectStatus").toString().equals("Completed")) {
+                            projectNames.add(documentSnapshot.get("projectTitle").toString());
+                            projectIDs.add(documentSnapshot.get("projectID").toString());
+                            // Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Adding projects to lists", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(AvailableCollabsFiveOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        })
+    }
+
     private void reqCollabsAsyncFunc() {
         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                 .collection("Projects").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
