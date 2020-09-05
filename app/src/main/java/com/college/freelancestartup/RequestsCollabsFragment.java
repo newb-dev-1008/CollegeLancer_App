@@ -46,6 +46,7 @@ public class RequestsCollabsFragment extends Fragment {
         collab2RecyclerView = root.findViewById(R.id.request_collabs_recyclerView2);
         swipeDownRefreshTV = root.findViewById(R.id.swipeRefreshTVCollab2);
         swipeRefreshLayout = root.findViewById(R.id.swipeRefreshLayoutCollab2);
+        emptyTV = root.findViewById(R.id.request_collab2_emptyTV);
 
         showCollab2();
 
