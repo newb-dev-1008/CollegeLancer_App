@@ -186,7 +186,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // AsyncTask here
                         if (internalReqFlag != 1) {
-                            AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(;
+                            AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(AvailableCollabsFiveOpenActivity.this);
                             chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
                             chooseProjectBuilder.setSingleChoiceItems(projNames, -1, new DialogInterface.OnClickListener() {
                                 @Override
