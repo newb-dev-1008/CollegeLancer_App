@@ -185,7 +185,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
 
                         if (internalReqFlag != 1) {
                             AvailableAsyncTask asyncTask = new AvailableAsyncTask(AvailableCollabsFiveOpenActivity.this);
-                            asyncTask.execute().ge;
+                            String str_result = asyncTask.execute().get();
                             /*
                             String s = new String();
                             for (String x : projectNames) {
