@@ -254,7 +254,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
             activity.collab5ProgressBar.setVisibility(View.GONE);
             activity.progressTV.setVisibility(View.GONE);
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            if (activity.internalReqFlag != 0) {
+            if (activity.internalReqFlag != 1) {
                 AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(activity);
                 chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
                 chooseProjectBuilder.setSingleChoiceItems(activity.projNames, -1, new DialogInterface.OnClickListener() {
