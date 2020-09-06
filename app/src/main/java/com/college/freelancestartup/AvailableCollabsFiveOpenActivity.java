@@ -244,10 +244,25 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                                                             Toast.makeText(AvailableCollabsFiveOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                                                         }
                                                                     });
+                                                                    db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                                                            .collection("MyCollabs").document(selectedProjectID).update("requestsMade", requestsMade).addOnFailureListener(new OnFailureListener() {
+                                                                        @Override
+                                                                        public void onFailure(@NonNull Exception e) {
+                                                                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    });
                                                                 } catch (NullPointerException e) {
                                                                     requestsMade.add(userEmail);
                                                                     db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                                                                             .collection("Projects").document(selectedProjectID).update("requestsMade", requestsMade).addOnFailureListener(new OnFailureListener() {
+                                                                        @Override
+                                                                        public void onFailure(@NonNull Exception e) {
+                                                                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    });
+                                                                    requestsMade.add(userEmail);
+                                                                    db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                                                            .collection("MyCollabs").document(selectedProjectID).update("requestsMade", requestsMade).addOnFailureListener(new OnFailureListener() {
                                                                         @Override
                                                                         public void onFailure(@NonNull Exception e) {
                                                                             Toast.makeText(AvailableCollabsFiveOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();

@@ -45,6 +45,7 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
         // userEmail = getIntent().getExtras().get("userEmail").toString();
 
         db = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         showRequestsLog();
 
@@ -58,7 +59,7 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
     }
 
     private void showRequestsLog() {
-        db.collection("Users").document("User " + ).collection("CollabRequests")
+        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).collection("CollabRequests")
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
