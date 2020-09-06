@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class MyCollabsFourOpenActivity extends AppCompatActivity {
 
     private TextView posterName, projectTitle, postedDate, collabStatus, projectDesc, numApplicants, numSelectedApplicants, skills, openFor, noVotes, noVotesTV;
-    private MaterialButton applicantsLogButton, finishProjectButton, selectedApplicantsButton;
+    private MaterialButton applicantsLogButton, finishProjectButton, selectedApplicantsButton, requestsLogButton;
     private Switch collab4VisibleSwitch, endProjectSwitch;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
@@ -52,6 +52,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
         finishProjectButton = findViewById(R.id.collab4_finishProjectBtn);
         selectedApplicantsButton = findViewById(R.id.collab4_selectedApplicantBtn);
         collab4VisibleSwitch = findViewById(R.id.collab4_visibleSwitch);
+        requestsLogButton = findViewById(R.id.button)
         skills = findViewById(R.id.collab4_skills);
         openFor = findViewById(R.id.collab4_openFor);
         endProjectSwitch = findViewById(R.id.collab4_endProjectSwitch);
@@ -104,6 +105,16 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                         finishProjectButton.setVisibility(View.VISIBLE);
                         break;
                 }
+
+                db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                        .collection("MyCollabs").document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.contains("requestsMade")) {
+
+                        }
+                    }
+                })
 
                 /*
                 db.collection("CollabProjects").document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
