@@ -48,6 +48,8 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
         requestLogRecyclerView.setVisibility(View.GONE);
         emptyTV = findViewById(R.id.log_collab5RequestsLog_emptyTV);
         emptyTV.setVisibility(View.GONE);
+        progressBar = findViewById(R.id.requestLog_progressBar);
+        progressTV = findViewById(R.id.requestLog_progressTV);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutCollab5RequestsLog);
         projectID = getIntent().getExtras().get("projectID").toString();
 
