@@ -89,6 +89,7 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
         holder.skills1.setText(skills);
         holder.noProjects1.setText(noProjects);
         holder.noCollabs1.setText(noCollabs);
+        */
 
         if (flag == 1) {
             holder.pickedStatus.setVisibility(View.VISIBLE);
@@ -117,7 +118,7 @@ public class AvailableCollabsFiveAdapter extends RecyclerView.Adapter<AvailableC
                 }
             });
         }
-        */
+
     }
 
     public static class AvailableCollabsFiveViewHolder extends RecyclerView.ViewHolder {
