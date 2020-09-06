@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -25,8 +26,9 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
     private RecyclerView requestLogRecyclerView;
     private TextView emptyTV;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private String userEmail;
+    // private String userEmail;
     private FirebaseFirestore db;
+    private FirebaseAuth firebaseAuth;
 
     private RecyclerView.LayoutManager requestLogLayoutManager;
     private RecyclerView.Adapter requestLogCollabAdapter;
@@ -40,7 +42,7 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
         requestLogRecyclerView.setVisibility(View.GONE);
         emptyTV = findViewById(R.id.log_collab5RequestsLog_emptyTV);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutCollab5RequestsLog);
-        userEmail = getIntent().getExtras().get("userEmail").toString();
+        // userEmail = getIntent().getExtras().get("userEmail").toString();
 
         db = FirebaseFirestore.getInstance();
 
@@ -56,7 +58,7 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
     }
 
     private void showRequestsLog() {
-        db.collection("Users").document("User " + userEmail).collection("CollabRequests")
+        db.collection("Users").document("User " + ).collection("CollabRequests")
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
