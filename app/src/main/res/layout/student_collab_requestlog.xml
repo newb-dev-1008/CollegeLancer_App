@@ -77,6 +77,27 @@
                     android:layout_marginTop="10dp"
                     android:id="@+id/swipeRefreshTVCollab5RequestsLog"/>
 
+                <ProgressBar
+                    android:id="@+id/collab5_progressBar"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal"
+                    android:indeterminate="true"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+                <TextView
+                    android:id="@+id/collab5_progressTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Listing your current projects..."
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="20dp"/>
+
             </LinearLayout>
         </ScrollView>
 

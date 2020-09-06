@@ -1,5 +1,6 @@
 package com.college.freelancestartup;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -105,5 +107,28 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
                 Toast.makeText(RequestLogCollabFourActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private static class RequestLogAsync extends AsyncTask<Void, Void, Void> {
+        private WeakReference<RequestLogCollabFourActivity> activityWeakReference;
+
+        RequestLogAsync(RequestLogCollabFourActivity activity) {
+            activityWeakReference = new WeakReference<RequestLogCollabFourActivity>(activity);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            return null;
+        }
     }
 }
