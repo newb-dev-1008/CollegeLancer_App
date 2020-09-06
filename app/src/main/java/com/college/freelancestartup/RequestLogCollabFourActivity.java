@@ -85,41 +85,6 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
             }
         });
 
-        new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if (queryDocumentSnapshots.size() > 0) {
-                    emptyTV.setVisibility(View.GONE);
-                    requestLogRecyclerView.setVisibility(View.VISIBLE);
-                    ArrayList<AllColabsOne> prevCollabs = new ArrayList<>();
-                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        String posterTitle = documentSnapshot.get("posterTitle").toString();
-                        String projectTitle = documentSnapshot.get("projectTitle").toString();
-                        String posterDate = documentSnapshot.get("postDate").toString();
-                        String projectSkills = documentSnapshot.get("projectSkills").toString();
-                        String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
-                        String projectDesc = documentSnapshot.get("projectDesc").toString();
-                        String projectID = documentSnapshot.get("projectID").toString();
-                        int flag = 1;
-                        prevCollabs.add(new AllColabsOne(posterTitle, projectTitle, projectDesc, posterDate, projectSkills, projectOpenFor, projectID, flag));
-
-                        requestLogLayoutManager = new LinearLayoutManager(RequestLogCollabFourActivity.this);
-                        requestLogCollabAdapter = new AllColabsOneAdapter(prevCollabs);
-                        requestLogRecyclerView.setHasFixedSize(true);
-                        requestLogRecyclerView.setLayoutManager(requestLogLayoutManager);
-                        requestLogRecyclerView.setAdapter(requestLogCollabAdapter);
-                    }
-                } else {
-                    requestLogRecyclerView.setVisibility(View.GONE);
-                    swipeRefreshLayout.setVisibility(View.GONE);
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(RequestLogCollabFourActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private ArrayList<AvailableCollabsFive> performBackgroundTask(ArrayList<String> emails) {
