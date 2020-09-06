@@ -19,6 +19,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class RequestLogCollabFourActivity extends AppCompatActivity {
@@ -26,9 +27,10 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
     private RecyclerView requestLogRecyclerView;
     private TextView emptyTV;
     private SwipeRefreshLayout swipeRefreshLayout;
-    // private String userEmail;
+    private String projectID;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
+    private ArrayList<String> userEmails;
 
     private RecyclerView.LayoutManager requestLogLayoutManager;
     private RecyclerView.Adapter requestLogCollabAdapter;
@@ -42,7 +44,7 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
         requestLogRecyclerView.setVisibility(View.GONE);
         emptyTV = findViewById(R.id.log_collab5RequestsLog_emptyTV);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutCollab5RequestsLog);
-        // userEmail = getIntent().getExtras().get("userEmail").toString();
+        projectID = getIntent().getExtras().get("projectID").toString();
 
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -59,8 +61,16 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
     }
 
     private void showRequestsLog() {
-        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).collection("CollabRequests")
-                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail()).collection("MyCollabs")
+                .document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                userEmails = (ArrayList<String>) documentSnapshot.get("requestsMade");
+
+            }
+        }
+
+        new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (queryDocumentSnapshots.size() > 0) {
