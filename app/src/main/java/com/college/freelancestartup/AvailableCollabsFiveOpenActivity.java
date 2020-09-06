@@ -222,6 +222,17 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                                             @Override
                                                             public void onSuccess(Void aVoid) {
                                                                 Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Request sent. Expect a response soon!", Toast.LENGTH_SHORT).show();
+                                                                ArrayList<String> requestsMade = new ArrayList<>();
+                                                                try {
+                                                                    db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                                                            .collection("Projects").document(selectedProjectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                        @Override
+                                                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                                        }
+                                                                    })
+                                                                }
+
                                                             }
                                                         }).addOnFailureListener(new OnFailureListener() {
                                                             @Override

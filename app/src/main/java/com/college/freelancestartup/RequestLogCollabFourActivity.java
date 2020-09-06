@@ -56,7 +56,7 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
     }
 
     private void showRequestsLog() {
-        db.collection("Users").document("User " + userEmail).collection("PrevCollabs")
+        db.collection("Users").document("User " + userEmail).collection("CollabRequests")
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
