@@ -3,6 +3,7 @@ package com.college.freelancestartup;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -124,6 +125,13 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            RequestLogCollabFourActivity activity = activityWeakReference.get();
+            if (activity == null || activity.isFinishing()) {
+                return;
+            }
+            activity.progressBar.setVisibility(View.VISIBLE);
+            activity.progressTV.setVisibility(View.VISIBLE);
+            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
 
         @Override
