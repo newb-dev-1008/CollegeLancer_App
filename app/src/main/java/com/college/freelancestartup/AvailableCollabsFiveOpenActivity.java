@@ -98,6 +98,9 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
 
         if (flagLog == 1) {
             requestButton.setVisibility(View.GONE);
+        } else if (flagLog == 2) {
+            requestButton.setVisibility(View.GONE);
+            messageButton.setVisibility(View.GONE);
         }
 
         db.collection("Users").document("User " + userEmail).get()

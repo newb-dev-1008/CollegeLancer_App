@@ -117,7 +117,22 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
 
     private void performBackgroundTask(ArrayList<String> emails) {
         // Finish this
-
+        for (String s : emails) {
+            db.collection("Users").document("User " + s).collection("CollabRequests")
+                    .document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    String posterTitle = documentSnapshot.get("posterTitle").toString();
+                    String projectTitle = documentSnapshot.get("projectTitle").toString();
+                    String posterDate = documentSnapshot.get("postDate").toString();
+                    String projectSkills = documentSnapshot.get("projectSkills").toString();
+                    String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
+                    String projectDesc = documentSnapshot.get("projectDesc").toString();
+                    String projectID = documentSnapshot.get("projectID").toString();
+                    int flag = 2;
+                }
+            })
+        }
     }
 
     private static class RequestLogAsync extends AsyncTask<ArrayList<String>, Void, String> {
