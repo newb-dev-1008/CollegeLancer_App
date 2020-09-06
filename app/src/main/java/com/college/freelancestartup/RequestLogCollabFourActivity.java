@@ -115,7 +115,11 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
         });
     }
 
-    private static class RequestLogAsync extends AsyncTask<Void, Void, Void> {
+    private void performBackgroundTask() {
+        // Finish this
+    }
+
+    private static class RequestLogAsync extends AsyncTask<String, Void, String> {
         private WeakReference<RequestLogCollabFourActivity> activityWeakReference;
 
         RequestLogAsync(RequestLogCollabFourActivity activity) {
@@ -135,13 +139,19 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+        protected String doInBackground(String... params) {
+            RequestLogCollabFourActivity activity = activityWeakReference.get();
+            if (activity == null || activity.isFinishing()) {
+                return "";
+            }
+            activity.performBackgroundTask();
+            return "Finished";
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
-            return null;
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
         }
+
     }
 }
