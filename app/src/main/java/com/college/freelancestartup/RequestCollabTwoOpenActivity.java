@@ -122,11 +122,9 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
         // Notification to project poster
 
         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                .collection("CollabRequests").document("projectID").update("projectStatus", "Accepted");
+                .collection("CollabRequests").document(projectID).update("projectStatus", "Accepted");
         projectStatus1.setText("Accepted");
         projectStatus1.setTextColor(Color.parseColor("#228B22"));
-        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                .collection("CollabRequests").document("projectID").delete();
 
         Map<String, Object> userReqPicked = new HashMap<>();
         userReqPicked.put("emailID", firebaseAuth.getCurrentUser().getEmail());
@@ -173,12 +171,10 @@ public class RequestCollabTwoOpenActivity extends AppCompatActivity {
 
     private void rejectButtonPressed() {
         db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                .collection("CollabRequests").document("projectID").update("projectStatus", "Rejected");
+                .collection("CollabRequests").document(projectID).update("projectStatus", "Rejected");
 
         projectStatus1.setText("Rejected");
         projectStatus1.setTextColor(Color.parseColor("#800000"));
-        db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
-                .collection("CollabRequests").document("projectID").delete();
         // Send notification to project poster about the guy rejecting
     }
 }

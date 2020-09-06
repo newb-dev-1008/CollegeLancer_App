@@ -215,7 +215,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                                         sendRequestCollab5.put("projectOpenFor", documentSnapshot.get("projectOpenFor").toString());
                                                         sendRequestCollab5.put("projectDesc", documentSnapshot.get("projectDesc").toString());
                                                         sendRequestCollab5.put("projectID", documentSnapshot.get("projectID").toString());
-                                                        sendRequestCollab5.put("projectStatus", documentSnapshot.get("projectStatus").toString());
+                                                        sendRequestCollab5.put("projectStatus", "Pending");
                                                         db.collection("Users").document("User " + userEmail)
                                                                 .collection("CollabRequests").document(documentSnapshot.get("projectID").toString())
                                                                 .set(sendRequestCollab5).addOnSuccessListener(new OnSuccessListener<Void>() {
