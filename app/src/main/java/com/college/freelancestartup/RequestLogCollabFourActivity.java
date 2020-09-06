@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -74,9 +75,15 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 userEmails = (ArrayList<String>) documentSnapshot.get("requestsMade");
-
+                RequestLogAsync asyncTask = new RequestLogAsync(RequestLogCollabFourActivity.this);
+                asyncTask.execute(userEmails);
             }
-        }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(RequestLogCollabFourActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -115,27 +122,40 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
         });
     }
 
-    private void performBackgroundTask(ArrayList<String> emails) {
-        // Finish this
+    private ArrayList<AvailableCollabsFive> performBackgroundTask(ArrayList<String> emails) {
+        ArrayList<AvailableCollabsFive> availableCollabs = new ArrayList<>();
         for (String s : emails) {
             db.collection("Users").document("User " + s).collection("CollabRequests")
                     .document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    String posterTitle = documentSnapshot.get("posterTitle").toString();
-                    String projectTitle = documentSnapshot.get("projectTitle").toString();
-                    String posterDate = documentSnapshot.get("postDate").toString();
-                    String projectSkills = documentSnapshot.get("projectSkills").toString();
-                    String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
-                    String projectDesc = documentSnapshot.get("projectDesc").toString();
-                    String projectID = documentSnapshot.get("projectID").toString();
+                    String projectStatus = documentSnapshot.get("projectStatus").toString();
                     int flag = 2;
+                    db.collection("Users").document("User " + s).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            String name = documentSnapshot.get("name").toString();
+                            String semester = documentSnapshot.get("studentSemester").toString();
+                            String skills = documentSnapshot.get("studentSkills").toString();
+                            String department = documentSnapshot.get("department").toString();
+                            String previousCollabs = documentSnapshot.get("numberCollabs").toString();
+                            String previousProjects = documentSnapshot.get("numberProjects").toString();
+                            String userEmail = documentSnapshot.get("email").toString();
+                            availableCollabs.add(new AvailableCollabsFive(name, department, skills, previousCollabs, previousProjects, semester, userEmail, flag, "Zero"));
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(RequestLogCollabFourActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
-            })
+            });
         }
+        return availableCollabs;
     }
 
-    private static class RequestLogAsync extends AsyncTask<ArrayList<String>, Void, String> {
+    private static class RequestLogAsync extends AsyncTask<ArrayList<String>, Void, ArrayList<AvailableCollabsFive>> {
         private WeakReference<RequestLogCollabFourActivity> activityWeakReference;
 
         RequestLogAsync(RequestLogCollabFourActivity activity) {
@@ -155,14 +175,15 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(ArrayList<String>... params) {
+        protected ArrayList<AvailableCollabsFive> doInBackground(ArrayList<String>... params) {
             RequestLogCollabFourActivity activity = activityWeakReference.get();
             if (activity == null || activity.isFinishing()) {
-                return "";
+                return new ArrayList<>();
             }
             ArrayList<String> IDs = params[0];
-            activity.performBackgroundTask(IDs);
-            return "Finished";
+            ArrayList<AvailableCollabsFive> temp;
+            temp = activity.performBackgroundTask(IDs);
+            return temp;
         }
 
         @Override
@@ -176,6 +197,12 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
             activity.progressBar.setVisibility(View.GONE);
             activity.progressTV.setVisibility(View.GONE);
             activity.requestLogRecyclerView.setVisibility(View.VISIBLE);
+
+            activity.requestLogLayoutManager = new LinearLayoutManager(RequestLogCollabFourActivity.this);
+            activity.requestLogCollabAdapter = new AvailableCollabsFiveAdapter(prevCollabs);
+            activity.requestLogRecyclerView.setHasFixedSize(true);
+            activity.requestLogRecyclerView.setLayoutManager(activity.requestLogLayoutManager);
+            activity.requestLogRecyclerView.setAdapter(activity.requestLogCollabAdapter);
         }
 
     }
