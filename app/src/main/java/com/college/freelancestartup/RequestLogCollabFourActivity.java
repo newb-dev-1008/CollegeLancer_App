@@ -3,6 +3,7 @@ package com.college.freelancestartup;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,12 +28,13 @@ import java.util.ArrayList;
 public class RequestLogCollabFourActivity extends AppCompatActivity {
 
     private RecyclerView requestLogRecyclerView;
-    private TextView emptyTV;
+    private TextView emptyTV, progressTV;
     private SwipeRefreshLayout swipeRefreshLayout;
     private String projectID;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private ArrayList<String> userEmails;
+    private ProgressBar progressBar;
 
     private RecyclerView.LayoutManager requestLogLayoutManager;
     private RecyclerView.Adapter requestLogCollabAdapter;
@@ -45,6 +47,7 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
         requestLogRecyclerView = findViewById(R.id.log_collabsRequestsLog_recyclerView5);
         requestLogRecyclerView.setVisibility(View.GONE);
         emptyTV = findViewById(R.id.log_collab5RequestsLog_emptyTV);
+        emptyTV.setVisibility(View.GONE);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutCollab5RequestsLog);
         projectID = getIntent().getExtras().get("projectID").toString();
 
