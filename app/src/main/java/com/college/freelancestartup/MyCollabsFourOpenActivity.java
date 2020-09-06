@@ -52,7 +52,7 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
         finishProjectButton = findViewById(R.id.collab4_finishProjectBtn);
         selectedApplicantsButton = findViewById(R.id.collab4_selectedApplicantBtn);
         collab4VisibleSwitch = findViewById(R.id.collab4_visibleSwitch);
-        requestsLogButton = findViewById(R.id.button)
+        requestsLogButton = findViewById(R.id.collab4_noRequestsLogBtn);
         skills = findViewById(R.id.collab4_skills);
         openFor = findViewById(R.id.collab4_openFor);
         endProjectSwitch = findViewById(R.id.collab4_endProjectSwitch);
@@ -111,10 +111,15 @@ public class MyCollabsFourOpenActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.contains("requestsMade")) {
-
+                            requestsLogButton.setVisibility(View.VISIBLE);
                         }
                     }
-                })
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MyCollabsFourOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
                 /*
                 db.collection("CollabProjects").document(projectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
