@@ -43,7 +43,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
     private ProgressBar collab5ProgressBar;
     // private String projectID;
     private Calendar cObj;
-    private ArrayList<String> projectNames, projectIDs;
+    private ArrayList<String> projectNames, projectIDs, requestsMade;
     private MaterialButton previousCollabsButton, messageButton, requestButton;
     private String[] projNames;
 
@@ -63,6 +63,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
         flagLog = Integer.parseInt(getIntent().getExtras().get("flagLog").toString());
 
         name1 = findViewById(R.id.collab5_name);
+        requestsMade = new ArrayList<>();
         personDepartment1 = findViewById(R.id.collab5_personDepartments);
         personSemester1 = findViewById(R.id.collab5_personSemester);
         personPhone1 = findViewById(R.id.collab5_personPhoneNo);
@@ -222,15 +223,36 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                                             @Override
                                                             public void onSuccess(Void aVoid) {
                                                                 Toast.makeText(AvailableCollabsFiveOpenActivity.this, "Request sent. Expect a response soon!", Toast.LENGTH_SHORT).show();
-                                                                ArrayList<String> requestsMade = new ArrayList<>();
                                                                 try {
                                                                     db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
                                                                             .collection("Projects").document(selectedProjectID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                                         @Override
                                                                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-
+                                                                            requestsMade = (ArrayList<String>) documentSnapshot.get("requestsMade");
                                                                         }
-                                                                    })
+                                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                                        @Override
+                                                                        public void onFailure(@NonNull Exception e) {
+                                                                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    });
+                                                                    requestsMade.add(userEmail);
+                                                                    db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                                                            .collection("Projects").document(selectedProjectID).update("requestsMade", requestsMade).addOnFailureListener(new OnFailureListener() {
+                                                                        @Override
+                                                                        public void onFailure(@NonNull Exception e) {
+                                                                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    });
+                                                                } catch (NullPointerException e) {
+                                                                    requestsMade.add(userEmail);
+                                                                    db.collection("Users").document("User " + firebaseAuth.getCurrentUser().getEmail())
+                                                                            .collection("Projects").document(selectedProjectID).update("requestsMade", requestsMade).addOnFailureListener(new OnFailureListener() {
+                                                                        @Override
+                                                                        public void onFailure(@NonNull Exception e) {
+                                                                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    });
                                                                 }
 
                                                             }
