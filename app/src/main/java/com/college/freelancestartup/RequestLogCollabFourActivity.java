@@ -115,11 +115,12 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
         });
     }
 
-    private void performBackgroundTask() {
+    private void performBackgroundTask(ArrayList<String> emails) {
         // Finish this
+
     }
 
-    private static class RequestLogAsync extends AsyncTask<String, Void, String> {
+    private static class RequestLogAsync extends AsyncTask<ArrayList<String>, Void, String> {
         private WeakReference<RequestLogCollabFourActivity> activityWeakReference;
 
         RequestLogAsync(RequestLogCollabFourActivity activity) {
@@ -139,18 +140,27 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(String... params) {
+        protected String doInBackground(ArrayList<String>... params) {
             RequestLogCollabFourActivity activity = activityWeakReference.get();
             if (activity == null || activity.isFinishing()) {
                 return "";
             }
-            activity.performBackgroundTask();
+            ArrayList<String> IDs = params[0];
+            activity.performBackgroundTask(IDs);
             return "Finished";
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
+            RequestLogCollabFourActivity activity = activityWeakReference.get();
+            if (activity == null || activity.isFinishing()) {
+                return;
+            }
+            activity.progressBar.setVisibility(View.GONE);
+            activity.progressTV.setVisibility(View.GONE);
+            activity.requestLogRecyclerView.setVisibility(View.VISIBLE);
         }
 
     }

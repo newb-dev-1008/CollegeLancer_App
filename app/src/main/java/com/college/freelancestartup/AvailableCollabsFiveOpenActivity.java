@@ -368,7 +368,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
             super.onPostExecute(s);
             AvailableCollabsFiveOpenActivity activity = activityWeakReference.get();
             if (activity == null || activity.isFinishing()) {
-                Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
                 return;
             }
             activity.collab5ProgressBar.setVisibility(View.GONE);
