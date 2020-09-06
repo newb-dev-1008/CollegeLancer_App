@@ -187,8 +187,8 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+        protected void onPostExecute(ArrayList<AvailableCollabsFive> a) {
+            super.onPostExecute(a);
 
             RequestLogCollabFourActivity activity = activityWeakReference.get();
             if (activity == null || activity.isFinishing()) {
@@ -198,8 +198,8 @@ public class RequestLogCollabFourActivity extends AppCompatActivity {
             activity.progressTV.setVisibility(View.GONE);
             activity.requestLogRecyclerView.setVisibility(View.VISIBLE);
 
-            activity.requestLogLayoutManager = new LinearLayoutManager(RequestLogCollabFourActivity.this);
-            activity.requestLogCollabAdapter = new AvailableCollabsFiveAdapter(prevCollabs);
+            activity.requestLogLayoutManager = new LinearLayoutManager(activity);
+            activity.requestLogCollabAdapter = new AvailableCollabsFiveAdapter(a);
             activity.requestLogRecyclerView.setHasFixedSize(true);
             activity.requestLogRecyclerView.setLayoutManager(activity.requestLogLayoutManager);
             activity.requestLogRecyclerView.setAdapter(activity.requestLogCollabAdapter);
