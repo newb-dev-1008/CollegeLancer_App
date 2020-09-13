@@ -96,7 +96,6 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
             }
         });
 
-
         if (flagLog == 1) {
             requestButton.setVisibility(View.GONE);
         } else if (flagLog == 2) {
@@ -213,23 +212,19 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                     @Override
                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                        try {
-                                                            String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
-                                                            String projectDesc = documentSnapshot.get("projectDesc").toString();
-                                                            ArrayList<String> projectSkills = (ArrayList<String>) documentSnapshot.get("projectSkills");
-                                                            String projectTitle = documentSnapshot.get("projectTitle").toString();
-                                                            String projectID = documentSnapshot.get("projectID").toString();
-                                                            sendRequestCollab5.put("posterTitle", posterName);
-                                                            sendRequestCollab5.put("postDate", cObj.getTime().toString());
-                                                            sendRequestCollab5.put("projectSkills", projectSkills);
-                                                            sendRequestCollab5.put("projectOpenFor", projectOpenFor);
-                                                            sendRequestCollab5.put("projectDesc", projectDesc);
-                                                            sendRequestCollab5.put("projectTitle", projectTitle);
-                                                            sendRequestCollab5.put("projectID", projectID);
-                                                            sendRequestCollab5.put("projectStatus", "Pending");
-                                                        } catch (NullPointerException e) {
-                                                            e.printStackTrace();
-                                                        }
+                                                        String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
+                                                        String projectDesc = documentSnapshot.get("projectDesc").toString();
+                                                        ArrayList<String> projectSkills = (ArrayList<String>) documentSnapshot.get("projectSkills");
+                                                        String projectTitle = documentSnapshot.get("projectTitle").toString();
+                                                        String projectID = documentSnapshot.get("projectID").toString();
+                                                        sendRequestCollab5.put("posterTitle", posterName);
+                                                        sendRequestCollab5.put("postDate", cObj.getTime().toString());
+                                                        sendRequestCollab5.put("projectSkills", projectSkills);
+                                                        sendRequestCollab5.put("projectOpenFor", projectOpenFor);
+                                                        sendRequestCollab5.put("projectDesc", projectDesc);
+                                                        sendRequestCollab5.put("projectTitle", projectTitle);
+                                                        sendRequestCollab5.put("projectID", projectID);
+                                                        sendRequestCollab5.put("projectStatus", "Pending");
 
                                                         db.collection("Users").document("User " + userEmail)
                                                                 .collection("CollabRequests").document(documentSnapshot.get("projectID").toString())
