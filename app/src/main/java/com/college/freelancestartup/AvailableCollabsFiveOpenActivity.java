@@ -27,6 +27,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -212,9 +213,10 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                     @Override
                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                        String projectSkills = documentSnapshot.get("projectSkills").toString();
+                                                        Toast.makeText(AvailableCollabsFiveOpenActivity.this, firebaseAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
                                                         String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
                                                         String projectDesc = documentSnapshot.get("projectDesc").toString();
+                                                        ArrayList<String> projectSkills = (ArrayList<String>) documentSnapshot.get("projectSkills");
                                                         String projectTitle = documentSnapshot.get("projectTitle").toString();
                                                         String projectID = documentSnapshot.get("projectID").toString();
                                                         sendRequestCollab5.put("posterTitle", posterName);
