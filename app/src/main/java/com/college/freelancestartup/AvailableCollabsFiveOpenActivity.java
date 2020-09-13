@@ -192,6 +192,7 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // AsyncTask here
                         if (internalReqFlag != 1) {
+                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, firebaseAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
                             AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(AvailableCollabsFiveOpenActivity.this);
                             chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
                             chooseProjectBuilder.setSingleChoiceItems(projNames, -1, new DialogInterface.OnClickListener() {
@@ -213,7 +214,6 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                     @Override
                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                        Toast.makeText(AvailableCollabsFiveOpenActivity.this, firebaseAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
                                                         String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
                                                         String projectDesc = documentSnapshot.get("projectDesc").toString();
                                                         ArrayList<String> projectSkills = (ArrayList<String>) documentSnapshot.get("projectSkills");
