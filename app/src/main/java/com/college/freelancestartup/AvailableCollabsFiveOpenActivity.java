@@ -192,7 +192,6 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // AsyncTask here
                         if (internalReqFlag != 1) {
-                            Toast.makeText(AvailableCollabsFiveOpenActivity.this, firebaseAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
                             AlertDialog.Builder chooseProjectBuilder = new AlertDialog.Builder(AvailableCollabsFiveOpenActivity.this);
                             chooseProjectBuilder.setTitle("Choose the project you want to collaborate on");
                             chooseProjectBuilder.setSingleChoiceItems(projNames, -1, new DialogInterface.OnClickListener() {
@@ -214,19 +213,24 @@ public class AvailableCollabsFiveOpenActivity extends AppCompatActivity {
                                                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                     @Override
                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                        String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
-                                                        String projectDesc = documentSnapshot.get("projectDesc").toString();
-                                                        ArrayList<String> projectSkills = (ArrayList<String>) documentSnapshot.get("projectSkills");
-                                                        String projectTitle = documentSnapshot.get("projectTitle").toString();
-                                                        String projectID = documentSnapshot.get("projectID").toString();
-                                                        sendRequestCollab5.put("posterTitle", posterName);
-                                                        sendRequestCollab5.put("postDate", cObj.getTime().toString());
-                                                        sendRequestCollab5.put("projectSkills", projectSkills);
-                                                        sendRequestCollab5.put("projectOpenFor", projectOpenFor);
-                                                        sendRequestCollab5.put("projectDesc", projectDesc);
-                                                        sendRequestCollab5.put("projectTitle", projectTitle);
-                                                        sendRequestCollab5.put("projectID", projectID);
-                                                        sendRequestCollab5.put("projectStatus", "Pending");
+                                                        try {
+                                                            String projectOpenFor = documentSnapshot.get("projectOpenFor").toString();
+                                                            String projectDesc = documentSnapshot.get("projectDesc").toString();
+                                                            ArrayList<String> projectSkills = (ArrayList<String>) documentSnapshot.get("projectSkills");
+                                                            String projectTitle = documentSnapshot.get("projectTitle").toString();
+                                                            String projectID = documentSnapshot.get("projectID").toString();
+                                                            sendRequestCollab5.put("posterTitle", posterName);
+                                                            sendRequestCollab5.put("postDate", cObj.getTime().toString());
+                                                            sendRequestCollab5.put("projectSkills", projectSkills);
+                                                            sendRequestCollab5.put("projectOpenFor", projectOpenFor);
+                                                            sendRequestCollab5.put("projectDesc", projectDesc);
+                                                            sendRequestCollab5.put("projectTitle", projectTitle);
+                                                            sendRequestCollab5.put("projectID", projectID);
+                                                            sendRequestCollab5.put("projectStatus", "Pending");
+                                                        } catch (NullPointerException e) {
+                                                            e.printStackTrace();
+                                                        }
+
                                                         db.collection("Users").document("User " + userEmail)
                                                                 .collection("CollabRequests").document(documentSnapshot.get("projectID").toString())
                                                                 .set(sendRequestCollab5).addOnSuccessListener(new OnSuccessListener<Void>() {
