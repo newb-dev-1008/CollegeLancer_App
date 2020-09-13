@@ -31,6 +31,7 @@ public class AvailableCollabsFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView collab5RecyclerView;
     private TextView swipeDownRefreshTV, emptyTV;
+    private ArrayList<String> requestedPeople;
 
     private RecyclerView.LayoutManager availableCollab5LayoutManager;
     private RecyclerView.Adapter availableCollab5Adapter;
@@ -95,6 +96,7 @@ public class AvailableCollabsFragment extends Fragment {
                                 collab5RecyclerView.setHasFixedSize(true);
                                 collab5RecyclerView.setLayoutManager(availableCollab5LayoutManager);
                                 collab5RecyclerView.setAdapter(availableCollab5Adapter);
+                                // swipeDownRefreshTV.setVisibility(View.GONE);
                             }
                         } else {
                             collab5RecyclerView.setVisibility(View.GONE);
