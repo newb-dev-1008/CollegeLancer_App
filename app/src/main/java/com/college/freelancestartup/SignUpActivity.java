@@ -516,20 +516,20 @@ public class SignUpActivity extends AppCompatActivity {
                                                         public void onSuccess(AuthResult authResult) {
                                                             Toast.makeText(SignUpActivity.this, "Created Account Successfully, signing you in...", Toast.LENGTH_SHORT).show();
                                                             updateUI(firebaseAuth.getCurrentUser());
-                                                        }
-                                                    })
-                                                    .addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    });
-                                            db.collection("Users").document("User " + UIDEmailID).set(usersMap)
-                                                    .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void aVoid) {
-                                                            Toast.makeText(SignUpActivity.this, "Your details have been saved.", Toast.LENGTH_SHORT).show();
-                                                            // Toast.makeText(SignUpActivity.this, "Created account, please wait...", Toast.LENGTH_SHORT).show();
+                                                            db.collection("Users").document("User " + UIDEmailID).set(usersMap)
+                                                                    .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<Void>() {
+                                                                        @Override
+                                                                        public void onSuccess(Void aVoid) {
+                                                                            Toast.makeText(SignUpActivity.this, "Your details have been saved.", Toast.LENGTH_SHORT).show();
+                                                                            // Toast.makeText(SignUpActivity.this, "Created account, please wait...", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    })
+                                                                    .addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
+                                                                        @Override
+                                                                        public void onFailure(@NonNull Exception e) {
+                                                                            Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    });
                                                         }
                                                     })
                                                     .addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
