@@ -354,13 +354,6 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            System.out.println(documentSnapshot);
-                            AlertDialog test = new MaterialAlertDialogBuilder(LoginActivity.this)
-                                    .setTitle("Testing")
-                                    .setMessage(documentSnapshot.toString())
-                                    .setPositiveButton("Okay", null)
-                                    .create();
-                            test.show();
                             if (documentSnapshot.get("department") != null ||               // if any
                                     documentSnapshot.get("phoneNumber") != null ||          // field in
                                     documentSnapshot.get("name") != null ||                 // Firestore is
