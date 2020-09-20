@@ -73,6 +73,7 @@ import static android.view.View.VISIBLE;
 
 public class SignUpActivity extends AppCompatActivity {
 
+    private Map<String, Object> usersMap;
     private Button signUp, checkEmailButton;
     private SignInButton signUpGoogle;
     private LoginButton signUpFB;
@@ -100,6 +101,8 @@ public class SignUpActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         FacebookSdk.sdkInitialize(getApplicationContext());
+
+        usersMap = new HashMap<>();
 
         signUpNameET = findViewById(R.id.signupNameEditText);
         signUp = findViewById(R.id.signupButton);
@@ -503,7 +506,6 @@ public class SignUpActivity extends AppCompatActivity {
                                     .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<AuthResult>() {
                                         @Override
                                         public void onSuccess(AuthResult authResult) {
-                                            Map<String, Object> usersMap = new HashMap<>();
                                             // Toast.makeText(SignUpActivity.this, "EmailAuth Success", Toast.LENGTH_SHORT).show();
                                             usersMap.put(KEY_NAME, name);
                                             usersMap.put(KEY_EMAIL, emailID);
